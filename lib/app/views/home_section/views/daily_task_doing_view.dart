@@ -1,5 +1,10 @@
 import 'dart:ui';
 
+<<<<<<< HEAD
+=======
+import 'package:base_project/app/routes/app_routes.dart';
+import 'package:base_project/core/widgets/custom_app_button.dart';
+>>>>>>> 9dc6c9a (dev_mujasam done changes commit)
 import 'package:blur/blur.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -11,10 +16,24 @@ import '../../../../core/Constants/app_colors.dart';
 import '../../../../core/constants/app_fonts_and_styles.dart';
 import '../../../../core/constants/app_images.dart';
 
+<<<<<<< HEAD
 class DailyTaskDoingView extends StatelessWidget {
   const DailyTaskDoingView({super.key});
 
   @override
+=======
+class DailyTaskDoingView extends StatefulWidget {
+  const DailyTaskDoingView({super.key});
+
+  @override
+  State<DailyTaskDoingView> createState() => _DailyTaskDoingViewState();
+}
+
+class _DailyTaskDoingViewState extends State<DailyTaskDoingView> {
+  DateTime? endTime;
+
+  @override
+>>>>>>> 9dc6c9a (dev_mujasam done changes commit)
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
@@ -147,6 +166,7 @@ class DailyTaskDoingView extends StatelessWidget {
                   ),
                   child: Column(
                     children: [
+<<<<<<< HEAD
                       SvgPicture.asset(AppImages.meditationClockSvg),
                       Text('5 Minutes', style: AppStyles.urbanistBold20White600),
                       Text('Meditation', style: AppStyles.urbanistBold20White600),
@@ -166,6 +186,58 @@ class DailyTaskDoingView extends StatelessWidget {
                                   minutes: 1,
                                   seconds: 02
                                 )),
+=======
+                      30.verticalSpace,
+                      Stack(
+                        alignment: Alignment.bottomCenter,
+                        children: [
+                          SvgPicture.asset(AppImages.meditationClockSvg),
+                          Text('5 Minutes', style: AppStyles.urbanistBold20White600),
+                        ],
+                      ),
+                      Text('Meditation', style: AppStyles.urbanistBold30Yellow700),
+                      Text('Take a 5 minute break today to \ngo outside in the sun and \nbreathe air',textAlign: TextAlign.center, style: AppStyles.poppins14w700white),
+                      30.verticalSpace,
+                      Text('start the timer',textAlign: TextAlign.center, style: AppStyles.poppins16w700white),
+                      Container(
+                        alignment: Alignment.center,
+                        margin: EdgeInsets.symmetric(horizontal: 90.w),
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(35.sp),
+                          border: Border.all(
+                            color: AppColors.whiteColor,
+                            width: 1.5.w,
+                          ),
+                        ),
+                        child: Row(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            GestureDetector(
+                              onTap: () {
+                                setState(() {
+                                  endTime = DateTime.now().add(
+                                    const Duration(seconds: 10),
+                                  );
+                                });
+                              },
+                              child: Image.asset(
+                                AppImages.startPng,
+                                height: 55.h,
+                              ),
+                            ),
+                            endTime == null
+                                ? Text(
+                              "00:10", // default display before starting
+                              style: AppStyles.poppins28w300white,
+                            )
+                                : TimerCountdown(
+                              format: CountDownTimerFormat.minutesSeconds,
+                              enableDescriptions: false,
+                              timeTextStyle: AppStyles.poppins28w300white,
+                              spacerWidth: 0,
+                              endTime: endTime!, // safe to use !
+>>>>>>> 9dc6c9a (dev_mujasam done changes commit)
                               onEnd: () {
                                 print('Finished');
                               },
@@ -179,6 +251,20 @@ class DailyTaskDoingView extends StatelessWidget {
                 ),
               ),
             ),
+<<<<<<< HEAD
+=======
+            10.verticalSpace,
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: 30.w),
+              child: CustomAppButton(
+                  onTap: (){
+                    Get.toNamed(AppRoutes.dailyTaskDoneView);
+                  },
+                  text: 'Done',
+                  isIcon: false,
+                  textStyle: AppStyles.poppins16w600white),
+            )
+>>>>>>> 9dc6c9a (dev_mujasam done changes commit)
           ],
         ),
       ),

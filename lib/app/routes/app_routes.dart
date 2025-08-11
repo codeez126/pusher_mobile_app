@@ -15,6 +15,10 @@ class AppRoutes {
   static const notificationsView = '/notification';
   static const dailyTaskView = '/dailyChallenge';
   static const dailyTaskDoingView = '/dailyTaskDoing';
+<<<<<<< HEAD
+=======
+  static const dailyTaskDoneView = '/dailyTaskDone';
+>>>>>>> 9dc6c9a (dev_mujasam done changes commit)
 
 
   //==============BottomNav============
