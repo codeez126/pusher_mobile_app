@@ -68,13 +68,13 @@ class Onboarding2View extends StatelessWidget {
                             Padding(
                               padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 14.h),
                               child: Text(
-                                AppStrings.yourJourney,
+                                "Your Journey, Your Success".tr,
                                 style: AppStyles.urbanistBold28White900,
                                 textAlign: TextAlign.center,
                               ),
                             ),
                             Text(
-                              AppStrings.everyoneJourney,
+                              "Everyone's Journey Is Unique,".tr,
                               style: GoogleFonts.poppins(
                                 fontSize: 15.sp,
                                 fontWeight: FontWeight.w700,
@@ -83,7 +83,7 @@ class Onboarding2View extends StatelessWidget {
                               textAlign: TextAlign.center,
                             ),
                             Text(
-                              AppStrings.chooseYourGoals,
+                              "Choose Your Goals,".tr,
                               style: GoogleFonts.poppins(
                                 fontSize: 15.sp,
                                 fontWeight: FontWeight.w700,
@@ -92,7 +92,7 @@ class Onboarding2View extends StatelessWidget {
                               textAlign: TextAlign.center,
                             ),
                             Text(
-                              AppStrings.letUsCustomize,
+                              "Let Us Customize Your Personalized \nExperience".tr,
                               style: GoogleFonts.poppins(
                                 fontSize: 15.sp,
                                 fontWeight: FontWeight.w700,
@@ -134,7 +134,7 @@ class Onboarding2View extends StatelessWidget {
                                 padding: EdgeInsets.all(8.0),
                                 child: CustomAppButton(
                                     onTap: (){Get.toNamed(AppRoutes.phoneLogin);},
-                                    text: 'Next',
+                                    text: 'Next'.tr,
                                     textStyle: AppStyles.poppins16w700white),
                               ),
                             ),

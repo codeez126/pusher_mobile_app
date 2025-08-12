@@ -20,36 +20,38 @@ class _PersonalGoalsViewState extends State<PersonalGoalsView> {
   Set<String> categories = {};
 
   final Map<String, Map<String, dynamic>> goalCategories = {
-    'fitness': {
-      'title': 'What\'s Your Fitness Goals ?',
-      'icon': '💪',
-      'goals': [
-        'Improve fitness',
-        'Start a new sport',
-        'Build muscle mass',
-        'Lose weight',
+    'fitness'.tr: {
+      'title'.tr: 'What\'s Your Fitness Goals ?'.tr,
+      'icon'.tr: '💪',
+      'goals'.tr: [
+        'Improve fitness'.tr,
+        'Start a new sport'.tr,
+        'Build muscle mass'.tr,
+        'Lose weight'.tr,
       ],
     },
-    'motivation': {
-      'title': 'What\'s Your Motivation Goals ?',
-      'icon': '🔥',
-      'goals': [
-        'Find sense of inspiration',
-        'Avoid procrastination',
-        'Improve planning and organization',
-        'Set realistic goals',
+    'motivation'.tr: {
+      'title'.tr: 'What\'s Your Motivation Goals ?'.tr,
+      'icon'.tr: '🔥',
+      'goals'.tr: [
+        'Find sense of inspiration'.tr,
+        'Avoid procrastination'.tr,
+        'Improve planning and organization'.tr,
+        'Set realistic goals'.tr,
       ],
     },
-    'relationship': {
-      'title': 'What\'s Your Relationship Goals ?',
-      'icon': '💕',
-      'goals': [
-        'Improve communication',
-        'Spend more quality time together',
-        'Resolve issues and strengthen the bond',
-        'Learn and grow as a couple',
+
+    'relationship'.tr: {
+      'title'.tr: 'What\'s Your Relationship Goals ?'.tr,
+      'icon'.tr: '💕',
+      'goals'.tr: [
+        'Improve communication'.tr,
+        'Spend more quality time together'.tr,
+        'Resolve issues and strengthen the bond'.tr,
+        'Learn and grow as a couple'.tr,
       ],
     },
+
   };
 
   @override
@@ -92,7 +94,7 @@ class _PersonalGoalsViewState extends State<PersonalGoalsView> {
                   onTap: () {
                     handleNext();
                   },
-                  text: 'Next',
+                  text: "Next".tr,
                   textStyle: AppStyles.poppins16w700white,
                 ),
               ),
@@ -143,10 +145,10 @@ class _PersonalGoalsViewState extends State<PersonalGoalsView> {
                         ),
                         child: Row(
                           children: [
-                            Text(categoryData['icon'],),
+                            Text(categoryData['icon'.tr],),
                             5.horizontalSpace,
                             Text(
-                              categoryData['title'],
+                              categoryData['title'.tr],
                               style: AppStyles.poppins14w700white
                             ),
                           ],
@@ -165,9 +167,9 @@ class _PersonalGoalsViewState extends State<PersonalGoalsView> {
                 ),
                 child: Column(
                   children: List.generate(
-                    categoryData['goals'].length,
+                    categoryData['goals'.tr].length,
                         (index) {
-                      final goal = categoryData['goals'][index];
+                      final goal = categoryData['goals'.tr][index];
                       final isSelected = selectedGoals.contains(goal);
 
                       return Padding(
@@ -175,7 +177,7 @@ class _PersonalGoalsViewState extends State<PersonalGoalsView> {
                         child: GestureDetector(
                           onTap: () {
                             setState(() {
-                              final categoryGoals = categoryData['goals'] as List<String>;
+                              final categoryGoals = categoryData['goals'.tr] as List<String>;
                               final selectedInCategory = selectedGoals
                                   .where((g) => categoryGoals.contains(g))
                                   .length;
@@ -240,28 +242,28 @@ class _PersonalGoalsViewState extends State<PersonalGoalsView> {
   void handleNext() {
     if (selectedGoals.isEmpty) {
       print('$selectedGoals');
-      Utils.toastMessage('Please select at least one goal');
+      Utils.toastMessage('Please select at least one goal'.tr);
       return;
     }
 
     Map<String, List<String>> goalsByCategory = {};
     goalCategories.forEach((categoryKey, categoryData) {
-      final categoryGoals = categoryData['goals'] as List<String>;
+      final categoryGoals = categoryData['goals'.tr] as List<String>;
       final selectedInCategory = selectedGoals
           .where((selectedGoal) => categoryGoals.contains(selectedGoal))
           .toList();
 
       if (selectedInCategory.isNotEmpty) {
-        goalsByCategory[categoryData['title']] = selectedInCategory;
+        goalsByCategory[categoryData['title'.tr]] = selectedInCategory;
       }
     });
 
-    print('Selected Goals by Category:');
+    print('Selected Goals by Category:'.tr);
     goalsByCategory.forEach((category, goals) {
       print('$category: ${goals.join(', ')}');
     });
 
-    Utils.toastMessage('Selected ${selectedGoals.length} goals');
+    Utils.toastMessage('${'Selected'.tr}${selectedGoals.length} goals'.tr);
     Get.toNamed(AppRoutes.premiumSubscriptionView);
   }
 }

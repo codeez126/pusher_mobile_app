@@ -142,7 +142,7 @@ class _ImprovementViewState extends State<ImprovementView> {
                   onTap: () {
                     Get.toNamed(AppRoutes.personalGoalsView);
                   },
-                  text: 'Next',
+                  text: 'Next'.tr,
                   textStyle: AppStyles.poppins16w600white,
                 ),
               ),
@@ -155,13 +155,13 @@ class _ImprovementViewState extends State<ImprovementView> {
 
   void handleNext() {
     if (selectedCategories.isEmpty) {
-      Utils.toastMessage('Please select at least one category to improve');
+      Utils.toastMessage('Please select at least one category to improve'.tr);
       return;
     }
 
     // Handle navigation to next screen
-    print('Selected categories: ${selectedCategories.toList()}');
+    print('${'Selected categories'.tr} : ${selectedCategories.toList()}');
 
-    Utils.toastMessage('Selected: ${selectedCategories.join(', ')}');
+    Utils.toastMessage('${'Selected'.tr} : ${selectedCategories.join(', ')}');
   }
 }
