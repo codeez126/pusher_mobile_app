@@ -9,10 +9,7 @@ import 'package:base_project/app/views/registration_section/view/personal_goals_
 import 'package:base_project/app/views/registration_section/view/premium_subscription_view.dart';
 import 'package:base_project/app/views/splash/views/splash_view.dart';
 import 'package:get/get.dart';
-<<<<<<< HEAD
-=======
 import '../views/home_section/views/daily_task_done_view.dart';
->>>>>>> 9dc6c9a (dev_mujasam done changes commit)
 import '../views/home_section/views/well_done_view.dart';
 import '../views/registration_section/view/otp_verfication_view.dart';
 import '../views/registration_section/view/phone_login_view.dart';
@@ -37,11 +34,7 @@ class AppPages {
     GetPage(name: AppRoutes.notificationsView, page: () => NotificationsView()),
     GetPage(name: AppRoutes.dailyTaskView, page: () => DailyTaskView()),
     GetPage(name: AppRoutes.dailyTaskDoingView, page: () => DailyTaskDoingView()),
-<<<<<<< HEAD
-=======
     GetPage(name: AppRoutes.dailyTaskDoneView, page: () => DailyTaskDoneView()),
->>>>>>> 9dc6c9a (dev_mujasam done changes commit)
-
     GetPage(name: AppRoutes.bottomNavNavigation, page: ()=> BottomNavNavigation()),
 
   ];

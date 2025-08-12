@@ -23,11 +23,8 @@ class AppImages {
   static const String friendsSvg = 'assets/icons/friends.svg';
   static const String walkSvg = 'assets/icons/walk.svg';
   static const String changeSvg = 'assets/icons/change.svg';
-<<<<<<< HEAD
-=======
   static const String doneSvg = 'assets/icons/done.svg';
   static const String nextSvg = 'assets/icons/next.svg';
->>>>>>> 9dc6c9a (dev_mujasam done changes commit)
 
   /// Images
   static const String bgMainImage = 'assets/images/bg_main.png';

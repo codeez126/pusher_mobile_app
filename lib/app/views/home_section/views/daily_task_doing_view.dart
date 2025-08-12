@@ -1,11 +1,7 @@
 import 'dart:ui';
 
-<<<<<<< HEAD
-=======
 import 'package:base_project/app/routes/app_routes.dart';
 import 'package:base_project/core/widgets/custom_app_button.dart';
->>>>>>> 9dc6c9a (dev_mujasam done changes commit)
-import 'package:blur/blur.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
@@ -16,12 +12,6 @@ import '../../../../core/Constants/app_colors.dart';
 import '../../../../core/constants/app_fonts_and_styles.dart';
 import '../../../../core/constants/app_images.dart';
 
-<<<<<<< HEAD
-class DailyTaskDoingView extends StatelessWidget {
-  const DailyTaskDoingView({super.key});
-
-  @override
-=======
 class DailyTaskDoingView extends StatefulWidget {
   const DailyTaskDoingView({super.key});
 
@@ -33,7 +23,6 @@ class _DailyTaskDoingViewState extends State<DailyTaskDoingView> {
   DateTime? endTime;
 
   @override
->>>>>>> 9dc6c9a (dev_mujasam done changes commit)
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
@@ -51,15 +40,15 @@ class _DailyTaskDoingViewState extends State<DailyTaskDoingView> {
               alignment: Alignment.topCenter,
               children: [
                 Container(height: 210.h),
-                //Blur effect custom made for practice
+                // Blur Header
                 ClipRRect(
                   borderRadius: BorderRadius.vertical(
                     bottom: Radius.circular(50.sp),
                   ),
                   child: BackdropFilter(
                     filter: ImageFilter.blur(
-                      sigmaX: 10, // blur strength horizontally
-                      sigmaY: 10, // blur strength vertically
+                      sigmaX: 10,
+                      sigmaY: 10,
                     ),
                     child: Container(
                       height: 170.h,
@@ -82,10 +71,6 @@ class _DailyTaskDoingViewState extends State<DailyTaskDoingView> {
                                 AppImages.backImage,
                                 height: 120.h,
                               ),
-                              // Image.asset(
-                              //   AppImages.imageBackIcon,
-                              //   height: 120.h,
-                              // ),
                             ),
                           ),
                           Positioned(
@@ -100,6 +85,7 @@ class _DailyTaskDoingViewState extends State<DailyTaskDoingView> {
                     ),
                   ),
                 ),
+                // Change Task Button
                 Positioned(
                   bottom: 0,
                   child: Container(
@@ -112,14 +98,26 @@ class _DailyTaskDoingViewState extends State<DailyTaskDoingView> {
                       decoration: BoxDecoration(
                         color: AppColors.lightBlue,
                         borderRadius: BorderRadius.circular(35.sp),
-                        border: Border.all(width: 1.5.w,color: AppColors.whiteColor)
+                        border: Border.all(
+                          width: 1.5.w,
+                          color: AppColors.whiteColor,
+                        ),
                       ),
-                      padding: EdgeInsets.symmetric(horizontal: 20.w,vertical: 10.h),
+                      padding: EdgeInsets.symmetric(
+                        horizontal: 20.w,
+                        vertical: 10.h,
+                      ),
                       child: Row(
                         children: [
-                          Text('Change Task', style: AppStyles.poppins16w600white,),
+                          Text(
+                            'Change Task',
+                            style: AppStyles.poppins16w600white,
+                          ),
                           5.horizontalSpace,
-                          SvgPicture.asset(AppImages.changeSvg,height: 30.h,)
+                          SvgPicture.asset(
+                            AppImages.changeSvg,
+                            height: 30.h,
+                          )
                         ],
                       ),
                     ),
@@ -146,59 +144,44 @@ class _DailyTaskDoingViewState extends State<DailyTaskDoingView> {
               ],
             ),
             20.verticalSpace,
-            ClipRRect(
-              borderRadius: BorderRadius.vertical(
-                bottom: Radius.circular(50.sp),
-              ),
 
+            // Task Box
+            ClipRRect(
+              borderRadius: BorderRadius.circular(50.sp),
               child: BackdropFilter(
                 filter: ImageFilter.blur(
-                  sigmaX: 10, // blur strength horizontally
-                  sigmaY: 10, // blur strength vertically
+                  sigmaX: 10,
+                  sigmaY: 10,
                 ),
                 child: Container(
                   width: double.infinity,
                   margin: EdgeInsets.symmetric(horizontal: 20.w),
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(50.sp),
-                    border: Border.all(width: 1.5.w,color: AppColors.whiteColor),
+                    border: Border.all(
+                      width: 1.5.w,
+                      color: AppColors.whiteColor,
+                    ),
                     color: AppColors.whiteColor.withOpacity(0.10),
                   ),
                   child: Column(
                     children: [
-<<<<<<< HEAD
                       SvgPicture.asset(AppImages.meditationClockSvg),
-                      Text('5 Minutes', style: AppStyles.urbanistBold20White600),
-                      Text('Meditation', style: AppStyles.urbanistBold20White600),
-                      Text('Take a 5 minute break today to \ngo outside in the sun and \nbreathe air',textAlign: TextAlign.center, style: AppStyles.urbanistBold20White600),
-                      Text('start the timer',textAlign: TextAlign.center, style: AppStyles.urbanistBold20White600),
-                      Container(
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Image.asset(AppImages.startPng,height: 40.h,),
-                            TimerCountdown(
-                              format: CountDownTimerFormat.minutesSeconds,
-                                enableDescriptions: false,
-                                timeTextStyle: AppStyles.poppins28w300white,
-                                spacerWidth: 0,
-                                endTime: DateTime.now().add(Duration(
-                                  minutes: 1,
-                                  seconds: 02
-                                )),
-=======
-                      30.verticalSpace,
-                      Stack(
-                        alignment: Alignment.bottomCenter,
-                        children: [
-                          SvgPicture.asset(AppImages.meditationClockSvg),
-                          Text('5 Minutes', style: AppStyles.urbanistBold20White600),
-                        ],
+                      Text('5 Minutes',
+                          style: AppStyles.urbanistBold20White600),
+                      Text('Meditation',
+                          style: AppStyles.urbanistBold20White600),
+                      Text(
+                        'Take a 5 minute break today to \ngo outside in the sun and \nbreathe air',
+                        textAlign: TextAlign.center,
+                        style: AppStyles.urbanistBold20White600,
                       ),
-                      Text('Meditation', style: AppStyles.urbanistBold30Yellow700),
-                      Text('Take a 5 minute break today to \ngo outside in the sun and \nbreathe air',textAlign: TextAlign.center, style: AppStyles.poppins14w700white),
                       30.verticalSpace,
-                      Text('start the timer',textAlign: TextAlign.center, style: AppStyles.poppins16w700white),
+                      Text(
+                        'start the timer',
+                        textAlign: TextAlign.center,
+                        style: AppStyles.urbanistBold20White600,
+                      ),
                       Container(
                         alignment: Alignment.center,
                         margin: EdgeInsets.symmetric(horizontal: 90.w),
@@ -228,16 +211,16 @@ class _DailyTaskDoingViewState extends State<DailyTaskDoingView> {
                             ),
                             endTime == null
                                 ? Text(
-                              "00:10", // default display before starting
+                              "00:10",
                               style: AppStyles.poppins28w300white,
                             )
                                 : TimerCountdown(
                               format: CountDownTimerFormat.minutesSeconds,
                               enableDescriptions: false,
-                              timeTextStyle: AppStyles.poppins28w300white,
+                              timeTextStyle:
+                              AppStyles.poppins28w300white,
                               spacerWidth: 0,
-                              endTime: endTime!, // safe to use !
->>>>>>> 9dc6c9a (dev_mujasam done changes commit)
+                              endTime: endTime!,
                               onEnd: () {
                                 print('Finished');
                               },
@@ -245,26 +228,26 @@ class _DailyTaskDoingViewState extends State<DailyTaskDoingView> {
                           ],
                         ),
                       ),
-                      SvgPicture.asset(AppImages.yogaSvg)
+                      30.verticalSpace,
+                      SvgPicture.asset(AppImages.yogaSvg),
                     ],
-                  )
+                  ),
                 ),
               ),
             ),
-<<<<<<< HEAD
-=======
+
             10.verticalSpace,
             Padding(
               padding: EdgeInsets.symmetric(horizontal: 30.w),
               child: CustomAppButton(
-                  onTap: (){
-                    Get.toNamed(AppRoutes.dailyTaskDoneView);
-                  },
-                  text: 'Done',
-                  isIcon: false,
-                  textStyle: AppStyles.poppins16w600white),
-            )
->>>>>>> 9dc6c9a (dev_mujasam done changes commit)
+                onTap: () {
+                  Get.toNamed(AppRoutes.dailyTaskDoneView);
+                },
+                text: 'Done',
+                isIcon: false,
+                textStyle: AppStyles.poppins16w600white,
+              ),
+            ),
           ],
         ),
       ),
