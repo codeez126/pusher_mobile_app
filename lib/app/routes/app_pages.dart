@@ -1,7 +1,13 @@
 import 'package:base_project/app/views/bottom_nav_navigation.dart';
-import 'package:base_project/app/views/home_section/views/daily_task_doing_view.dart';
-import 'package:base_project/app/views/home_section/views/daily_task_view.dart';
+import 'package:base_project/app/views/home_section/views/daily_course_view.dart';
+import 'package:base_project/app/views/home_section/views/daily_goals_doing_view.dart';
+import 'package:base_project/app/views/home_section/views/daily_goals_done_view.dart';
+import 'package:base_project/app/views/home_section/views/daily_goals_view.dart';
+import 'package:base_project/app/views/home_section/views/motivational_videos_view.dart';
 import 'package:base_project/app/views/home_section/views/notification_view.dart';
+import 'package:base_project/app/views/home_section/views/pusher_challenge_done_view.dart';
+import 'package:base_project/app/views/home_section/views/pusher_challenge_view.dart';
+import 'package:base_project/app/views/home_section/views/pusher_challenges_all_completed_view.dart';
 import 'package:base_project/app/views/onboarding/view/onboarding_2_view.dart';
 import 'package:base_project/app/views/onboarding/view/onboarding_view.dart';
 import 'package:base_project/app/views/registration_section/view/improvement_view.dart';
@@ -9,7 +15,6 @@ import 'package:base_project/app/views/registration_section/view/personal_goals_
 import 'package:base_project/app/views/registration_section/view/premium_subscription_view.dart';
 import 'package:base_project/app/views/splash/views/splash_view.dart';
 import 'package:get/get.dart';
-import '../views/home_section/views/daily_task_done_view.dart';
 import '../views/home_section/views/well_done_view.dart';
 import '../views/registration_section/view/otp_verfication_view.dart';
 import '../views/registration_section/view/phone_login_view.dart';
@@ -32,9 +37,16 @@ class AppPages {
 
     GetPage(name: AppRoutes.wellDoneView, page: () => WellDoneView()),
     GetPage(name: AppRoutes.notificationsView, page: () => NotificationsView()),
-    GetPage(name: AppRoutes.dailyTaskView, page: () => DailyTaskView()),
-    GetPage(name: AppRoutes.dailyTaskDoingView, page: () => DailyTaskDoingView()),
-    GetPage(name: AppRoutes.dailyTaskDoneView, page: () => DailyTaskDoneView()),
+    GetPage(name: AppRoutes.dailyGoalsView, page: () => DailyGoalsView()),
+    GetPage(name: AppRoutes.dailyGoalsDoingView, page: () => DailyGoalsDoingView()),
+    GetPage(name: AppRoutes.dailyGoalsDoneView, page: () => DailyGoalsDoneView()),
+    GetPage(name: AppRoutes.motivationalVideosView, page: () => MotivationalVideosView()),
+    GetPage(name: AppRoutes.dailyCourseView, page: () => DailyCourseView()),
+    GetPage(name: AppRoutes.pusherChallengeView, page: () => PusherChallengeView()),
+    GetPage(name: AppRoutes.pusherChallengeDoneView, page: () => PusherChallengeDoneView()),
+    GetPage(name: AppRoutes.pusherChallengeAllCompletedView, page: () => PusherChallengesAllCompletedView()),
+
+
     GetPage(name: AppRoutes.bottomNavNavigation, page: ()=> BottomNavNavigation()),
 
   ];

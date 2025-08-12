@@ -21,7 +21,7 @@ class NotificationsView extends StatelessWidget {
         width: double.infinity,
         decoration: BoxDecoration(
           image: DecorationImage(
-            image: AssetImage(AppImages.splashBackground),
+            image: AssetImage(AppImages.dailyChallengeBackground),
             fit: BoxFit.cover,
           ),
         ),
@@ -63,7 +63,7 @@ class NotificationsView extends StatelessWidget {
                                 SvgPicture.asset(AppImages.notificationBellSvg),
                                 10.horizontalSpace,
                                 Text(
-                                  'Notifications',
+                                  'Notifications'.tr,
                                   style: AppStyles.poppins20w600darkGrey2,
                                 ),
                               ],
@@ -85,9 +85,9 @@ class NotificationsView extends StatelessWidget {
                     onTap: (){
                       Get.toNamed(AppRoutes.bottomNavNavigation);
                     },
-                    child: CustomNotificationByDay(weekday: 'TODAY')),
+                    child: CustomNotificationByDay(weekday: 'TODAY'.tr)),
                     16.verticalSpace,
-                    CustomNotificationByDay(weekday: 'YESTERDAY'),
+                    CustomNotificationByDay(weekday: 'YESTERDAY'.tr),
                     16.verticalSpace,
                   ],
                 ),
@@ -95,62 +95,6 @@ class NotificationsView extends StatelessWidget {
             ),
           ],
         ),
-      ),
-    );
-  }
-
-  Widget _buildNotificationItem(String time, String message) {
-    return Container(
-      padding: EdgeInsets.all(5),
-      decoration: BoxDecoration(
-        color: Colors.white.withOpacity(0.40),
-        borderRadius: BorderRadius.circular(8.sp),
-        border: Border.all(color: AppColors.whiteColor, width: 1.2.w),
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Row(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              SvgPicture.asset(AppImages.clockSvg),
-              2.horizontalSpace,
-              Text(
-                time,
-                style: AppStyles.poppins12w600darkGrey2
-              ),
-            ],
-          ),
-          4.verticalSpace,
-          Container(
-            height: 50.h,
-            width: double.infinity,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(12.sp),
-              border: Border.all(color: AppColors.whiteColor, width: 1.w),
-              color: AppColors.whiteColor.withOpacity(0.60),
-            ),
-            child: Padding(
-              padding: EdgeInsets.symmetric(horizontal: 5.w),
-              child: Row(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  SvgPicture.asset(AppImages.notificationBellSvg, height: 20.h),
-                  5.horizontalSpace,
-                  Expanded(
-                    child: Text(
-                      message,
-                      softWrap: true,
-                      overflow: TextOverflow.ellipsis,
-                      style: AppStyles.poppins12w600darkGrey2,
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          )
-
-        ],
       ),
     );
   }

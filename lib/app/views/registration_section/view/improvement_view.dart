@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:ui';
 
 import 'package:base_project/app/routes/app_routes.dart';
@@ -22,6 +23,7 @@ class ImprovementView extends StatefulWidget {
 
 class _ImprovementViewState extends State<ImprovementView> {
   Set<String> selectedCategories = {};
+  Set<String> showIconFor = {}; // Tracks categories where icon should show
 
   @override
   Widget build(BuildContext context) {
@@ -44,10 +46,10 @@ class _ImprovementViewState extends State<ImprovementView> {
                 subtitle: '',
                 isImprovement: true,
               ),
-              /// =======================================Categories Grid========================================
+
               Expanded(
                 child: Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 20),
+                  padding: const EdgeInsets.symmetric(horizontal: 20),
                   child: GridView.builder(
                     gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                       crossAxisCount: 2,
@@ -58,19 +60,18 @@ class _ImprovementViewState extends State<ImprovementView> {
                     itemCount: ImprovementModel.categories.length,
                     itemBuilder: (context, index) {
                       final category = ImprovementModel.categories[index];
-                      final isSelected = selectedCategories.contains(
-                        category.title,
-                      );
+                      final isSelected = selectedCategories.contains(category.title);
+                      final showIcon = showIconFor.contains(category.title);
+
                       return GestureDetector(
                         onTap: () {
                           setState(() {
                             if (isSelected) {
                               selectedCategories.remove(category.title);
+                              showIconFor.remove(category.title);
                             } else {
                               selectedCategories.add(category.title);
                             }
-                            print(selectedCategories);
-                            handleNext();
                           });
                         },
                         child: Container(
@@ -78,13 +79,9 @@ class _ImprovementViewState extends State<ImprovementView> {
                             image: DecorationImage(
                               image: AssetImage(category.image),
                               fit: BoxFit.fill,
-                              filterQuality: FilterQuality.low,
                             ),
                             borderRadius: BorderRadius.circular(25),
-                            border: Border.all(
-                              color: AppColors.whiteColor,
-                              width: 0.5.w,
-                            ),
+                            border: Border.all(color: AppColors.whiteColor, width: 0.5.w),
                             boxShadow: [
                               BoxShadow(
                                 color: Colors.black.withOpacity(0.2),
@@ -93,42 +90,73 @@ class _ImprovementViewState extends State<ImprovementView> {
                               ),
                             ],
                           ),
-                          child: ClipRRect(
-                            borderRadius: BorderRadius.circular(16),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              mainAxisAlignment: MainAxisAlignment.end,
-                              children: [
-                                SvgPicture.asset(AppImages.plusSvg),
-                                Stack(
-                                  alignment: Alignment.center,
-                                  children: [
-                                    Blur(
-                                      blurColor: AppColors.whiteColor,
-                                      borderRadius: BorderRadius.circular(32.r),
-                                      blur: 10.sp,
-                                      child: Container(
-                                        width: 140.w,
-                                        padding: EdgeInsets.symmetric(
-                                          horizontal: 10.w,
-                                          vertical: 20.h,
+                          child: Stack(
+                            alignment: Alignment.center,
+                            children: [
+                              Positioned(
+                                bottom: 15.h,
+                                child: ClipRRect(
+                                  borderRadius: BorderRadius.circular(20.sp),
+                                  child: BackdropFilter(
+                                    filter: ImageFilter.blur(sigmaY: 10, sigmaX: 10),
+                                    child: AnimatedContainer(
+                                      duration: Duration(milliseconds: 800),
+                                      curve: Curves.easeInOut,
+                                      alignment: Alignment.center,
+                                      width: 140.w,
+                                      height: isSelected
+                                          ? MediaQuery.of(context).size.height - 640
+                                          : 60.h,
+                                      padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 10.h),
+                                      decoration: BoxDecoration(
+                                        color: Colors.white.withOpacity(0.2),
+                                        borderRadius: BorderRadius.circular(20.sp),
+                                      ),
+                                      child: FittedBox(
+                                        fit: BoxFit.scaleDown,
+                                        child: Text(
+                                          category.title,
+                                          style: TextStyle(
+                                            fontSize: 18.sp,
+                                            color: Colors.white,
+                                            fontWeight: FontWeight.bold,
+                                            shadows: [
+                                              Shadow(offset: Offset(0, 1), blurRadius: 2, color: Colors.black26),
+                                            ],
+                                          ),
                                         ),
                                       ),
+                                      onEnd: () {
+                                        if (isSelected && !showIcon) {
+                                          Future.delayed(Duration(milliseconds: 100), () {
+                                            setState(() {
+                                              showIconFor.add(category.title);
+                                            });
+                                          });
+                                        }
+                                      },
                                     ),
-                                    Text(
-                                      category.title,
-                                      style: TextStyle(
-                                        fontSize: 18.sp,
-                                        color: Colors.white,
-                                        fontWeight: FontWeight.bold,
-                                        letterSpacing: 0.5,
-                                      ),
-                                    ),
-                                  ],
+                                  ),
                                 ),
-                                15.verticalSpace,
-                              ],
-                            ),
+                              ),
+//                              if (showIcon==false)
+                              AnimatedPositioned(
+                                duration: Duration(milliseconds: 600),
+                                curve: Curves.easeInOut,
+                                top: isSelected ? 15 : 10,
+                                right: isSelected ? 10 : 52,
+                                child: AnimatedRotation(
+                                  alignment: Alignment.center,
+                                  turns: isSelected ? 0.1 : 1,
+                                  duration: Duration(milliseconds: 700),
+                                  curve: Curves.easeInOut,
+                                  child: SvgPicture.asset(
+                                    AppImages.plusSvg,
+                                  ),
+                                ),
+                              )
+
+                            ],
                           ),
                         ),
                       );
@@ -136,12 +164,12 @@ class _ImprovementViewState extends State<ImprovementView> {
                   ),
                 ),
               ),
+
+              /// Next Button
               Padding(
                 padding: EdgeInsets.all(20),
                 child: CustomAppButton(
-                  onTap: () {
-                    Get.toNamed(AppRoutes.personalGoalsView);
-                  },
+                  onTap: handleNext,
                   text: 'Next'.tr,
                   textStyle: AppStyles.poppins16w600white,
                 ),
@@ -158,10 +186,7 @@ class _ImprovementViewState extends State<ImprovementView> {
       Utils.toastMessage('Please select at least one category to improve'.tr);
       return;
     }
-
-    // Handle navigation to next screen
-    print('${'Selected categories'.tr} : ${selectedCategories.toList()}');
-
     Utils.toastMessage('${'Selected'.tr} : ${selectedCategories.join(', ')}');
+    Get.toNamed(AppRoutes.personalGoalsView);
   }
 }

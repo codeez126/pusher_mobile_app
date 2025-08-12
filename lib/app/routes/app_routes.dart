@@ -13,9 +13,14 @@ class AppRoutes {
   //=================Home Section==================================
   static const wellDoneView = '/wellDone';
   static const notificationsView = '/notification';
-  static const dailyTaskView = '/dailyChallenge';
-  static const dailyTaskDoingView = '/dailyTaskDoing';
-  static const dailyTaskDoneView = '/dailyTaskDone';
+  static const dailyGoalsView = '/dailyChallenge';
+  static const dailyGoalsDoingView = '/dailyTaskDoing';
+  static const dailyGoalsDoneView = '/dailyTaskDone';
+  static const motivationalVideosView = '/motivationalVideos';
+  static const dailyCourseView = '/dailyCourse';
+  static const pusherChallengeView = '/pusherChallenge';
+  static const pusherChallengeDoneView = '/pusherChallengeDone';
+  static const pusherChallengeAllCompletedView = '/pusherChallengeAllCompleted';
 
 
   //==============BottomNav============

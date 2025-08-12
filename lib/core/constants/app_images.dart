@@ -14,6 +14,7 @@ class AppImages {
   static const String person = 'assets/icons/person.png';
   static const String personSvg = 'assets/icons/person.svg';
   static const String challengeSvg = 'assets/icons/challange.svg';
+  static const String challenge2Svg = 'assets/icons/challange (1).svg';
   static const String challenge = 'assets/icons/challenge.png';
   static const String coursesSvg = 'assets/icons/courses.svg';
   static const String dailyCourseSvg = 'assets/icons/daily_course.svg';
@@ -25,6 +26,13 @@ class AppImages {
   static const String changeSvg = 'assets/icons/change.svg';
   static const String doneSvg = 'assets/icons/done.svg';
   static const String nextSvg = 'assets/icons/next.svg';
+  static const String arrowLeft_x2 = 'assets/icons/arrows x2 left.svg';
+  static const String arrowDown_x2 = 'assets/icons/arrows x2 down.svg';
+  static const String heartSvg = 'assets/icons/heart.svg';
+  static const String heartFavSvg = 'assets/icons/heartFav.svg';
+  static const String playSvg = 'assets/icons/play.svg';
+  static const String checkBoxEmptySvg = 'assets/icons/checkBoxEmpty.svg';
+  static const String checkBoxFillSvg = 'assets/icons/checkBoxFill.svg';
 
   /// Images
   static const String bgMainImage = 'assets/images/bg_main.png';
@@ -66,5 +74,15 @@ class AppImages {
 
   //===========================Daily Task Doing View ===============================
   static const String startPng ='assets/images/daily_task_doing_view/start_play.png';
+
+
+  //==========================Motivational Videos View===============================
+  static const String motivationalVideoBackgroundOne="assets/images/motivational_videos_view/motivational_videos_1.png";
+  static const String motivationalVideoBackgroundTwo="assets/images/motivational_videos_view/motivational_videos_2.jpg";
+  static const String motivationalVideoBackgroundThree="assets/images/motivational_videos_view/motivational_videos_3.jpg";
+  static const String motivationalVideoBackgroundFour="assets/images/motivational_videos_view/motivational_videos_4.jpg";
+
+  //============================Pusher Challenges=====================================
+  static const String  premiumPusherStarSvg="assets/images/pusher_challenge_view/premiumSTARR.svg";
 
 }

@@ -26,11 +26,11 @@ class WellDoneView extends StatelessWidget {
                 },child: Image.asset(AppImages.closeImage,height: 120.h,))
               ],
             ),
-            Text('Well Done',style: AppStyles.urbanistBold32White900,),
+            Text('Well Done'.tr,style: AppStyles.urbanistBold32White900,),
             20.verticalSpace,
             SvgPicture.asset(AppImages.completed),
             20.verticalSpace,
-            Text('We hope you got some \nmotivation today',style: AppStyles.poppins24w300white,textAlign: TextAlign.center,),
+            Text('We hope you got some \nmotivation today'.tr,style: AppStyles.poppins24w300white,textAlign: TextAlign.center,),
             40.verticalSpace,
             GestureDetector(
               onTap: (){
@@ -51,7 +51,7 @@ class WellDoneView extends StatelessWidget {
                   Image.asset(AppImages.star,height: 30.h,),
                   10.horizontalSpace,
                   Text(
-                      'Upgrade Now',
+                      'Upgrade Now'.tr,
                       style: AppStyles.poppins14w700white
                   ),
                 ],
@@ -70,6 +70,7 @@ class WellDoneView extends StatelessWidget {
 
   void goNext() {
     print('Next');
-    Get.toNamed(AppRoutes.notificationsView);
+    //Get.toNamed(AppRoutes.notificationsView);
+    Get.toNamed(AppRoutes.bottomNavNavigation);
   }
 }

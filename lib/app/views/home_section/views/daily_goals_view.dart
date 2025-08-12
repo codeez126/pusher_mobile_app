@@ -2,6 +2,7 @@ import 'dart:ui';
 
 import 'package:base_project/app/routes/app_routes.dart';
 import 'package:base_project/core/widgets/custom_app_button.dart';
+import 'package:base_project/core/widgets/custom_info_dialoge.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
@@ -11,14 +12,14 @@ import '../../../../core/Constants/app_colors.dart';
 import '../../../../core/constants/app_fonts_and_styles.dart';
 import '../../../../core/constants/app_images.dart';
 
-class DailyTaskView extends StatefulWidget {
-  DailyTaskView({Key? key}) : super(key: key);
+class DailyGoalsView extends StatefulWidget {
+  DailyGoalsView({Key? key}) : super(key: key);
 
   @override
-  State<DailyTaskView> createState() => _DailyTaskViewState();
+  State<DailyGoalsView> createState() => _DailyGoalsViewState();
 }
 
-class _DailyTaskViewState extends State<DailyTaskView> {
+class _DailyGoalsViewState extends State<DailyGoalsView> {
   int currentPage = 0;
   PageController pageController = PageController();
 
@@ -71,7 +72,7 @@ class _DailyTaskViewState extends State<DailyTaskView> {
                       Positioned(
                         bottom: 55,
                         child: Text(
-                          'Daily Challenge',
+                          'Daily Challenge'.tr,
                           style: AppStyles.poppins20w600darkGrey2,
                         ),
                       ),
@@ -94,15 +95,15 @@ class _DailyTaskViewState extends State<DailyTaskView> {
                       text: TextSpan(
                         children: [
                           TextSpan(
-                            text: 'choose',
+                            text: 'choose'.tr,
                             style: AppStyles.poppins16w400darkGrey2,
                           ),
                           TextSpan(
-                            text: ' One',
+                            text: ' One'.tr,
                             style: AppStyles.poppins16w900darkGrey2,
                           ),
                           TextSpan(
-                            text: '\nchallenge for today',
+                            text: '\nchallenge for today'.tr,
                             style: AppStyles.poppins16w400darkGrey2,
                           ),
                         ],
@@ -110,22 +111,26 @@ class _DailyTaskViewState extends State<DailyTaskView> {
                     ),
                   ),
                 ),
-                // Info Icon
                 Positioned(
                   bottom: 0,
                   right: 0,
-                  child: Container(
-                    margin: EdgeInsets.all(20.sp),
-                    padding: EdgeInsets.all(5.sp),
-                    decoration: BoxDecoration(
-                      color: AppColors.whiteColor.withOpacity(0.60),
-                      shape: BoxShape.circle,
-                      border: Border.all(
-                        color: AppColors.whiteColor,
-                        width: 1.8.w,
+                  child: GestureDetector(
+                      onTap: () {
+                        Get.dialog(CustomInfoDialog(description: "Every day you can choose one daily challenge from three possible challenges. After you choose and carry it out, three new challenge will appear every other day.".tr));
+                      },
+                      child: Container(
+                      margin: EdgeInsets.all(20.sp),
+                      padding: EdgeInsets.all(5.sp),
+                      decoration: BoxDecoration(
+                        color: AppColors.whiteColor.withOpacity(0.60),
+                        shape: BoxShape.circle,
+                        border: Border.all(
+                          color: AppColors.whiteColor,
+                          width: 1.8.w,
+                        ),
                       ),
+                      child: SvgPicture.asset(AppImages.infoSvg),
                     ),
-                    child: SvgPicture.asset(AppImages.infoSvg),
                   ),
                 ),
               ],
@@ -144,30 +149,30 @@ class _DailyTaskViewState extends State<DailyTaskView> {
                 },
                 children: [
                   buildPageViewItem(
-                    '5 Minute',
-                    'Meditation',
+                    '5 Minute'.tr,
+                    'Meditation'.tr,
                     AppStyles.urbanistBold30Yellow700,
-                    'Take a 5 minute break today to go outside in the sun and breathe air',
+                    'Take a 5 minute break today to go outside in the sun and breathe air'.tr,
                     AppImages.yogaSvg,
                     AppImages.meditationBackgroundImage,
                     () {
-                      Get.toNamed(AppRoutes.dailyTaskDoingView);
+                      Get.toNamed(AppRoutes.dailyGoalsDoingView);
                     },
                   ),
                   buildPageViewItem(
-                    'Meet A',
-                    'Friend',
+                    'Meet A'.tr,
+                    'Friend'.tr,
                     AppStyles.urbanistBold30LightBlue700,
-                    'meeting a friend I haven\'t seen in a long time',
+                    'Meeting a friend I haven\'t seen in a long time'.tr,
                     AppImages.friendsSvg,
                     AppImages.friendBackgroundImage,
                     () {},
                   ),
                   buildPageViewItem(
-                    'Take A',
-                    'Walk',
+                    'Take A'.tr,
+                    'Walk'.tr,
                     AppStyles.urbanistBold30Yellow700,
-                    'Go for a walk in a place you like, for example at the sea or even under the house',
+                    'Go for a walk in a place you like, for example at the sea or even under the house'.tr,
                     AppImages.walkSvg,
                     AppImages.walkBackgroundImage,
                     () {},
@@ -219,9 +224,8 @@ class _DailyTaskViewState extends State<DailyTaskView> {
           children: [
             SizedBox(height: 370.h),
             Container(
-              height: 300.h,
+              height: 310.h,
               margin: EdgeInsets.symmetric(horizontal: 30.w),
-              padding: EdgeInsets.symmetric(horizontal: 20.w),
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(20.r),
                 color: Colors.black,
@@ -232,31 +236,57 @@ class _DailyTaskViewState extends State<DailyTaskView> {
                   fit: BoxFit.cover,
                 ),
               ),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.end,
-                crossAxisAlignment: CrossAxisAlignment.center,
+              child: Stack(
                 children: [
-                  currentPage == 0
-                      ? Stack(
-                        alignment: Alignment.bottomCenter,
-                        children: [
-                          SvgPicture.asset(AppImages.meditationClockSvg),
-                          Text(title, style: AppStyles.urbanistBold20White600),
+                  Container(
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(18.r), // Slightly smaller to account for border
+                      gradient: LinearGradient(
+                        begin: Alignment.topCenter,
+                        end: Alignment.bottomCenter,
+                        colors: [
+                          Colors.transparent,
+                          Colors.black.withOpacity(0.2),
+                          Colors.black.withOpacity(0.4),
+                          Colors.black.withOpacity(0.6),
                         ],
-                      )
-                      : Text(title, style: AppStyles.urbanistBold20White600),
-                  if (currentPage == 1 || currentPage == 2) 10.verticalSpace,
-                  Text(heading, style: headingStyle),
-                  if (currentPage == 1 || currentPage == 2) 10.verticalSpace,
-                  Text(
-                    description,
-                    style: AppStyles.poppins14w500white,
-                    textAlign: TextAlign.center,
+                        stops: [0.0, 0.3, 0.6, 1.0],
+                      ),
+                    ),
                   ),
-                  if (currentPage == 1 || currentPage == 2) 10.verticalSpace,
-                  SvgPicture.asset(
-                    svgIcon,
-                    height: currentPage == 1 || currentPage == 2 ? 50.h : null,
+                  Positioned.fill(
+                    child: Container(
+                      padding: EdgeInsets.symmetric(horizontal: 20.w),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          currentPage == 0
+                              ? Stack(
+                            alignment: Alignment.bottomCenter,
+                            children: [
+                              SvgPicture.asset(AppImages.meditationClockSvg),
+                              Text(title, style: AppStyles.urbanistBold20White600),
+                            ],
+                          )
+                              : Text(title, style: AppStyles.urbanistBold20White600),
+                          if (currentPage == 1 || currentPage == 2) 10.verticalSpace,
+                          Text(heading, style: headingStyle),
+                          if (currentPage == 1 || currentPage == 2) 10.verticalSpace,
+                          Text(
+                            description,
+                            style: AppStyles.poppins14w500white,
+                            textAlign: TextAlign.center,
+                          ),
+                          if (currentPage == 1 || currentPage == 2) 10.verticalSpace,
+                          SvgPicture.asset(
+                            svgIcon,
+                            height: currentPage == 1 || currentPage == 2 ? 50.h : null,
+                          ),
+                          20.verticalSpace, // Added bottom spacing
+                        ],
+                      ),
+                    ),
                   ),
                 ],
               ),
@@ -264,9 +294,9 @@ class _DailyTaskViewState extends State<DailyTaskView> {
             Positioned(
               top: 0,
               child: Container(
-                padding: EdgeInsets.symmetric(horizontal: 30.w, vertical: 15.h),
+                padding: EdgeInsets.symmetric(horizontal: 30.w, vertical: 10.h),
                 decoration: BoxDecoration(
-                  color: AppColors.darkGrey2.withOpacity(0.80),
+                  color: AppColors.darkGrey2.withOpacity(0.90), // Increased opacity for better readability
                   borderRadius: BorderRadius.circular(40.sp),
                   border: Border.all(color: AppColors.whiteColor, width: 1.5.w),
                 ),
@@ -288,7 +318,7 @@ class _DailyTaskViewState extends State<DailyTaskView> {
             onTap: () {
               onTap();
             },
-            text: 'Take This Challenge',
+            text: 'Take This Challenge'.tr,
             isIcon: false,
             textStyle: AppStyles.poppins16w600white,
           ),

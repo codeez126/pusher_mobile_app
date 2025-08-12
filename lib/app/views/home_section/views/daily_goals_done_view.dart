@@ -1,4 +1,5 @@
 import 'dart:ui';
+import 'package:base_project/core/widgets/daily_goals_done_view/custom_challenge_complete_box.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
@@ -6,11 +7,30 @@ import 'package:get/get.dart';
 import '../../../../core/Constants/app_colors.dart';
 import '../../../../core/constants/app_fonts_and_styles.dart';
 import '../../../../core/constants/app_images.dart';
-import '../../../../core/widgets/daily_task_done_view/animated_progress_bar.dart';
 
 
-class DailyTaskDoneView extends StatelessWidget {
-  const DailyTaskDoneView({super.key});
+class DailyGoalsDoneView extends StatefulWidget {
+  const DailyGoalsDoneView({super.key});
+
+  @override
+  State<DailyGoalsDoneView> createState() => _DailyGoalsDoneViewState();
+}
+
+
+class _DailyGoalsDoneViewState extends State<DailyGoalsDoneView> {
+
+  bool showChallengeBox = false;
+
+
+  @override
+  void initState() {
+    super.initState();
+    Future.delayed(const Duration(milliseconds: 400), () {
+      if (mounted) {
+        setState(() => showChallengeBox = true);
+      }
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -70,7 +90,7 @@ class DailyTaskDoneView extends StatelessWidget {
                           Positioned(
                             bottom: 55,
                             child: Text(
-                              'Daily Challenge',
+                              'Daily Challenge'.tr,
                               style: AppStyles.poppins20w600darkGrey2,
                             ),
                           ),
@@ -100,7 +120,7 @@ class DailyTaskDoneView extends StatelessWidget {
                         padding: EdgeInsets.symmetric(horizontal: 20.w,vertical: 10.h),
                         child: Row(
                           children: [
-                            Text('Next Daily Goal', style: AppStyles.poppins16w600white,),
+                            Text('Next Daily Goal'.tr, style: AppStyles.poppins16w600white,),
                             5.horizontalSpace,
                             SvgPicture.asset(AppImages.nextSvg,height: 30.h,)
                           ],
@@ -130,54 +150,10 @@ class DailyTaskDoneView extends StatelessWidget {
               ],
             ),
             20.verticalSpace,
-            ClipRRect(
-              borderRadius: BorderRadius.vertical(
-                bottom: Radius.circular(50.sp),
+            if (showChallengeBox)
+              CustomChallengeCompleteBox(
+                progress: 0.78,
               ),
-
-              child: BackdropFilter(
-                filter: ImageFilter.blur(
-                  sigmaX: 10, // blur strength horizontally
-                  sigmaY: 10, // blur strength vertically
-                ),
-                child: Container(
-                    width: double.infinity,
-                    margin: EdgeInsets.symmetric(horizontal: 20.w),
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(50.sp),
-                      border: Border.all(width: 1.5.w,color: AppColors.whiteColor),
-                      color: AppColors.whiteColor.withOpacity(0.10),
-                    ),
-                    child: Column(
-                      children: [
-                        30.verticalSpace,
-                          Text(
-                            'Daily Challenge Completed Today',
-                            textAlign: TextAlign.center,
-                            style: AppStyles.poppins16w600white,
-                          ),
-                        30.verticalSpace,
-                        SvgPicture.asset(AppImages.doneSvg),
-                        30.verticalSpace,
-                        Padding(
-                            padding: EdgeInsets.symmetric(horizontal: 20.w),
-                            child: AnimatedProgressBar(
-                              targetProgress: 0.33, // 0=0% ,1=100%
-                              backgroundColor: AppColors.whiteColor.withOpacity(
-                                0.25,
-                              ),
-                              height: 30.h,
-                              progressColor: AppColors.lightBlue,
-                              borderColor: AppColors.whiteColor,
-                            ),
-                          ),
-                        30.verticalSpace
-
-                      ],
-                    )
-                ),
-              ),
-            ),
           ],
         ),
       ),

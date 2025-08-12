@@ -87,6 +87,79 @@ class LocaleString extends Translations {
       'Unlock Mentor Challenge': 'Unlock Mentor Challenge',
       'Upgrade 50\$': 'Upgrade 50\$',
       'Continue With 7-Day Challenge Trial': 'Continue With 7-Day Challenge Trial',
+
+      //===============================Well Done View=======================================
+      'Well Done':'Well Done',
+      'We hope you got some \nmotivation today':'We hope you got some \nmotivation today',
+      'Upgrade Now':'Upgrade Now',
+
+      //===============================Notification View=====================================
+      'Notifications':'Notifications',
+      'TODAY':'TODAY',
+      'YESTERDAY':'YESTERDAY',
+
+      //==============================="Motivation Video View================================
+      "Motivation Video Mix":"Motivation Video Mix",
+      "All Videos":"All Videos",
+      '"Change Your Mind"':'"Change Your Mind"',
+      'By Sam Mor - Mental Adviser':'By Sam Mor - Mental Adviser',
+
+      //====================================Daily Goals view==================================
+      'Daily Challenge':'Daily Challenge',
+      'choose':'choose',
+      ' One':' One',
+      '\nchallenge for today':'\nchallenge for today',
+      '5 Minute':'5 Minute',
+      'Meditation':'Meditation',
+      'Take a 5 minute break today to go outside in the sun and breathe air':'Take a 5 minute break today to go outside in the sun and breathe air',
+      'Meet A':'Meet A',
+      'Friend':'Friend',
+      'Meeting a friend I haven\'t seen in a long time':'Meeting a friend I haven\'t seen in a long time',
+      'Take A':'Take A',
+      'Walk':'Walk',
+      'Go for a walk in a place you like, for example at the sea or even under the house':'Go for a walk in a place you like, for example at the sea or even under the house',
+      'Take This Challenge':'Take This Challenge',
+      "Info":"Info",
+      "Every day you can choose one daily challenge from three possible challenges. After you choose and carry it out, three new challenge will appear every other day.":"Every day you can choose one daily challenge from three possible challenges. After you choose and carry it out, three new challenge will appear every other day",
+
+
+      //========================================Daily Goals Doing View========================================
+      'Change Task':'Change Task',
+      'Take a 5 minute break today to \ngo outside in the sun and \nbreathe air':'Take a 5 minute break today to \ngo outside in the sun and \nbreathe air',
+      'start the timer':'start the timer',
+      'Done':'Done',
+
+
+      //======================================Daily Goals Done View=======================================
+      'Next Daily Goal':'Next Daily Goal',
+      'Daily Challenge Completed Today':'Daily Challenge Completed Today',
+
+      //======================================Daily Course View===========================================
+      " All Videos":" All Videos",
+      '"Nothing Will Stop Me"':'"Nothing Will Stop Me"',
+      '"Let\'s talk for a second about life and our meaning and how nothing can stop us. We are the ones who stand in our own way."':'"Let\'s talk for a second about life and our meaning and how nothing can stop us. We are the ones who stand in our own way."',
+      "Daily Course":"Daily Course",
+      'Min':'Min',
+      'Daily Next Goals':'Daily Next Goals',
+
+      //====================================================Pusher Challenges===========================
+      'Pusher Challenge':'Pusher Challenge',
+      'Super Mix Routine':'Super Mix Routine',
+      "Every day you need to complete the pusher challenge routine for 7 days, After you finish the challenge a new challenge will appear every other day.":"Every day you need to complete the pusher challenge routine for 7 days, After you finish the challenge a new challenge will appear every other day.",
+
+      //==================================================pusher Challenges done===========================
+      "Upgrade from 20\$":"Upgrade from 20\$",
+      "Get the complete progress for yourself with premium challenges":"Get the complete progress for yourself with premium challenges",
+
+      //=================================================Pusher Challenges Controller==========================
+      "Listening To Music":"Listening To Music",
+      "45 Minutes Workout":"45 Minutes Workout",
+      "Cold Shower":"Cold Shower",
+      "Protein Shake":"Protein Shake",
+
+
+
+
     },
 
     'he-IL': {"Login": "Login"},

@@ -12,14 +12,14 @@ import '../../../../core/Constants/app_colors.dart';
 import '../../../../core/constants/app_fonts_and_styles.dart';
 import '../../../../core/constants/app_images.dart';
 
-class DailyTaskDoingView extends StatefulWidget {
-  const DailyTaskDoingView({super.key});
+class DailyGoalsDoingView extends StatefulWidget {
+  const DailyGoalsDoingView({super.key});
 
   @override
-  State<DailyTaskDoingView> createState() => _DailyTaskDoingViewState();
+  State<DailyGoalsDoingView> createState() => _DailyGoalsDoingViewState();
 }
 
-class _DailyTaskDoingViewState extends State<DailyTaskDoingView> {
+class _DailyGoalsDoingViewState extends State<DailyGoalsDoingView> {
   DateTime? endTime;
 
   @override
@@ -40,7 +40,6 @@ class _DailyTaskDoingViewState extends State<DailyTaskDoingView> {
               alignment: Alignment.topCenter,
               children: [
                 Container(height: 210.h),
-                // Blur Header
                 ClipRRect(
                   borderRadius: BorderRadius.vertical(
                     bottom: Radius.circular(50.sp),
@@ -76,7 +75,7 @@ class _DailyTaskDoingViewState extends State<DailyTaskDoingView> {
                           Positioned(
                             bottom: 55,
                             child: Text(
-                              'Daily Challenge',
+                              'Daily Challenge'.tr,
                               style: AppStyles.poppins20w600darkGrey2,
                             ),
                           ),
@@ -85,7 +84,6 @@ class _DailyTaskDoingViewState extends State<DailyTaskDoingView> {
                     ),
                   ),
                 ),
-                // Change Task Button
                 Positioned(
                   bottom: 0,
                   child: Container(
@@ -110,7 +108,7 @@ class _DailyTaskDoingViewState extends State<DailyTaskDoingView> {
                       child: Row(
                         children: [
                           Text(
-                            'Change Task',
+                            'Change Task'.tr,
                             style: AppStyles.poppins16w600white,
                           ),
                           5.horizontalSpace,
@@ -123,7 +121,6 @@ class _DailyTaskDoingViewState extends State<DailyTaskDoingView> {
                     ),
                   ),
                 ),
-                // Info Icon
                 Positioned(
                   bottom: 0,
                   right: 0,
@@ -167,18 +164,18 @@ class _DailyTaskDoingViewState extends State<DailyTaskDoingView> {
                   child: Column(
                     children: [
                       SvgPicture.asset(AppImages.meditationClockSvg),
-                      Text('5 Minutes',
+                      Text('5 Minutes'.tr,
                           style: AppStyles.urbanistBold20White600),
-                      Text('Meditation',
+                      Text('Meditation'.tr,
                           style: AppStyles.urbanistBold20White600),
                       Text(
-                        'Take a 5 minute break today to \ngo outside in the sun and \nbreathe air',
+                        'Take a 5 minute break today to \ngo outside in the sun and \nbreathe air'.tr,
                         textAlign: TextAlign.center,
                         style: AppStyles.urbanistBold20White600,
                       ),
                       30.verticalSpace,
                       Text(
-                        'start the timer',
+                        'start the timer'.tr,
                         textAlign: TextAlign.center,
                         style: AppStyles.urbanistBold20White600,
                       ),
@@ -241,9 +238,9 @@ class _DailyTaskDoingViewState extends State<DailyTaskDoingView> {
               padding: EdgeInsets.symmetric(horizontal: 30.w),
               child: CustomAppButton(
                 onTap: () {
-                  Get.toNamed(AppRoutes.dailyTaskDoneView);
+                  Get.toNamed(AppRoutes.dailyGoalsDoneView);
                 },
-                text: 'Done',
+                text: 'Done'.tr,
                 isIcon: false,
                 textStyle: AppStyles.poppins16w600white,
               ),
