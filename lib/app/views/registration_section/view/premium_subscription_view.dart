@@ -17,7 +17,7 @@ class PremiumSubscriptionView extends StatefulWidget {
 }
 
 class _PremiumSubscriptionViewState extends State<PremiumSubscriptionView> {
-  String selectedPlan = 'Premium'; // Default selection
+  String selectedPlan = 'Premium'.tr; // Default selection
 
   @override
   Widget build(BuildContext context) {
@@ -41,17 +41,17 @@ class _PremiumSubscriptionViewState extends State<PremiumSubscriptionView> {
                     SvgPicture.asset(AppSvgs.logo,height: 30.h,),
                     20.verticalSpace,
                     Text(
-                      'Say Hello To Your Best Self.',
+                      'Say Hello To Your Best Self.'.tr,
                       style: AppStyles.poppins20w600white,
                     ),
                     8.verticalSpace,
                     Text(
-                      'Get The Complete Progress For Yourself With',
+                      'Get The Complete Progress For Yourself With'.tr,
                       textAlign: TextAlign.center,
                       style: AppStyles.poppins12w700white
                     ),
                     Text(
-                      'Premium Challenges',
+                      'Premium Challenges'.tr,
                       textAlign: TextAlign.center,
                       style: AppStyles.poppins12w700white
                     ),
@@ -67,7 +67,7 @@ class _PremiumSubscriptionViewState extends State<PremiumSubscriptionView> {
                     GestureDetector(
                       onTap: () {
                         setState(() {
-                          selectedPlan = 'Premium';
+                          selectedPlan = 'Premium'.tr;
                           print(selectedPlan);
                         });
                       },
@@ -77,14 +77,14 @@ class _PremiumSubscriptionViewState extends State<PremiumSubscriptionView> {
                         padding: EdgeInsets.symmetric(horizontal: 20.w,),
                         margin: EdgeInsets.only(bottom: 16),
                         decoration: BoxDecoration(
-                          color: selectedPlan == 'Premium'? AppColors.whiteColor.withOpacity(0.30):AppColors.yellow.withOpacity(0),
+                          color: selectedPlan == 'Premium'.tr? AppColors.whiteColor.withOpacity(0.30):AppColors.yellow.withOpacity(0),
                           image: DecorationImage(image: AssetImage(AppImages.premiumPackageBackground)),
                             borderRadius: BorderRadius.circular(16),
                         border: Border.all(
-                          color: selectedPlan == 'Premium'
+                          color: selectedPlan == 'Premium'.tr
                               ? AppColors.whiteColor.withOpacity(0.30)
                               : Colors.white.withOpacity(0),
-                          width: selectedPlan == 'Premium' ? 2 : 2,
+                          width: selectedPlan == 'Premium'.tr ? 2 : 2,
                         ),
                         ),
                         child: Column(
@@ -92,17 +92,17 @@ class _PremiumSubscriptionViewState extends State<PremiumSubscriptionView> {
                           children: [
                             50.verticalSpace,
                             Text(
-                              'Premium',
+                              'Premium'.tr,
                               style: AppStyles.poppins16w700white
                             ),
                             buildFeatureItem(
-                              'Unlock Extra Challenges For 30 Days',
+                              'Unlock Extra Challenges For 30 Days'.tr,
                             ),
                             buildFeatureItem(
-                              'Unlock Access For Pusher Courses',
+                              'Unlock Access For Pusher Courses'.tr,
                             ),
                             Spacer(),
-                            buildUpgradeButton(AppImages.premiumStar, 'Upgrade 20\$',AppColors.lightBlue),
+                            buildUpgradeButton(AppImages.premiumStar, 'Upgrade 20\$'.tr,AppColors.lightBlue),
                           ],
                         ),
                       ),
@@ -110,7 +110,7 @@ class _PremiumSubscriptionViewState extends State<PremiumSubscriptionView> {
                     GestureDetector(
                       onTap: () {
                         setState(() {
-                          selectedPlan = 'Pusher VIP';
+                          selectedPlan = 'Pusher VIP'.tr;
                           print(selectedPlan);
                         });
                       },
@@ -122,36 +122,36 @@ class _PremiumSubscriptionViewState extends State<PremiumSubscriptionView> {
                         margin: EdgeInsets.only(bottom: 20),
                         decoration: BoxDecoration(
                           image: DecorationImage(image: AssetImage(AppImages.pusherVipBackground),fit: BoxFit.fill),
-                          color: selectedPlan=='Pusher VIP'?AppColors.whiteColor.withOpacity(0.30):AppColors.whiteColor.withOpacity(0),
+                          color: selectedPlan=='Pusher VIP'.tr?AppColors.whiteColor.withOpacity(0.30):AppColors.whiteColor.withOpacity(0),
                           borderRadius: BorderRadius.circular(16),
                           border: Border.all(
-                             color: selectedPlan == 'Pusher VIP'
+                             color: selectedPlan == 'Pusher VIP'.tr
                                  ? AppColors.whiteColor.withOpacity(0.30)
                                 : AppColors.whiteColor.withOpacity(0),
-                            width: selectedPlan == 'Pusher VIP' ? 2 : 2,
+                            width: selectedPlan == 'Pusher VIP'.tr ? 2 : 2,
                           ),
                         ),
                         child: Column(
                           children: [
                             40.verticalSpace,
                             Text(
-                              'Pusher VIP',
+                              'Pusher VIP'.tr,
                               style: AppStyles.poppins14w700white
                             ),
                             buildFeatureItem(
-                              'Unlock Extra Challenges For 20 Days',
+                              'Unlock Extra Challenges For 20 Days'.tr,
                               isWhite: true,
                             ),
                             buildFeatureItem(
-                              'Unlock Access For Pusher Courses',
+                              'Unlock Access For Pusher Courses'.tr,
                               isWhite: true,
                             ),
                             buildFeatureItem(
-                              'Unlock Mentor Challenge',
+                              'Unlock Mentor Challenge'.tr,
                               isWhite: true,
                             ),
                             Spacer(),
-                            buildUpgradeButton(AppImages.premiumStar2, 'Upgrade 50\$',AppColors.yellow),
+                            buildUpgradeButton(AppImages.premiumStar2, 'Upgrade 50\$'.tr,AppColors.yellow),
                           ],
                         ),
                       ),
@@ -166,7 +166,7 @@ class _PremiumSubscriptionViewState extends State<PremiumSubscriptionView> {
                   onTap: (){
                     handleContinue();
                   },
-                  text: 'Continue With 7-Day Challenge Trial',
+                  text: 'Continue With 7-Day Challenge Trial'.tr,
                   textStyle: AppStyles.poppins14w700white,
                   paddingInsideHorizontal: 10,
                   image: AppImages.premiumStar,

@@ -48,7 +48,7 @@ class PhoneLogin extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
                     Text(
-                      "Phone",
+                      "Phone".tr,
                       style: GoogleFonts.poppins(
                         color: AppColors.whiteColor,
                         fontSize: FontSizes.pt14,
@@ -153,7 +153,7 @@ class PhoneLogin extends StatelessWidget {
                         print('Login attempt with: $phone');
                       },
                       isIcon: false,
-                      text: 'Login',
+                      text: "Login".tr,
                       textStyle:AppStyles.poppins16w600white ),
                 ),
               ),

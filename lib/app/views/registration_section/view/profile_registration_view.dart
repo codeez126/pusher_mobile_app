@@ -47,7 +47,7 @@ class _ProfileRegistrationViewState extends State<ProfileRegistrationView> {
               children: [
                 CustomRegistrationAppBar(
                   isTittleAndSubtitle: true,
-                  title: 'My Profile',
+                  title: "My Profile".tr,
                   subtitle: '',
                   isProfile: true,
                 ),
@@ -62,14 +62,14 @@ class _ProfileRegistrationViewState extends State<ProfileRegistrationView> {
                         children: [
                           CustomNameContainer(
                             controller: profileRegistrationController.firstNameController,
-                            textSection: 'First Name',
-                            hintText: 'Or',
+                            textSection: "First Name".tr,
+                            hintText: 'Or'.tr,
                           ),
                           16.horizontalSpace,
                           CustomNameContainer(
                             controller: profileRegistrationController.lastNameController,
-                            textSection: 'Last Name',
-                            hintText: 'Hajim',
+                            textSection: 'Last Name'.tr,
+                            hintText: 'Hajim'.tr,
                           ),
                         ],
                       ),
@@ -90,7 +90,7 @@ class _ProfileRegistrationViewState extends State<ProfileRegistrationView> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
-                              'Date of birth',
+                              'Date of birth'.tr,
                               style: AppStyles.poppins14w700white,
                             ),
                             8.verticalSpace,
@@ -253,41 +253,41 @@ class _ProfileRegistrationViewState extends State<ProfileRegistrationView> {
                           GenderSelectionContainerWidget(
                             onTap: () {
                               setState(() {
-                                profileRegistrationController.selectedGender = 'Male';
+                                profileRegistrationController.selectedGender = 'Male'.tr;
                               });
                             },
                             selectedGender: profileRegistrationController.selectedGender,
                             icon: Icons.male,
-                            genderName: 'Male',
+                            genderName: 'Male'.tr,
                           ),
                           12.horizontalSpace,
                           GenderSelectionContainerWidget(
                             onTap: () {
                               setState(() {
-                                profileRegistrationController.selectedGender = 'Female';
+                                profileRegistrationController.selectedGender = 'Female'.tr;
                               });
                             },
                             selectedGender: profileRegistrationController.selectedGender,
                             icon: Icons.female,
-                            genderName: 'Female',
+                            genderName: 'Female'.tr,
                           ),
                           12.horizontalSpace,
                           GenderSelectionContainerWidget(
                             onTap: () {
                               setState(() {
-                                profileRegistrationController.selectedGender = 'Other';
+                                profileRegistrationController.selectedGender = 'Other'.tr;
                               });
                             },
                             selectedGender: profileRegistrationController.selectedGender,
                             isIcon: false,
-                            genderName: 'Other',
+                            genderName: 'Other'.tr,
                           ),
                         ],
                       ),
                       24.verticalSpace,
 
                       ///=====================================Email check Box========================================
-                      Text('Email', style: AppStyles.poppins14w700white),
+                      Text('Email'.tr, style: AppStyles.poppins14w700white),
                       28.verticalSpace,
                       Row(
                         crossAxisAlignment: CrossAxisAlignment.start,
@@ -330,7 +330,7 @@ class _ProfileRegistrationViewState extends State<ProfileRegistrationView> {
                                 signUp();
                               },
                               child: Text(
-                                'I\'ve read this text & you want to receive promotional emails & messages from Dobbi',
+                                'I\'ve read this text & you want to receive promotional emails & messages from Pusher'.tr,
                                 style: AppStyles.poppins10w700white,
                               ),
                             ),
@@ -342,12 +342,12 @@ class _ProfileRegistrationViewState extends State<ProfileRegistrationView> {
                         onTap: () {
                           Get.toNamed(AppRoutes.improvementView);
                         },
-                        text: 'Sign Up',
+                        text: 'Sign Up'.tr,
                         textStyle: AppStyles.poppins16w700darkGrey2,
                       ),
                       20.verticalSpace,
                       Text(
-                        'By clicking “Sign up״ button below, you are agreeing to our terms of use, opening an account with Pusher, and acknowledging you have read our privacy policy',
+                        'By clicking “Sign up״ button below'.tr,
                         textAlign: TextAlign.center,
                         style: AppStyles.poppins12w700white,
                       ),

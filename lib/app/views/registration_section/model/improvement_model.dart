@@ -1,4 +1,5 @@
 import 'package:base_project/core/constants/app_images.dart';
+import 'package:get/get.dart';
 
 class ImprovementModel {
   final String title;
@@ -11,27 +12,27 @@ class ImprovementModel {
 
   static final List<ImprovementModel> categories = [
     ImprovementModel(
-      title: 'Fitness',
+      title: 'Fitness'.tr,
       image: AppImages.fitness,
     ),
     ImprovementModel(
-      title: 'Relationship',
+      title: 'Relationship'.tr,
       image: AppImages.relationship,
     ),
     ImprovementModel(
-      title: 'Motivation',
+      title: 'Motivation'.tr,
       image: AppImages.motivation,
     ),
     ImprovementModel(
-      title: 'Financial',
+      title: 'Financial'.tr,
       image: AppImages.financial,
     ),
     ImprovementModel(
-      title: 'Social',
+      title: 'Social'.tr,
       image: AppImages.social,
     ),
     ImprovementModel(
-      title: 'Balance',
+      title: 'Balance'.tr,
       image: AppImages.balance,
     ),
   ];

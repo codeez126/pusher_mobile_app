@@ -65,13 +65,13 @@ class OnboardingView extends StatelessWidget {
                             Padding(
                               padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 20.h),
                               child: Text(
-                                AppStrings.startYourSelfImprovement,
+                                "Start Your Self Improvement Journey Today!".tr,
                                 style: AppStyles.urbanistBold28White900,
                                 textAlign: TextAlign.center,
                               ),
                             ),
                             Text(
-                              AppStrings.settingGoalsIsEasy,
+                              "Setting Goals Is Easy, Achieving Them- ".tr,
                               style: GoogleFonts.poppins(
                                 fontSize: 15.sp,
                                 fontWeight: FontWeight.w700,
@@ -80,7 +80,7 @@ class OnboardingView extends StatelessWidget {
                               textAlign: TextAlign.center,
                             ),
                             Text(
-                              AppStrings.thatWhereWeShine,
+                              "That's Where We Shine.".tr,
                               style: GoogleFonts.poppins(
                                 fontSize: 15.sp,
                                 fontWeight: FontWeight.w700,
@@ -89,7 +89,7 @@ class OnboardingView extends StatelessWidget {
                               textAlign: TextAlign.center,
                             ),
                             Text(
-                              AppStrings.ditchTheFear,
+                              "Ditch The Fear, Embrace Change,".tr,
                               style: GoogleFonts.poppins(
                                 fontSize: 15.sp,
                                 fontWeight: FontWeight.w700,
@@ -98,7 +98,7 @@ class OnboardingView extends StatelessWidget {
                               textAlign: TextAlign.center,
                             ),
                             Text(
-                              AppStrings.andGetReadyTo,
+                              "And Get Ready To Transform!".tr,
                               style: GoogleFonts.poppins(
                                 fontSize: 15.sp,
                                 fontWeight: FontWeight.w700,
@@ -117,7 +117,7 @@ class OnboardingView extends StatelessWidget {
                                 padding: EdgeInsets.all(8.0),
                                 child: CustomAppButton(
                                     onTap: (){Get.toNamed(AppRoutes.onboarding2View);},
-                                    text: 'Next',
+                                    text: 'Next'.tr,
                                     textStyle: AppStyles.poppins16w700white),
                               ),
                             ),

@@ -55,8 +55,8 @@ class _OtpVerficationViewState extends State<OtpVerficationView> {
             children: [
               CustomRegistrationAppBar(
                 isTittleAndSubtitle: true,
-                title: "verification",
-                subtitle: "Enter Your Verification Code",
+                title: "verification".tr,
+                subtitle: "Enter Your Verification Code".tr,
                 isIcon: true,
               ),
               Container(
@@ -95,7 +95,7 @@ class _OtpVerficationViewState extends State<OtpVerficationView> {
 
                 child: Center(
                   child: Text(
-                    "Invalid code. Enter the correct verification code",
+                    "Invalid code. Enter the correct verification code".tr,
                     style: GoogleFonts.poppins(
                       fontWeight: FontWeight.w600,
                       fontSize: FontSizes.pt12,
@@ -110,7 +110,7 @@ class _OtpVerficationViewState extends State<OtpVerficationView> {
                   print('Resend Code');
                 },
                 child: Text(
-                  "Didn't receive the code? Resend it now",
+                  "Didn't receive the code? Resend it now".tr,
                   style: GoogleFonts.poppins(
                     color: AppColors.whiteColor,
                     fontSize: FontSizes.pt12,
@@ -125,7 +125,7 @@ class _OtpVerficationViewState extends State<OtpVerficationView> {
                   borderRadius: BorderRadius.circular(30),
                   child: CustomAppButton(onTap: (){
                     Get.toNamed(AppRoutes.profileRegistrationView);
-                  }, text: 'OK', textStyle: AppStyles.poppins16w700white)
+                  }, text: "OK".tr, textStyle: AppStyles.poppins16w700white)
                 ),
               ),
             ],
