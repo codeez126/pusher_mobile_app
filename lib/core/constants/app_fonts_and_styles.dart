@@ -67,14 +67,18 @@ class AppStyles{
   static TextStyle poppins16w700white = GoogleFonts.poppins(fontWeight: FontWeight.w700, fontSize: FontSizes.pt16, color: AppColors.whiteColor,);
   static TextStyle poppins16w600white = GoogleFonts.poppins(fontWeight: FontWeight.w600, fontSize: FontSizes.pt16, color: AppColors.whiteColor,);
   static TextStyle poppins20w600white = GoogleFonts.poppins(fontWeight: FontWeight.w600, fontSize: FontSizes.pt20, color: AppColors.whiteColor,);
+  static TextStyle poppins20w700LightBlue = GoogleFonts.poppins(fontWeight: FontWeight.w700, fontSize: FontSizes.pt20, color: AppColors.lightBlue,);
   static TextStyle poppins24w600white = GoogleFonts.poppins(fontWeight: FontWeight.w600, fontSize: FontSizes.pt24, color: AppColors.whiteColor,);
   static TextStyle poppins24w300white = GoogleFonts.poppins(fontWeight: FontWeight.w300, fontSize: FontSizes.pt24, color: AppColors.whiteColor,);
   static TextStyle poppins28w600white = GoogleFonts.poppins(fontWeight: FontWeight.w600, fontSize: FontSizes.pt28, color: AppColors.whiteColor,);
   static TextStyle poppins16w700darkGrey2 = GoogleFonts.poppins(fontWeight: FontWeight.w700, fontSize: FontSizes.pt16, color: AppColors.darkGrey2,);
+  static TextStyle poppins16w600darkGrey2 = GoogleFonts.poppins(fontWeight: FontWeight.w600, fontSize: FontSizes.pt16, color: AppColors.darkGrey2,);
   static TextStyle poppins14w500white = GoogleFonts.poppins(fontWeight: FontWeight.w500, fontSize: FontSizes.pt14, color: AppColors.whiteColor,);
   static TextStyle poppins20w600darkGrey2 = GoogleFonts.poppins(fontWeight: FontWeight.w600, fontSize: FontSizes.pt20, color: AppColors.darkGrey2,);
   static TextStyle poppins18w600darkGrey2 = GoogleFonts.poppins(fontWeight: FontWeight.w600, fontSize: FontSizes.pt18, color: AppColors.darkGrey2,);
   static TextStyle poppins16w400darkGrey2 = GoogleFonts.poppins(fontWeight: FontWeight.w400, fontSize: FontSizes.pt16, color: AppColors.darkGrey2,);
+  static TextStyle poppins14w400darkGrey2 = GoogleFonts.poppins(fontWeight: FontWeight.w400, fontSize: FontSizes.pt14, color: AppColors.darkGrey2,);
+  static TextStyle poppins14w400Red = GoogleFonts.poppins(fontWeight: FontWeight.w400, fontSize: FontSizes.pt14, color: AppColors.redColor,);
   static TextStyle poppins16w900darkGrey2 = GoogleFonts.poppins(fontWeight: FontWeight.w900, fontSize: FontSizes.pt16, color: AppColors.darkGrey2,);
 
   //GoogleFonts.poppins(fontSize: FontSizes.pt14,fontWeight: FontWeight.w700,color: AppColors.whiteColor)

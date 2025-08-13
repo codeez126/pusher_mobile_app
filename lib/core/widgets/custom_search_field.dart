@@ -59,7 +59,7 @@ class _CustomSearchFieldState extends State<CustomSearchField> {
           prefixIcon: Padding(
             padding: EdgeInsets.only(left: 12.w, right: 8.w),
             child: SvgPicture.asset(
-              AppSvgs.search,
+              AppSvgs.searchSvg,
               height: 16.h,
               width: 16.h,
               fit: BoxFit.contain,

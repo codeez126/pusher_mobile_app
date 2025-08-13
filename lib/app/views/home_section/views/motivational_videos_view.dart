@@ -1,5 +1,6 @@
 import 'dart:ui';
 import 'package:base_project/app/views/home_section/controller/motivational_videos_controller.dart';
+import 'package:base_project/core/constants/app_svgs.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
@@ -52,7 +53,7 @@ class MotivationalVideosView extends StatelessWidget {
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
-                                SvgPicture.asset(AppImages.arrowDown_x2),
+                                SvgPicture.asset(AppSvgs.arrowDown_x2Svg),
                                 5.horizontalSpace,
                                 RichText(text: TextSpan(
                                   children: [
@@ -67,7 +68,7 @@ class MotivationalVideosView extends StatelessWidget {
                                   ]
                                 )),
                                 5.horizontalSpace,
-                                SvgPicture.asset(AppImages.arrowDown_x2),
+                                SvgPicture.asset(AppSvgs.arrowDown_x2Svg),
                               ],
                             ),
                           ),
@@ -143,8 +144,8 @@ class MotivationalVideosView extends StatelessWidget {
                                        onTap: (){
                                          //motivationalVideosController.addOrRemoveFav();
                                        },
-                                       child: fav?SvgPicture.asset(AppImages.heartFavSvg,height: 30.h,):SvgPicture.asset(
-                                         AppImages.heartSvg,
+                                       child: fav?SvgPicture.asset(AppSvgs.heartFavSvg,height: 30.h,):SvgPicture.asset(
+                                         AppSvgs.heartSvg,
                                        ),
                                      ),
                                      GestureDetector(
@@ -165,7 +166,7 @@ class MotivationalVideosView extends StatelessWidget {
                                            ),
                                          ),
                                          child: SvgPicture.asset(
-                                           AppImages.playSvg,
+                                           AppSvgs.playSvg,
                                            height: 15.h,
                                          ),
                                        ),
@@ -190,7 +191,7 @@ class MotivationalVideosView extends StatelessWidget {
               child: InkWell(
                 onTap: () => Get.back(),
                 child: SvgPicture.asset(
-                  AppImages.backImage,
+                  AppSvgs.backImageSvg,
                   height: 120.h,
                 ),
               ),

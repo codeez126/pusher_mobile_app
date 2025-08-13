@@ -1,6 +1,7 @@
 import 'dart:math' as math;
 import 'dart:ui';
 import 'package:base_project/app/views/home_section/controller/pusher_challenge_controller.dart';
+import 'package:base_project/core/constants/app_svgs.dart';
 import 'package:dotted_decoration/dotted_decoration.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -59,7 +60,7 @@ class PusherChallengesAllCompletedView extends StatelessWidget {
                               child: InkWell(
                                 onTap: () => Get.back(),
                                 child: SvgPicture.asset(
-                                  AppImages.backImage,
+                                  AppSvgs.backImageSvg,
                                   height: 120.h,
                                 ),
                               ),
@@ -70,7 +71,7 @@ class PusherChallengesAllCompletedView extends StatelessWidget {
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   SvgPicture.asset(
-                                    AppImages.challenge2Svg,
+                                    AppSvgs.challenge2Svg,
                                     height: 35.h,
                                   ),
                                   5.horizontalSpace,
@@ -110,7 +111,7 @@ class PusherChallengesAllCompletedView extends StatelessWidget {
                           width: 1.8.w,
                         ),
                       ),
-                      child: SvgPicture.asset(AppImages.infoSvg),
+                      child: SvgPicture.asset(AppSvgs.infoSvg),
                     ),
                   ),
                 ],
@@ -154,8 +155,8 @@ class PusherChallengesAllCompletedView extends StatelessWidget {
                                   onTap: () {},
                                   child: SvgPicture.asset(
                                     pusherChallengeController.selectedChallenge
-                                        ? AppImages.checkBoxFillSvg
-                                        : AppImages.checkBoxEmptySvg,
+                                        ? AppSvgs.checkBoxFillSvg
+                                        : AppSvgs.checkBoxEmptySvg,
                                   ),
                                 ),
                                 10.horizontalSpace,
@@ -171,19 +172,30 @@ class PusherChallengesAllCompletedView extends StatelessWidget {
                     },
                   ),
                   Positioned(
-                    child: IgnorePointer( // ensures taps go through
+                    child: IgnorePointer( 
                       child: Transform.rotate(
-                        angle: (math.pi / 4)*math.pi, // 45° diagonal
+                        angle: math.pi*2*(math.pi/3.35),//math.pi*(math.pi / 4),
                         child: Container(
                           height: 60.h,
                           width: double.infinity,
                           alignment: Alignment.center,
                           decoration: DottedDecoration(
                             shape: Shape.box,
+                            strokeWidth: 2.w,
                             color: AppColors.whiteColor,
                           ),
                           child: Container(
-                            color: AppColors.whiteColor,
+                            alignment: Alignment.center,
+                            height: MediaQuery.of(context).size.height,
+                            width: MediaQuery.of(context).size.width,
+                            color: AppColors.whiteColor.withOpacity(0.55),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Text("Well Done".tr,style: AppStyles.poppins20w700LightBlue,),
+                                SvgPicture.asset(AppSvgs.wellDoneBlueSvg)
+                              ],
+                            ),
                           ),
                         ),
                       ),

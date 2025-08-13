@@ -1,4 +1,5 @@
 import 'dart:ui';
+import 'package:base_project/core/constants/app_svgs.dart';
 import 'package:base_project/core/widgets/daily_goals_done_view/custom_challenge_complete_box.dart';
 import 'package:base_project/core/widgets/pusher_challenge_view/custom_premium_box.dart';
 import 'package:flutter/material.dart';
@@ -64,7 +65,7 @@ class _PusherChallengeDoneViewState extends State<PusherChallengeDoneView> {
                               child: InkWell(
                                 onTap: () => Get.back(),
                                 child: SvgPicture.asset(
-                                  AppImages.backImage,
+                                  AppSvgs.backImageSvg,
                                   height: 120.h,
                                 ),
                               ),
@@ -75,7 +76,7 @@ class _PusherChallengeDoneViewState extends State<PusherChallengeDoneView> {
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   SvgPicture.asset(
-                                    AppImages.challenge2Svg,
+                                    AppSvgs.challenge2Svg,
                                     height: 35.h,
                                   ),
                                   5.horizontalSpace,
@@ -115,7 +116,7 @@ class _PusherChallengeDoneViewState extends State<PusherChallengeDoneView> {
                           width: 1.8.w,
                         ),
                       ),
-                      child: SvgPicture.asset(AppImages.infoSvg),
+                      child: SvgPicture.asset(AppSvgs.infoSvg),
                     ),
                   ),
                 ],

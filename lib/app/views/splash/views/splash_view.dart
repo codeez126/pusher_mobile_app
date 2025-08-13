@@ -4,8 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
-import 'package:google_fonts/google_fonts.dart';
-
 import '../controllers/splash_controller.dart';
 
 class SplashView extends StatelessWidget {
@@ -29,7 +27,7 @@ class SplashView extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            SvgPicture.asset(AppSvgs.logo, height: 50.h),
+            SvgPicture.asset(AppSvgs.logoSvg, height: 50.h),
             100.verticalSpace,
             // Text(
             //   "Title here",

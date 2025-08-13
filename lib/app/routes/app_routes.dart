@@ -23,6 +23,18 @@ class AppRoutes {
   static const pusherChallengeAllCompletedView = '/pusherChallengeAllCompleted';
 
 
+  //====================Profile Section=========================
+  static const profileView = '/profile';
+  static const editProfileView = '/editProfile';
+  static const termOfUseView = '/termOfUse';
+  static const privacyPolicyView = '/privacyPolicy';
+  static const languagesView = '/languages';
+
+  //=========================Courses Section=========================
+  static const coursesView = '/courses';
+
+
+
   //==============BottomNav============
   static const bottomNavNavigation = '/bottomNavNavigation';
 

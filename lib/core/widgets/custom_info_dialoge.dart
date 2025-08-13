@@ -1,3 +1,4 @@
+import 'package:base_project/core/constants/app_svgs.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
@@ -36,7 +37,7 @@ class CustomInfoDialog extends StatelessWidget {
             Row(
               children: [
                 SvgPicture.asset(
-                  AppImages.infoSvg,
+                  AppSvgs.infoSvg,
                   color: AppColors.whiteColor,
                 ),
                 5.horizontalSpace,

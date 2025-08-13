@@ -1,3 +1,4 @@
+import 'package:base_project/core/constants/app_svgs.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
@@ -51,7 +52,7 @@ class CustomPremiumBox extends StatelessWidget {
               CustomFeatureItem(
                 text: 'Unlock Extra Challenges For 30 Days'.tr,
                 isSvgImage: true,
-                svgImage: AppImages.lockSvg,
+                svgImage: AppSvgs.lockSvg,
                 textStyle: AppStyles.poppins12w300white,
               ),
               CustomFeatureItem(
@@ -71,7 +72,7 @@ class CustomPremiumBox extends StatelessWidget {
             ],
           ),
         ),
-        Positioned(top: 0,right: 0,child: SvgPicture.asset(AppImages.premiumPusherStarSvg))
+        Positioned(top: 0,right: 0,child: SvgPicture.asset(AppSvgs.premiumPusherStarSvg))
       ],
     );
   }

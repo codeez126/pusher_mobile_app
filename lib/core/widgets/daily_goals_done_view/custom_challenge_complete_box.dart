@@ -1,4 +1,5 @@
 import 'dart:ui';
+import 'package:base_project/core/constants/app_svgs.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
@@ -79,7 +80,7 @@ class _CustomChallengeCompleteBoxState extends State<CustomChallengeCompleteBox>
               ScaleTransition(
                 scale: _scaleAnimation,
                 child: SvgPicture.asset(
-                  AppImages.doneSvg,
+                  AppSvgs.doneSvg,
                   height:200.h,
                 ),
               ),

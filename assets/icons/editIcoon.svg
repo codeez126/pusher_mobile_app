@@ -1,0 +1,21 @@
+<svg width="71" height="71" viewBox="0 0 71 71" fill="none" xmlns="http://www.w3.org/2000/svg">
+<foreignObject x="-5" y="-12.7969" width="81" height="83.28"><div xmlns="http://www.w3.org/1999/xhtml" style="backdrop-filter:blur(14.25px);clip-path:url(#bgblur_0_1_5367_clip_path);height:100%;width:100%"></div></foreignObject><g filter="url(#filter0_d_1_5367)" data-figma-bg-blur-radius="28.5">
+<ellipse cx="35.5" cy="27.7031" rx="12" ry="12" transform="rotate(180 35.5 27.7031)" fill="white" fill-opacity="0.3" shape-rendering="crispEdges"/>
+<path d="M35.5 39.4531C29.0107 39.4531 23.75 34.1925 23.75 27.7031C23.75 21.2138 29.0107 15.9531 35.5 15.9531C41.9893 15.9531 47.25 21.2138 47.25 27.7031C47.25 34.1925 41.9893 39.4531 35.5 39.4531Z" stroke="white" stroke-width="0.5" shape-rendering="crispEdges"/>
+</g>
+<path d="M36.3821 22.59C36.8789 22.0517 37.1273 21.7826 37.3913 21.6256C38.0281 21.2468 38.8124 21.2351 39.4599 21.5946C39.7283 21.7435 39.9843 22.0051 40.4963 22.5282C41.0084 23.0513 41.2645 23.3128 41.4103 23.587C41.7622 24.2484 41.7507 25.0495 41.3799 25.7001C41.2262 25.9698 40.9627 26.2235 40.4359 26.731L34.1667 32.7692C33.1683 33.7309 32.669 34.2118 32.045 34.4555C31.4211 34.6992 30.7351 34.6813 29.3632 34.6454L29.1766 34.6405C28.7589 34.6296 28.5501 34.6241 28.4287 34.4863C28.3073 34.3486 28.3239 34.1359 28.3571 33.7105L28.3751 33.4795C28.4683 32.282 28.515 31.6833 28.7488 31.1451C28.9826 30.6069 29.386 30.17 30.1926 29.296L36.3821 22.59Z" stroke="#5A5A5A" stroke-linejoin="round"/>
+<path d="M35.667 22.667L40.3337 27.3337" stroke="#5A5A5A" stroke-linejoin="round"/>
+<defs>
+<filter id="filter0_d_1_5367" x="-5" y="-12.7969" width="81" height="83.28" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+<feFlood flood-opacity="0" result="BackgroundImageFix"/>
+<feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
+<feOffset dy="7.98"/>
+<feGaussianBlur stdDeviation="11.4"/>
+<feComposite in2="hardAlpha" operator="out"/>
+<feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.1 0"/>
+<feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_1_5367"/>
+<feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_1_5367" result="shape"/>
+</filter>
+<clipPath id="bgblur_0_1_5367_clip_path" transform="translate(5 12.7969)"><ellipse cx="35.5" cy="27.7031" rx="12" ry="12" transform="rotate(180 35.5 27.7031)"/>
+</clipPath></defs>
+</svg>

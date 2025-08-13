@@ -147,6 +147,11 @@ class LocaleString extends Translations {
       'Super Mix Routine':'Super Mix Routine',
       "Every day you need to complete the pusher challenge routine for 7 days, After you finish the challenge a new challenge will appear every other day.":"Every day you need to complete the pusher challenge routine for 7 days, After you finish the challenge a new challenge will appear every other day.",
 
+      //====================================================Pusher Challenges View===========================
+      "Remove":"Remove",
+      "Finish":"Finish",
+
+
       //==================================================pusher Challenges done===========================
       "Upgrade from 20\$":"Upgrade from 20\$",
       "Get the complete progress for yourself with premium challenges":"Get the complete progress for yourself with premium challenges",
@@ -157,11 +162,32 @@ class LocaleString extends Translations {
       "Cold Shower":"Cold Shower",
       "Protein Shake":"Protein Shake",
 
+      //===================================================Profile view================================================
+      'Hi Hami':'Hi Hami',
+      "Edit My Profile":"Edit My Profile",
+      "Sharing The App":"Sharing The App",
+      'Contact Us':'Contact Us',
+      'Terms Of Use':'Terms Of Use',
+      'Privacy Policy':'Privacy Policy',
+      'Log Out':'Log Out',
+      'Delete User':'Delete User',
+
+      //===================================================Edit Profile View=======================================
+      "Edit Profile":"Edit Profile",
+      "Full Name":"Full Name",
+      "Or Haim":"Or Haim",
+
+      //=====================================================Languages view==============================================
+      "Languages":"Languages",
+
 
 
 
     },
 
-    'he-IL': {"Login": "Login"},
+    'he-IL': {
+      "Login": "Login",
+      "Languages":"6kjhskjflsla",
+    },
   };
 }

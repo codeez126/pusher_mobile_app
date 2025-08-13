@@ -1,6 +1,7 @@
 import 'dart:ui';
 
 import 'package:base_project/app/routes/app_routes.dart';
+import 'package:base_project/core/constants/app_svgs.dart';
 import 'package:base_project/core/widgets/custom_app_button.dart';
 import 'package:base_project/core/widgets/custom_info_dialoge.dart';
 import 'package:flutter/material.dart';
@@ -11,6 +12,7 @@ import 'package:get/get.dart';
 import '../../../../core/Constants/app_colors.dart';
 import '../../../../core/constants/app_fonts_and_styles.dart';
 import '../../../../core/constants/app_images.dart';
+import 'daily_goals_doing_view.dart';
 
 class DailyGoalsView extends StatefulWidget {
   DailyGoalsView({Key? key}) : super(key: key);
@@ -60,7 +62,7 @@ class _DailyGoalsViewState extends State<DailyGoalsView> {
                         child: InkWell(
                           onTap: () => Get.back(),
                           child: SvgPicture.asset(
-                            AppImages.backImage,
+                            AppSvgs.backImageSvg,
                             height: 120.h,
                           ),
                           // Image.asset(
@@ -129,7 +131,7 @@ class _DailyGoalsViewState extends State<DailyGoalsView> {
                           width: 1.8.w,
                         ),
                       ),
-                      child: SvgPicture.asset(AppImages.infoSvg),
+                      child: SvgPicture.asset(AppSvgs.infoSvg),
                     ),
                   ),
                 ),
@@ -153,10 +155,20 @@ class _DailyGoalsViewState extends State<DailyGoalsView> {
                     'Meditation'.tr,
                     AppStyles.urbanistBold30Yellow700,
                     'Take a 5 minute break today to go outside in the sun and breathe air'.tr,
-                    AppImages.yogaSvg,
+                    AppSvgs.yogaSvg,
                     AppImages.meditationBackgroundImage,
                     () {
-                      Get.toNamed(AppRoutes.dailyGoalsDoingView);
+                      Get.toNamed(
+                        AppRoutes.dailyGoalsDoingView,
+                        arguments: {
+                          'backgroundImage': AppImages.meditationBackgroundImage,
+                          'title': '5 Minute'.tr,
+                          'heading': 'Meditation'.tr,
+                          'description': 'Take a 5 minute break today to go outside in the sun and breathe air'.tr,
+                          'iconImage': AppSvgs.yogaSvg,
+                        },
+                      );
+
                     },
                   ),
                   buildPageViewItem(
@@ -164,18 +176,40 @@ class _DailyGoalsViewState extends State<DailyGoalsView> {
                     'Friend'.tr,
                     AppStyles.urbanistBold30LightBlue700,
                     'Meeting a friend I haven\'t seen in a long time'.tr,
-                    AppImages.friendsSvg,
+                    AppSvgs.friendsSvg,
                     AppImages.friendBackgroundImage,
-                    () {},
+                    () {
+                      Get.toNamed(
+                        AppRoutes.dailyGoalsDoingView,
+                        arguments: {
+                          'backgroundImage': AppImages.friendBackgroundImage,
+                          'title': 'Meet A'.tr,
+                          'heading': 'Friend'.tr,
+                          'description': 'Meeting a friend I haven\'t seen in a long time'.tr,
+                          'iconImage': AppSvgs.friendsSvg,
+                        },
+                      );
+                    },
                   ),
                   buildPageViewItem(
                     'Take A'.tr,
                     'Walk'.tr,
                     AppStyles.urbanistBold30Yellow700,
                     'Go for a walk in a place you like, for example at the sea or even under the house'.tr,
-                    AppImages.walkSvg,
+                    AppSvgs.walkSvg,
                     AppImages.walkBackgroundImage,
-                    () {},
+                    () {
+                      Get.toNamed(
+                        AppRoutes.dailyGoalsDoingView,
+                        arguments: {
+                          'backgroundImage': AppImages.walkBackgroundImage,
+                          'title': 'Take A'.tr,
+                          'heading': 'Walk'.tr,
+                          'description': 'Go for a walk in a place you like, for example at the sea or even under the house'.tr,
+                          'iconImage': AppSvgs.walkSvg,
+                        },
+                      );
+                    },
                   ),
                 ],
               ),
@@ -265,7 +299,7 @@ class _DailyGoalsViewState extends State<DailyGoalsView> {
                               ? Stack(
                             alignment: Alignment.bottomCenter,
                             children: [
-                              SvgPicture.asset(AppImages.meditationClockSvg),
+                              SvgPicture.asset(AppSvgs.meditationClockSvg),
                               Text(title, style: AppStyles.urbanistBold20White600),
                             ],
                           )

@@ -1,3 +1,4 @@
+import 'package:base_project/core/constants/app_svgs.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
@@ -27,7 +28,7 @@ class CustomNotificationItem extends StatelessWidget {
           Row(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              SvgPicture.asset(AppImages.clockSvg),
+              SvgPicture.asset(AppSvgs.clockSvg),
               2.horizontalSpace,
               Text(
                   time,
@@ -49,7 +50,7 @@ class CustomNotificationItem extends StatelessWidget {
               child: Row(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  SvgPicture.asset(AppImages.notificationBellSvg, height: 20.h),
+                  SvgPicture.asset(AppSvgs.notificationBellSvg, height: 20.h),
                   5.horizontalSpace,
                   Expanded(
                     child: Text(

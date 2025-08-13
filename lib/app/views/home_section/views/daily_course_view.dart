@@ -2,6 +2,7 @@ import 'dart:math' as math show pi;
 import 'dart:ui';
 
 import 'package:base_project/app/routes/app_routes.dart';
+import 'package:base_project/core/constants/app_svgs.dart';
 import 'package:base_project/core/widgets/daily_course_view/custom_audio_waveform_player.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -59,7 +60,7 @@ class DailyCourseView extends StatelessWidget {
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
-                                Transform.rotate(angle: (3*math.pi)/2,child: SvgPicture.asset(AppImages.arrowDown_x2)),
+                                Transform.rotate(angle: (3*math.pi)/2,child: SvgPicture.asset(AppSvgs.arrowDown_x2Svg)),
                                 5.horizontalSpace,
                                 RichText(text: TextSpan(
                                     children: [
@@ -74,7 +75,7 @@ class DailyCourseView extends StatelessWidget {
                                     ]
                                 )),
                                 5.horizontalSpace,
-                                Transform.rotate(angle: math.pi/2,child: SvgPicture.asset(AppImages.arrowDown_x2)),
+                                Transform.rotate(angle: math.pi/2,child: SvgPicture.asset(AppSvgs.arrowDown_x2Svg)),
                               ],
                             ),
                           ),
@@ -215,7 +216,7 @@ class DailyCourseView extends StatelessWidget {
                       child: InkWell(
                         onTap: () => Get.back(),
                         child: SvgPicture.asset(
-                          AppImages.backImage,
+                          AppSvgs.backImageSvg,
                           height: 120.h,
 
                         ),
@@ -234,7 +235,7 @@ class DailyCourseView extends StatelessWidget {
                       ),
                       child: Row(
                         children: [
-                          SvgPicture.asset(AppImages.clockSvg,color: AppColors.whiteColor,),
+                          SvgPicture.asset(AppSvgs.clockSvg,color: AppColors.whiteColor,),
                           5.horizontalSpace,
                           Text('08:40${'Min'.tr}',style: AppStyles.poppins12w700white,)
                         ],
@@ -251,31 +252,36 @@ class DailyCourseView extends StatelessWidget {
                       borderRadius: BorderRadius.circular(45.sp),
                       color: const Color(0xff0E1E2E4).withOpacity(0.45),
                     ),
-                    child: Container(
-                      decoration: BoxDecoration(
-                        color: AppColors.lightBlue,
-                        borderRadius: BorderRadius.circular(35.sp),
-                        border: Border.all(
-                          width: 1.5.w,
-                          color: AppColors.whiteColor,
-                        ),
-                      ),
-                      padding: EdgeInsets.symmetric(
-                        horizontal: 20.w,
-                        vertical: 10.h,
-                      ),
-                      child: Row(
-                        children: [
-                          Text(
-                            'Daily Next Goals',
-                            style: AppStyles.poppins16w600white,
+                    child: GestureDetector(
+                      onTap: (){
+                        nextDailyGoals();
+                      },
+                      child: Container(
+                        decoration: BoxDecoration(
+                          color: AppColors.lightBlue,
+                          borderRadius: BorderRadius.circular(35.sp),
+                          border: Border.all(
+                            width: 1.5.w,
+                            color: AppColors.whiteColor,
                           ),
-                          5.horizontalSpace,
-                          SvgPicture.asset(
-                            AppImages.nextSvg,
-                            height: 30.h,
-                          )
-                        ],
+                        ),
+                        padding: EdgeInsets.symmetric(
+                          horizontal: 20.w,
+                          vertical: 10.h,
+                        ),
+                        child: Row(
+                          children: [
+                            Text(
+                              'Next Daily Goals',
+                              style: AppStyles.poppins16w600white,
+                            ),
+                            5.horizontalSpace,
+                            SvgPicture.asset(
+                              AppSvgs.nextSvg,
+                              height: 30.h,
+                            )
+                          ],
+                        ),
                       ),
                     ),
                   ),
@@ -285,5 +291,9 @@ class DailyCourseView extends StatelessWidget {
             ),
       ),
     );
+  }
+
+  void nextDailyGoals() {
+    Get.toNamed(AppRoutes.pusherChallengeView);
   }
 }

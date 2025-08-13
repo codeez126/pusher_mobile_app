@@ -25,7 +25,7 @@ class CustomTopContainerBackIcon extends StatelessWidget {
         alignment: Alignment.center,
         children: [
           Positioned(left: 0,bottom: 0,child: InkWell(onTap: (){onTap();},child: Image.asset(AppImages.imageBackIcon,height: 120.h,))),
-          Positioned(bottom: 35,child: SvgPicture.asset(AppSvgs.logo,height: 50.h,)),
+          Positioned(bottom: 35,child: SvgPicture.asset(AppSvgs.logoSvg,height: 50.h,)),
         ],
       ),
     );

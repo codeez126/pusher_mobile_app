@@ -1,4 +1,5 @@
 import 'package:base_project/app/routes/app_routes.dart';
+import 'package:base_project/core/constants/app_svgs.dart';
 import 'package:base_project/core/widgets/Notifocation_view/custom_notification_by_day.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -47,7 +48,7 @@ class NotificationsView extends StatelessWidget {
                         bottom: 0,
                         child: InkWell(
                           onTap: () => Get.back(),
-                          child: SvgPicture.asset(AppImages.backImage,height: 120.h,),
+                          child: SvgPicture.asset(AppSvgs.backImageSvg,height: 120.h,),
                           // Image.asset(
                           //   AppImages.imageBackIcon,
                           //   height: 120.h,
@@ -60,7 +61,7 @@ class NotificationsView extends StatelessWidget {
                           children: [
                             Row(
                               children: [
-                                SvgPicture.asset(AppImages.notificationBellSvg),
+                                SvgPicture.asset(AppSvgs.notificationBellSvg),
                                 10.horizontalSpace,
                                 Text(
                                   'Notifications'.tr,

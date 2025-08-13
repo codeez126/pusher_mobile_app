@@ -32,14 +32,14 @@ PreferredSizeWidget customAppBar() {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                SvgPicture.asset(AppSvgs.drawer, height: 18.h),
+                SvgPicture.asset(AppSvgs.drawerSvg, height: 18.h),
                 Text(
                   AppStrings.home,
                   style: TextStyles.mediumw600(
                     Get.context!,
                   ).copyWith(color: Colors.white, fontSize: 18.sp),
                 ),
-                SvgPicture.asset(AppSvgs.bell, height: 18.h),
+                SvgPicture.asset(AppSvgs.notificationBellSvg, height: 18.h),
               ],
             ),
           ),
@@ -49,7 +49,7 @@ PreferredSizeWidget customAppBar() {
               children: [
                 Expanded(child: CustomSearchField(hintText: "Search")),
                 SizedBox(width: 10.w),
-                SvgPicture.asset(AppSvgs.filter, height: 36.h),
+                SvgPicture.asset(AppSvgs.filterSvg, height: 36.h),
               ],
             ),
           ).marginOnly(top: 10.h),

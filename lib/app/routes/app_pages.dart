@@ -1,4 +1,5 @@
 import 'package:base_project/app/views/bottom_nav_navigation.dart';
+import 'package:base_project/app/views/courses_section/courses_view.dart';
 import 'package:base_project/app/views/home_section/views/daily_course_view.dart';
 import 'package:base_project/app/views/home_section/views/daily_goals_doing_view.dart';
 import 'package:base_project/app/views/home_section/views/daily_goals_done_view.dart';
@@ -10,6 +11,11 @@ import 'package:base_project/app/views/home_section/views/pusher_challenge_view.
 import 'package:base_project/app/views/home_section/views/pusher_challenges_all_completed_view.dart';
 import 'package:base_project/app/views/onboarding/view/onboarding_2_view.dart';
 import 'package:base_project/app/views/onboarding/view/onboarding_view.dart';
+import 'package:base_project/app/views/profile_section/edit_profile_view.dart';
+import 'package:base_project/app/views/profile_section/languages_view.dart';
+import 'package:base_project/app/views/profile_section/privacy_policy_view.dart';
+import 'package:base_project/app/views/profile_section/profile_view.dart';
+import 'package:base_project/app/views/profile_section/term_of_use_view.dart';
 import 'package:base_project/app/views/registration_section/view/improvement_view.dart';
 import 'package:base_project/app/views/registration_section/view/personal_goals_view.dart';
 import 'package:base_project/app/views/registration_section/view/premium_subscription_view.dart';
@@ -23,7 +29,8 @@ import 'app_routes.dart';
 
 class AppPages {
   static final routes = [
-    // Auth
+
+    //-----------------------------------------Registration Section----------------------------------
     GetPage(name: AppRoutes.splashView, page: () => SplashView()),
     GetPage(name: AppRoutes.onboardingView, page: () => OnboardingView()),
     GetPage(name: AppRoutes.onboarding2View, page: () => Onboarding2View()),
@@ -34,11 +41,12 @@ class AppPages {
     GetPage(name: AppRoutes.personalGoalsView, page: () => PersonalGoalsView()),
     GetPage(name: AppRoutes.premiumSubscriptionView, page: () => PremiumSubscriptionView()),
 
-
+    //----------------------------------Home Section-------------------------------------
     GetPage(name: AppRoutes.wellDoneView, page: () => WellDoneView()),
     GetPage(name: AppRoutes.notificationsView, page: () => NotificationsView()),
     GetPage(name: AppRoutes.dailyGoalsView, page: () => DailyGoalsView()),
-    GetPage(name: AppRoutes.dailyGoalsDoingView, page: () => DailyGoalsDoingView()),
+    ///for arguments
+    GetPage(name: AppRoutes.dailyGoalsDoingView, page: ()=> DailyGoalsDoingView()),
     GetPage(name: AppRoutes.dailyGoalsDoneView, page: () => DailyGoalsDoneView()),
     GetPage(name: AppRoutes.motivationalVideosView, page: () => MotivationalVideosView()),
     GetPage(name: AppRoutes.dailyCourseView, page: () => DailyCourseView()),
@@ -46,7 +54,19 @@ class AppPages {
     GetPage(name: AppRoutes.pusherChallengeDoneView, page: () => PusherChallengeDoneView()),
     GetPage(name: AppRoutes.pusherChallengeAllCompletedView, page: () => PusherChallengesAllCompletedView()),
 
+    //---------------------------------------Profile Section_---------------------------------------
+    GetPage(name: AppRoutes.profileView, page: ()=> ProfileView()),
+    GetPage(name: AppRoutes.editProfileView, page: ()=> EditProfileView()),
+    GetPage(name: AppRoutes.termOfUseView, page: ()=> TermOfUseView()),
+    GetPage(name: AppRoutes.privacyPolicyView, page: ()=> PrivacyPolicyView()),
+    GetPage(name: AppRoutes.languagesView, page: ()=> LanguagesView()),
 
+    //---------------------------------------Courses Section---------------------------------------
+    GetPage(name: AppRoutes.coursesView, page: ()=> CoursesView()),
+
+
+
+    //---------------------------------------Bottom Navigation---------------------------------------
     GetPage(name: AppRoutes.bottomNavNavigation, page: ()=> BottomNavNavigation()),
 
   ];

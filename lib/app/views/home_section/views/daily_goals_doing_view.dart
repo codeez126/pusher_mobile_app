@@ -1,7 +1,6 @@
 import 'dart:ui';
 
-import 'package:base_project/app/routes/app_routes.dart';
-import 'package:base_project/core/widgets/custom_app_button.dart';
+import 'package:base_project/core/constants/app_svgs.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
@@ -11,6 +10,8 @@ import 'package:get/get.dart';
 import '../../../../core/Constants/app_colors.dart';
 import '../../../../core/constants/app_fonts_and_styles.dart';
 import '../../../../core/constants/app_images.dart';
+import '../../../../core/widgets/custom_app_button.dart';
+import '../../../routes/app_routes.dart';
 
 class DailyGoalsDoingView extends StatefulWidget {
   const DailyGoalsDoingView({super.key});
@@ -22,6 +23,23 @@ class DailyGoalsDoingView extends StatefulWidget {
 class _DailyGoalsDoingViewState extends State<DailyGoalsDoingView> {
   DateTime? endTime;
 
+  late String backgroundImage;
+  late String title;
+  late String heading;
+  late String description;
+  late String iconImage;
+
+  @override
+  void initState() {
+    super.initState();
+    final args = Get.arguments as Map<String, dynamic>;
+    backgroundImage = args['backgroundImage'];
+    title = args['title'];
+    heading = args['heading'];
+    description = args['description'];
+    iconImage = args['iconImage'];
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -30,12 +48,13 @@ class _DailyGoalsDoingViewState extends State<DailyGoalsDoingView> {
         height: double.infinity,
         decoration: BoxDecoration(
           image: DecorationImage(
-            image: AssetImage(AppImages.meditationBackgroundImage),
+            image: AssetImage(backgroundImage),
             fit: BoxFit.cover,
           ),
         ),
         child: Column(
           children: [
+            // Header section
             Stack(
               alignment: Alignment.topCenter,
               children: [
@@ -45,10 +64,7 @@ class _DailyGoalsDoingViewState extends State<DailyGoalsDoingView> {
                     bottom: Radius.circular(50.sp),
                   ),
                   child: BackdropFilter(
-                    filter: ImageFilter.blur(
-                      sigmaX: 10,
-                      sigmaY: 10,
-                    ),
+                    filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
                     child: Container(
                       height: 170.h,
                       width: double.infinity,
@@ -67,7 +83,7 @@ class _DailyGoalsDoingViewState extends State<DailyGoalsDoingView> {
                             child: InkWell(
                               onTap: () => Get.back(),
                               child: SvgPicture.asset(
-                                AppImages.backImage,
+                                AppSvgs.backImageSvg,
                                 height: 120.h,
                               ),
                             ),
@@ -92,31 +108,34 @@ class _DailyGoalsDoingViewState extends State<DailyGoalsDoingView> {
                       borderRadius: BorderRadius.circular(45.sp),
                       color: const Color(0xff0E1E2E4).withOpacity(0.45),
                     ),
-                    child: Container(
-                      decoration: BoxDecoration(
-                        color: AppColors.lightBlue,
-                        borderRadius: BorderRadius.circular(35.sp),
-                        border: Border.all(
-                          width: 1.5.w,
-                          color: AppColors.whiteColor,
-                        ),
-                      ),
-                      padding: EdgeInsets.symmetric(
-                        horizontal: 20.w,
-                        vertical: 10.h,
-                      ),
-                      child: Row(
-                        children: [
-                          Text(
-                            'Change Task'.tr,
-                            style: AppStyles.poppins16w600white,
+                    child: GestureDetector(
+                      onTap: (){
+                        Get.back();
+                      },
+                      child: Container(
+                        decoration: BoxDecoration(
+                          color: AppColors.lightBlue,
+                          borderRadius: BorderRadius.circular(35.sp),
+                          border: Border.all(
+                            width: 1.5.w,
+                            color: AppColors.whiteColor,
                           ),
-                          5.horizontalSpace,
-                          SvgPicture.asset(
-                            AppImages.changeSvg,
-                            height: 30.h,
-                          )
-                        ],
+                        ),
+                        padding: EdgeInsets.symmetric(
+                          horizontal: 20.w,
+                          vertical: 10.h,
+                        ),
+                        child: Row(
+                          children: [
+                            Text('Change Task'.tr,
+                                style: AppStyles.poppins16w600white),
+                            5.horizontalSpace,
+                            SvgPicture.asset(
+                              AppSvgs.changeSvg,
+                              height: 30.h,
+                            ),
+                          ],
+                        ),
                       ),
                     ),
                   ),
@@ -135,43 +154,58 @@ class _DailyGoalsDoingViewState extends State<DailyGoalsDoingView> {
                         width: 1.8.w,
                       ),
                     ),
-                    child: SvgPicture.asset(AppImages.infoSvg),
+                    child: SvgPicture.asset(AppSvgs.infoSvg),
                   ),
                 ),
               ],
             ),
             20.verticalSpace,
-
-            // Task Box
-            ClipRRect(
-              borderRadius: BorderRadius.circular(50.sp),
-              child: BackdropFilter(
-                filter: ImageFilter.blur(
-                  sigmaX: 10,
-                  sigmaY: 10,
+        Stack(
+          children: [
+            Container(
+              margin: EdgeInsets.symmetric(horizontal: 20.w),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(50.r),
+                gradient: LinearGradient(
+                  begin: Alignment.topCenter,
+                  end: Alignment.bottomCenter,
+                  colors: [
+                    Colors.transparent,
+                    Colors.black.withOpacity(0.4),
+                    Colors.black.withOpacity(0.6),
+                    Colors.black.withOpacity(0.8),
+                  ],
+                  stops: [0.0, 0.3, 0.6, 1.0],
                 ),
+              ),
+            ),
+            ClipRRect(
+              borderRadius: BorderRadius.circular(50.r),
+              child: BackdropFilter(
+                filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
                 child: Container(
-                  width: double.infinity,
                   margin: EdgeInsets.symmetric(horizontal: 20.w),
                   decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(50.sp),
-                    border: Border.all(
-                      width: 1.5.w,
-                      color: AppColors.whiteColor,
-                    ),
-                    color: AppColors.whiteColor.withOpacity(0.10),
+                    borderRadius: BorderRadius.circular(50.r),
+                    border: Border.all(width: 1.5.w, color: AppColors.whiteColor),
+                    color: AppColors.whiteColor.withOpacity(0.35),
                   ),
                   child: Column(
                     children: [
-                      SvgPicture.asset(AppImages.meditationClockSvg),
-                      Text('5 Minutes'.tr,
-                          style: AppStyles.urbanistBold20White600),
-                      Text('Meditation'.tr,
-                          style: AppStyles.urbanistBold20White600),
+                      if(title != '5 Minute') 20.verticalSpace,
+                      Stack(
+                        alignment: Alignment.bottomCenter,
+                        children: [
+                          if(title=='5 Minute')SvgPicture.asset(AppSvgs.meditationClockSvg),
+                          Text(title.tr, style: AppStyles.urbanistBold20White600),
+                        ],
+                      ),
+                      Text(heading.tr, style: AppStyles.urbanistBold30Yellow700),
+                      10.verticalSpace,
                       Text(
-                        'Take a 5 minute break today to \ngo outside in the sun and \nbreathe air'.tr,
+                        description.tr,
                         textAlign: TextAlign.center,
-                        style: AppStyles.urbanistBold20White600,
+                        style: AppStyles.poppins16w600white,
                       ),
                       30.verticalSpace,
                       Text(
@@ -190,7 +224,6 @@ class _DailyGoalsDoingViewState extends State<DailyGoalsDoingView> {
                           ),
                         ),
                         child: Row(
-                          crossAxisAlignment: CrossAxisAlignment.center,
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             GestureDetector(
@@ -226,14 +259,15 @@ class _DailyGoalsDoingViewState extends State<DailyGoalsDoingView> {
                         ),
                       ),
                       30.verticalSpace,
-                      SvgPicture.asset(AppImages.yogaSvg),
+                      SvgPicture.asset(iconImage,height: 50.h,),
                     ],
                   ),
                 ),
               ),
             ),
-
-            10.verticalSpace,
+          ],
+        ),
+        10.verticalSpace,
             Padding(
               padding: EdgeInsets.symmetric(horizontal: 30.w),
               child: CustomAppButton(

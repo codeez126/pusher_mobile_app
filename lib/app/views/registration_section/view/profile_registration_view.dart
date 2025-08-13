@@ -5,6 +5,7 @@ import 'package:base_project/core/constants/app_images.dart';
 import 'package:base_project/core/widgets/custom_app_button.dart';
 import 'package:base_project/core/widgets/custom_name_container.dart';
 import 'package:base_project/core/widgets/custom_registration_app_bar.dart';
+import 'package:base_project/core/widgets/edit_profile_view/date_of_birth_drop_down.dart';
 import 'package:base_project/core/widgets/gender_selection_container_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -52,13 +53,12 @@ class _ProfileRegistrationViewState extends State<ProfileRegistrationView> {
                   isProfile: true,
                 ),
                 40.verticalSpace,
-                Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 15.w),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      ///===========================================Names Fields==============================
-                      Row(
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    ///===========================================Names Fields==============================
+                    Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 15.w),                      child: Row(
                         children: [
                           CustomNameContainer(
                             controller: profileRegistrationController.firstNameController,
@@ -73,182 +73,22 @@ class _ProfileRegistrationViewState extends State<ProfileRegistrationView> {
                           ),
                         ],
                       ),
-                      24.verticalSpace,
-                      ///====================================DOB=========================================================
-                     // SizedBox(height: 400.h,child: CustomDatePicker()),
-                      Container(
-                        padding: EdgeInsets.all(9.sp),
-                        decoration: BoxDecoration(
-                          color: Colors.white.withOpacity(0.2),
-                          borderRadius: BorderRadius.circular(20.sp),
-                          border: Border.all(
-                            color: AppColors.whiteColor,
-                            width: 1.2.w,
-                          ),
-                        ),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              'Date of birth'.tr,
-                              style: AppStyles.poppins14w700white,
-                            ),
-                            8.verticalSpace,
-                            Row(
-                              children: [
-                                Expanded(
-                                  child: Container(
-                                    alignment: Alignment.center,
-                                    decoration: BoxDecoration(
-                                      color: Colors.white.withOpacity(0.2),
-                                      borderRadius: BorderRadius.circular(12),
-                                      // border: Border.all(
-                                      //   color: AppColors.whiteColor,
-                                      //   width: 1.2.w,
-                                      // ),
-                                    ),
-                                    child: DropdownButtonFormField<String>(
-                                      value: profileRegistrationController.selectedDay,
-                                      dropdownColor: AppColors.whiteColor
-                                          .withOpacity(0.80),
-                                      style: TextStyle(color: Colors.white),
-                                      decoration: InputDecoration(
-                                        border: InputBorder.none,
-                                        contentPadding: EdgeInsets.symmetric(
-                                          horizontal: 26,
-                                          vertical: 10,
-                                        ),
-                                      ),
-                                      items: List.generate(32, (index) {
-                                        String day =
-                                            index == 0
-                                                ? '00'
-                                                : index.toString().padLeft(
-                                                  2,
-                                                  '0',
-                                                );
-                                        return DropdownMenuItem(
-                                          value: day,
-                                          child: Text(
-                                            day,
-                                            style:
-                                                AppStyles
-                                                    .poppins14w700darkGrey2,
-                                          ),
-                                        );
-                                      }),
-                                      onChanged: (value) {
-                                        setState(() {
-                                          profileRegistrationController.selectedDay = value!;
-                                        });
-                                      },
-                                    ),
-                                  ),
-                                ),
-                                12.horizontalSpace,
-                                Expanded(
-                                  child: Container(
-                                    decoration: BoxDecoration(
-                                      color: Colors.white.withOpacity(0.2),
-                                      borderRadius: BorderRadius.circular(12),
-                                      // border: Border.all(
-                                      //   color: AppColors.whiteColor,
-                                      //   width: 1.2.w,
-                                      // ),
-                                    ),
-                                    child: DropdownButtonFormField<String>(
-                                      value: profileRegistrationController.selectedMonth,
-                                      dropdownColor: AppColors.whiteColor
-                                          .withOpacity(0.80),
-                                      style: TextStyle(color: Colors.white),
-                                      decoration: InputDecoration(
-                                        border: InputBorder.none,
-                                        contentPadding: EdgeInsets.symmetric(
-                                          horizontal: 26,
-                                          vertical: 10,
-                                        ),
-                                      ),
-                                      items: List.generate(13, (index) {
-                                        String month =
-                                            index == 0
-                                                ? '00'
-                                                : index.toString().padLeft(
-                                                  2,
-                                                  '0',
-                                                );
-                                        return DropdownMenuItem(
-                                          value: month,
-                                          child: Text(
-                                            month,
-                                            style:
-                                                AppStyles
-                                                    .poppins14w700darkGrey2,
-                                          ),
-                                        );
-                                      }),
-                                      onChanged: (value) {
-                                        setState(() {
-                                          profileRegistrationController.selectedMonth = value!;
-                                        });
-                                      },
-                                    ),
-                                  ),
-                                ),
-                                12.horizontalSpace,
-                                Expanded(
-                                  child: Container(
-                                    decoration: BoxDecoration(
-                                      color: Colors.white.withOpacity(0.2),
-                                      borderRadius: BorderRadius.circular(12),
-                                      // border: Border.all(
-                                      //   color: AppColors.whiteColor,
-                                      //   width: 1.2.w,
-                                      // ),
-                                    ),
-                                    child: DropdownButtonFormField<String>(
-                                      value: profileRegistrationController.selectedYear,
-                                      dropdownColor: AppColors.whiteColor
-                                          .withOpacity(0.80),
-                                      style: TextStyle(color: Colors.white),
-                                      decoration: InputDecoration(
-                                        border: InputBorder.none,
-                                        contentPadding: EdgeInsets.symmetric(
-                                          horizontal: 16,
-                                          vertical: 10,
-                                        ),
-                                      ),
-                                      items: List.generate(50, (index) {
-                                        String year =
-                                            (DateTime.now().year - index)
-                                                .toString();
-                                        return DropdownMenuItem(
-                                          value: year,
-                                          child: Text(
-                                            year,
-                                            style:
-                                                AppStyles
-                                                    .poppins14w700darkGrey2,
-                                          ),
-                                        );
-                                      }),
-                                      onChanged: (value) {
-                                        setState(() {
-                                          profileRegistrationController.selectedYear = value!;
-                                        });
-                                      },
-                                    ),
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ],
-                        ),
-                      ),
-                      24.verticalSpace,
-                      ///===============================Gender selection======================================
-                      Text('Gender', style: AppStyles.poppins14w700white),
-                      12.verticalSpace,
-                      Row(
+                    ),
+                    24.verticalSpace,
+                    ///====================================DOB=========================================================
+                    DateOfBirthContainer(
+                      borderColor: AppColors.whiteColor,
+                    ),
+                    24.verticalSpace,
+                    ///===============================Gender selection======================================
+                    Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 15.w),
+                      child: Text('Gender', style: AppStyles.poppins14w700white),
+                    ),
+                    12.verticalSpace,
+                    Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 15.w),
+                      child: Row(
                         children: [
                           GenderSelectionContainerWidget(
                             onTap: () {
@@ -284,12 +124,18 @@ class _ProfileRegistrationViewState extends State<ProfileRegistrationView> {
                           ),
                         ],
                       ),
-                      24.verticalSpace,
+                    ),
+                    24.verticalSpace,
 
-                      ///=====================================Email check Box========================================
-                      Text('Email'.tr, style: AppStyles.poppins14w700white),
-                      28.verticalSpace,
-                      Row(
+                    ///=====================================Email check Box========================================
+                    Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 15.w),
+                      child: Text('Email'.tr, style: AppStyles.poppins14w700white),
+                    ),
+                    28.verticalSpace,
+                    Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 15.w),
+                      child: Row(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           GestureDetector(
@@ -337,23 +183,29 @@ class _ProfileRegistrationViewState extends State<ProfileRegistrationView> {
                           ),
                         ],
                       ),
-                      30.verticalSpace,
-                      CustomAppButton(
+                    ),
+                    30.verticalSpace,
+                    Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 15.w),
+                      child: CustomAppButton(
                         onTap: () {
                           Get.toNamed(AppRoutes.improvementView);
                         },
                         text: 'Sign Up'.tr,
                         textStyle: AppStyles.poppins16w700darkGrey2,
                       ),
-                      20.verticalSpace,
-                      Text(
+                    ),
+                    20.verticalSpace,
+                    Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 15.w),
+                      child: Text(
                         'By clicking “Sign up״ button below'.tr,
                         textAlign: TextAlign.center,
                         style: AppStyles.poppins12w700white,
                       ),
-                      20.verticalSpace,
-                    ],
-                  ),
+                    ),
+                    20.verticalSpace,
+                  ],
                 ),
               ],
             ),

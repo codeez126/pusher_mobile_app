@@ -107,6 +107,8 @@ flutter:
     - assets/images/daily_task_doing_view/
     - assets/images/motivational_videos_view/
     - assets/images/pusher_challenge_view/
+    - assets/images/profile_view/
+    - assets/images/edit_profile_view/
     - assets/icons/
     - assets/fonts/
     - .env

@@ -1,5 +1,6 @@
 import 'dart:ui';
 import 'package:base_project/app/views/home_section/controller/pusher_challenge_controller.dart';
+import 'package:base_project/core/constants/app_svgs.dart';
 import 'package:base_project/core/widgets/custom_info_dialoge.dart';
 import 'package:base_project/core/widgets/pusher_challenge_view/custom_premium_box.dart';
 import 'package:flutter/material.dart';
@@ -73,7 +74,7 @@ class _PusherChallengeViewState extends State<PusherChallengeView> {
                               child: InkWell(
                                 onTap: () => Get.back(),
                                 child: SvgPicture.asset(
-                                  AppImages.backImage,
+                                  AppSvgs.backImageSvg,
                                   height: 120.h,
                                 ),
                               ),
@@ -84,7 +85,7 @@ class _PusherChallengeViewState extends State<PusherChallengeView> {
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   SvgPicture.asset(
-                                    AppImages.challenge2Svg,
+                                    AppSvgs.challenge2Svg,
                                     height: 35.h,
                                   ),
                                   5.horizontalSpace,
@@ -128,7 +129,7 @@ class _PusherChallengeViewState extends State<PusherChallengeView> {
                             width: 1.8.w,
                           ),
                         ),
-                        child: SvgPicture.asset(AppImages.infoSvg),
+                        child: SvgPicture.asset(AppSvgs.infoSvg),
                       ),
                     ),
                   ),
@@ -143,63 +144,190 @@ class _PusherChallengeViewState extends State<PusherChallengeView> {
                 itemBuilder: (context, index) {
                   final isSelected = selectedTaskIndices.contains(index);
                   return ClipRRect(
-                    borderRadius: BorderRadius.circular(5.sp),
+                    borderRadius: BorderRadius.circular(40.sp),
                     child: BackdropFilter(
                       filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
-                      child: Container(
-                        margin: EdgeInsets.only(
-                          bottom: 10.h,
-                          left: 20.w,
-                          right: 20.w,
-                        ),
-                        padding: EdgeInsets.all(10.sp),
-                        decoration: BoxDecoration(
-                          color: isSelected
-                              ? AppColors.yellow
-                              : AppColors.whiteColor.withOpacity(0.18),
-                          border: Border.all(
-                            color: isSelected
-                                ? AppColors.yellow.withOpacity(0.8)
-                                : AppColors.whiteColor,
-                            width: 1.5.w,
-                          ),
-                          borderRadius: BorderRadius.circular(5.sp),
-                        ),
-                        child: Row(
-                          children: [
-                            GestureDetector(
-                              onTap: () {
-                                setState(() {
-                                  if (isSelected) {
-                                    selectedTaskIndices.remove(index);
-                                  } else {
-                                    if (selectedTaskIndices.length == pusherChallengeController.taskNames.length - 1) {
-                                      selectedTaskIndices.add(index);
-                                      Get.toNamed(AppRoutes.pusherChallengeAllCompletedView);
-                                    } else if (selectedTaskIndices.length < pusherChallengeController.taskNames.length) {
-                                      selectedTaskIndices.add(index);
-                                    } else {
-                                      // Already at max
-                                      Utils.toastMessage('You can select up to $maxSelectableItems tasks'.tr);
-                                    }
-                                  }
-                                });
-                                print('Selected tasks: ${selectedTaskIndices.toList()}');
-                              },
-                              child: SvgPicture.asset(isSelected?AppImages.checkBoxFillSvg:AppImages.checkBoxEmptySvg),
-                            ),
-                            10.horizontalSpace,
-                            Expanded(
-                              child: Text(
-                                pusherChallengeController.taskNames[index].tr,
-                                style: isSelected
-                                    ? AppStyles.poppins14w500white.copyWith(
-                                  fontWeight: FontWeight.w600,
-                                )
-                                    : AppStyles.poppins14w500white,
+                      child: GestureDetector(
+                        onTap: () {
+                          Get.dialog(
+                            Material(
+                              color: Colors.transparent,
+                              child: Container(
+                                margin: EdgeInsets.symmetric(horizontal: 20.sp,vertical: 100.h,),
+                                decoration: BoxDecoration(
+                                  color: AppColors.whiteColor.withOpacity(0.45),
+                                  borderRadius: BorderRadius.circular(40.r),
+                                  border: Border.all(
+                                    color: AppColors.whiteColor,
+                                    width: 1.5.w,
+                                  ),
+                                ),
+                                child: ClipRRect(
+                                  borderRadius: BorderRadius.circular(40.r),
+                                  child: BackdropFilter(
+                                    filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
+                                    child: Container(
+                                      width: double.infinity,
+                                      padding: EdgeInsets.all(20.sp),
+                                      decoration: BoxDecoration(
+                                        color: AppColors.darkGrey2.withOpacity(0.10),
+                                        borderRadius: BorderRadius.circular(40.r),
+                                      ),
+                                      child: Column(
+                                        mainAxisSize: MainAxisSize.min,
+                                        crossAxisAlignment: CrossAxisAlignment.start,
+                                        children: [
+                                          Container(
+                                            width: double.infinity,
+                                            padding: EdgeInsets.symmetric(vertical: 12.h),
+                                            decoration: BoxDecoration(
+                                              color: AppColors.whiteColor.withOpacity(0.15),
+                                              borderRadius: BorderRadius.circular(25.r),
+                                              border: Border.all(
+                                                color: AppColors.whiteColor,
+                                                width: 1.5.w,
+                                              ),
+                                            ),
+                                            child: Center(
+                                              child: Text(
+                                                pusherChallengeController.taskNames[index],
+                                                style: AppStyles.poppins20w600white,
+                                              ),
+                                            ),
+                                          ),
+                                          16.verticalSpace,
+                                          Row(
+                                            children: [
+                                              SvgPicture.asset(AppSvgs.infoSvg,color: AppColors.yellow,height: 35.h,),
+                                              8.horizontalSpace,
+                                              Text(
+                                                "Description",
+                                                style: AppStyles.poppins16w700white.copyWith(color: AppColors.yellow),
+                                              ),
+                                            ],
+                                          ),
+                                          8.verticalSpace,
+                                          Text(
+                                            pusherChallengeController.taskDescriptions[index],
+                                            style: AppStyles.poppins14w700white,
+                                          ),
+                                          20.verticalSpace,
+                                          Row(
+                                            children: [
+                                              SvgPicture.asset(AppSvgs.introductionsSvg,height: 35.h,),
+                                              8.horizontalSpace,
+                                              Text(
+                                                "Introductions",
+                                                style: AppStyles.poppins16w700white.copyWith(color: AppColors.yellow),
+                                              ),
+                                            ],
+                                          ),
+                                          12.verticalSpace,
+                                          Column(
+                                            crossAxisAlignment: CrossAxisAlignment.start,
+                                            children: [
+                                              bulletPoint("Why It’s Important: ",
+                                                  "Exercise Improves Your Energy, Mood, And Overall Health."),
+                                              bulletPoint("What You Need To Do: ",
+                                                  "Spend Just 45 Minutes Today On A Physical Activity Of Your Choice."),
+                                              bulletPoint("How It Helps: ",
+                                                  "Consistency Builds Lasting Habits And Keeps You On Track Toward Your Fitness Goals."),
+                                            ],
+                                          ),
+                                          24.verticalSpace,
+                                          SizedBox(
+                                            width: double.infinity,
+                                            child: ElevatedButton(
+                                              style: ElevatedButton.styleFrom(
+                                                backgroundColor: AppColors.lightBlue,
+                                                shape: RoundedRectangleBorder(
+                                                  borderRadius: BorderRadius.circular(30.r),
+                                                  side: BorderSide(color: AppColors.whiteColor, width: 1.5.w),
+                                                ),
+                                                padding: EdgeInsets.symmetric(vertical: 14.h),
+                                              ),
+                                              onPressed: () {
+                                                setState(() {
+                                                  if (isSelected) {
+                                                    selectedTaskIndices.remove(index);
+                                                  } else {
+                                                    if (selectedTaskIndices.length >= maxSelectableItems) {
+                                                      Utils.toastMessage('You can select up to $maxSelectableItems tasks'.tr);
+                                                      return;
+                                                    }
+                                                    selectedTaskIndices.add(index);
+
+                                                    if (selectedTaskIndices.length == pusherChallengeController.taskNames.length) {
+                                                      Get.back();
+                                                      Get.toNamed(AppRoutes.pusherChallengeAllCompletedView);
+                                                    } else {
+                                                      Get.back();
+                                                      Get.toNamed(AppRoutes.pusherChallengeDoneView);
+                                                    }
+                                                  }
+                                                });
+
+                                                Get.back();
+                                              },
+                                              child: Row(
+                                                mainAxisAlignment: MainAxisAlignment.center,
+                                                children: [
+                                                  Text(
+                                                    isSelected?"Remove".tr:"Finish".tr,
+                                                    style: AppStyles.poppins16w600white,
+                                                  ),
+                                                  5.horizontalSpace,
+                                                  SvgPicture.asset(AppSvgs.finishSvg,height: 25.h,),
+                                                ],
+                                              ),
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  ),
+                                ),
                               ),
+                            )
+                          );
+
+                          print('Selected tasks: ${selectedTaskIndices.toList()}');
+                        },
+                        child: Container(
+                          margin: EdgeInsets.only(
+                            bottom: 10.h,
+                            left: 20.w,
+                            right: 20.w,
+                          ),
+                          padding: EdgeInsets.all(10.sp),
+                          decoration: BoxDecoration(
+                            color: isSelected
+                                ? AppColors.yellow
+                                : AppColors.whiteColor.withOpacity(0.18),
+                            border: Border.all(
+                              color: isSelected
+                                  ? AppColors.yellow.withOpacity(0.8)
+                                  : AppColors.whiteColor,
+                              width: 1.5.w,
                             ),
-                          ],
+                            borderRadius: BorderRadius.circular(5.sp),
+                          ),
+                          child: Row(
+                            children: [
+                              SvgPicture.asset(isSelected?AppSvgs.checkBoxFillSvg:AppSvgs.checkBoxEmptySvg),
+                              10.horizontalSpace,
+                              Expanded(
+                                child: Text(
+                                  pusherChallengeController.taskNames[index].tr,
+                                  style: isSelected
+                                      ? AppStyles.poppins14w500white.copyWith(
+                                    fontWeight: FontWeight.w600,
+                                  )
+                                      : AppStyles.poppins14w500white,
+                                ),
+                              ),
+                            ],
+                          ),
                         ),
                       ),
                     ),
@@ -237,6 +365,35 @@ class _PusherChallengeViewState extends State<PusherChallengeView> {
       ),
     );
   }
+
+  Widget bulletPoint(String title, String content) {
+    return Padding(
+      padding: EdgeInsets.only(bottom: 10.h),
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text("•  ",
+            style: AppStyles.poppins16w600white,
+          ),
+          Expanded(
+            child: RichText(
+              text: TextSpan(
+                style: AppStyles.poppins14w700white,
+                children: [
+                  TextSpan(
+                    text: title,
+                    style: AppStyles.poppins14w500white,
+                  ),
+                  TextSpan(text: content),
+                ],
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
 
   // Helper method to get selected task names (you can use this in your controller)
   List<String> getSelectedTaskNames() {

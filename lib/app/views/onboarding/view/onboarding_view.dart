@@ -34,7 +34,7 @@ class OnboardingView extends StatelessWidget {
           children: [
             Padding(
               padding: EdgeInsets.only(top: 80.h),
-              child: SvgPicture.asset(AppSvgs.logo,height: 55.h,),
+              child: SvgPicture.asset(AppSvgs.logoSvg,height: 55.h,),
             ),
             ClipRRect(
               borderRadius: BorderRadius.only(

@@ -149,7 +149,7 @@ class CustomRegistrationAppBar extends StatelessWidget {
                             width: 1.5.w,
                           ),
                         ),
-                        child: SvgPicture.asset(AppImages.cameraSvg, height: 30.h),
+                        child: SvgPicture.asset(AppSvgs.cameraSvg, height: 30.h),
                       ),
                       Positioned(
                         bottom: 0,

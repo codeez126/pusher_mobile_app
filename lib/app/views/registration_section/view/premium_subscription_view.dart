@@ -38,7 +38,7 @@ class _PremiumSubscriptionViewState extends State<PremiumSubscriptionView> {
                 padding: EdgeInsets.all(20.sp),
                 child: Column(
                   children: [
-                    SvgPicture.asset(AppSvgs.logo,height: 30.h,),
+                    SvgPicture.asset(AppSvgs.logoSvg,height: 30.h,),
                     20.verticalSpace,
                     Text(
                       'Say Hello To Your Best Self.'.tr,
@@ -185,7 +185,7 @@ class _PremiumSubscriptionViewState extends State<PremiumSubscriptionView> {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        SvgPicture.asset(AppImages.lockSvg),
+        SvgPicture.asset(AppSvgs.lockSvg),
         12.horizontalSpace,
         Text(
           text,

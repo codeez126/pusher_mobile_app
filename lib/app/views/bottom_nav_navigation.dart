@@ -1,10 +1,13 @@
 import 'dart:ui';
+import 'package:base_project/app/views/courses_section/courses_view.dart';
 import 'package:base_project/app/views/home_section/views/daily_course_view.dart';
 import 'package:base_project/app/views/home_section/views/daily_goals_view.dart';
 import 'package:base_project/app/views/home_section/views/pusher_challenge_view.dart';
 import 'package:base_project/app/views/home_section/views/well_done_view.dart';
+import 'package:base_project/app/views/profile_section/profile_view.dart';
 import 'package:base_project/app/views/registration_section/view/otp_verfication_view.dart';
 import 'package:base_project/core/constants/app_images.dart';
+import 'package:base_project/core/constants/app_svgs.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -22,17 +25,17 @@ class _BottomNavNavigationState extends State<BottomNavNavigation> {
   int selectedIndex = 1;
 
   final List<Widget> screens = [
-    WellDoneView(),
+    //WellDoneView(),
+    ProfileView(),
     DailyGoalsView(),
-    DailyCourseView(),
- //   MotivationalVideosView(),
+    CoursesView(),
     PusherChallengeView(),
   ];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      extendBody: true,
+      extendBody: selectedIndex==0?false:true,
       body: screens[selectedIndex],
       bottomNavigationBar: ClipRRect(
         child: BackdropFilter(
@@ -66,7 +69,7 @@ class _BottomNavNavigationState extends State<BottomNavNavigation> {
               items: [
                 BottomNavigationBarItem(
                   icon: SvgPicture.asset(
-                    AppImages.personSvg,
+                    AppSvgs.personSvg,
                     colorFilter: ColorFilter.mode(
                       selectedIndex == 0
                           ? AppColors.darkGrey2
@@ -78,7 +81,7 @@ class _BottomNavNavigationState extends State<BottomNavNavigation> {
                 ),
                 BottomNavigationBarItem(
                   icon: SvgPicture.asset(
-                    AppImages.dailyCourseSvg,
+                    AppSvgs.dailyGoalsSvg,
                     colorFilter: ColorFilter.mode(
                       selectedIndex == 1
                           ? AppColors.darkGrey2
@@ -90,7 +93,7 @@ class _BottomNavNavigationState extends State<BottomNavNavigation> {
                 ),
                 BottomNavigationBarItem(
                   icon: SvgPicture.asset(
-                    AppImages.coursesSvg,
+                    AppSvgs.coursesSvg,
                     colorFilter: ColorFilter.mode(
                       selectedIndex == 2
                           ? AppColors.darkGrey2

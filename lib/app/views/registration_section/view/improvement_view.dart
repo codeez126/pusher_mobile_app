@@ -3,6 +3,7 @@ import 'dart:ui';
 
 import 'package:base_project/app/routes/app_routes.dart';
 import 'package:base_project/app/views/registration_section/model/improvement_model.dart';
+import 'package:base_project/core/constants/app_svgs.dart';
 import 'package:base_project/core/utils/utils.dart';
 import 'package:base_project/core/widgets/custom_app_button.dart';
 import 'package:base_project/core/widgets/custom_registration_app_bar.dart';
@@ -93,53 +94,57 @@ class _ImprovementViewState extends State<ImprovementView> {
                           child: Stack(
                             alignment: Alignment.center,
                             children: [
-                              Positioned(
-                                bottom: 15.h,
-                                child: ClipRRect(
-                                  borderRadius: BorderRadius.circular(20.sp),
-                                  child: BackdropFilter(
-                                    filter: ImageFilter.blur(sigmaY: 10, sigmaX: 10),
-                                    child: AnimatedContainer(
-                                      duration: Duration(milliseconds: 800),
-                                      curve: Curves.easeInOut,
-                                      alignment: Alignment.center,
-                                      width: 140.w,
-                                      height: isSelected
-                                          ? MediaQuery.of(context).size.height - 640
-                                          : 60.h,
-                                      padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 10.h),
-                                      decoration: BoxDecoration(
-                                        color: Colors.white.withOpacity(0.2),
-                                        borderRadius: BorderRadius.circular(20.sp),
-                                      ),
-                                      child: FittedBox(
-                                        fit: BoxFit.scaleDown,
-                                        child: Text(
-                                          category.title,
-                                          style: TextStyle(
-                                            fontSize: 18.sp,
-                                            color: Colors.white,
-                                            fontWeight: FontWeight.bold,
-                                            shadows: [
-                                              Shadow(offset: Offset(0, 1), blurRadius: 2, color: Colors.black26),
-                                            ],
+                              Container(
+                                padding: EdgeInsets.only(bottom: 10.sp),
+                                child: AnimatedAlign(
+                                  duration: Duration(milliseconds: 600),
+                                  curve: Curves.easeInOut,
+                                  alignment: isSelected ? Alignment.center : Alignment.bottomCenter,
+                                  child: ClipRRect(
+                                    borderRadius: BorderRadius.circular(20.sp),
+                                    child: BackdropFilter(
+                                      filter: ImageFilter.blur(sigmaY: 10, sigmaX: 10),
+                                      child: AnimatedContainer(
+                                        duration: Duration(milliseconds: 800),
+                                        curve: Curves.easeInOut,
+                                        alignment: Alignment.center,
+                                        width: 140.w,
+                                        height: isSelected
+                                            ? MediaQuery.of(context).size.height - 640
+                                            : 60.h,
+                                        padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 10.h),
+                                        decoration: BoxDecoration(
+                                          color: Colors.white.withOpacity(0.2),
+                                          borderRadius: BorderRadius.circular(20.sp),
+                                        ),
+                                        child: FittedBox(
+                                          fit: BoxFit.scaleDown,
+                                          child: Text(
+                                            category.title,
+                                            style: TextStyle(
+                                              fontSize: 18.sp,
+                                              color: Colors.white,
+                                              fontWeight: FontWeight.bold,
+                                              shadows: [
+                                                Shadow(offset: Offset(0, 1), blurRadius: 2, color: Colors.black26),
+                                              ],
+                                            ),
                                           ),
                                         ),
-                                      ),
-                                      onEnd: () {
-                                        if (isSelected && !showIcon) {
-                                          Future.delayed(Duration(milliseconds: 100), () {
-                                            setState(() {
-                                              showIconFor.add(category.title);
+                                        onEnd: () {
+                                          if (isSelected && !showIcon) {
+                                            Future.delayed(Duration(milliseconds: 100), () {
+                                              setState(() {
+                                                showIconFor.add(category.title);
+                                              });
                                             });
-                                          });
-                                        }
-                                      },
+                                          }
+                                        },
+                                      ),
                                     ),
                                   ),
                                 ),
                               ),
-//                              if (showIcon==false)
                               AnimatedPositioned(
                                 duration: Duration(milliseconds: 600),
                                 curve: Curves.easeInOut,
@@ -147,11 +152,11 @@ class _ImprovementViewState extends State<ImprovementView> {
                                 right: isSelected ? 10 : 52,
                                 child: AnimatedRotation(
                                   alignment: Alignment.center,
-                                  turns: isSelected ? 0.1 : 1,
+                                  turns: isSelected ? 0.12 : 1,
                                   duration: Duration(milliseconds: 700),
                                   curve: Curves.easeInOut,
                                   child: SvgPicture.asset(
-                                    AppImages.plusSvg,
+                                    AppSvgs.plusSvg,
                                   ),
                                 ),
                               )
