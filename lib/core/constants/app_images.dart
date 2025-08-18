@@ -65,5 +65,16 @@ class AppImages {
   //===============================Edit Profile View===================================
   static const String editProfileBackground = "assets/images/edit_profile_view/editProfileViewBackgroundBlurrImage.png";
 
+  //==================================Courses view====================================
+  static const String searchIconCoursesDarkGery2 = "assets/icons/searchIconCouesesDarkgrey2.png";
+  static const String courseBackgroundImage1 = "assets/images/courses_view/1.jpg";
+  static const String courseBackgroundImage2 = "assets/images/courses_view/2.jpg";
+  static const String courseBackgroundImage3 = "assets/images/courses_view/3.jpg";
+  static const String courseBackgroundImage4 = "assets/images/courses_view/4.jpg";
+  static const String courseBackgroundImage5 = "assets/images/courses_view/5.jpg";
+  static const String courseBackgroundImage6 = "assets/images/courses_view/6.jpg";
+  static const String courseBackgroundImage7 = "assets/images/courses_view/7.jpg";
+  static const String courseBackgroundImage8 = "assets/images/courses_view/8.jpg";
+
 
 }

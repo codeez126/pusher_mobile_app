@@ -109,6 +109,7 @@ flutter:
     - assets/images/pusher_challenge_view/
     - assets/images/profile_view/
     - assets/images/edit_profile_view/
+    - assets/images/courses_view/
     - assets/icons/
     - assets/fonts/
     - .env

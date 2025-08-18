@@ -1,11 +1,8 @@
 import 'dart:ui';
-import 'package:base_project/app/views/courses_section/courses_view.dart';
-import 'package:base_project/app/views/home_section/views/daily_course_view.dart';
+import 'package:base_project/app/views/courses_section/view/courses_view.dart';
 import 'package:base_project/app/views/home_section/views/daily_goals_view.dart';
 import 'package:base_project/app/views/home_section/views/pusher_challenge_view.dart';
-import 'package:base_project/app/views/home_section/views/well_done_view.dart';
-import 'package:base_project/app/views/profile_section/profile_view.dart';
-import 'package:base_project/app/views/registration_section/view/otp_verfication_view.dart';
+import 'package:base_project/app/views/profile_section/view/profile_view.dart';
 import 'package:base_project/core/constants/app_images.dart';
 import 'package:base_project/core/constants/app_svgs.dart';
 import 'package:flutter/material.dart';
@@ -35,7 +32,7 @@ class _BottomNavNavigationState extends State<BottomNavNavigation> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      extendBody: selectedIndex==0?false:true,
+      extendBody: selectedIndex==0||selectedIndex==2?false:true,
       body: screens[selectedIndex],
       bottomNavigationBar: ClipRRect(
         child: BackdropFilter(

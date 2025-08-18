@@ -6,9 +6,9 @@ import 'package:base_project/core/widgets/profile_view/custom_container_tile.dar
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import '../../../core/Constants/app_colors.dart';
-import '../../../core/constants/app_images.dart';
 
+import '../../../../core/Constants/app_colors.dart';
+import '../../../../core/constants/app_images.dart';
 class ProfileView extends StatelessWidget {
   const ProfileView({Key? key}) : super(key: key);
 

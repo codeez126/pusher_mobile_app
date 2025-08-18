@@ -3,7 +3,7 @@ import 'package:base_project/core/widgets/custom_app_bar_term_of_use.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../../../core/constants/app_images.dart';
+import '../../../../core/constants/app_images.dart';
 
 class PrivacyPolicyView extends StatelessWidget {
   const PrivacyPolicyView({super.key});

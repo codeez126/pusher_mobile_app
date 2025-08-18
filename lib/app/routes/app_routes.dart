@@ -32,6 +32,7 @@ class AppRoutes {
 
   //=========================Courses Section=========================
   static const coursesView = '/courses';
+  static const favouriteView = '/favourite';
 
 
 

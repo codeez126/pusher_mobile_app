@@ -1,5 +1,6 @@
 import 'package:base_project/app/views/bottom_nav_navigation.dart';
-import 'package:base_project/app/views/courses_section/courses_view.dart';
+import 'package:base_project/app/views/courses_section/view/courses_view.dart';
+import 'package:base_project/app/views/courses_section/view/favourite_view.dart';
 import 'package:base_project/app/views/home_section/views/daily_course_view.dart';
 import 'package:base_project/app/views/home_section/views/daily_goals_doing_view.dart';
 import 'package:base_project/app/views/home_section/views/daily_goals_done_view.dart';
@@ -11,17 +12,17 @@ import 'package:base_project/app/views/home_section/views/pusher_challenge_view.
 import 'package:base_project/app/views/home_section/views/pusher_challenges_all_completed_view.dart';
 import 'package:base_project/app/views/onboarding/view/onboarding_2_view.dart';
 import 'package:base_project/app/views/onboarding/view/onboarding_view.dart';
-import 'package:base_project/app/views/profile_section/edit_profile_view.dart';
-import 'package:base_project/app/views/profile_section/languages_view.dart';
-import 'package:base_project/app/views/profile_section/privacy_policy_view.dart';
-import 'package:base_project/app/views/profile_section/profile_view.dart';
-import 'package:base_project/app/views/profile_section/term_of_use_view.dart';
+import 'package:base_project/app/views/profile_section/view/edit_profile_view.dart';
 import 'package:base_project/app/views/registration_section/view/improvement_view.dart';
 import 'package:base_project/app/views/registration_section/view/personal_goals_view.dart';
 import 'package:base_project/app/views/registration_section/view/premium_subscription_view.dart';
 import 'package:base_project/app/views/splash/views/splash_view.dart';
 import 'package:get/get.dart';
 import '../views/home_section/views/well_done_view.dart';
+import '../views/profile_section/view/languages_view.dart';
+import '../views/profile_section/view/privacy_policy_view.dart';
+import '../views/profile_section/view/profile_view.dart';
+import '../views/profile_section/view/term_of_use_view.dart';
 import '../views/registration_section/view/otp_verfication_view.dart';
 import '../views/registration_section/view/phone_login_view.dart';
 import '../views/registration_section/view/profile_registration_view.dart';
@@ -63,6 +64,7 @@ class AppPages {
 
     //---------------------------------------Courses Section---------------------------------------
     GetPage(name: AppRoutes.coursesView, page: ()=> CoursesView()),
+    GetPage(name: AppRoutes.favouriteView, page: ()=> FavouriteView()),
 
 
 

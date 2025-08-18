@@ -29,6 +29,7 @@ class AppSvgs {
   static const String heartSvg = 'assets/icons/heart.svg';
   static const String heartFavSvg = 'assets/icons/heartFav.svg';
   static const String playSvg = 'assets/icons/play.svg';
+  static const String pauseSvg = 'assets/icons/pause.svg';
   static const String checkBoxEmptySvg = 'assets/icons/checkBoxEmpty.svg';
   static const String checkBoxFillSvg = 'assets/icons/checkBoxFill.svg';
   static const String wellDoneBlueSvg = 'assets/icons/wellDoneBlue_svg.svg';

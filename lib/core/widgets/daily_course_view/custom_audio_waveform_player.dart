@@ -1,15 +1,20 @@
 import 'dart:ui';
 
 import 'package:base_project/core/Constants/app_colors.dart';
+import 'package:base_project/core/constants/app_svgs.dart';
 import 'package:flutter/material.dart';
 import 'dart:math' as math;
 
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 class CustomAudioWaveformPlayer extends StatefulWidget {
   final double width;
+  final double buttonWidth;
   final double height;
+  final double buttonHeight;
   final Color backgroundColor;
+  final bool isAudioContainerBackground;
   final Color playedWaveColor;
   final Color unplayedWaveColor;
   final Color playButtonColor;
@@ -19,7 +24,10 @@ class CustomAudioWaveformPlayer extends StatefulWidget {
     Key? key,
     this.width = 300,
     this.height = 60,
+    this.buttonWidth = 45,
+    this.buttonHeight = 45,
     this.backgroundColor = Colors.grey,
+    this.isAudioContainerBackground = true,
     this.playedWaveColor = Colors.white,
     this.unplayedWaveColor = Colors.white54,
     this.playButtonColor = Colors.white,
@@ -63,7 +71,7 @@ class _CustomAudioWaveformPlayerState extends State<CustomAudioWaveformPlayer>
 
   @override
   Widget build(BuildContext context) {
-    return ClipRRect(
+    return widget.isAudioContainerBackground?ClipRRect(
       borderRadius: BorderRadius.circular(widget.height / 2),
       child: BackdropFilter(
         filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
@@ -119,6 +127,56 @@ class _CustomAudioWaveformPlayerState extends State<CustomAudioWaveformPlayer>
               ),
             ],
           ),
+        ),
+      ),
+    ):ClipRRect(
+      borderRadius: BorderRadius.circular(widget.height / 2),
+      child: Container(
+        alignment: Alignment.center,
+        width: widget.width,
+        height: widget.height,
+        child: Stack(
+          alignment: Alignment.center,
+          children: [
+            Positioned.fill(
+              child: CustomPaint(
+                painter: WaveformPainter(
+                  progress: widget.progress,
+                  playedColor: widget.playedWaveColor,
+                  unplayedColor: widget.unplayedWaveColor,
+                ),
+              ),
+            ),
+            GestureDetector(
+              onTap: _togglePlayPause,
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(25.sp),
+                child: BackdropFilter(
+                  filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
+                  child: Container(
+                    width: widget.buttonWidth,
+                    height: widget.buttonHeight,
+                    decoration: BoxDecoration(
+                        //color: widget.playButtonColor,
+                        shape: BoxShape.circle,
+                        border: Border.all(color: AppColors.whiteColor,width: 0.5.w)
+                    ),
+                    child: AnimatedBuilder(
+                      animation: _animationController,
+                      builder: (context, child) {
+                        return Center(
+                          child: SvgPicture.asset(
+                            isPlaying?AppSvgs.pauseSvg:AppSvgs.playSvg,
+                            height: isPlaying?20.h:15.h,
+                          ),
+                        );
+                      },
+                    ),
+                  ),
+                ),
+              ),
+            ),
+          ],
         ),
       ),
     );

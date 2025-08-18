@@ -11,7 +11,6 @@ import 'package:base_project/core/widgets/custom_registration_app_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:get_storage/get_storage.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../controller/phone_login_controller.dart';
 
@@ -68,14 +67,12 @@ class PhoneLogin extends StatelessWidget {
                     filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
                     child: Obx(() {
                       return Row(
-                        crossAxisAlignment: phoneLoginController
-                            .isClickedCountryCode.value ? CrossAxisAlignment
-                            .start : CrossAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Obx(() {
                             return AnimatedContainer(
                               curve: Curves.easeInOut,
-                              duration: const Duration(milliseconds: 300),
+                              duration: const Duration(milliseconds: 1000),
                               width: 120.w,
                               height: phoneLoginController.isClickedCountryCode
                                   .value ? 200.h : 60.h,
