@@ -1,7 +1,6 @@
 import 'dart:ui';
 import 'package:base_project/app/views/extra_challenges_sections/controller/viewing_the_challenge_controller.dart';
 import 'package:base_project/core/constants/app_svgs.dart';
-import 'package:base_project/core/widgets/daily_goals_done_view/custom_challenge_complete_box.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
