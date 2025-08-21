@@ -1,5 +1,6 @@
 import 'dart:ui';
 import 'package:base_project/app/views/courses_section/view/courses_view.dart';
+import 'package:base_project/app/views/extra_challenges_sections/view/voucher_and_coin_view.dart';
 import 'package:base_project/app/views/home_section/views/daily_goals_view.dart';
 import 'package:base_project/app/views/home_section/views/pusher_challenge_view.dart';
 import 'package:base_project/app/views/profile_section/view/profile_view.dart';
@@ -26,13 +27,14 @@ class _BottomNavNavigationState extends State<BottomNavNavigation> {
     ProfileView(),
     DailyGoalsView(),
     CoursesView(),
-    PusherChallengeView(),
+    VouchersAndCoinView(),
+    //PusherChallengeView(),
   ];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      extendBody: selectedIndex==0||selectedIndex==2?false:true,
+      extendBody: selectedIndex==0||selectedIndex==2||selectedIndex==3?false:true,
       body: screens[selectedIndex],
       bottomNavigationBar: ClipRRect(
         child: BackdropFilter(
@@ -109,7 +111,7 @@ class _BottomNavNavigationState extends State<BottomNavNavigation> {
                       colorBlendMode: BlendMode.srcIn,
                     ),
                   ),
-                  label: 'Challenges',
+                  label: 'Challenge',
                 ),
               ],
             ),

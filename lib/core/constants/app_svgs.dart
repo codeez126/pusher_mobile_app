@@ -50,5 +50,13 @@ class AppSvgs {
   static const String  languagesIconSvg="assets/icons/languagesIcon.svg";
   static const String  tickSvg="assets/icons/tick.svg";
   static const String  introductionsSvg="assets/icons/introductions.svg";
+  static const String  financialIconSvg="assets/icons/financialIcon.svg";
+  static const String  calenderSvg="assets/icons/calender.svg";
+  static const String  coinSvg="assets/icons/coin.svg";
+  static const String  shareSvg="assets/icons/share.svg";
+  static const String  backImageWhiteSvg="assets/icons/backImageWhitebackbutton.svg";
+  static const String  arrowDownAnimateSvg="assets/icons/arrow animation.svg";
+  static const String  lockAnimateSvg="assets/icons/lock animation.svg";
+  static const String  circleTickSvg="assets/icons/checkmark-circle-01.svg";
 
 }

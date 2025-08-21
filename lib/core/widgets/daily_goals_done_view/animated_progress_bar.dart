@@ -30,63 +30,70 @@ class CustomProgressBar extends StatelessWidget {
     final String displayText = customText ??
         (showPercentage ? '$percentage% done' : 'done');
 
-    return Container(
-      height: height,
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(borderRadius),
-        border: Border.all(
-          color: borderColor,
-          width: 1.5,
-        ),
-      ),
-      child: ClipRRect(
-        borderRadius: BorderRadius.circular(borderRadius - 1.5),
-        child: Stack(
-          children: [
-            // Background
-            Container(
-              width: double.infinity,
-              height: height,
-              color: backgroundColor,
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        final double maxWidth = constraints.maxWidth;
+
+        return Container(
+          height: height,
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(borderRadius),
+            border: Border.all(
+              color: borderColor,
+              width: 1.5,
             ),
-            // Progress fill
-            if (progress > 0)
-              Align(
-                alignment: Alignment.centerLeft,
-                child: Container(
-                  width: progress * MediaQuery.of(context).size.width,
+          ),
+          child: ClipRRect(
+            borderRadius: BorderRadius.circular(borderRadius - 1.5),
+            child: Stack(
+              children: [
+                // Background
+                Container(
+                  width: double.infinity,
                   height: height,
-                  decoration: BoxDecoration(
-                    color: progressColor,
-                    borderRadius: BorderRadius.only(
-                      topLeft: Radius.circular(borderRadius - 1.5),
-                      bottomLeft: Radius.circular(borderRadius - 1.5),
-                      topRight: progress >= 1.0
-                          ? Radius.circular(borderRadius - 1.5)
-                          : Radius.zero,
-                      bottomRight: progress >= 1.0
-                          ? Radius.circular(borderRadius - 1.5)
-                          : Radius.zero,
+                  color: backgroundColor,
+                ),
+                // Progress fill
+                if (progress > 0)
+                  Align(
+                    alignment: Alignment.centerLeft,
+                    child: Container(
+                      width: progress * maxWidth,
+                      height: height,
+                      decoration: BoxDecoration(
+                        color: progressColor,
+                        borderRadius: BorderRadius.only(
+                          topLeft: Radius.circular(borderRadius - 1.5),
+                          bottomLeft: Radius.circular(borderRadius - 1.5),
+                          topRight: progress >= 1.0
+                              ? Radius.circular(borderRadius - 1.5)
+                              : Radius.zero,
+                          bottomRight: progress >= 1.0
+                              ? Radius.circular(borderRadius - 1.5)
+                              : Radius.zero,
+                        ),
+                      ),
+                    ),
+                  ),
+                // Text overlay
+                Center(
+                  child: Text(
+                    displayText,
+                    style: TextStyle(
+                      color: textColor,
+                      fontSize: 16,
+                      fontWeight: FontWeight.w600,
                     ),
                   ),
                 ),
-              ),
-            // Text overlay
-            Center(
-              child: Text(
-                displayText,
-                style: TextStyle(
-                  color: textColor,
-                  fontSize: 16,
-                  fontWeight: FontWeight.w600,
-                ),
-              ),
+              ],
             ),
-          ],
-        ),
-      ),
+          ),
+        );
+      },
     );
   }
+
 }
 
 // Animated version of the progress bar

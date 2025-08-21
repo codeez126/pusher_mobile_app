@@ -1,6 +1,9 @@
 import 'package:base_project/app/views/bottom_nav_navigation.dart';
+import 'package:base_project/app/views/courses_section/view/courses_details_view.dart';
 import 'package:base_project/app/views/courses_section/view/courses_view.dart';
 import 'package:base_project/app/views/courses_section/view/favourite_view.dart';
+import 'package:base_project/app/views/extra_challenges_sections/view/viewing_the_challenge_view.dart';
+import 'package:base_project/app/views/extra_challenges_sections/view/voucher_and_coin_view.dart';
 import 'package:base_project/app/views/home_section/views/daily_course_view.dart';
 import 'package:base_project/app/views/home_section/views/daily_goals_doing_view.dart';
 import 'package:base_project/app/views/home_section/views/daily_goals_done_view.dart';
@@ -65,7 +68,11 @@ class AppPages {
     //---------------------------------------Courses Section---------------------------------------
     GetPage(name: AppRoutes.coursesView, page: ()=> CoursesView()),
     GetPage(name: AppRoutes.favouriteView, page: ()=> FavouriteView()),
+    GetPage(name: AppRoutes.coursesDetailView, page: ()=> CoursesDetailsView()),
 
+    //--------------------------------------Extra challenges section-------------------------------
+    GetPage(name: AppRoutes.vouchersAndCoinView, page: ()=> VouchersAndCoinView()),
+    GetPage(name: AppRoutes.viewingTheChallengeView, page: ()=> ViewingTheChallengeView()),
 
 
     //---------------------------------------Bottom Navigation---------------------------------------

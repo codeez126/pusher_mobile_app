@@ -33,7 +33,11 @@ class AppRoutes {
   //=========================Courses Section=========================
   static const coursesView = '/courses';
   static const favouriteView = '/favourite';
+  static const coursesDetailView = '/coursesDetail';
 
+  //=========================extra challenges section=========================
+  static const vouchersAndCoinView = "/vouchersAndCoin";
+  static const viewingTheChallengeView = "/viewingTheChallenge";
 
 
   //==============BottomNav============

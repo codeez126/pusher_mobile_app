@@ -181,10 +181,37 @@ class LocaleString extends Translations {
       "Languages":"Languages",
 
       //=================================================courses view===================================================
+      "For You":"For You",
+      "Self Improvement":"Self Improvement",
+      "Romantic":"Romantic",
+      "Courses":"Courses",
+      "Search":"Search",
 
       //=================================================Favorites view===================================================
       "Favorites":"Favorites",
+      "No favorites yet":"No favorites yet",
 
+      //=================================================Courses Details View===========================================
+      "current lesson:":"current lesson:",
+      "  Shifting Your Perspective":"  Shifting Your Perspective",
+
+      //=================================================Viewing the Challenges Controller ==================================
+      "Track Your Spending":"Track Your Spending",
+      "Long-Term Planning & Review":"Long-Term Planning & Review",
+      "Listen To A Financial Podcast":"Listen To A Financial Podcast",
+      "Set SMART Financial Goals":"Set SMART Financial Goals",
+
+      //==================================================Viewing the Challenge View=========================================
+      "Financial Daily challenge completed today":"Financial Daily challenge completed today",
+      "The Challenge Completed Successfully And Earned:":"The Challenge Completed Successfully And Earned:",
+      "Share the achievement with friends":"Share the achievement with friends",
+      "Share":"Share",
+      "Day":"Day",
+      "you still can complete all the challenges":"you still can complete all the challenges",
+      'By':'By',
+      "Complete The Challenge And Win ":"Complete The Challenge And Win ",
+      "Win ":"Win ",
+      "Challenges":"Challenges",
 
 
 

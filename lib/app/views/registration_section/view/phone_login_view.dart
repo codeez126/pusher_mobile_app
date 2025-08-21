@@ -65,8 +65,7 @@ class PhoneLogin extends StatelessWidget {
                   borderRadius: BorderRadius.circular(30),
                   child: BackdropFilter(
                     filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
-                    child: Obx(() {
-                      return Row(
+                    child:Row(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Obx(() {
@@ -193,11 +192,10 @@ class PhoneLogin extends StatelessWidget {
                             ),
                           ),
                         ],
-                      );
-                    }),
+                      ),
+                  ),
                   ),
                 ),
-              ),
               30.verticalSpace,
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 24.0),
@@ -216,7 +214,6 @@ class PhoneLogin extends StatelessWidget {
                             .value}${phoneLoginController.phoneController
                             .text}';
                         print('Full Phone: $phoneWithCode');
-
                         if (phoneWithCode
                             .replaceAll(RegExp(r'\D'), '')
                             .length < 8) {

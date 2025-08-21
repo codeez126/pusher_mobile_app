@@ -16,7 +16,6 @@ class CoursesController extends GetxController{
      AppImages.courseBackgroundImage7,
      AppImages.courseBackgroundImage8,
    ];
-
   List<String> forYouCategoryTittleList = [
      "Positive Power",
      "Think Positive",
@@ -37,7 +36,6 @@ class CoursesController extends GetxController{
     AppImages.courseBackgroundImage7,
     AppImages.courseBackgroundImage8,
   ];
-
    List<String> financialCategoryTittleList = [
     "Smart Money",
     "Wealth Habits",
@@ -58,7 +56,6 @@ class CoursesController extends GetxController{
     AppImages.courseBackgroundImage1,
     AppImages.courseBackgroundImage4,
   ];
-
    List<String> selfImprovementCategoryTittleList = [
     "Daily Growth",
     "Better You",
@@ -79,7 +76,6 @@ class CoursesController extends GetxController{
     AppImages.courseBackgroundImage7,
     AppImages.courseBackgroundImage8,
   ];
-
    List<String> romanticCategoryTittleList = [
     "Love Notes",
     "Heart Talks",
@@ -99,6 +95,18 @@ class CoursesController extends GetxController{
     AppImages.courseBackgroundImage5,
     AppImages.courseBackgroundImage7,
     AppImages.courseBackgroundImage8,
+  ];
+  List<String> courseDurations = [
+    "00:45 hr / 1 lesson",
+    "01:20 hr / 2 lessons",
+    "02:15 hr / 4 lessons",
+    "03:10 hr / 3 lessons",
+    "04:30 hr / 5 lessons",
+    "05:50 hr / 6 lessons",
+    "06:40 hr / 7 lessons",
+    "07:25 hr / 8 lessons",
+    "08:10 hr / 9 lessons",
+    "09:55 hr / 10 lessons",
   ];
 
 }

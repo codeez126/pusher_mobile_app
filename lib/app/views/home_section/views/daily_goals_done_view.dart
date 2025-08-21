@@ -1,6 +1,7 @@
 import 'dart:ui';
 import 'package:base_project/app/routes/app_routes.dart';
 import 'package:base_project/core/constants/app_svgs.dart';
+import 'package:base_project/core/widgets/custom_change_round_button.dart';
 import 'package:base_project/core/widgets/daily_goals_done_view/custom_challenge_complete_box.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -52,7 +53,6 @@ class _DailyGoalsDoneViewState extends State<DailyGoalsDoneView> {
               alignment: Alignment.topCenter,
               children: [
                 Container(height: 210.h),
-                //Blur effect custom made for practice
                 ClipRRect(
                   borderRadius: BorderRadius.vertical(
                     bottom: Radius.circular(50.sp),
@@ -113,21 +113,7 @@ class _DailyGoalsDoneViewState extends State<DailyGoalsDoneView> {
                       onTap: (){
                         nextDailyGoals();
                       },
-                      child: Container(
-                        decoration: BoxDecoration(
-                            color: AppColors.lightBlue,
-                            borderRadius: BorderRadius.circular(35.sp),
-                            border: Border.all(width: 1.5.w,color: AppColors.whiteColor)
-                        ),
-                        padding: EdgeInsets.symmetric(horizontal: 20.w,vertical: 10.h),
-                        child: Row(
-                          children: [
-                            Text('Next Daily Goal'.tr, style: AppStyles.poppins16w600white,),
-                            5.horizontalSpace,
-                            SvgPicture.asset(AppSvgs.nextSvg,height: 30.h,)
-                          ],
-                        ),
-                      ),
+                      child: CustomChangeRoundButton(text: 'Next Daily Goals', icon: AppSvgs.nextSvg),
                     ),
                   ),
                 ),

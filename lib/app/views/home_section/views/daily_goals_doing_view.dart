@@ -11,6 +11,7 @@ import '../../../../core/Constants/app_colors.dart';
 import '../../../../core/constants/app_fonts_and_styles.dart';
 import '../../../../core/constants/app_images.dart';
 import '../../../../core/widgets/custom_app_button.dart';
+import '../../../../core/widgets/custom_change_round_button.dart';
 import '../../../routes/app_routes.dart';
 
 class DailyGoalsDoingView extends StatefulWidget {
@@ -112,31 +113,7 @@ class _DailyGoalsDoingViewState extends State<DailyGoalsDoingView> {
                       onTap: (){
                         Get.back();
                       },
-                      child: Container(
-                        decoration: BoxDecoration(
-                          color: AppColors.lightBlue,
-                          borderRadius: BorderRadius.circular(35.sp),
-                          border: Border.all(
-                            width: 1.5.w,
-                            color: AppColors.whiteColor,
-                          ),
-                        ),
-                        padding: EdgeInsets.symmetric(
-                          horizontal: 20.w,
-                          vertical: 10.h,
-                        ),
-                        child: Row(
-                          children: [
-                            Text('Change Task'.tr,
-                                style: AppStyles.poppins16w600white),
-                            5.horizontalSpace,
-                            SvgPicture.asset(
-                              AppSvgs.changeSvg,
-                              height: 30.h,
-                            ),
-                          ],
-                        ),
-                      ),
+                      child: CustomChangeRoundButton(text: 'Change Task', icon: AppSvgs.changeSvg),
                     ),
                   ),
                 ),

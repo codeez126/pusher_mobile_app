@@ -3,6 +3,7 @@ import 'dart:ui';
 
 import 'package:base_project/app/routes/app_routes.dart';
 import 'package:base_project/core/constants/app_svgs.dart';
+import 'package:base_project/core/widgets/custom_change_round_button.dart';
 import 'package:base_project/core/widgets/daily_course_view/custom_audio_waveform_player.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -162,8 +163,9 @@ class DailyCourseView extends StatelessWidget {
                                             height: 60,
                                             backgroundColor: AppColors.whiteColor.withOpacity(0.35),
                                             playedWaveColor: Colors.white,
-                                            unplayedWaveColor: Colors.white60,
-                                            progress: 0.7,
+                                            isTimerEnabled: false,
+                                            //unPlayedWaveColor: Colors.white60,
+                                            ///progress: 0.7,
                                           ),
                                         ],
                                       ),
@@ -256,33 +258,7 @@ class DailyCourseView extends StatelessWidget {
                       onTap: (){
                         nextDailyGoals();
                       },
-                      child: Container(
-                        decoration: BoxDecoration(
-                          color: AppColors.lightBlue,
-                          borderRadius: BorderRadius.circular(35.sp),
-                          border: Border.all(
-                            width: 1.5.w,
-                            color: AppColors.whiteColor,
-                          ),
-                        ),
-                        padding: EdgeInsets.symmetric(
-                          horizontal: 20.w,
-                          vertical: 10.h,
-                        ),
-                        child: Row(
-                          children: [
-                            Text(
-                              'Next Daily Goals',
-                              style: AppStyles.poppins16w600white,
-                            ),
-                            5.horizontalSpace,
-                            SvgPicture.asset(
-                              AppSvgs.nextSvg,
-                              height: 30.h,
-                            )
-                          ],
-                        ),
-                      ),
+                      child: CustomChangeRoundButton(text: 'Next Daily Goals'.tr, icon: AppSvgs.nextSvg),
                     ),
                   ),
                 ),

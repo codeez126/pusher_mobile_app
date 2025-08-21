@@ -14,9 +14,11 @@ class CustomChallengeCompleteBox extends StatefulWidget {
   const CustomChallengeCompleteBox({
     super.key,
     this.progress = 0.33,
+    this.text = 'Daily Challenge Completed Today',
   });
 
   final double progress;
+  final String text;
 
   @override
   State<CustomChallengeCompleteBox> createState() => _CustomChallengeCompleteBoxState();
@@ -72,7 +74,7 @@ class _CustomChallengeCompleteBoxState extends State<CustomChallengeCompleteBox>
             children: [
               30.verticalSpace,
               Text(
-                'Daily Challenge Completed Today'.tr,
+                widget.text.tr,
                 textAlign: TextAlign.center,
                 style: AppStyles.poppins16w600white,
               ),

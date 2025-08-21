@@ -79,12 +79,11 @@ class FavouriteView extends StatelessWidget {
 
               Obx(() {
                 if (favoritesController.favorites.isEmpty) {
-                  return Center(child: Text("No favorites yet"));
+                  return Center(child: Text("No favorites yet".tr));
                 }
                 return SizedBox(
                   height: 270.h,
                   child: ListView.builder(
-                    primary: true,
                     scrollDirection:Axis.horizontal,
                     itemCount: favoritesController.favorites.length,
                     itemBuilder: (context, index) {
@@ -93,7 +92,10 @@ class FavouriteView extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.center,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Expanded(child: CustomListviewItem(course: course)),
+                          Expanded(
+                              child: CustomListviewItem(
+                              course: course, onTap: (){},
+                          )),
                           5.verticalSpace,
                           Container(
                             margin: EdgeInsets.only(left: 10.w),

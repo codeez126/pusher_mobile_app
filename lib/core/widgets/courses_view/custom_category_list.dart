@@ -18,7 +18,6 @@ class CustomCategoryList extends StatelessWidget {
   String categoryName;
   Widget child;
 
-
   @override
   Widget build(BuildContext context) {
     return Column(

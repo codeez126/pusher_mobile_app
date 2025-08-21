@@ -226,11 +226,11 @@ class _PusherChallengeViewState extends State<PusherChallengeView> {
                                           Column(
                                             crossAxisAlignment: CrossAxisAlignment.start,
                                             children: [
-                                              bulletPoint("Why It’s Important: ",
+                                              dialogueBulletPoint("Why It’s Important: ",
                                                   "Exercise Improves Your Energy, Mood, And Overall Health."),
-                                              bulletPoint("What You Need To Do: ",
+                                              dialogueBulletPoint("What You Need To Do: ",
                                                   "Spend Just 45 Minutes Today On A Physical Activity Of Your Choice."),
-                                              bulletPoint("How It Helps: ",
+                                              dialogueBulletPoint("How It Helps: ",
                                                   "Consistency Builds Lasting Habits And Keeps You On Track Toward Your Fitness Goals."),
                                             ],
                                           ),
@@ -290,7 +290,6 @@ class _PusherChallengeViewState extends State<PusherChallengeView> {
                               ),
                             )
                           );
-
                           print('Selected tasks: ${selectedTaskIndices.toList()}');
                         },
                         child: Container(
@@ -338,21 +337,17 @@ class _PusherChallengeViewState extends State<PusherChallengeView> {
               CustomPremiumBox(
                 plan: pusherChallengeController.selectedPlan,
                 onTap: () {
-                  // Check if at least one task is selected
                   if (selectedTaskIndices.isEmpty) {
                     Utils.toastMessage('Please select at least one task'.tr);
                     return;
                   }
 
-                  // Get selected task names for processing
                   List<String> selectedTaskNames = selectedTaskIndices
                       .map((index) => pusherChallengeController.taskNames[index])
                       .toList();
 
                   print('Selected tasks: ${selectedTaskNames.join(', ')}');
                   print('Selected plan: ${pusherChallengeController.selectedPlan}');
-
-                  // Show success message
                   Utils.toastMessage('${'Selected'.tr} ${selectedTaskIndices.length} tasks'.tr);
 
                   Get.toNamed(AppRoutes.pusherChallengeDoneView);
@@ -366,7 +361,7 @@ class _PusherChallengeViewState extends State<PusherChallengeView> {
     );
   }
 
-  Widget bulletPoint(String title, String content) {
+  Widget dialogueBulletPoint(String title, String content) {
     return Padding(
       padding: EdgeInsets.only(bottom: 10.h),
       child: Row(
@@ -395,14 +390,12 @@ class _PusherChallengeViewState extends State<PusherChallengeView> {
   }
 
 
-  // Helper method to get selected task names (you can use this in your controller)
   List<String> getSelectedTaskNames() {
     return selectedTaskIndices
         .map((index) => pusherChallengeController.taskNames[index])
         .toList();
   }
 
-  // Helper method to reset selections
   void resetSelections() {
     setState(() {
       selectedTaskIndices.clear();

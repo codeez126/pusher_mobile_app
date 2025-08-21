@@ -76,5 +76,14 @@ class AppImages {
   static const String courseBackgroundImage7 = "assets/images/courses_view/7.jpg";
   static const String courseBackgroundImage8 = "assets/images/courses_view/8.jpg";
 
+  //=================================Viewing the Challenge View=============================
+  static const String  topContainer="assets/images/viewing_the_challenge_view/shape top.png";
+  static const String  closeButtonImage="assets/images/viewing_the_challenge_view/closeButtonImage.png";
+  static const String  backImageButton="assets/images/viewing_the_challenge_view/backImageButton.png";
+
+  //=======================================vouchers_and_coins_view=============================
+  static const String challengeBackgroundImage1 = "assets/images/vouchers_and_coins_view/vouncher_and_coin_backgroun_image.jpg";
+
+
 
 }
