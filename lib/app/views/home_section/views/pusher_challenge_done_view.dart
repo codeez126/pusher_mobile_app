@@ -20,6 +20,16 @@ class PusherChallengeDoneView extends StatefulWidget {
 
 class _PusherChallengeDoneViewState extends State<PusherChallengeDoneView> {
 
+@override
+  void initState() {
+    super.initState();
+    Future.delayed(const Duration(seconds: 3), () {
+      if (mounted) {
+        Get.back();
+      }
+    });
+
+  }
 
   @override
   Widget build(BuildContext context) {

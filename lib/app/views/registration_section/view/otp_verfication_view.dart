@@ -24,17 +24,13 @@ class _OtpVerficationViewState extends State<OtpVerficationView> {
     OtpVerificationController(),
   );
 
-  // List<int> tapCounts = List.filled(6, 0);
-
   @override
   void initState() {
     super.initState();
-    //otpController.clearingLogic();
   }
 
   @override
   void dispose() {
-    //otpController.disposeControllers();
     super.dispose();
   }
 
@@ -106,7 +102,7 @@ class _OtpVerficationViewState extends State<OtpVerficationView> {
               ),
               20.verticalSpace,
               InkWell(
-                onTap: (){
+                onTap: () {
                   print('Resend Code');
                 },
                 child: Text(
@@ -123,9 +119,13 @@ class _OtpVerficationViewState extends State<OtpVerficationView> {
                 padding: const EdgeInsets.symmetric(horizontal: 24.0),
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(30),
-                  child: CustomAppButton(onTap: (){
-                    Get.toNamed(AppRoutes.profileRegistrationView);
-                  }, text: "OK".tr, textStyle: AppStyles.poppins16w700white)
+                  child: CustomAppButton(
+                    onTap: () {
+                      otpVerfication();
+                    },
+                    text: "OK".tr,
+                    textStyle: AppStyles.poppins16w700white,
+                  ),
                 ),
               ),
             ],
@@ -133,5 +133,9 @@ class _OtpVerficationViewState extends State<OtpVerficationView> {
         ),
       ),
     );
+  }
+
+  void otpVerfication() {
+    Get.toNamed(AppRoutes.profileRegistrationView);
   }
 }

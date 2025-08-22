@@ -203,35 +203,81 @@ class PhoneLogin extends StatelessWidget {
                   borderRadius: BorderRadius.circular(30),
                   child: CustomAppButton(
                       onTap: () {
-                        // Get.toNamed(AppRoutes.otpVerificationView);
-                        // final phone =
-                        //     '${phoneLoginController.selectedCode
-                        //     .value}${phoneLoginController.phoneController
-                        //     .text}';
-                        // print('Login attempt with: $phone');
-                        final phoneWithCode =
-                            '${phoneLoginController.selectedCode
-                            .value}${phoneLoginController.phoneController
-                            .text}';
-                        print('Full Phone: $phoneWithCode');
-                        if (phoneWithCode
-                            .replaceAll(RegExp(r'\D'), '')
-                            .length < 8) {
-                          print("Invalid phone number");
-                        } else {
-                          //GetStorage().write('phone', phoneWithCode);
-                          Get.toNamed(AppRoutes.otpVerificationView);
-                        }
+                        phoneNumberLogin();
                       },
                       isIcon: false,
                       text: "Login".tr,
                       textStyle: AppStyles.poppins16w600white),
                 ),
               ),
+              50.verticalSpace,
+              Text("Or".tr,style: AppStyles.poppins16w700white,),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  GestureDetector(
+                    onTap: (){
+                      appleLogin();
+                    },
+                    child: Container(
+                      padding: EdgeInsets.symmetric(horizontal: 20.sp,vertical: 22.sp),
+                      alignment: Alignment.center,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(25.sp),
+                          color: AppColors.whiteColor,
+                          ),
+                      child: Image.asset(AppImages.appleImage,height: 25.h,),
+                    ),
+                  ),
+                  10.horizontalSpace,
+                  GestureDetector(
+                    onTap: (){
+                      googleLogin();
+                    },
+                    child: Container(
+                      padding: EdgeInsets.symmetric(horizontal: 20.sp,vertical: 22.sp),
+                      alignment: Alignment.center,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(25.sp),
+                        color: AppColors.whiteColor,
+                      ),
+                      child: Image.asset(AppImages.googleImage,height: 25.h,),
+                    ),
+                  ),
+                ],
+              )
             ],
           ),
         ),
       ),
     );
+  }
+
+  void appleLogin() {}
+
+  void googleLogin() {}
+
+  void phoneNumberLogin() {
+
+    // Get.toNamed(AppRoutes.otpVerificationView);
+    // final phone =
+    //     '${phoneLoginController.selectedCode
+    //     .value}${phoneLoginController.phoneController
+    //     .text}';
+    // print('Login attempt with: $phone');
+    final phoneWithCode =
+        '${phoneLoginController.selectedCode
+        .value}${phoneLoginController.phoneController
+        .text}';
+    print('Full Phone: $phoneWithCode');
+    if (phoneWithCode
+        .replaceAll(RegExp(r'\D'), '')
+        .length < 8) {
+      print("Invalid phone number");
+    } else {
+      //GetStorage().write('phone', phoneWithCode);
+      Get.toNamed(AppRoutes.otpVerificationView);
+    }
+
   }
 }

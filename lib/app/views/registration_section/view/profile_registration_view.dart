@@ -83,7 +83,7 @@ class _ProfileRegistrationViewState extends State<ProfileRegistrationView> {
                     ///===============================Gender selection======================================
                     Padding(
                       padding: EdgeInsets.symmetric(horizontal: 15.w),
-                      child: Text('Gender', style: AppStyles.poppins14w700white),
+                      child: Text('Gender'.tr, style: AppStyles.poppins14w700white),
                     ),
                     12.verticalSpace,
                     Padding(

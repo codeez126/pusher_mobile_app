@@ -32,10 +32,12 @@ class LocaleString extends Translations {
       'Last Name': 'Last Name',
       'Hajim': 'Hajim',
       'Date of birth': 'Date of birth',
+      'Gender':'Gender',
       'Male': 'Male',
       'Female': 'Female',
       'Other': 'Other',
       'Email': 'Email',
+      'Add a profile image':'Add a profile image',
       'I\'ve read this text & you want to receive promotional emails & messages from Pusher':'I\'ve read this text & you want to receive promotional emails & messages from Pusher',
       'Sign Up': 'Sign Up',
       'By clicking “Sign up״ button below':'By clicking “Sign up״ button below, you are agreeing to our terms of use, opening an account with Pusher, and acknowledging you have read our privacy policy',
@@ -74,7 +76,7 @@ class LocaleString extends Translations {
       'You can select up to 3 goals per category':'You can select up to 3 goals per category',
       'Please select at least one goal': 'Please select at least one goal',
       'Selected Goals by Category:': 'Selected Goals by Category',
-      //================================Premium View
+      //================================Premium View===================================================================================
       'Premium': 'Premium',
       'Say Hello To Your Best Self.': 'Say Hello To Your Best Self.',
       'Get The Complete Progress For Yourself With':'Get The Complete Progress For Yourself With',
