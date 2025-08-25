@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 
@@ -75,7 +76,8 @@ class Utils {
             height: 50,
             width: 50,
             child: CircularProgressIndicator(
-              valueColor: AlwaysStoppedAnimation<Color>(AppColors.primaryColor),
+              strokeWidth: 5.w,
+              valueColor: AlwaysStoppedAnimation<Color>(AppColors.lightBlue),
             ),
           ),
         ),

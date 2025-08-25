@@ -1,5 +1,5 @@
 import 'package:base_project/app/routes/app_routes.dart';
-import 'package:base_project/app/views/registration_section/controller/profile_registration_controller.dart';
+import 'package:base_project/app/views/auth/controllers/profile_registration_controller.dart';
 import 'package:base_project/core/constants/app_fonts_and_styles.dart';
 import 'package:base_project/core/constants/app_images.dart';
 import 'package:base_project/core/widgets/custom_app_button.dart';
@@ -21,13 +21,6 @@ class ProfileRegistrationView extends StatefulWidget {
 class _ProfileRegistrationViewState extends State<ProfileRegistrationView> {
 
   final ProfileRegistrationController profileRegistrationController = Get.put(ProfileRegistrationController());
-  @override
-  void dispose() {
-    profileRegistrationController.firstNameController.dispose();
-    profileRegistrationController.lastNameController.dispose();
-    profileRegistrationController.emailController.dispose();
-    super.dispose();
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -61,13 +54,13 @@ class _ProfileRegistrationViewState extends State<ProfileRegistrationView> {
                       padding: EdgeInsets.symmetric(horizontal: 15.w),                      child: Row(
                         children: [
                           CustomNameContainer(
-                            controller: profileRegistrationController.firstNameController,
+                            controller: profileRegistrationController.firstNameController.value,
                             textSection: "First Name".tr,
                             hintText: 'Or'.tr,
                           ),
                           16.horizontalSpace,
                           CustomNameContainer(
-                            controller: profileRegistrationController.lastNameController,
+                            controller: profileRegistrationController.lastNameController.value,
                             textSection: 'Last Name'.tr,
                             hintText: 'Hajim'.tr,
                           ),

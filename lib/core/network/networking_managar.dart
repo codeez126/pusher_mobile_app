@@ -122,5 +122,6 @@ class NetworkManager {
     } else {
       AppDialogs.errorSnackBarTop("Check your internet");
     }
+    return null;
   }
 }

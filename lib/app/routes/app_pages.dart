@@ -26,9 +26,9 @@ import '../views/profile_section/view/languages_view.dart';
 import '../views/profile_section/view/privacy_policy_view.dart';
 import '../views/profile_section/view/profile_view.dart';
 import '../views/profile_section/view/term_of_use_view.dart';
-import '../views/registration_section/view/otp_verfication_view.dart';
-import '../views/registration_section/view/phone_login_view.dart';
-import '../views/registration_section/view/profile_registration_view.dart';
+import '../views/auth/views/otp_verfication_view.dart';
+import '../views/auth/views/phone_login_view.dart';
+import '../views/auth/views/profile_registration_view.dart';
 import 'app_routes.dart';
 
 class AppPages {
