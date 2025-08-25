@@ -12,6 +12,7 @@ class AppRoutes {
   static const premiumSubscriptionView = '/premiumSubscription';
   //=================Home Section==================================
   static const wellDoneView = '/wellDone';
+  static const home = '/home';
   static const notificationsView = '/notification';
   static const dailyGoalsView = '/dailyChallenge';
   static const dailyGoalsDoingView = '/dailyTaskDoing';
@@ -21,7 +22,6 @@ class AppRoutes {
   static const pusherChallengeView = '/pusherChallenge';
   static const pusherChallengeDoneView = '/pusherChallengeDone';
   static const pusherChallengeAllCompletedView = '/pusherChallengeAllCompleted';
-
 
   //====================Profile Section=========================
   static const profileView = '/profile';
@@ -39,8 +39,6 @@ class AppRoutes {
   static const vouchersAndCoinView = "/vouchersAndCoin";
   static const viewingTheChallengeView = "/viewingTheChallenge";
 
-
   //==============BottomNav============
   static const bottomNavNavigation = '/bottomNavNavigation';
-
 }
