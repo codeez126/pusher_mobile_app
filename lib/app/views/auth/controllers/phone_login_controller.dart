@@ -155,7 +155,7 @@ class PhoneLoginController extends GetxController {
           print("Status : ${model.status}");
           print("Message : ${model.message}");
           print("Token : ${model.data?.token}");
-          Utils.toastMessage("Otp Verified Successfully");
+          Utils.toastMessage("${model.message}");
           final register = model.data?.user?.isRegistered;
           print("Registered Or Not : $register");
           if(register==0){
