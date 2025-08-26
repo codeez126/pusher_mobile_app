@@ -1,6 +1,7 @@
 import 'package:base_project/app/routes/app_routes.dart';
 import 'package:base_project/app/views/auth/model/register_phone_number_model.dart';
 import 'package:base_project/app/views/auth/model/send_otp_response_model.dart';
+import 'package:base_project/core/Managers/PrefManager.dart';
 import 'package:base_project/core/constants/api_urls.dart';
 import 'package:base_project/core/network/networking_managar.dart';
 import 'package:base_project/core/utils/utils.dart';
@@ -155,6 +156,13 @@ class PhoneLoginController extends GetxController {
           print("Status : ${model.status}");
           print("Message : ${model.message}");
           print("Token : ${model.data?.token}");
+
+          PrefManager.setToken(model.data!.token.toString());
+          PrefManager.save("firstName", model.data!.user!.firstName);
+          PrefManager.save("lastName", model.data!.user!.lastName);
+          PrefManager.save("dob", model.data!.user!.dob);
+          PrefManager.save("gender", model.data!.user!.gender);
+
           Utils.toastMessage("${model.message}");
           final register = model.data?.user?.isRegistered;
           print("Registered Or Not : $register");

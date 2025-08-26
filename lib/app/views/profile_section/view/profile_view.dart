@@ -1,5 +1,6 @@
 import 'dart:ui';
 import 'package:base_project/app/routes/app_routes.dart';
+import 'package:base_project/core/Managers/PrefManager.dart';
 import 'package:base_project/core/constants/app_fonts_and_styles.dart';
 import 'package:base_project/core/constants/app_svgs.dart';
 import 'package:base_project/core/widgets/profile_view/custom_container_tile.dart';
@@ -10,10 +11,12 @@ import 'package:get/get.dart';
 import '../../../../core/Constants/app_colors.dart';
 import '../../../../core/constants/app_images.dart';
 class ProfileView extends StatelessWidget {
-  const ProfileView({Key? key}) : super(key: key);
+  const ProfileView({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final firstName = (PrefManager.read("firstName") ?? "").toString();
+    final lastName  = (PrefManager.read("lastName") ?? "").toString();
     return Scaffold(
       body: Container(
         width: double.infinity,
@@ -109,7 +112,7 @@ class ProfileView extends StatelessWidget {
                                   ),
                                 ),
                                 child: Text(
-                                  'Hi Hami'.tr,
+                                  '$firstName $lastName'.tr,
                                   style: AppStyles.poppins20w600white
                                 ),
                               ),

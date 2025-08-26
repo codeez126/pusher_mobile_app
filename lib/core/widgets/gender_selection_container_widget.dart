@@ -25,7 +25,7 @@ class GenderSelectionContainerWidget extends StatelessWidget {
           decoration: BoxDecoration(
             color: selectedGender == genderName
                 ? Colors.white.withOpacity(0.3)
-                : Colors.white.withOpacity(0.1),
+                : AppColors.darkGrey2.withOpacity(0.1),
             borderRadius: BorderRadius.circular(20),
             border: Border.all(
               color: AppColors.whiteColor,
