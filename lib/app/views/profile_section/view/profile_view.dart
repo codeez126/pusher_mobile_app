@@ -161,7 +161,10 @@ class ProfileView extends StatelessWidget {
                                       containerColor: AppColors.redColor.withOpacity(0.35),
                                       borderColor: AppColors.redColor,
                                       titleColor: AppColors.whiteColor,
-                                      onTap: () {}),
+                                      onTap: () {
+                                        PrefManager.setIsLogin(false);
+                                        Get.offAllNamed(AppRoutes.phoneLogin);
+                                      }),
                                   Spacer(),
                                   CustomContainerTile(
                                       icon: AppSvgs.deleteSvg,

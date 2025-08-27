@@ -71,6 +71,7 @@ dependencies:
   blur: ^4.0.2
   flutter_timer_countdown: ^1.0.7
   dotted_decoration: ^2.0.0
+  google_sign_in: ^6.2.2
 
   # Validation
   form_validator: ^2.1.1

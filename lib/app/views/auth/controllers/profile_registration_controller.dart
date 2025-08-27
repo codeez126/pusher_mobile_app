@@ -128,7 +128,7 @@ class ProfileRegistrationController extends GetxController {
       final model = UpdateProfileResponseModel.fromJson(response.data);
       try {
         if (model.status == true) {
-
+          PrefManager.setIsLogin(true);
           PrefManager.save("firstName", model.data!.user!.firstName);
           PrefManager.save("lastName", model.data!.user!.lastName);
           PrefManager.save("dob", model.data!.user!.dob);

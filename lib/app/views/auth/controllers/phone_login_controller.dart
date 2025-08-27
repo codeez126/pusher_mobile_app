@@ -8,7 +8,7 @@ import 'package:base_project/core/utils/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:dio/dio.dart' as dio;
-import 'package:get_storage/get_storage.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 
 import '../model/verify_otp_response_model.dart';
 
@@ -74,6 +74,8 @@ class PhoneLoginController extends GetxController {
   var verifyOtpModel = VerifyOtpReponseModel().obs;
   final isClickedCountryCode = false.obs;
   final RxBool loading = false.obs;
+  GoogleSignIn googleSignIn = GoogleSignIn();
+
 
   void register() async {
     final code = selectedCode.value.replaceAll("+", "");
@@ -132,6 +134,24 @@ class PhoneLoginController extends GetxController {
       Utils.toastMessage("Unable to register, please check your connection.");
     }
   }
+
+  Future<void> googleSignin() async {
+    try{
+      final account = await googleSignIn.signIn();
+
+      print("Account ID: ${account?.id}");
+      print("Account Email: ${account?.email}");
+      print("Account DisplayName: ${account?.displayName}");
+      print("Account PhotoUrl: ${account?.photoUrl}");
+
+      final auth = account?.authentication;
+      print("Auth Token: $auth");
+    }catch(s,e){
+      print("Stack Trace: $s");
+      print("Error : $e");
+    }
+  }
+
   void verifyOtp(String phone) async {
     // final code = selectedCode.value.replaceAll("+", "");
     // final phone = phoneController.value.text.trim();
@@ -158,6 +178,7 @@ class PhoneLoginController extends GetxController {
           print("Token : ${model.data?.token}");
 
           PrefManager.setToken(model.data!.token.toString());
+          PrefManager.setIsLogin(true);
           PrefManager.save("firstName", model.data!.user!.firstName);
           PrefManager.save("lastName", model.data!.user!.lastName);
           PrefManager.save("dob", model.data!.user!.dob);
@@ -185,7 +206,6 @@ class PhoneLoginController extends GetxController {
       Utils.toastMessage("Error verifying OTP: $e");
     }
   }
-
   void sendOtp() async {
     Map<String, dynamic> data = {"phone": phoneController.value.text};
 
@@ -217,6 +237,45 @@ class PhoneLoginController extends GetxController {
     }
   }
 
+
+  // static Future<GoogleSignInAccount?> signInWithGoogle() async {
+  //   Utils.toastMessage("Starting Google Sign-In...");
+  //   print("🔵 Google Sign-In: Starting sign-in process");
+  //
+  //   try {
+  //     print("🔵 Google Sign-In: Signing out previous session");
+  //     await googleSignIn.signOut();
+  //
+  //     print("🔵 Google Sign-In: Attempting to sign in");
+  //     final user = await googleSignIn.signIn();
+  //
+  //     if (user != null) {
+  //       print("✅ Google Sign-In: Successfully signed in as ${user.email}");
+  //       Utils.toastMessage("Successfully signed in as ${user.email}");
+  //
+  //       // Get authentication tokens
+  //       try {
+  //         final auth = await user.authentication;
+  //         print("✅ Google Sign-In: Authentication tokens obtained");
+  //         print("   - Access Token: ${auth.accessToken != null ? 'Available' : 'Not available'}");
+  //         print("   - ID Token: ${auth.idToken != null ? 'Available' : 'Not available'}");
+  //         print("   - Server Auth Code: ${auth.serverAuthCode != null ? 'Available' : 'Not available'}");
+  //       } catch (authError) {
+  //         print("⚠️ Google Sign-In: Failed to get authentication tokens: $authError");
+  //       }
+  //
+  //       return user;
+  //     } else {
+  //       print("❌ Google Sign-In: Sign-in was cancelled or failed");
+  //       Utils.toastMessage("Sign-in was cancelled");
+  //       return null;
+  //     }
+  //   } catch (e) {
+  //     print("❌ Google Sign-In error: $e");
+  //     Utils.toastMessage("Sign-in failed: $e");
+  //     return null;
+  //   }
+  // }
 
 
 }

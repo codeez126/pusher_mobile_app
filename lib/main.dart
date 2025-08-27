@@ -5,6 +5,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 
 import 'app/routes/app_pages.dart';
 import 'app/routes/app_routes.dart';
@@ -22,6 +23,7 @@ void main() async {
   // Initialize GetStorage
   await PrefManager.init();
   await GetStorage.init();
+  //await initializeGoogleSignIn();
   runApp(MyApp());
 }
 
@@ -49,3 +51,13 @@ class MyApp extends StatelessWidget {
     );
   }
 }
+// Future<void> initializeGoogleSignIn() async {
+//   try {
+//     await GoogleSignIn.instance.initialize(
+//       serverClientId: "1012067083699-do0mtlqea05tjqj22n18n1rnim7e733m.apps.googleusercontent.com"
+//     );
+//     print("Google Sign In initialized successfully");
+//   } catch (e) {
+//     print("Failed to initialize Google Sign In: $e");
+//   }
+// }

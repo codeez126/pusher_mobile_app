@@ -140,7 +140,7 @@ class _EditProfileViewState extends State<EditProfileView> {
                     child: GestureDetector(
                       behavior: HitTestBehavior.translucent,
                       onTap: () {
-                        Get.offAllNamed(AppRoutes.profileView);
+                        Get.back();
                         print('tapped');
                       },
                       child: Image.asset(AppImages.backImage, height: 130.h),
