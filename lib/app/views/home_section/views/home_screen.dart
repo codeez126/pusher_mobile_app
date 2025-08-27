@@ -10,7 +10,6 @@ import 'package:base_project/core/widgets/daily_course_view/custom_audio_wavefor
 import 'package:base_project/core/widgets/daily_goals_done_view/animated_progress_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 
 import '../../../../core/Constants/app_colors.dart';
