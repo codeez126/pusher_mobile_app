@@ -388,192 +388,12 @@ class _HomeScreenState extends State<HomeScreen> {
                                                 );
                                               }
                                             },
-                                            child: Container(
-                                              margin:
-                                                  const EdgeInsets.symmetric(
-                                                    horizontal: 10,
-                                                    vertical: 20,
-                                                  ),
-                                              decoration: BoxDecoration(
-                                                image: DecorationImage(
-                                                  image: AssetImage(
-                                                    AppImages
-                                                        .motivationalVideoBackgroundOne,
-                                                  ),
-                                                  fit: BoxFit.cover,
-                                                ),
-                                                color: Colors.white,
-                                                borderRadius:
-                                                    BorderRadius.circular(24),
-                                                boxShadow: [
-                                                  BoxShadow(
-                                                    color: Colors.black
-                                                        .withOpacity(0.2),
-                                                    blurRadius: 12,
-                                                    offset: const Offset(0, 6),
-                                                  ),
-                                                ],
-                                              ),
-                                              child: Container(
-                                                padding: EdgeInsets.symmetric(
-                                                  horizontal: 8,
-                                                  vertical: 10,
-                                                ),
-                                                height: Get.height,
-                                                width: Get.width,
-                                                decoration: BoxDecoration(
-                                                  borderRadius:
-                                                      BorderRadius.circular(24),
-                                                  color: Colors.black
-                                                      .withValues(alpha: 0.3),
-                                                ),
-                                                child: Column(
-                                                  mainAxisAlignment:
-                                                      MainAxisAlignment.end,
-                                                  crossAxisAlignment:
-                                                      CrossAxisAlignment.start,
-                                                  children: [
-                                                    AnimatedProgressBar(
-                                                      targetProgress: 0.78,
-                                                      backgroundColor: AppColors
-                                                          .whiteColor
-                                                          .withOpacity(0.25),
-                                                      height: 30.h,
-                                                      progressColor:
-                                                          AppColors.yellow,
-                                                      borderColor:
-                                                          AppColors.whiteColor,
-                                                    ),
-                                                    SizedBox(height: 10),
-                                                    Align(
-                                                      alignment:
-                                                          Alignment.topRight,
-                                                      child: Container(
-                                                        // width: Get.width * 0.50,
-                                                        padding:
-                                                            EdgeInsets.symmetric(
-                                                              horizontal: 12,
-                                                              vertical: 8,
-                                                            ),
-                                                        decoration: BoxDecoration(
-                                                          color: Colors.white
-                                                              .withValues(
-                                                                alpha: 0.2,
-                                                              ),
-                                                          borderRadius:
-                                                              BorderRadius.circular(
-                                                                50,
-                                                              ),
-                                                          border: Border.all(
-                                                            color: Colors.white,
-                                                            width: 1,
-                                                          ),
-                                                        ),
-                                                        child: Row(
-                                                          mainAxisSize:
-                                                              MainAxisSize.min,
-                                                          spacing: 0,
-                                                          mainAxisAlignment:
-                                                              MainAxisAlignment
-                                                                  .center,
-                                                          children: [
-                                                            Text(
-                                                              "35",
-                                                              style: AppTextStyles
-                                                                  .medium
-                                                                  .copyWith(
-                                                                    fontSize:
-                                                                        16,
-                                                                    fontWeight:
-                                                                        FontWeight
-                                                                            .w700,
-                                                                    color:
-                                                                        Colors
-                                                                            .white,
-                                                                  ),
-                                                            ),
-                                                            Image.asset(
-                                                              "assets/images/point.png",
-                                                              width: 35,
-                                                              height: 35,
-                                                            ),
-                                                          ],
-                                                        ),
-                                                      ),
-                                                    ),
-                                                    Spacer(),
-                                                    Text(
-                                                      "“Nothing Will Stop Me”",
-                                                      style: AppTextStyles
-                                                          .largew600
-                                                          .copyWith(
-                                                            color: Colors.white,
-                                                          ),
-                                                    ),
-                                                    Container(
-                                                      padding: EdgeInsets.all(
-                                                        5,
-                                                      ),
-                                                      decoration: BoxDecoration(
-                                                        borderRadius:
-                                                            BorderRadius.circular(
-                                                              50,
-                                                            ),
-                                                        color: Colors.white
-                                                            .withValues(
-                                                              alpha: 0.25,
-                                                            ),
-                                                      ),
-                                                      child: Text(
-                                                        "By Amit Cohen",
-                                                        style: AppTextStyles
-                                                            .medium
-                                                            .copyWith(
-                                                              color:
-                                                                  Colors.white,
-                                                            ),
-                                                      ),
-                                                    ),
-
-                                                    const SizedBox(height: 10),
-                                                    Container(
-                                                      padding:
-                                                          EdgeInsets.symmetric(
-                                                            vertical: 10,
-                                                            horizontal: 5,
-                                                          ),
-                                                      decoration: BoxDecoration(
-                                                        color: Colors.white
-                                                            .withValues(
-                                                              alpha: 0.2,
-                                                            ),
-                                                        borderRadius:
-                                                            BorderRadius.circular(
-                                                              50,
-                                                            ),
-                                                        border: Border.all(
-                                                          color: Colors.white,
-                                                          width: 0.5,
-                                                        ),
-                                                      ),
-                                                      child: CustomAudioWaveformPlayer(
-                                                        isTimerEnabled: false,
-                                                        height: 50.h,
-                                                        buttonHeight: 50.h,
-                                                        buttonWidth: 50.w,
-                                                        isAudioContainerBackground:
-                                                            true,
-                                                        isBackgroundContainerEnabled:
-                                                            false,
-                                                        backgroundColor:
-                                                            Colors.transparent,
-                                                      ),
-                                                    ),
-                                                    // const SizedBox(height: 20),
-                                                  ],
-                                                ),
-                                              ),
-                                            ),
+                                            child:
+                                                index == 1
+                                                    ? DailyMotivation()
+                                                    : index == 0
+                                                    ? DailyTask()
+                                                    : DailyPusher(),
                                           ),
                                         );
                                       },
@@ -716,6 +536,309 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
               ),
             ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class DailyMotivation extends StatelessWidget {
+  const DailyMotivation({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 20),
+      decoration: BoxDecoration(
+        image: DecorationImage(
+          image: AssetImage(AppImages.motivationalVideoBackgroundOne),
+          fit: BoxFit.cover,
+        ),
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(24),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withOpacity(0.2),
+            blurRadius: 12,
+            offset: const Offset(0, 6),
+          ),
+        ],
+      ),
+      child: Container(
+        padding: EdgeInsets.symmetric(horizontal: 8, vertical: 10),
+        height: Get.height,
+        width: Get.width,
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(24),
+          color: Colors.black.withValues(alpha: 0.3),
+        ),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.end,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            AnimatedProgressBar(
+              targetProgress: 0.78,
+              backgroundColor: AppColors.whiteColor.withOpacity(0.25),
+              height: 30.h,
+              progressColor: AppColors.yellow,
+              borderColor: AppColors.whiteColor,
+            ),
+            SizedBox(height: 10),
+            Align(
+              alignment: Alignment.topRight,
+              child: Container(
+                // width: Get.width * 0.50,
+                padding: EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+                decoration: BoxDecoration(
+                  color: Colors.white.withValues(alpha: 0.2),
+                  borderRadius: BorderRadius.circular(50),
+                  border: Border.all(color: Colors.white, width: 1),
+                ),
+                child: Row(
+                  mainAxisSize: MainAxisSize.min,
+                  spacing: 0,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      "35",
+                      style: AppTextStyles.medium.copyWith(
+                        fontSize: 16,
+                        fontWeight: FontWeight.w700,
+                        color: Colors.white,
+                      ),
+                    ),
+                    Image.asset(
+                      "assets/images/point.png",
+                      width: 35,
+                      height: 35,
+                    ),
+                  ],
+                ),
+              ),
+            ),
+            Spacer(),
+            Text(
+              "“Nothing Will Stop Me”",
+              style: AppTextStyles.largew600.copyWith(color: Colors.white),
+            ),
+            Container(
+              padding: EdgeInsets.all(5),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(50),
+                color: Colors.white.withValues(alpha: 0.25),
+              ),
+              child: Text(
+                "By Amit Cohen",
+                style: AppTextStyles.medium.copyWith(color: Colors.white),
+              ),
+            ),
+
+            const SizedBox(height: 10),
+            Container(
+              padding: EdgeInsets.symmetric(vertical: 10, horizontal: 5),
+              decoration: BoxDecoration(
+                color: Colors.white.withValues(alpha: 0.2),
+                borderRadius: BorderRadius.circular(50),
+                border: Border.all(color: Colors.white, width: 0.5),
+              ),
+              child: CustomAudioWaveformPlayer(
+                isTimerEnabled: false,
+                height: 50.h,
+                buttonHeight: 50.h,
+                buttonWidth: 50.w,
+                isAudioContainerBackground: true,
+                isBackgroundContainerEnabled: false,
+                backgroundColor: Colors.transparent,
+              ),
+            ),
+            // const SizedBox(height: 20),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class DailyTask extends StatelessWidget {
+  const DailyTask({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 20),
+      decoration: BoxDecoration(
+        color: Color(0xffcedeff),
+        borderRadius: BorderRadius.circular(24),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withOpacity(0.2),
+            blurRadius: 12,
+            offset: const Offset(0, 6),
+          ),
+        ],
+      ),
+      child: Container(
+        padding: EdgeInsets.symmetric(horizontal: 8, vertical: 10),
+        height: Get.height,
+        width: Get.width,
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(24),
+          color: Colors.black.withValues(alpha: 0.02),
+        ),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            AnimatedProgressBar(
+              targetProgress: 0,
+              backgroundColor: Color(0xffd9e5ff),
+              height: 30.h,
+              progressColor: AppColors.yellow,
+              borderColor: AppColors.whiteColor,
+            ),
+            SizedBox(height: 10),
+
+            Text(
+              "Choose One Daily Challenge From Three Possible Challenges",
+              style: AppTextStyles.largew600.copyWith(color: Colors.white),
+            ),
+
+            const SizedBox(height: 10),
+            Flexible(
+              child: Center(
+                child: Image.asset(
+                  'assets/images/numbers.png',
+                  // height: 60,
+                ),
+              ),
+            ),
+            const SizedBox(height: 10),
+            Align(
+              alignment: Alignment.bottomRight,
+              child: Container(
+                // width: Get.width * 0.50,
+                padding: EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+                decoration: BoxDecoration(
+                  color: Colors.white.withValues(alpha: 0.2),
+                  borderRadius: BorderRadius.circular(50),
+                  border: Border.all(color: Colors.white, width: 1),
+                ),
+                child: Row(
+                  mainAxisSize: MainAxisSize.min,
+                  spacing: 0,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      "35",
+                      style: AppTextStyles.medium.copyWith(
+                        fontSize: 16,
+                        fontWeight: FontWeight.w700,
+                        color: Colors.white,
+                      ),
+                    ),
+                    Image.asset(
+                      "assets/images/point.png",
+                      width: 35,
+                      height: 35,
+                    ),
+                  ],
+                ),
+              ),
+            ),
+            // const SizedBox(height: 20),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class DailyPusher extends StatelessWidget {
+  const DailyPusher({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 20),
+      decoration: BoxDecoration(
+        color: Color(0xff60A9FE),
+        borderRadius: BorderRadius.circular(24),
+        image: DecorationImage(
+          image: AssetImage('assets/images/bigstart.png'),
+          fit: BoxFit.cover,
+        ),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withOpacity(0.2),
+            blurRadius: 12,
+            offset: const Offset(0, 6),
+          ),
+        ],
+      ),
+      child: Container(
+        padding: EdgeInsets.symmetric(horizontal: 8, vertical: 10),
+        height: Get.height,
+        width: Get.width,
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(24),
+          color: Colors.black.withValues(alpha: 0.02),
+        ),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            AnimatedProgressBar(
+              textColor: Colors.black,
+              targetProgress: 0.35,
+              backgroundColor: Color(0xff83baf9),
+              height: 30.h,
+              progressColor: Colors.white,
+              borderColor: AppColors.whiteColor,
+            ),
+            SizedBox(height: 10),
+            Align(
+              alignment: Alignment.topLeft,
+              child: Container(
+                // width: Get.width * 0.50,
+                padding: EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+                decoration: BoxDecoration(
+                  color: Colors.white.withValues(alpha: 0.2),
+                  borderRadius: BorderRadius.circular(50),
+                  border: Border.all(color: Colors.white, width: 1),
+                ),
+                child: Row(
+                  mainAxisSize: MainAxisSize.min,
+                  spacing: 0,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      "35",
+                      style: AppTextStyles.medium.copyWith(
+                        fontSize: 16,
+                        fontWeight: FontWeight.w700,
+                        color: Colors.white,
+                      ),
+                    ),
+                    Image.asset(
+                      "assets/images/point.png",
+                      width: 35,
+                      height: 35,
+                    ),
+                  ],
+                ),
+              ),
+            ),
+
+            Spacer(),
+            Center(
+              child: Image.asset(
+                'assets/images/pusher.png',
+                // height: 60,
+              ),
+            ),
+
+            // const SizedBox(height: 20),
           ],
         ),
       ),
