@@ -1,4 +1,4 @@
-import 'package:base_project/app/views/home_section/controllers/home_controller.dart';
+import 'package:base_project/app/views/home_section/controller/home_controller.dart';
 import 'package:base_project/core/constants/app_colors.dart';
 import 'package:base_project/core/utils/text_styles.dart';
 import 'package:flutter/material.dart';
