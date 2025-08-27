@@ -51,6 +51,7 @@ class _CustomAudioWaveformPlayerState extends State<CustomAudioWaveformPlayer>
   late AnimationController _animationController;
   bool isPlaying = false;
 
+
   Duration currentPosition = Duration.zero;
   double progress = 0.0;
 

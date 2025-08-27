@@ -1,5 +1,5 @@
 import 'package:base_project/app/routes/app_routes.dart';
-import 'package:base_project/app/views/registration_section/controller/profile_registration_controller.dart';
+import 'package:base_project/app/views/auth/controllers/profile_registration_controller.dart';
 import 'package:base_project/core/constants/app_fonts_and_styles.dart';
 import 'package:base_project/core/constants/app_images.dart';
 import 'package:base_project/core/widgets/custom_app_button.dart';
@@ -21,13 +21,6 @@ class ProfileRegistrationView extends StatefulWidget {
 class _ProfileRegistrationViewState extends State<ProfileRegistrationView> {
 
   final ProfileRegistrationController profileRegistrationController = Get.put(ProfileRegistrationController());
-  @override
-  void dispose() {
-    profileRegistrationController.firstNameController.dispose();
-    profileRegistrationController.lastNameController.dispose();
-    profileRegistrationController.emailController.dispose();
-    super.dispose();
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -58,16 +51,17 @@ class _ProfileRegistrationViewState extends State<ProfileRegistrationView> {
                   children: [
                     ///===========================================Names Fields==============================
                     Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 15.w),                      child: Row(
+                      padding: EdgeInsets.symmetric(horizontal: 15.w),
+                      child: Row(
                         children: [
                           CustomNameContainer(
-                            controller: profileRegistrationController.firstNameController,
+                            controller: profileRegistrationController.firstNameController.value,
                             textSection: "First Name".tr,
                             hintText: 'Or'.tr,
                           ),
                           16.horizontalSpace,
                           CustomNameContainer(
-                            controller: profileRegistrationController.lastNameController,
+                            controller: profileRegistrationController.lastNameController.value,
                             textSection: 'Last Name'.tr,
                             hintText: 'Hajim'.tr,
                           ),
@@ -78,12 +72,13 @@ class _ProfileRegistrationViewState extends State<ProfileRegistrationView> {
                     ///====================================DOB=========================================================
                     DateOfBirthContainer(
                       borderColor: AppColors.whiteColor,
+                      controller: profileRegistrationController,
                     ),
                     24.verticalSpace,
                     ///===============================Gender selection======================================
                     Padding(
                       padding: EdgeInsets.symmetric(horizontal: 15.w),
-                      child: Text('Gender', style: AppStyles.poppins14w700white),
+                      child: Text('Gender'.tr, style: AppStyles.poppins14w700white),
                     ),
                     12.verticalSpace,
                     Padding(
@@ -93,10 +88,13 @@ class _ProfileRegistrationViewState extends State<ProfileRegistrationView> {
                           GenderSelectionContainerWidget(
                             onTap: () {
                               setState(() {
-                                profileRegistrationController.selectedGender = 'Male'.tr;
+                                profileRegistrationController.gender = 'Male'.tr;
+                                profileRegistrationController.selectedGender=1;
+                                print(profileRegistrationController.gender);
+                                print(profileRegistrationController.selectedGender);
                               });
                             },
-                            selectedGender: profileRegistrationController.selectedGender,
+                            selectedGender: profileRegistrationController.gender,
                             icon: Icons.male,
                             genderName: 'Male'.tr,
                           ),
@@ -104,10 +102,13 @@ class _ProfileRegistrationViewState extends State<ProfileRegistrationView> {
                           GenderSelectionContainerWidget(
                             onTap: () {
                               setState(() {
-                                profileRegistrationController.selectedGender = 'Female'.tr;
+                                profileRegistrationController.gender = 'Female'.tr;
+                                profileRegistrationController.selectedGender=2;
+                                print(profileRegistrationController.gender);
+                                print(profileRegistrationController.selectedGender);
                               });
                             },
-                            selectedGender: profileRegistrationController.selectedGender,
+                            selectedGender: profileRegistrationController.gender,
                             icon: Icons.female,
                             genderName: 'Female'.tr,
                           ),
@@ -115,10 +116,13 @@ class _ProfileRegistrationViewState extends State<ProfileRegistrationView> {
                           GenderSelectionContainerWidget(
                             onTap: () {
                               setState(() {
-                                profileRegistrationController.selectedGender = 'Other'.tr;
+                                profileRegistrationController.gender = 'Other'.tr;
+                                profileRegistrationController.selectedGender=3;
+                                print(profileRegistrationController.gender);
+                                print(profileRegistrationController.selectedGender);
                               });
                             },
-                            selectedGender: profileRegistrationController.selectedGender,
+                            selectedGender: profileRegistrationController.gender,
                             isIcon: false,
                             genderName: 'Other'.tr,
                           ),
@@ -126,7 +130,6 @@ class _ProfileRegistrationViewState extends State<ProfileRegistrationView> {
                       ),
                     ),
                     24.verticalSpace,
-
                     ///=====================================Email check Box========================================
                     Padding(
                       padding: EdgeInsets.symmetric(horizontal: 15.w),
@@ -173,7 +176,10 @@ class _ProfileRegistrationViewState extends State<ProfileRegistrationView> {
                           Expanded(
                             child: GestureDetector(
                               onTap: () {
-                                signUp();
+                                print(profileRegistrationController.agreeToTerms);
+                                setState(() {
+                                  profileRegistrationController.agreeToTerms = !profileRegistrationController.agreeToTerms;
+                                });
                               },
                               child: Text(
                                 'I\'ve read this text & you want to receive promotional emails & messages from Pusher'.tr,
@@ -189,7 +195,8 @@ class _ProfileRegistrationViewState extends State<ProfileRegistrationView> {
                       padding: EdgeInsets.symmetric(horizontal: 15.w),
                       child: CustomAppButton(
                         onTap: () {
-                          Get.toNamed(AppRoutes.improvementView);
+                          //Get.toNamed(AppRoutes.improvementView);
+                          signUp();
                         },
                         text: 'Sign Up'.tr,
                         textStyle: AppStyles.poppins16w700darkGrey2,
@@ -220,9 +227,6 @@ class _ProfileRegistrationViewState extends State<ProfileRegistrationView> {
   }
 
   void signUp() {
-    print(profileRegistrationController.agreeToTerms);
-    setState(() {
-      profileRegistrationController.agreeToTerms = !profileRegistrationController.agreeToTerms;
-    });
+    profileRegistrationController.updateProfile();
   }
 }

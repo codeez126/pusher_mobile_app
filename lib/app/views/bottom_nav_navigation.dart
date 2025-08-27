@@ -24,13 +24,11 @@ class _BottomNavNavigationState extends State<BottomNavNavigation> {
   int selectedIndex = 1;
 
   final List<Widget> screens = [
-    //WellDoneView(),
     ProfileView(),
     // DailyGoalsView(),
     HomeScreen(),
     CoursesView(),
     VouchersAndCoinView(),
-    //PusherChallengeView(),
   ];
 
   @override

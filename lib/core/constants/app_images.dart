@@ -19,6 +19,8 @@ class AppImages {
   static const String splashBackground = 'assets/images/backgrouns_splash.png';
   static const String onboardingBackground = 'assets/images/onboarding_background.png';
   static const String onboarding2Background = 'assets/images/onboarding_2_background.png';
+  static const String googleImage = 'assets/images/googleImage.png';
+  static const String appleImage = 'assets/images/apple 1.png';
 
   //==================improvement View=======================
   static const String social= "assets/images/improvement_view/social.png";

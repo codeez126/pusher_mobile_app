@@ -1,5 +1,18 @@
 class ApiEndpoints {
-  // static String get baseUrl => dotenv.env['BASEURL'] ?? '';
-  static String baseUrl = "https://jsonplaceholder.typicode.com/";
-  static String getData = "todos"; // Notice the getter
+
+  static const String baseUrl= "https://pusher.m2lgx.com/api/";
+  static const String apiRegisterUrl = "${baseUrl}register";
+  static const String apiRegisterEndPoint = "register";
+
+  static const String apiSendOtpUrl = "${baseUrl}send-otp";
+  static const String apiSendOtpEndPoint = "send-otp";
+
+  static const String apiVerifyOtpUrl = "${baseUrl}verify-otp";
+  static const String apiVerifyOtpEndPoint = "verify-otp";
+
+  static const String apiUpdateProfileUrl = "${baseUrl}update-profile";
+  static const String apiUpdateProfileEndPoint = "update-profile";
+
+
+
 }

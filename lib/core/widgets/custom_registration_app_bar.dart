@@ -96,7 +96,7 @@ class CustomRegistrationAppBar extends StatelessWidget {
                     Row(
                       children: [
                         Text(
-                          'What Would You Like To\nImprove?',
+                          'What Would You Like To\nImprove?'.tr,
                           textAlign: TextAlign.center,
                           style: AppStyles.urbanistBold20White900,
                         ),
@@ -110,11 +110,11 @@ class CustomRegistrationAppBar extends StatelessWidget {
                 child: Column(
                   children: [
                     Text(
-                      "Setting Personal Goals",
+                      "Setting Personal Goals".tr,
                       style: AppStyles.urbanistBold28White900,
                     ),
                     Text(
-                      'Based on your selection, pick the \ngoals you want to achieve for \npersonal growth.',
+                      'Based on your selection, pick the \ngoals you want to achieve for \npersonal growth.'.tr,
                       textAlign: TextAlign.center,
                       style: AppStyles.poppins12w700white,
                     ),
@@ -166,7 +166,7 @@ class CustomRegistrationAppBar extends StatelessWidget {
                   ),
                   8.verticalSpace,
                   Text(
-                    'Add a profile image',
+                    'Add a profile image'.tr,
                     style: AppStyles.poppins12w700white,
                   ),
                 ],

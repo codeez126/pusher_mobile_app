@@ -58,5 +58,6 @@ class AppSvgs {
   static const String  arrowDownAnimateSvg="assets/icons/arrow animation.svg";
   static const String  lockAnimateSvg="assets/icons/lock animation.svg";
   static const String  circleTickSvg="assets/icons/checkmark-circle-01.svg";
+  static const String  arrowDownSvg="assets/icons/downArrowICONS.svg";
 
 }

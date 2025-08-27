@@ -161,9 +161,10 @@ class DailyCourseView extends StatelessWidget {
                                           CustomAudioWaveformPlayer(
                                             width: 320,
                                             height: 60,
-                                            backgroundColor: AppColors.whiteColor.withOpacity(0.35),
+                                            backgroundColor: AppColors.whiteColor.withOpacity(0.22),
                                             playedWaveColor: Colors.white,
                                             isTimerEnabled: false,
+                                            totalDuration: Duration(minutes: 2, seconds: 20),
                                             //unPlayedWaveColor: Colors.white60,
                                             ///progress: 0.7,
                                           ),

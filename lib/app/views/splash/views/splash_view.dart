@@ -29,13 +29,6 @@ class SplashView extends StatelessWidget {
           children: [
             SvgPicture.asset(AppSvgs.logoSvg, height: 50.h),
             100.verticalSpace,
-            // Text(
-            //   "Title here",
-            //   style: GoogleFonts.poppins(
-            //     fontSize: 30.sp,
-            //     fontWeight: FontWeight.w500,
-            //   ),
-            // ),
           ],
         ),
       ),

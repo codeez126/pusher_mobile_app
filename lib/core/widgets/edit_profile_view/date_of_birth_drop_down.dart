@@ -1,12 +1,18 @@
+import 'dart:math' as math;
+
+import 'package:base_project/core/constants/app_svgs.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 
+import '../../../app/views/auth/controllers/profile_registration_controller.dart';
 import '../../Constants/app_colors.dart';
 import '../../constants/app_fonts_and_styles.dart';
 
 class DateOfBirthDropDown extends StatelessWidget {
-  DateOfBirthDropDown({super.key,
+  const DateOfBirthDropDown({
+    super.key,
     required this.label,
     required this.selectedValue,
     required this.isOpen,
@@ -21,8 +27,6 @@ class DateOfBirthDropDown extends StatelessWidget {
   final VoidCallback onTap;
   final List<String> items;
   final ValueChanged<String> onSelect;
-
-  bool boxClosed = true;
 
   @override
   Widget build(BuildContext context) {
@@ -43,60 +47,52 @@ class DateOfBirthDropDown extends StatelessWidget {
           GestureDetector(
             onTap: onTap,
             child: Container(
-              padding: EdgeInsets.symmetric(
-                vertical: 15.sp,
-              ),
+              padding: EdgeInsets.symmetric(vertical: 15.sp),
               decoration: BoxDecoration(
                 color: AppColors.whiteColor.withOpacity(0.80),
                 borderRadius: BorderRadius.vertical(
                   top: Radius.circular(10.sp),
-                  bottom: isOpen
-                      ? Radius.circular(0)
-                      : (boxClosed
-                      ? Radius.circular(10.sp)
-                      : Radius.circular(0.sp)),
+                  bottom: isOpen ? Radius.circular(0) : Radius.circular(10.sp),
                 ),
               ),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Text(selectedValue, style: AppStyles.poppins16w700darkGrey2),
-                  Icon(isOpen ? Icons.arrow_drop_up : Icons.arrow_drop_down)
+                  Text(selectedValue.isEmpty ? label : selectedValue,
+                      style: AppStyles.poppins16w700darkGrey2),
+                  isOpen?Transform.rotate(
+                      angle: math.pi,
+                      child: SvgPicture.asset(AppSvgs.arrowDownSvg)):SvgPicture.asset(AppSvgs.arrowDownSvg),
                 ],
               ),
             ),
           ),
           ClipRRect(
-              borderRadius: BorderRadius.vertical(bottom: Radius.circular(10.sp)),
-              child: AnimatedContainer(
-                duration: Duration(milliseconds: 1300),
-                curve: Curves.easeInOut,
-                height: isOpen ? 150.h : 00,
-                onEnd: () {
-                  boxClosed = !isOpen;
-                },
-                //margin: EdgeInsets.only(top: 8.h),
-                color: AppColors.whiteColor.withOpacity(0.8),
-                child: SingleChildScrollView(
-                  child: Column(
-                    children: items.map((item) {
-                      return InkWell(
-                        onTap: () => onSelect(item),
-                        child: Container(
-                          width: double.infinity,
-                          alignment: Alignment.center,
-                          padding: EdgeInsets.symmetric(vertical: 8.h, horizontal: 12.w),
-                          child: Text(
-                            item,
-                            style: AppStyles.poppins14w400darkGrey2,
-                          ),
-                        ),
-                      );
-                    }).toList(),
-                  ),
+            borderRadius:
+            BorderRadius.vertical(bottom: Radius.circular(10.sp)),
+            child: AnimatedContainer(
+              duration: const Duration(milliseconds: 300),
+              curve: Curves.easeInOut,
+              height: isOpen ? 150.h : 0,
+              color: AppColors.whiteColor.withOpacity(0.8),
+              child: SingleChildScrollView(
+                child: Column(
+                  children: items.map((item) {
+                    return InkWell(
+                      onTap: () => onSelect(item),
+                      child: Container(
+                        width: double.infinity,
+                        alignment: Alignment.center,
+                        padding: EdgeInsets.symmetric(
+                            vertical: 8.h, horizontal: 12.w),
+                        child: Text(item,
+                            style: AppStyles.poppins14w400darkGrey2),
+                      ),
+                    );
+                  }).toList(),
                 ),
-              )
-
+              ),
+            ),
           ),
         ],
       ),
@@ -104,30 +100,15 @@ class DateOfBirthDropDown extends StatelessWidget {
   }
 }
 
-class DateOfBirthContainer extends StatefulWidget {
-  DateOfBirthContainer({
+class DateOfBirthContainer extends StatelessWidget {
+  final ProfileRegistrationController controller;
+  final Color borderColor;
+
+  const DateOfBirthContainer({
     super.key,
+    required this.controller,
     this.borderColor = AppColors.lightBlue,
   });
-
-  Color borderColor;
-
-  @override
-  State<DateOfBirthContainer> createState() => _DateOfBirthContainerState();
-}
-
-class _DateOfBirthContainerState extends State<DateOfBirthContainer> {
-  bool isDropdownOpen = false;
-
-  String selectedDay = "01";
-
-  bool isMonthDropdownOpen = false;
-
-  String selectedMonth = "01";
-
-  bool isYearDropdownOpen = false;
-
-  String selectedYear = DateTime.now().year.toString();
 
   @override
   Widget build(BuildContext context) {
@@ -136,7 +117,7 @@ class _DateOfBirthContainerState extends State<DateOfBirthContainer> {
       padding: EdgeInsets.symmetric(horizontal: 5.sp, vertical: 10.sp),
       decoration: BoxDecoration(
         border: Border.all(
-          color: widget.borderColor,//AppColors.lightBlue,
+          color: borderColor,
           width: 1.w,
         ),
         color: AppColors.whiteColor.withOpacity(0.40),
@@ -147,64 +128,64 @@ class _DateOfBirthContainerState extends State<DateOfBirthContainer> {
         children: [
           Padding(
             padding: EdgeInsets.only(left: 10.sp),
-            child: Text("Date Of Birth".tr, style: AppStyles.poppins14w700darkGrey2),
+            child: Text("Date Of Birth".tr,
+                style: AppStyles.poppins14w700darkGrey2),
           ),
           10.verticalSpace,
           Row(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Expanded(
-                child: DateOfBirthDropDown(
+                child: Obx(() => DateOfBirthDropDown(
                   label: "Days".tr,
-                  selectedValue: selectedDay,
-                  isOpen: isDropdownOpen,
-                  onTap: () => setState(() {
-                    isDropdownOpen = !isDropdownOpen;
-                  }),
-                  items: List.generate(31, (i) => (i + 1).toString().padLeft(2, '0')),
-                  onSelect: (val) => setState(() {
-                    selectedDay = val;
-                    isDropdownOpen = false;
-                    printDOB();
-                  }),
-                ),
+                  selectedValue: controller.selectedDay.value,
+                  isOpen: controller.isDayDropdownOpen.value,
+                  onTap: () =>
+                      controller.isDayDropdownOpen.toggle(),
+                  items: List.generate(
+                      31, (i) => (i + 1).toString().padLeft(2, '0')),
+                  onSelect: (val) {
+                    controller.selectedDay.value = val;
+                    controller.isDayDropdownOpen.value = false;
+                    controller.saveDOB();
+                  },
+                )),
               ),
               10.horizontalSpace,
               Expanded(
-                child: DateOfBirthDropDown(
+                child: Obx(() => DateOfBirthDropDown(
                   label: "Months".tr,
-                  selectedValue: selectedMonth,
-                  isOpen: isMonthDropdownOpen,
-                  onTap: () => setState(() {
-                    isMonthDropdownOpen = !isMonthDropdownOpen;
-                  }),
-                  items: List.generate(12, (i) => (i + 1).toString().padLeft(2, '0')),
-                  onSelect: (val) => setState(() {
-                    selectedMonth = val;
-                    isMonthDropdownOpen = false;
-                    printDOB();
-                  }),
-                ),
+                  selectedValue: controller.selectedMonth.value,
+                  isOpen: controller.isMonthDropdownOpen.value,
+                  onTap: () =>
+                      controller.isMonthDropdownOpen.toggle(),
+                  items: List.generate(
+                      12, (i) => (i + 1).toString().padLeft(2, '0')),
+                  onSelect: (val) {
+                    controller.selectedMonth.value = val;
+                    controller.isMonthDropdownOpen.value = false;
+                    controller.saveDOB();
+                  },
+                )),
               ),
               10.horizontalSpace,
               Expanded(
-                child: DateOfBirthDropDown(
+                child: Obx(() => DateOfBirthDropDown(
                   label: "Years".tr,
-                  selectedValue: selectedYear,
-                  isOpen: isYearDropdownOpen,
-                  onTap: () => setState(() {
-                    isYearDropdownOpen = !isYearDropdownOpen;
-                  }),
+                  selectedValue: controller.selectedYear.value,
+                  isOpen: controller.isYearDropdownOpen.value,
+                  onTap: () =>
+                      controller.isYearDropdownOpen.toggle(),
                   items: List.generate(
                     DateTime.now().year - 1900 + 1,
                         (i) => (DateTime.now().year - i).toString(),
                   ),
-                  onSelect: (val) => setState(() {
-                    selectedYear = val;
-                    isYearDropdownOpen = false;
-                    printDOB();
-                  }),
-                ),
+                  onSelect: (val) {
+                    controller.selectedYear.value = val;
+                    controller.isYearDropdownOpen.value = false;
+                    controller.saveDOB();
+                  },
+                )),
               ),
             ],
           ),
@@ -212,9 +193,11 @@ class _DateOfBirthContainerState extends State<DateOfBirthContainer> {
       ),
     );
   }
+
   void printDOB() {
-    String dob = "$selectedDay/$selectedMonth/$selectedYear";
+    final dob =
+        "${controller.selectedYear.value}-${controller.selectedMonth.value.padLeft(2, '0')}-${controller.selectedDay.value.padLeft(2, '0')}";
     print("Selected Date of Birth: $dob");
   }
-
 }
+
