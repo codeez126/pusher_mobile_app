@@ -2,6 +2,7 @@ import 'dart:io';
 import 'package:base_project/core/constants/app_fonts_and_styles.dart';
 import 'package:base_project/core/utils/text_styles.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:image_cropper/image_cropper.dart';
 import 'package:image_picker/image_picker.dart';
 import '../Constants/app_colors.dart';
@@ -97,19 +98,18 @@ class _ImagePickerWidgetState extends State<ImagePickerWidget> {
                   ),
                   const SizedBox(height: 8),
                   Text(
-                    'Add Photo',
+                    'Add Photo'.tr,
                     style: TextStyle(color: Colors.grey[600], fontSize: 14),
                   ),
                 ],
               ),
     );
   }
-
   void showImagePickerOptions() {
     CustomBottomSheet.show(
       backgroundColor: AppColors.darkGrey2.withOpacity(0.60),
       context: context,
-      title: widget.title ?? 'Select Image',
+      title: widget.title ?? 'Select Image'.tr,
       child: Container(
         padding: EdgeInsets.all(16),
         decoration: BoxDecoration(
@@ -119,14 +119,14 @@ class _ImagePickerWidgetState extends State<ImagePickerWidget> {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            Text("Choose an option", style: AppStyles.poppins16w700white),
+            Text("Choose an option".tr, style: AppStyles.poppins16w700white),
             const SizedBox(height: 20),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 _buildPickerOption(
                   context,
-                  "Camera",
+                  "Camera".tr,
                   Icons.camera_alt,
                   () async {
                     pickImage(ImageSource.camera);
@@ -134,7 +134,7 @@ class _ImagePickerWidgetState extends State<ImagePickerWidget> {
                 ),
                 _buildPickerOption(
                   context,
-                  "Gallery",
+                  "Gallery".tr,
                   Icons.photo_library,
                   () async {
                     pickImage(ImageSource.gallery);

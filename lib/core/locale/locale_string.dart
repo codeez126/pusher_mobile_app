@@ -178,6 +178,8 @@ class LocaleString extends Translations {
       "Edit Profile":"Edit Profile",
       "Full Name":"Full Name",
       "Or Haim":"Or Haim",
+      "Enter full name":"Enter full name",
+      "Update Profile":"Update Profile",
 
       //=====================================================Languages view==============================================
       "Languages":"Languages",
@@ -214,6 +216,38 @@ class LocaleString extends Translations {
       "Complete The Challenge And Win ":"Complete The Challenge And Win ",
       "Win ":"Win ",
       "Challenges":"Challenges",
+
+      //========================================================ImagePicker==================================================
+      'Add Photo':'Add Photo',
+      'Select Image':'Select Image',
+      "Choose an option":"Choose an option",
+      "Camera":"Camera",
+      "Gallery":"Gallery",
+
+      //==============================================================phone login controller========================================
+      "Otp verification failed":"Otp verification failed",
+      "Unable to verify OTP, please try again":"Unable to verify OTP, please try again",
+      "Error verifying OTP":"Error verifying OTP",
+      "Otp Sent Successfully":"Otp Sent Successfully",
+      "Failed to send OTP":"Failed to send OTP",
+      "Error parsing OTP response":"Error parsing OTP response",
+      "No response while sending OTP":"No response while sending OTP",
+      'Email Not Found':'Email Not Found',
+      "Registration successful!":"Registration successful!",
+      "Registration failed":"Registration failed",
+      "Registration failed. Please try again.":"Registration failed. Please try again.",
+      "Unable to register, please check your connection.":"Unable to register, please check your connection.",
+      "Sign-in configuration error. Please try again.":"Sign-in configuration error. Please try again.",
+      "Network error. Please check your connection.":"Network error. Please check your connection.",
+      "Sign-in cancelled.":"Sign-in cancelled.",
+      "Sign-in failed. Please try again.":"Sign-in failed. Please try again.",
+      "An unexpected error occurred. Please try again.":"An unexpected error occurred. Please try again.",
+
+      //============================================profile registration controller========================================================
+      'Enter Your First Name':'Enter Your First Name',
+      'Enter Your Last Name':'Enter Your Last Name',
+      "Update failed":"Update failed",
+      "Unable to Update, please check your connection.":"Unable to Update, please check your connection.",
 
 
 

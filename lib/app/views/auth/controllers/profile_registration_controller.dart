@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:base_project/app/routes/app_routes.dart';
 import 'package:base_project/app/views/auth/model/update_profile_response_model.dart';
 import 'package:base_project/core/Managers/PrefManager.dart';
@@ -17,6 +19,8 @@ class ProfileRegistrationController extends GetxController {
   final emailController = TextEditingController().obs;
   final NetworkManager networkManager = NetworkManager();
   var  profileModel = UpdateProfileResponseModel().obs;
+
+
   int selectedGender = 1;
   String gender = 'Male';
   bool agreeToTerms = false;
@@ -39,11 +43,11 @@ class ProfileRegistrationController extends GetxController {
 
   Future<void> updateProfile() async {
     if (firstNameController.value.text.isEmpty) {
-      Utils.toastMessage('Enter Your First Name');
+      Utils.toastMessage('Enter Your First Name'.tr);
       return;
     }
     if (lastNameController.value.text.isEmpty) {
-      Utils.toastMessage('Enter Your Last Name');
+      Utils.toastMessage('Enter Your Last Name'.tr);
       return;
     }
 
@@ -81,7 +85,7 @@ class ProfileRegistrationController extends GetxController {
           Get.toNamed(AppRoutes.improvementView);
         } else {
           print("Failed: ${model.message}");
-          Utils.toastMessage(model.message ?? "Update failed");
+          Utils.toastMessage(model.message ?? "Update failed".tr);
         }
       } catch (stackTrace, error) {
         print("Error : $stackTrace");
@@ -90,7 +94,7 @@ class ProfileRegistrationController extends GetxController {
       }
     } else {
       print("Unsuccessful Update: No response");
-      Utils.toastMessage("Unable to Update, please check your connection.");
+      Utils.toastMessage("Unable to Update, please check your connection.".tr);
     }
   }
   Future<void> updateProfileEditView({
@@ -100,11 +104,11 @@ class ProfileRegistrationController extends GetxController {
   }) async {
 
     if (firstName.isEmpty) {
-      Utils.toastMessage('Enter Your First Name');
+      Utils.toastMessage('Enter Your First Name'.tr);
       return;
     }
     if (lastName.isEmpty) {
-      Utils.toastMessage('Enter Your Last Name');
+      Utils.toastMessage('Enter Your Last Name'.tr);
       return;
     }
     String dob =
@@ -137,13 +141,13 @@ class ProfileRegistrationController extends GetxController {
 
           Utils.toastMessage("${model.message}");
         } else {
-          Utils.toastMessage(model.message ?? "Update failed");
+          Utils.toastMessage(model.message ?? "Update failed".tr);
         }
       } catch (e) {
         print("Error updating profile: $e");
       }
     } else {
-      Utils.toastMessage("Unable to Update, please check your connection.");
+      Utils.toastMessage("Unable to Update, please check your connection.".tr);
     }
   }
 

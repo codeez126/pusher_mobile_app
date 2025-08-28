@@ -25,11 +25,11 @@ class ProfileRegistrationView extends StatefulWidget {
 }
 
 class _ProfileRegistrationViewState extends State<ProfileRegistrationView> {
-
-  final ImagePickerWidget imagePickerWidget =ImagePickerWidget();
-  final ProfileRegistrationController profileRegistrationController = Get.put(ProfileRegistrationController());
+  final ImagePickerWidget imagePickerWidget = ImagePickerWidget();
+  final ProfileRegistrationController profileRegistrationController = Get.put(
+    ProfileRegistrationController(),
+  );
   File? profileImage;
-
 
   @override
   Widget build(BuildContext context) {
@@ -48,12 +48,6 @@ class _ProfileRegistrationViewState extends State<ProfileRegistrationView> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                // CustomRegistrationAppBar(
-                //   isTittleAndSubtitle: true,
-                //   title: "My Profile".tr,
-                //   subtitle: '',
-                //   isProfile: true,
-                // ),
                 Stack(
                   alignment: Alignment.topCenter,
                   children: [
@@ -62,18 +56,30 @@ class _ProfileRegistrationViewState extends State<ProfileRegistrationView> {
                       height: 170.h,
                       width: double.infinity,
                       decoration: BoxDecoration(
-                        borderRadius: BorderRadius.vertical(bottom: Radius.circular(50.sp)),
+                        borderRadius: BorderRadius.vertical(
+                          bottom: Radius.circular(50.sp),
+                        ),
                         color: AppColors.whiteColor.withOpacity(0.30),
                       ),
                       child: Stack(
                         alignment: Alignment.center,
                         children: [
                           Positioned(
+                            top: 40,
+                            child: Text(
+                              "My Profile".tr,
+                              style: AppStyles.urbanistBold28White900,
+                            ),
+                          ),
+                          Positioned(
                             left: 0,
                             bottom: 0,
                             child: InkWell(
                               onTap: () => Get.back(),
-                              child: Image.asset(AppImages.imageBackIcon, height: 120.h),
+                              child: Image.asset(
+                                AppImages.imageBackIcon,
+                                height: 120.h,
+                              ),
                             ),
                           ),
                         ],
@@ -104,22 +110,25 @@ class _ProfileRegistrationViewState extends State<ProfileRegistrationView> {
                                     ),
                                   ),
                                   child: ClipOval(
-                                    child: profileImage != null
-                                        ? Image.file(
-                                      profileImage!,
-                                      fit: BoxFit.cover,
-                                      width: 100.w,
-                                      height: 100.w,
-                                    )
-                                        : Container(
-                                      color: Colors.white.withOpacity(0.3),
-                                      child: Center(
-                                        child: SvgPicture.asset(
-                                          AppSvgs.cameraSvg,
-                                          height: 30.h,
-                                        ),
-                                      ),
-                                    ),
+                                    child:
+                                        profileImage != null
+                                            ? Image.file(
+                                              profileImage!,
+                                              fit: BoxFit.cover,
+                                              width: 100.w,
+                                              height: 100.w,
+                                            )
+                                            : Container(
+                                              color: Colors.white.withOpacity(
+                                                0.3,
+                                              ),
+                                              child: Center(
+                                                child: SvgPicture.asset(
+                                                  AppSvgs.cameraSvg,
+                                                  height: 80.h,
+                                                ),
+                                              ),
+                                            ),
                                   ),
                                 ),
                               ),
@@ -127,12 +136,17 @@ class _ProfileRegistrationViewState extends State<ProfileRegistrationView> {
                                 bottom: -5,
                                 right: -5,
                                 child: InkWell(
-                                  onTap: () {
-                                    print("Image picker tapped");
-                                  },
-                                  child: Image.asset(
-                                    AppImages.addPng,
-                                    height: 44.h,
+                                  onTap: () {},
+                                  child: Container(
+                                    alignment: Alignment.center,
+                                    padding: EdgeInsets.all(6.w),
+                                    decoration: const BoxDecoration(
+                                      shape: BoxShape.circle,
+                                    ),
+                                    child: Image.asset(
+                                      AppImages.addPng,
+                                      height: 35.h,
+                                    ),
                                   ),
                                 ),
                               ),
@@ -145,7 +159,7 @@ class _ProfileRegistrationViewState extends State<ProfileRegistrationView> {
                           ),
                         ],
                       ),
-                    )
+                    ),
                   ],
                 ),
                 40.verticalSpace,
@@ -158,13 +172,19 @@ class _ProfileRegistrationViewState extends State<ProfileRegistrationView> {
                       child: Row(
                         children: [
                           CustomNameContainer(
-                            controller: profileRegistrationController.firstNameController.value,
+                            controller:
+                                profileRegistrationController
+                                    .firstNameController
+                                    .value,
                             textSection: "First Name".tr,
                             hintText: 'Or'.tr,
                           ),
                           16.horizontalSpace,
                           CustomNameContainer(
-                            controller: profileRegistrationController.lastNameController.value,
+                            controller:
+                                profileRegistrationController
+                                    .lastNameController
+                                    .value,
                             textSection: 'Last Name'.tr,
                             hintText: 'Hajim'.tr,
                           ),
@@ -172,16 +192,21 @@ class _ProfileRegistrationViewState extends State<ProfileRegistrationView> {
                       ),
                     ),
                     24.verticalSpace,
+
                     ///====================================DOB=========================================================
                     DateOfBirthContainer(
                       borderColor: AppColors.whiteColor,
                       controller: profileRegistrationController,
                     ),
                     24.verticalSpace,
+
                     ///===============================Gender selection======================================
                     Padding(
                       padding: EdgeInsets.symmetric(horizontal: 15.w),
-                      child: Text('Gender'.tr, style: AppStyles.poppins14w700white),
+                      child: Text(
+                        'Gender'.tr,
+                        style: AppStyles.poppins14w700white,
+                      ),
                     ),
                     12.verticalSpace,
                     Padding(
@@ -191,13 +216,18 @@ class _ProfileRegistrationViewState extends State<ProfileRegistrationView> {
                           GenderSelectionContainerWidget(
                             onTap: () {
                               setState(() {
-                                profileRegistrationController.gender = 'Male'.tr;
-                                profileRegistrationController.selectedGender=1;
+                                profileRegistrationController.gender =
+                                    'Male'.tr;
+                                profileRegistrationController.selectedGender =
+                                    1;
                                 print(profileRegistrationController.gender);
-                                print(profileRegistrationController.selectedGender);
+                                print(
+                                  profileRegistrationController.selectedGender,
+                                );
                               });
                             },
-                            selectedGender: profileRegistrationController.gender,
+                            selectedGender:
+                                profileRegistrationController.gender,
                             icon: Icons.male,
                             genderName: 'Male'.tr,
                           ),
@@ -205,13 +235,18 @@ class _ProfileRegistrationViewState extends State<ProfileRegistrationView> {
                           GenderSelectionContainerWidget(
                             onTap: () {
                               setState(() {
-                                profileRegistrationController.gender = 'Female'.tr;
-                                profileRegistrationController.selectedGender=2;
+                                profileRegistrationController.gender =
+                                    'Female'.tr;
+                                profileRegistrationController.selectedGender =
+                                    2;
                                 print(profileRegistrationController.gender);
-                                print(profileRegistrationController.selectedGender);
+                                print(
+                                  profileRegistrationController.selectedGender,
+                                );
                               });
                             },
-                            selectedGender: profileRegistrationController.gender,
+                            selectedGender:
+                                profileRegistrationController.gender,
                             icon: Icons.female,
                             genderName: 'Female'.tr,
                           ),
@@ -219,13 +254,18 @@ class _ProfileRegistrationViewState extends State<ProfileRegistrationView> {
                           GenderSelectionContainerWidget(
                             onTap: () {
                               setState(() {
-                                profileRegistrationController.gender = 'Other'.tr;
-                                profileRegistrationController.selectedGender=3;
+                                profileRegistrationController.gender =
+                                    'Other'.tr;
+                                profileRegistrationController.selectedGender =
+                                    3;
                                 print(profileRegistrationController.gender);
-                                print(profileRegistrationController.selectedGender);
+                                print(
+                                  profileRegistrationController.selectedGender,
+                                );
                               });
                             },
-                            selectedGender: profileRegistrationController.gender,
+                            selectedGender:
+                                profileRegistrationController.gender,
                             isIcon: false,
                             genderName: 'Other'.tr,
                           ),
@@ -233,10 +273,14 @@ class _ProfileRegistrationViewState extends State<ProfileRegistrationView> {
                       ),
                     ),
                     24.verticalSpace,
+
                     ///=====================================Email check Box========================================
                     Padding(
                       padding: EdgeInsets.symmetric(horizontal: 15.w),
-                      child: Text('Email'.tr, style: AppStyles.poppins14w700white),
+                      child: Text(
+                        'Email'.tr,
+                        style: AppStyles.poppins14w700white,
+                      ),
                     ),
                     28.verticalSpace,
                     Padding(
@@ -248,7 +292,8 @@ class _ProfileRegistrationViewState extends State<ProfileRegistrationView> {
                             onTap: () {
                               print(profileRegistrationController.agreeToTerms);
                               setState(() {
-                                profileRegistrationController. agreeToTerms = !profileRegistrationController.agreeToTerms;
+                                profileRegistrationController.agreeToTerms =
+                                    !profileRegistrationController.agreeToTerms;
                               });
                             },
                             child: Container(
@@ -256,7 +301,7 @@ class _ProfileRegistrationViewState extends State<ProfileRegistrationView> {
                               height: 24,
                               decoration: BoxDecoration(
                                 color:
-                                profileRegistrationController.agreeToTerms
+                                    profileRegistrationController.agreeToTerms
                                         ? Colors.orange
                                         : Colors.transparent,
                                 border: Border.all(
@@ -266,7 +311,7 @@ class _ProfileRegistrationViewState extends State<ProfileRegistrationView> {
                                 borderRadius: BorderRadius.circular(4),
                               ),
                               child:
-                              profileRegistrationController.agreeToTerms
+                                  profileRegistrationController.agreeToTerms
                                       ? Icon(
                                         Icons.check,
                                         color: Colors.white,
@@ -279,13 +324,18 @@ class _ProfileRegistrationViewState extends State<ProfileRegistrationView> {
                           Expanded(
                             child: GestureDetector(
                               onTap: () {
-                                print(profileRegistrationController.agreeToTerms);
+                                print(
+                                  profileRegistrationController.agreeToTerms,
+                                );
                                 setState(() {
-                                  profileRegistrationController.agreeToTerms = !profileRegistrationController.agreeToTerms;
+                                  profileRegistrationController.agreeToTerms =
+                                      !profileRegistrationController
+                                          .agreeToTerms;
                                 });
                               },
                               child: Text(
-                                'I\'ve read this text & you want to receive promotional emails & messages from Pusher'.tr,
+                                'I\'ve read this text & you want to receive promotional emails & messages from Pusher'
+                                    .tr,
                                 style: AppStyles.poppins10w700white,
                               ),
                             ),
@@ -323,10 +373,6 @@ class _ProfileRegistrationViewState extends State<ProfileRegistrationView> {
         ),
       ),
     );
-  }
-
-  void addProfileImage() {
-    print('Profile Picture Accessing');
   }
 
   void signUp() {

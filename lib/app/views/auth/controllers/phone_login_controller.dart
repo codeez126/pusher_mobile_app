@@ -84,70 +84,7 @@ class PhoneLoginController extends GetxController {
     ],
   );
 
-
-  void register() async {
-    final code = selectedCode.value.replaceAll("+", "");
-    final phone = phoneController.value.text.trim();
-    final phoneWithCode = "$code$phone";
-    print('Full Phone: $phoneWithCode');
-
-    // if (phoneWithCode.replaceAll(RegExp(r'\D'), '').length < 8) {
-    //   Utils.toastMessage("Invalid phone number");
-    //   return;
-    // }
-
-    if (phone.isEmpty) {
-      Utils.toastMessage('Enter Phone Number');
-      return;
-    }
-
-    Utils.showLoader();
-
-    Map<String, dynamic> data = {
-      "auth_type": "phone",
-      "phone": phoneWithCode,
-      "first_name": "Ali",
-      "last_name": "Jan",
-      "dob": "2003-08-20",
-      "gender": 1,
-    };
-
-    dio.Response? response = await networkManager.callApi(
-      urlEndPoint: ApiEndpoints.apiRegisterEndPoint,
-      method: HttpMethod.post,
-      body: data,
-    );
-    loading.value = false;
-    if (response != null) {
-      final model = RegisterPhoneNumberResponseModel.fromJson(response.data);
-      registerModel.value = model;
-      try {
-        if (model.status == true) {
-          print("Register Successful Message: ${model.message}");
-          //Utils.toastMessage("Register Successfully");
-          phoneController.value.clear();
-          //sendOtp();
-        } else {
-          print("Register Failed: ${model.message}");
-          Utils.toastMessage(model.message ?? "Registration failed");
-        }
-      } catch (stackTrace,error) {
-        print("Error : $stackTrace");
-        print("Error : $error");
-        print("Error : ${model.errors}");
-//        Utils.toastMessage("${model.errors}");
-      }
-    } else {
-      print("Unsuccessful Register: No response");
-      Utils.toastMessage("Unable to register, please check your connection.");
-    }
-  }
-
-
   void verifyOtp(String phone) async {
-    // final code = selectedCode.value.replaceAll("+", "");
-    // final phone = phoneController.value.text.trim();
-    // final phoneWithCode = "$code$phone";
 
     Map<String, dynamic> data = {
       "phone": phone,
@@ -187,15 +124,15 @@ class PhoneLoginController extends GetxController {
 
         } else {
           print("Otp Verification Failed: ${model.message}");
-          Utils.toastMessage(model.message ?? "Otp verification failed");
+          Utils.toastMessage(model.message ?? "Otp verification failed".tr);
         }
       } else {
         print("No response from server");
-        Utils.toastMessage("Unable to verify OTP, please try again");
+        Utils.toastMessage("Unable to verify OTP, please try again".tr);
       }
     } catch (e) {
       print("Error verifying OTP: $e");
-      Utils.toastMessage("Error verifying OTP: $e");
+      Utils.toastMessage("${"Error verifying OTP".tr}: $e");
     }
   }
   void sendOtp() async {
@@ -213,26 +150,26 @@ class PhoneLoginController extends GetxController {
         sendOtpModel.value = model;
         if (model.status == true) {
           print("Otp Sent Successfully");
-          Utils.toastMessage("Otp Sent Successfully: ${model.message}");
+          Utils.toastMessage("${"${"Otp Sent Successfully".tr}:"} ${model.message}");
           Get.toNamed(AppRoutes.otpVerificationView,arguments: {
             'phoneNumber': phoneController.value.text,
           });
         } else {
-          Utils.toastMessage(model.message ?? "Failed to send OTP");
+          Utils.toastMessage(model.message ?? "Failed to send OTP".tr);
         }
       } catch (e) {
         print("Error parsing OTP response: $e");
-        Utils.toastMessage("Error parsing OTP response");
+        Utils.toastMessage("Error parsing OTP response".tr);
       }
     } else {
-      Utils.toastMessage("No response while sending OTP");
+      Utils.toastMessage("No response while sending OTP".tr);
     }
   }
 
   void googleRegister(String email, var authId,displayName) async {
 
     if (email.isEmpty) {
-      Utils.toastMessage('Email Not Found');
+      Utils.toastMessage('Email Not Found'.tr);
       return;
     }
 
@@ -270,7 +207,7 @@ class PhoneLoginController extends GetxController {
       try {
         if (model.status == true) {
           print("Register Successful Message: ${model.message}");
-          Utils.toastMessage("Registration successful!");
+          Utils.toastMessage("Registration successful!".tr);
           phoneController.value.clear();
           PrefManager.setToken(model.data!.token.toString());
           PrefManager.setIsLogin(true);
@@ -282,23 +219,20 @@ class PhoneLoginController extends GetxController {
 
         } else {
           print("Register Failed: ${model.message}");
-          Utils.toastMessage(model.message ?? "Registration failed");
-
-          // Handle specific error cases
+          Utils.toastMessage(model.message ?? "Registration failed".tr);
           if (model.errors != null) {
             print("Registration Errors: ${model.errors}");
-            // You might want to show specific field errors to user
           }
         }
       } catch (error, stackTrace) {
         print("Error parsing response: $error");
         print("Stack Trace: $stackTrace");
         print("Model Errors: ${model.errors}");
-        Utils.toastMessage("Registration failed. Please try again.");
+        Utils.toastMessage("Registration failed. Please try again.".tr);
       }
     } else {
       print("Unsuccessful Register: No response");
-      Utils.toastMessage("Unable to register, please check your connection.");
+      Utils.toastMessage("Unable to register, please check your connection.".tr);
     }
   }
   Future<GoogleSignInAccount?> googleSignInTry() async {
@@ -306,7 +240,6 @@ class PhoneLoginController extends GetxController {
       await googleSignIn.signOut();
 
       print("🔄 Starting fresh Google Sign-In...");
-
       GoogleSignInAccount? account = await googleSignIn.signIn();
 
       if (account != null) {
@@ -349,26 +282,26 @@ class PhoneLoginController extends GetxController {
           print("2. Verify package name matches Google Cloud Console");
           print("3. Ensure google-services.json is properly configured");
           print("4. Check if Google Sign-In API is enabled");
-          Utils.toastMessage("Sign-in configuration error. Please try again.");
+          Utils.toastMessage("Sign-in configuration error. Please try again.".tr);
           break;
         case 'network_error':
           print("🔧 Check your internet connection");
-          Utils.toastMessage("Network error. Please check your connection.");
+          Utils.toastMessage("Network error. Please check your connection.".tr);
           break;
         case 'sign_in_canceled':
           print("🔧 User cancelled the sign-in process");
-          Utils.toastMessage("Sign-in cancelled.");
+          Utils.toastMessage("Sign-in cancelled.".tr);
           break;
         default:
           print("🔧 Unknown error occurred");
-          Utils.toastMessage("Sign-in failed. Please try again.");
+          Utils.toastMessage("Sign-in failed. Please try again.".tr);
       }
       return null;
     } catch (error, stackTrace) {
       print("❌ Unexpected error during Google Sign-In:");
       print("Error: $error");
       print("Stack Trace: $stackTrace");
-      Utils.toastMessage("An unexpected error occurred. Please try again.");
+      Utils.toastMessage("An unexpected error occurred. Please try again.".tr);
       return null;
     }
   }

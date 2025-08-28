@@ -1,3 +1,4 @@
+import 'package:base_project/core/constants/app_fonts_and_styles.dart';
 import 'package:flutter/material.dart';
 
 class CustomBottomSheet {
@@ -97,9 +98,7 @@ class ReusableBottomSheetContent extends StatelessWidget {
                   if (title != null)
                     Text(
                       title!,
-                      style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                        fontWeight: FontWeight.bold,
-                      ),
+                      style: AppStyles.poppins16w700white,
                     )
                   else
                     const SizedBox(),

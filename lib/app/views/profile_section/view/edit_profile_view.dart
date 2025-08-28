@@ -176,7 +176,7 @@ class _EditProfileViewState extends State<EditProfileView> {
                                 controller: updateNameController,
                                 style: AppStyles.poppins14w400darkGrey2,
                                 decoration: InputDecoration(
-                                  hintText: "Enter full name",
+                                  hintText: "Enter full name".tr,
                                   border: InputBorder.none,
                                 ),
                               )
@@ -340,7 +340,7 @@ class _EditProfileViewState extends State<EditProfileView> {
                       gender: selectedGender,
                     );
                   },
-                  text: "Update Profile",
+                  text: "Update Profile".tr,
                   isIcon: false,
                   textStyle: AppStyles.poppins14w500white,
                 ),

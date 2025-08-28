@@ -35,190 +35,191 @@ class PhoneLogin extends StatelessWidget {
             fit: BoxFit.cover,
           ),
         ),
-        child: SingleChildScrollView(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              CustomRegistrationAppBar(
-                isLogo: true,
-                logo: AppSvgs.logoSvg,
-              ),
-              30.verticalSpace,
-              Padding(
-                padding: EdgeInsets.symmetric(horizontal: 20.0),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    Text(
-                      "Phone".tr,
-                      style: GoogleFonts.poppins(
-                        color: AppColors.whiteColor,
-                        fontSize: FontSizes.pt14,
-                        fontWeight: FontWeight.w700,
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              20.verticalSpace,
-          Padding(
-            padding: EdgeInsets.symmetric(horizontal: 24.0),
-            child: ClipRRect(
-              borderRadius: BorderRadius.circular(30),
-              child: BackdropFilter(
-                filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
-                child: Row(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Obx(() {
-                      return AnimatedContainer(
-                        curve: Curves.easeInOut,
-                        duration: const Duration(milliseconds: 500),
-                        width: 120.w,
-                        height: phoneLoginController.isClickedCountryCode.value
-                            ? 200.h
-                            : 60.h,
-                        padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 10.h),
-                        decoration: BoxDecoration(
-                          color: Colors.white.withOpacity(0.1),
-                          borderRadius: BorderRadius.circular(30),
-                          border: Border.all(color: AppColors.whiteColor),
-                        ),
-                        child: phoneLoginController.isClickedCountryCode.value
-                            ? ListView.builder(
-                          padding: EdgeInsets.zero,
-                          itemCount: phoneLoginController.countryList.length,
-                          itemBuilder: (context, index) {
-                            final country =
-                            phoneLoginController.countryList[index];
-                            return GestureDetector(
-                              onTap: () {
-                                phoneLoginController.selectedCode.value =
-                                    country['code'] ?? '';
-                                phoneLoginController.isClickedCountryCode.value =
-                                false;
-                              },
-                              child: Padding(
-                                padding: EdgeInsets.symmetric(vertical: 6.h),
-                                child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    Text(
-                                      country['flag'] ?? '',
-                                      style: AppStyles.poppins14w700darkGrey2,
-                                    ),
-                                    8.horizontalSpace,
-                                    Text(
-                                      country['code'] ?? '',
-                                      style: AppStyles.poppins14w700darkGrey2.copyWith(color: AppColors.darkGrey2.withOpacity(0.70)),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            );
-                          },
-                        )
-                            : Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Text(
-                              phoneLoginController.selectedCode.value,
-                              style: AppStyles.poppins14w700darkGrey2,
-                            ),
-                            6.horizontalSpace,
-                            GestureDetector(
-                              onTap: () => phoneLoginController
-                                  .isClickedCountryCode.value = true,
-                              child: SvgPicture.asset(AppSvgs.arrowDownSvg),
-                            ),
-                          ],
-                        ),
-                      );
-                    }),
-                    10.horizontalSpace,
-                    Expanded(
-                      child: Container(
-                        height: 60.h,
-                        padding: EdgeInsets.symmetric(horizontal: 12),
-                        decoration: BoxDecoration(
-                          color: Colors.white.withOpacity(0.1),
-                          borderRadius: BorderRadius.circular(30),
-                          border: Border.all(color: AppColors.whiteColor),
-                        ),
-                        child: Center(
-                          child: TextField(
-                            focusNode: phoneNumberFocusNode,
-                            controller: phoneLoginController.phoneController.value,
-                            keyboardType: TextInputType.phone,
-                            style: AppStyles.poppins14w700darkGrey2,
-                            decoration: InputDecoration(
-                              border: InputBorder.none,
-                              hintText: '055-6675589',
-                              hintStyle: AppStyles.poppins14w700darkGrey2,
-                            ),
-                          ),
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            CustomRegistrationAppBar(
+              isLogo: true,
+              logo: AppSvgs.logoSvg,
             ),
-          ),
-          30.verticalSpace,
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 24.0),
-                child: ClipRRect(
-                  borderRadius: BorderRadius.circular(30),
-                  child: CustomAppButton(
-                      onTap: () {
-                        phoneNumberFocusNode.unfocus();
-                        FocusScope.of(context).unfocus();
-                        phoneNumberLogin();
-                      },
-                      isIcon: false,
-                      text: "Login".tr,
-                      textStyle: AppStyles.poppins16w600white),
-                ),
-              ),
-              50.verticalSpace,
-              Text("Or".tr,style: AppStyles.poppins16w700white,),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
+            30.verticalSpace,
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: 20.0),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.start,
                 children: [
-                  GestureDetector(
-                    onTap: (){
-                      appleLogin();
-                    },
-                    child: Container(
-                      padding: EdgeInsets.symmetric(horizontal: 20.sp,vertical: 22.sp),
-                      alignment: Alignment.center,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(25.sp),
-                          color: AppColors.whiteColor,
-                          ),
-                      child: Image.asset(AppImages.appleImage,height: 25.h,),
-                    ),
-                  ),
-                  10.horizontalSpace,
-                  GestureDetector(
-                    onTap: (){
-                      googleLogin();
-                    },
-                    child: Container(
-                      padding: EdgeInsets.symmetric(horizontal: 20.sp,vertical: 22.sp),
-                      alignment: Alignment.center,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(25.sp),
-                        color: AppColors.whiteColor,
-                      ),
-                      child: Image.asset(AppImages.googleImage,height: 25.h,),
+                  Text(
+                    "Phone".tr,
+                    style: GoogleFonts.poppins(
+                      color: AppColors.whiteColor,
+                      fontSize: FontSizes.pt14,
+                      fontWeight: FontWeight.w700,
                     ),
                   ),
                 ],
-              )
-            ],
+              ),
+            ),
+            20.verticalSpace,
+        Padding(
+          padding: EdgeInsets.symmetric(horizontal: 24.0),
+          child: ClipRRect(
+            borderRadius: BorderRadius.circular(30),
+            child: BackdropFilter(
+              filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Obx(() {
+                    return AnimatedContainer(
+                      curve: Curves.easeInOut,
+                      duration: const Duration(milliseconds: 500),
+                      width: 120.w,
+                      height: phoneLoginController.isClickedCountryCode.value
+                          ? 200.h
+                          : 60.h,
+                      padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 10.h),
+                      decoration: BoxDecoration(
+                        color: Colors.white.withOpacity(0.1),
+                        borderRadius: BorderRadius.circular(30),
+                        border: Border.all(color: AppColors.whiteColor),
+                      ),
+                      child: phoneLoginController.isClickedCountryCode.value
+                          ? ListView.builder(
+                        padding: EdgeInsets.zero,
+                        itemCount: phoneLoginController.countryList.length,
+                        itemBuilder: (context, index) {
+                          final country =
+                          phoneLoginController.countryList[index];
+                          return GestureDetector(
+                            onTap: () {
+                              phoneLoginController.selectedCode.value =
+                                  country['code'] ?? '';
+                              phoneLoginController.isClickedCountryCode.value =
+                              false;
+                            },
+                            child: Padding(
+                              padding: EdgeInsets.symmetric(vertical: 6.h),
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Text(
+                                    country['flag'] ?? '',
+                                    style: AppStyles.poppins14w700darkGrey2,
+                                  ),
+                                  8.horizontalSpace,
+                                  Text(
+                                    country['code'] ?? '',
+                                    style: AppStyles.poppins14w700darkGrey2.copyWith(color: AppColors.darkGrey2.withOpacity(0.70)),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          );
+                        },
+                      )
+                          : Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text(
+                            phoneLoginController.selectedCode.value,
+                            style: AppStyles.poppins14w700darkGrey2,
+                          ),
+                          6.horizontalSpace,
+                          GestureDetector(
+                            onTap: () => phoneLoginController
+                                .isClickedCountryCode.value = true,
+                            child: SvgPicture.asset(AppSvgs.arrowDownSvg),
+                          ),
+                        ],
+                      ),
+                    );
+                  }),
+                  10.horizontalSpace,
+                  Expanded(
+                    child: Container(
+                      height: 60.h,
+                      padding: EdgeInsets.symmetric(horizontal: 12),
+                      decoration: BoxDecoration(
+                        color: Colors.white.withOpacity(0.1),
+                        borderRadius: BorderRadius.circular(30),
+                        border: Border.all(color: AppColors.whiteColor),
+                      ),
+                      child: Center(
+                        child: TextField(
+                          focusNode: phoneNumberFocusNode,
+                          controller: phoneLoginController.phoneController.value,
+                          keyboardType: TextInputType.phone,
+                          style: AppStyles.poppins14w700darkGrey2,
+                          decoration: InputDecoration(
+                            border: InputBorder.none,
+                            hintText: '055-6675589',
+                            hintStyle: AppStyles.poppins14w700darkGrey2,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
           ),
+        ),
+        30.verticalSpace,
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 24.0),
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(30),
+                child: CustomAppButton(
+                    onTap: () {
+                      phoneNumberFocusNode.unfocus();
+                      FocusScope.of(context).unfocus();
+                      phoneNumberLogin();
+                    },
+                    isIcon: false,
+                    text: "Login".tr,
+                    textStyle: AppStyles.poppins16w600white),
+              ),
+            ),
+            50.verticalSpace,
+            Text("Or".tr,style: AppStyles.poppins16w700white,),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                GestureDetector(
+                  onTap: (){
+                    appleLogin();
+                  },
+                  child: Container(
+                    padding: EdgeInsets.symmetric(horizontal: 20.sp,vertical: 22.sp),
+                    alignment: Alignment.center,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(25.sp),
+                        color: AppColors.whiteColor,
+                        ),
+                    child: Image.asset(AppImages.appleImage,height: 25.h,),
+                  ),
+                ),
+                10.horizontalSpace,
+                GestureDetector(
+                  onTap: (){
+                    googleLogin();
+                  },
+                  child: Container(
+                    padding: EdgeInsets.symmetric(horizontal: 20.sp,vertical: 22.sp),
+                    alignment: Alignment.center,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(25.sp),
+                      color: AppColors.whiteColor,
+                    ),
+                    child: Image.asset(AppImages.googleImage,height: 25.h,),
+                  ),
+                ),
+              ],
+            ),
+            Spacer(),
+            SvgPicture.asset(AppSvgs.logoSvg,height: 40.h,),
+            30.verticalSpace,
+          ],
         ),
       ),
     );

@@ -9,18 +9,18 @@ class VerifyOtpReponseModel {
   VerifyOtpReponseModel.fromJson(Map<String, dynamic> json) {
     status = json['status'];
     message = json['message'];
-    data = json['data'] != null ? new Data.fromJson(json['data']) : null;
+    data = json['data'] != null ? Data.fromJson(json['data']) : null;
     errors = json['errors'];
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['status'] = this.status;
-    data['message'] = this.message;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['status'] = status;
+    data['message'] = message;
     if (this.data != null) {
       data['data'] = this.data!.toJson();
     }
-    data['errors'] = this.errors;
+    data['errors'] = errors;
     return data;
   }
 }
@@ -34,17 +34,17 @@ class Data {
 
   Data.fromJson(Map<String, dynamic> json) {
     token = json['token'];
-    user = json['user'] != null ? new User.fromJson(json['user']) : null;
+    user = json['user'] != null ? User.fromJson(json['user']) : null;
     expiresIn = json['expires_in'];
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['token'] = this.token;
-    if (this.user != null) {
-      data['user'] = this.user!.toJson();
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['token'] = token;
+    if (user != null) {
+      data['user'] = user!.toJson();
     }
-    data['expires_in'] = this.expiresIn;
+    data['expires_in'] = expiresIn;
     return data;
   }
 }
@@ -108,24 +108,24 @@ class User {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['id'] = this.id;
-    data['auth_type'] = this.authType;
-    data['profile_image'] = this.profileImage;
-    data['first_name'] = this.firstName;
-    data['last_name'] = this.lastName;
-    data['dob'] = this.dob;
-    data['gender'] = this.gender;
-    data['email'] = this.email;
-    data['phone'] = this.phone;
-    data['is_verified'] = this.isVerified;
-    data['is_registered'] = this.isRegistered;
-    data['address'] = this.address;
-    data['latitude'] = this.latitude;
-    data['longitude'] = this.longitude;
-    data['type'] = this.type;
-    data['created_at'] = this.createdAt;
-    data['updated_at'] = this.updatedAt;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['id'] = id;
+    data['auth_type'] = authType;
+    data['profile_image'] = profileImage;
+    data['first_name'] = firstName;
+    data['last_name'] = lastName;
+    data['dob'] = dob;
+    data['gender'] = gender;
+    data['email'] = email;
+    data['phone'] = phone;
+    data['is_verified'] = isVerified;
+    data['is_registered'] = isRegistered;
+    data['address'] = address;
+    data['latitude'] = latitude;
+    data['longitude'] = longitude;
+    data['type'] = type;
+    data['created_at'] = createdAt;
+    data['updated_at'] = updatedAt;
     return data;
   }
 }
