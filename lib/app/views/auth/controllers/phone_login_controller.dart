@@ -1,4 +1,5 @@
 import 'package:base_project/app/routes/app_routes.dart';
+import 'package:base_project/app/views/auth/model/google_login_response_model.dart';
 import 'package:base_project/app/views/auth/model/register_phone_number_model.dart';
 import 'package:base_project/app/views/auth/model/send_otp_response_model.dart';
 import 'package:base_project/core/Managers/PrefManager.dart';
@@ -6,6 +7,7 @@ import 'package:base_project/core/constants/api_urls.dart';
 import 'package:base_project/core/network/networking_managar.dart';
 import 'package:base_project/core/utils/utils.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:dio/dio.dart' as dio;
 import 'package:google_sign_in/google_sign_in.dart';
@@ -70,11 +72,17 @@ class PhoneLoginController extends GetxController {
   final NetworkManager networkManager = NetworkManager();
   final RxString selectedCode = '+92'.obs;
   var registerModel = RegisterPhoneNumberResponseModel().obs;
+  var googleModel = GoogleLoginResponseModel().obs;
   var sendOtpModel = SendOtpResponseModel().obs;
   var verifyOtpModel = VerifyOtpReponseModel().obs;
   final isClickedCountryCode = false.obs;
   final RxBool loading = false.obs;
-  GoogleSignIn googleSignIn = GoogleSignIn();
+  static final GoogleSignIn googleSignIn = GoogleSignIn(
+    scopes: [
+      'email',
+      'profile',
+    ],
+  );
 
 
   void register() async {
@@ -135,22 +143,6 @@ class PhoneLoginController extends GetxController {
     }
   }
 
-  Future<void> googleSignin() async {
-    try{
-      final account = await googleSignIn.signIn();
-
-      print("Account ID: ${account?.id}");
-      print("Account Email: ${account?.email}");
-      print("Account DisplayName: ${account?.displayName}");
-      print("Account PhotoUrl: ${account?.photoUrl}");
-
-      final auth = account?.authentication;
-      print("Auth Token: $auth");
-    }catch(s,e){
-      print("Stack Trace: $s");
-      print("Error : $e");
-    }
-  }
 
   void verifyOtp(String phone) async {
     // final code = selectedCode.value.replaceAll("+", "");
@@ -237,45 +229,166 @@ class PhoneLoginController extends GetxController {
     }
   }
 
+  void googleRegister(String email, var authId,displayName) async {
 
-  // static Future<GoogleSignInAccount?> signInWithGoogle() async {
-  //   Utils.toastMessage("Starting Google Sign-In...");
-  //   print("🔵 Google Sign-In: Starting sign-in process");
-  //
-  //   try {
-  //     print("🔵 Google Sign-In: Signing out previous session");
-  //     await googleSignIn.signOut();
-  //
-  //     print("🔵 Google Sign-In: Attempting to sign in");
-  //     final user = await googleSignIn.signIn();
-  //
-  //     if (user != null) {
-  //       print("✅ Google Sign-In: Successfully signed in as ${user.email}");
-  //       Utils.toastMessage("Successfully signed in as ${user.email}");
-  //
-  //       // Get authentication tokens
-  //       try {
-  //         final auth = await user.authentication;
-  //         print("✅ Google Sign-In: Authentication tokens obtained");
-  //         print("   - Access Token: ${auth.accessToken != null ? 'Available' : 'Not available'}");
-  //         print("   - ID Token: ${auth.idToken != null ? 'Available' : 'Not available'}");
-  //         print("   - Server Auth Code: ${auth.serverAuthCode != null ? 'Available' : 'Not available'}");
-  //       } catch (authError) {
-  //         print("⚠️ Google Sign-In: Failed to get authentication tokens: $authError");
-  //       }
-  //
-  //       return user;
-  //     } else {
-  //       print("❌ Google Sign-In: Sign-in was cancelled or failed");
-  //       Utils.toastMessage("Sign-in was cancelled");
-  //       return null;
-  //     }
-  //   } catch (e) {
-  //     print("❌ Google Sign-In error: $e");
-  //     Utils.toastMessage("Sign-in failed: $e");
-  //     return null;
-  //   }
-  // }
+    if (email.isEmpty) {
+      Utils.toastMessage('Email Not Found');
+      return;
+    }
 
+    Utils.showLoader();
+
+    List<String> nameParts = displayName.split(' ');
+    String firstName = nameParts.isNotEmpty ? nameParts[0] : "";
+    String lastName = nameParts.length > 1 ? nameParts.sublist(1).join(' ') : "";
+    String dob ="1995-10-20";
+    int gender =1;
+    Map<String, dynamic> data = {
+      "auth_type": "google",
+      "email": email,
+      "auth_id": authId.toString(),
+      "first_name": firstName,
+      "last_name": lastName,
+      "dob": dob,
+      "gender": gender
+    };
+
+    print('Sending Google Register Data: $data');
+
+    dio.Response? response = await networkManager.callApi(
+      urlEndPoint: ApiEndpoints.apiRegisterEndPoint,
+      method: HttpMethod.post,
+      body: data,
+    );
+
+    loading.value = false;
+
+    if (response != null) {
+      final model = GoogleLoginResponseModel.fromJson(response.data);
+      googleModel.value = model;
+
+      try {
+        if (model.status == true) {
+          print("Register Successful Message: ${model.message}");
+          Utils.toastMessage("Registration successful!");
+          phoneController.value.clear();
+          PrefManager.setToken(model.data!.token.toString());
+          PrefManager.setIsLogin(true);
+          PrefManager.save("firstName", firstName);
+          PrefManager.save("lastName", lastName);
+          PrefManager.save("dob", dob);
+          PrefManager.save("gender", gender);
+          Get.toNamed(AppRoutes.bottomNavNavigation);
+
+        } else {
+          print("Register Failed: ${model.message}");
+          Utils.toastMessage(model.message ?? "Registration failed");
+
+          // Handle specific error cases
+          if (model.errors != null) {
+            print("Registration Errors: ${model.errors}");
+            // You might want to show specific field errors to user
+          }
+        }
+      } catch (error, stackTrace) {
+        print("Error parsing response: $error");
+        print("Stack Trace: $stackTrace");
+        print("Model Errors: ${model.errors}");
+        Utils.toastMessage("Registration failed. Please try again.");
+      }
+    } else {
+      print("Unsuccessful Register: No response");
+      Utils.toastMessage("Unable to register, please check your connection.");
+    }
+  }
+  Future<GoogleSignInAccount?> googleSignInTry() async {
+    try {
+      await googleSignIn.signOut();
+
+      print("🔄 Starting fresh Google Sign-In...");
+
+      GoogleSignInAccount? account = await googleSignIn.signIn();
+
+      if (account != null) {
+        final GoogleSignInAuthentication auth = await account.authentication;
+
+        print("✅ Sign-in successful!");
+        print("Account ID: ${account.id}");
+        print("Account Email: ${account.email}");
+        print("Account DisplayName: ${account.displayName}");
+        print("Account PhotoUrl: ${account.photoUrl}");
+        print("Access Token: ${auth.accessToken}");
+        print("ID Token: ${auth.idToken}");
+
+        final email = account.email;
+        final authId = account.id;
+        final displayName = account.displayName ?? "";
+        final photoUrl = account.photoUrl ?? "";
+        final accessToken = auth.accessToken ?? "";
+
+        PrefManager.save('photoUrl', photoUrl);
+        PrefManager.save('authId', auth.idToken);
+
+        googleRegister(email, authId, displayName);
+
+        return account;
+      } else {
+        print("❌ User cancelled sign-in");
+        return null;
+      }
+    } on PlatformException catch (error) {
+      print("❌ PlatformException during Google Sign-In:");
+      print("Code: ${error.code}");
+      print("Message: ${error.message}");
+      print("Details: ${error.details}");
+
+      switch (error.code) {
+        case 'sign_in_failed':
+          print("🔧 Troubleshooting steps:");
+          print("1. Check SHA-1/SHA-256 fingerprints in Google Cloud Console");
+          print("2. Verify package name matches Google Cloud Console");
+          print("3. Ensure google-services.json is properly configured");
+          print("4. Check if Google Sign-In API is enabled");
+          Utils.toastMessage("Sign-in configuration error. Please try again.");
+          break;
+        case 'network_error':
+          print("🔧 Check your internet connection");
+          Utils.toastMessage("Network error. Please check your connection.");
+          break;
+        case 'sign_in_canceled':
+          print("🔧 User cancelled the sign-in process");
+          Utils.toastMessage("Sign-in cancelled.");
+          break;
+        default:
+          print("🔧 Unknown error occurred");
+          Utils.toastMessage("Sign-in failed. Please try again.");
+      }
+      return null;
+    } catch (error, stackTrace) {
+      print("❌ Unexpected error during Google Sign-In:");
+      print("Error: $error");
+      print("Stack Trace: $stackTrace");
+      Utils.toastMessage("An unexpected error occurred. Please try again.");
+      return null;
+    }
+  }
+
+
+  Future<void> signOut() async {
+    try {
+      await googleSignIn.signOut();
+      print("✅ Successfully signed out");
+    } catch (error) {
+      print("❌ Error during sign-out: $error");
+    }
+  }
+  Future<void> disconnect() async {
+    try {
+      await googleSignIn.disconnect();
+      print("✅ Successfully disconnected");
+    } catch (error) {
+      print("❌ Error during disconnect: $error");
+    }
+  }
 
 }

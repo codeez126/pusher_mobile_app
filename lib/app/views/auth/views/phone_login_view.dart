@@ -227,7 +227,8 @@ class PhoneLogin extends StatelessWidget {
   void appleLogin() {}
 
   void googleLogin() {
-    phoneLoginController.googleSignin();
+    //phoneLoginController.googleSignin();
+    phoneLoginController.googleSignInTry();
   }
 
   void phoneNumberLogin() {

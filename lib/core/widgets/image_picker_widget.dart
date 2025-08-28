@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'package:base_project/core/constants/app_fonts_and_styles.dart';
 import 'package:base_project/core/utils/text_styles.dart';
 import 'package:flutter/material.dart';
 import 'package:image_cropper/image_cropper.dart';
@@ -52,7 +53,7 @@ class _ImagePickerWidgetState extends State<ImagePickerWidget> {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: _showImagePickerOptions,
+      onTap: showImagePickerOptions,
       child: widget.child ?? _buildDefaultWidget(),
     );
   }
@@ -74,7 +75,6 @@ class _ImagePickerWidgetState extends State<ImagePickerWidget> {
                 child: Image.file(
                   _selectedImage!,
                   fit: BoxFit.cover,
-                  // Add error handling for image display
                   errorBuilder: (context, error, stackTrace) {
                     return Container(
                       color: Colors.grey[300],
@@ -105,21 +105,21 @@ class _ImagePickerWidgetState extends State<ImagePickerWidget> {
     );
   }
 
-  void _showImagePickerOptions() {
+  void showImagePickerOptions() {
     CustomBottomSheet.show(
-      backgroundColor: Colors.white,
+      backgroundColor: AppColors.darkGrey2.withOpacity(0.60),
       context: context,
       title: widget.title ?? 'Select Image',
       child: Container(
-        padding: const EdgeInsets.all(16),
+        padding: EdgeInsets.all(16),
         decoration: BoxDecoration(
-          color: Colors.white,
+          color: AppColors.darkGrey2,
           borderRadius: const BorderRadius.vertical(top: Radius.circular(20)),
         ),
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            Text("Choose an option", style: TextStyles.medium(context)),
+            Text("Choose an option", style: AppStyles.poppins16w700white),
             const SizedBox(height: 20),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -129,7 +129,7 @@ class _ImagePickerWidgetState extends State<ImagePickerWidget> {
                   "Camera",
                   Icons.camera_alt,
                   () async {
-                    _pickImage(ImageSource.camera);
+                    pickImage(ImageSource.camera);
                   },
                 ),
                 _buildPickerOption(
@@ -137,7 +137,7 @@ class _ImagePickerWidgetState extends State<ImagePickerWidget> {
                   "Gallery",
                   Icons.photo_library,
                   () async {
-                    _pickImage(ImageSource.gallery);
+                    pickImage(ImageSource.gallery);
                   },
                 ),
               ],
@@ -161,17 +161,17 @@ class _ImagePickerWidgetState extends State<ImagePickerWidget> {
         children: [
           CircleAvatar(
             radius: 30,
-            backgroundColor: AppColors.primaryColor.withOpacity(0.1),
-            child: Icon(icon, color: AppColors.primaryColor, size: 30),
+            backgroundColor: AppColors.whiteColor.withOpacity(0.5),
+            child: Icon(icon, color: AppColors.whiteColor, size: 30),
           ),
           const SizedBox(height: 8),
-          Text(title),
+          Text(title,style: AppStyles.poppins14w700white,),
         ],
       ),
     );
   }
 
-  Future<void> _pickImage(ImageSource source) async {
+  Future<void> pickImage(ImageSource source) async {
     try {
       setState(() {
         _isProcessing = true;

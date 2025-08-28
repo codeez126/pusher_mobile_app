@@ -98,6 +98,7 @@ class ProfileRegistrationController extends GetxController {
     required String lastName,
     required int gender,
   }) async {
+
     if (firstName.isEmpty) {
       Utils.toastMessage('Enter Your First Name');
       return;

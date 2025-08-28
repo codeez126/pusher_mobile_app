@@ -1,3 +1,5 @@
+import kotlin.script.experimental.jvm.util.classpathFromClass
+
 plugins {
     id("com.android.application")
     id("kotlin-android")
@@ -37,8 +39,8 @@ android {
             signingConfig = signingConfigs.getByName("debug")
         }
     }
-}
 
+}
 
 flutter {
     source = "../.."

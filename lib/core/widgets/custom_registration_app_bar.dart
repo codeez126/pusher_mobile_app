@@ -1,3 +1,4 @@
+import 'package:base_project/core/widgets/image_picker_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
@@ -128,7 +129,8 @@ class CustomRegistrationAppBar extends StatelessWidget {
           Positioned(
             bottom: 0,
             child: Center(
-              child: Column(
+              child:
+              Column(
                 children: [
                   Stack(
                     children: [
@@ -155,7 +157,11 @@ class CustomRegistrationAppBar extends StatelessWidget {
                         bottom: 0,
                         right: 0,
                         child: InkWell(
-                          onTap: () {},
+                          onTap: () {
+                            print("Image picker");
+
+
+                          },
                           child: Image.asset(
                             AppImages.addPng,
                             height: 50.h, // provide a valid height
