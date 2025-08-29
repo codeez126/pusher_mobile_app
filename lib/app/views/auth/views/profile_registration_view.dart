@@ -19,6 +19,8 @@ import '../../../../core/constants/app_svgs.dart';
 import '../../../../core/widgets/image_picker_widget.dart';
 
 class ProfileRegistrationView extends StatefulWidget {
+  const ProfileRegistrationView({super.key});
+
   @override
   _ProfileRegistrationViewState createState() =>
       _ProfileRegistrationViewState();
@@ -93,15 +95,13 @@ class _ProfileRegistrationViewState extends State<ProfileRegistrationView> {
                         mainAxisSize: MainAxisSize.min,
                         children: [
                           Stack(
-                            clipBehavior: Clip.none,
+                            alignment: Alignment.center,
                             children: [
-                              ImagePickerWidget(
-                                onImageSelected: (file) {
-                                  imageSelected(file);
-                                },
-                                child: Container(
+                              Obx(() {
+                                return Container(
                                   width: 100.w,
                                   height: 100.w,
+                                  alignment: Alignment.center,
                                   decoration: BoxDecoration(
                                     shape: BoxShape.circle,
                                     border: Border.all(
@@ -109,34 +109,43 @@ class _ProfileRegistrationViewState extends State<ProfileRegistrationView> {
                                       width: 1.5.w,
                                     ),
                                   ),
-                                  child: ClipOval(
-                                    child:
-                                        profileImage != null
-                                            ? Image.file(
-                                              profileImage!,
-                                              fit: BoxFit.cover,
-                                              width: 100.w,
-                                              height: 100.w,
-                                            )
-                                            : Container(
-                                              color: Colors.white.withOpacity(
-                                                0.3,
-                                              ),
-                                              child: Center(
-                                                child: SvgPicture.asset(
-                                                  AppSvgs.cameraSvg,
-                                                  height: 80.h,
-                                                ),
-                                              ),
-                                            ),
+                                  child: Padding(
+                                    padding: EdgeInsets.all(5.sp),
+                                    child: ClipRRect(
+                                      borderRadius: BorderRadius.circular(100.sp),
+                                      child:
+                                      profileRegistrationController.photoUrl
+                                          .value != null
+                                          ? Image.file(
+                                        profileRegistrationController.photoUrl
+                                            .value!,
+                                        fit: BoxFit.cover,
+                                        width: 100.w,
+                                        height: 100.w,
+                                      )
+                                          : Container(
+                                        color: Colors.white.withOpacity(
+                                          0.3,
+                                        ),
+                                        child: Center(
+                                          child: SvgPicture.asset(
+                                            AppSvgs.cameraSvg,
+                                            height: 80.h,
+                                          ),
+                                        ),
+                                      ),
+                                    ),
                                   ),
-                                ),
-                              ),
+                                );
+                              }),
                               Positioned(
                                 bottom: -5,
                                 right: -5,
-                                child: InkWell(
-                                  onTap: () {},
+                                child: ImagePickerWidget(
+                                  onImageSelected: (file) {
+                                    profileRegistrationController.photoUrl
+                                        .value = file;
+                                  },
                                   child: Container(
                                     alignment: Alignment.center,
                                     padding: EdgeInsets.all(6.w),
@@ -166,6 +175,7 @@ class _ProfileRegistrationViewState extends State<ProfileRegistrationView> {
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
+
                     ///===========================================Names Fields==============================
                     Padding(
                       padding: EdgeInsets.symmetric(horizontal: 15.w),
@@ -173,18 +183,18 @@ class _ProfileRegistrationViewState extends State<ProfileRegistrationView> {
                         children: [
                           CustomNameContainer(
                             controller:
-                                profileRegistrationController
-                                    .firstNameController
-                                    .value,
+                            profileRegistrationController
+                                .firstNameController
+                                .value,
                             textSection: "First Name".tr,
                             hintText: 'Or'.tr,
                           ),
                           16.horizontalSpace,
                           CustomNameContainer(
                             controller:
-                                profileRegistrationController
-                                    .lastNameController
-                                    .value,
+                            profileRegistrationController
+                                .lastNameController
+                                .value,
                             textSection: 'Last Name'.tr,
                             hintText: 'Hajim'.tr,
                           ),
@@ -219,7 +229,7 @@ class _ProfileRegistrationViewState extends State<ProfileRegistrationView> {
                                 profileRegistrationController.gender =
                                     'Male'.tr;
                                 profileRegistrationController.selectedGender =
-                                    1;
+                                1;
                                 print(profileRegistrationController.gender);
                                 print(
                                   profileRegistrationController.selectedGender,
@@ -227,7 +237,7 @@ class _ProfileRegistrationViewState extends State<ProfileRegistrationView> {
                               });
                             },
                             selectedGender:
-                                profileRegistrationController.gender,
+                            profileRegistrationController.gender,
                             icon: Icons.male,
                             genderName: 'Male'.tr,
                           ),
@@ -238,7 +248,7 @@ class _ProfileRegistrationViewState extends State<ProfileRegistrationView> {
                                 profileRegistrationController.gender =
                                     'Female'.tr;
                                 profileRegistrationController.selectedGender =
-                                    2;
+                                2;
                                 print(profileRegistrationController.gender);
                                 print(
                                   profileRegistrationController.selectedGender,
@@ -246,7 +256,7 @@ class _ProfileRegistrationViewState extends State<ProfileRegistrationView> {
                               });
                             },
                             selectedGender:
-                                profileRegistrationController.gender,
+                            profileRegistrationController.gender,
                             icon: Icons.female,
                             genderName: 'Female'.tr,
                           ),
@@ -257,7 +267,7 @@ class _ProfileRegistrationViewState extends State<ProfileRegistrationView> {
                                 profileRegistrationController.gender =
                                     'Other'.tr;
                                 profileRegistrationController.selectedGender =
-                                    3;
+                                3;
                                 print(profileRegistrationController.gender);
                                 print(
                                   profileRegistrationController.selectedGender,
@@ -265,7 +275,7 @@ class _ProfileRegistrationViewState extends State<ProfileRegistrationView> {
                               });
                             },
                             selectedGender:
-                                profileRegistrationController.gender,
+                            profileRegistrationController.gender,
                             isIcon: false,
                             genderName: 'Other'.tr,
                           ),
@@ -293,7 +303,7 @@ class _ProfileRegistrationViewState extends State<ProfileRegistrationView> {
                               print(profileRegistrationController.agreeToTerms);
                               setState(() {
                                 profileRegistrationController.agreeToTerms =
-                                    !profileRegistrationController.agreeToTerms;
+                                !profileRegistrationController.agreeToTerms;
                               });
                             },
                             child: Container(
@@ -301,9 +311,9 @@ class _ProfileRegistrationViewState extends State<ProfileRegistrationView> {
                               height: 24,
                               decoration: BoxDecoration(
                                 color:
-                                    profileRegistrationController.agreeToTerms
-                                        ? Colors.orange
-                                        : Colors.transparent,
+                                profileRegistrationController.agreeToTerms
+                                    ? Colors.orange
+                                    : Colors.transparent,
                                 border: Border.all(
                                   color: Colors.orange,
                                   width: 2,
@@ -311,13 +321,13 @@ class _ProfileRegistrationViewState extends State<ProfileRegistrationView> {
                                 borderRadius: BorderRadius.circular(4),
                               ),
                               child:
-                                  profileRegistrationController.agreeToTerms
-                                      ? Icon(
-                                        Icons.check,
-                                        color: Colors.white,
-                                        size: 16,
-                                      )
-                                      : null,
+                              profileRegistrationController.agreeToTerms
+                                  ? Icon(
+                                Icons.check,
+                                color: Colors.white,
+                                size: 16,
+                              )
+                                  : null,
                             ),
                           ),
                           12.horizontalSpace,
@@ -329,8 +339,8 @@ class _ProfileRegistrationViewState extends State<ProfileRegistrationView> {
                                 );
                                 setState(() {
                                   profileRegistrationController.agreeToTerms =
-                                      !profileRegistrationController
-                                          .agreeToTerms;
+                                  !profileRegistrationController
+                                      .agreeToTerms;
                                 });
                               },
                               child: Text(
@@ -381,7 +391,7 @@ class _ProfileRegistrationViewState extends State<ProfileRegistrationView> {
 
   void imageSelected(file) {
     setState(() {
-      profileImage = file;
+      profileRegistrationController.photoUrl.value = file;
     });
   }
 }

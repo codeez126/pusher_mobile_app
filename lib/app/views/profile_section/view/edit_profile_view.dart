@@ -1,3 +1,4 @@
+import 'dart:io';
 import 'dart:ui';
 
 import 'package:base_project/app/routes/app_routes.dart';
@@ -7,6 +8,7 @@ import 'package:base_project/core/constants/app_svgs.dart';
 import 'package:base_project/core/widgets/custom_app_button.dart';
 import 'package:base_project/core/widgets/custom_name_container.dart';
 import 'package:base_project/core/widgets/edit_profile_view/date_of_birth_drop_down.dart';
+import 'package:base_project/core/widgets/image_picker_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -32,11 +34,13 @@ class _EditProfileViewState extends State<EditProfileView> {
   var gender = PrefManager.read("gender");
   bool isEditName = false;
   bool isEditGender = false;
+  File? image;
 
   @override
   Widget build(BuildContext context) {
     var fullName =
-    "${PrefManager.read("firstName") ?? ""} ${PrefManager.read("lastName") ?? ""}";
+        "${PrefManager.read("firstName") ?? ""} ${PrefManager.read(
+        "lastName") ?? ""}";
     return Scaffold(
       body: Container(
         width: double.infinity,
@@ -98,10 +102,20 @@ class _EditProfileViewState extends State<EditProfileView> {
                                       color: AppColors.whiteColor,
                                       width: 2.w,
                                     ),
-                                    image: DecorationImage(
-                                      image: AssetImage(AppImages.profilePic),
-                                      fit: BoxFit.cover,
-                                    ),
+                                  ),
+                                  child: ClipRRect(
+                                      borderRadius:BorderRadius.circular(1000.sp),
+                                    //we use this for both cases
+                                    //profileRegistrationController.photoUrl.value= file,
+                                    child: image != null
+                                          ? Image.file(
+                                        image!,
+                                        fit: BoxFit.cover,
+                                      )
+                                          : Image.asset( // fallback avatar
+                                        AppImages.profilePic,
+                                        fit: BoxFit.cover,
+                                      ),
                                   ),
                                 ),
                               ),
@@ -120,11 +134,21 @@ class _EditProfileViewState extends State<EditProfileView> {
                                       width: 2.w,
                                     ),
                                   ),
-                                  child: SvgPicture.asset(
-                                    AppSvgs.editIcon2Svg,
-                                    color: AppColors.whiteColor,
-                                    width: 18.w,
-                                    height: 18.h,
+                                  child: ImagePickerWidget(
+                                    onImageSelected: (file) {
+                                      //we use this for both cases
+                                      //profileRegistrationController.photoUrl.value= file,
+                                      setState(() {
+                                        image= file;
+                                        print("Image Path: $image");
+                                      });
+                                    },
+                                    child: SvgPicture.asset(
+                                      AppSvgs.editIcon2Svg,
+                                      color: AppColors.whiteColor,
+                                      width: 18.w,
+                                      height: 18.h,
+                                    ),
                                   ),
                                 ),
                               ),
@@ -173,17 +197,18 @@ class _EditProfileViewState extends State<EditProfileView> {
                           isEditName ? 0.verticalSpace : 5.verticalSpace,
                           isEditName
                               ? TextField(
-                                controller: updateNameController,
-                                style: AppStyles.poppins14w400darkGrey2,
-                                decoration: InputDecoration(
-                                  hintText: "Enter full name".tr,
-                                  border: InputBorder.none,
-                                ),
-                              )
+                            controller: updateNameController,
+                            style: AppStyles.poppins14w400darkGrey2,
+                            decoration: InputDecoration(
+                              hintText: "Enter full name".tr,
+                              border: InputBorder.none,
+                            ),
+                          )
                               : Text(
-                               "${PrefManager.read("firstName") ?? ""} ${PrefManager.read("lastName") ?? ""}",
-                                style: AppStyles.poppins14w300darkGrey2,
-                              ),
+                            "${PrefManager.read("firstName") ??
+                                ""} ${PrefManager.read("lastName") ?? ""}",
+                            style: AppStyles.poppins14w300darkGrey2,
+                          ),
                         ],
                       ),
                     ),
@@ -193,20 +218,21 @@ class _EditProfileViewState extends State<EditProfileView> {
                           final fullName = updateNameController.text.trim();
                           final parts = fullName.split(" ");
                           final firstName = parts.isNotEmpty ? parts.first : "";
-                          final lastName = parts.length > 1 ? parts.sublist(1).join(" ") : "";
+                          final lastName = parts.length > 1 ? parts.sublist(1)
+                              .join(" ") : "";
                           PrefManager.save("firstName", firstName);
                           PrefManager.save("lastName", lastName);
                           isEditName = !isEditName;
                         });
                       },
                       child:
-                          isEditName
-                              ? SvgPicture.asset(
-                                AppSvgs.tickSvg,
-                                height: 20.h,
-                                color: AppColors.darkGrey2,
-                              )
-                              : SvgPicture.asset(AppSvgs.editIcon3Svg),
+                      isEditName
+                          ? SvgPicture.asset(
+                        AppSvgs.tickSvg,
+                        height: 20.h,
+                        color: AppColors.darkGrey2,
+                      )
+                          : SvgPicture.asset(AppSvgs.editIcon3Svg),
                     ),
                   ],
                 ),
@@ -236,69 +262,69 @@ class _EditProfileViewState extends State<EditProfileView> {
                           5.verticalSpace,
                           isEditGender
                               ? Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceEvenly,
+                            mainAxisAlignment:
+                            MainAxisAlignment.spaceEvenly,
+                            children: [
+                              Column(
                                 children: [
-                                  Column(
-                                    children: [
-                                      Radio<int>(
-                                        value: 1,
-                                        groupValue: gender,
-                                        activeColor: AppColors.lightBlue,
-                                        onChanged: (val) {
-                                          setState(() => gender = val ?? 1);
-                                        },
-                                      ),
-                                      Text(
-                                        "Male".tr,
-                                        style: AppStyles.poppins14w400darkGrey2,
-                                      ),
-                                    ],
+                                  Radio<int>(
+                                    value: 1,
+                                    groupValue: gender,
+                                    activeColor: AppColors.lightBlue,
+                                    onChanged: (val) {
+                                      setState(() => gender = val ?? 1);
+                                    },
                                   ),
-                                  16.horizontalSpace,
-                                  Column(
-                                    children: [
-                                      Radio<int>(
-                                        value: 2,
-                                        groupValue: gender,
-                                        activeColor: AppColors.lightBlue,
-                                        onChanged: (val) {
-                                          setState(() => gender = val ?? 2);
-                                        },
-                                      ),
-                                      Text(
-                                        "Female".tr,
-                                        style: AppStyles.poppins14w400darkGrey2,
-                                      ),
-                                    ],
-                                  ),
-                                  16.horizontalSpace,
-                                  Column(
-                                    children: [
-                                      Radio<int>(
-                                        value: 3,
-                                        groupValue: gender,
-                                        activeColor: AppColors.lightBlue,
-                                        onChanged: (val) {
-                                          setState(() => gender = val ?? 3);
-                                        },
-                                      ),
-                                      Text(
-                                        "Other".tr,
-                                        style: AppStyles.poppins14w400darkGrey2,
-                                      ),
-                                    ],
+                                  Text(
+                                    "Male".tr,
+                                    style: AppStyles.poppins14w400darkGrey2,
                                   ),
                                 ],
-                              )
-                              : Text(
-                                gender == 1
-                                    ? "Male".tr
-                                    : gender == 2
-                                    ? "Female".tr
-                                    : "Other".tr,
-                                style: AppStyles.poppins14w300darkGrey2,
                               ),
+                              16.horizontalSpace,
+                              Column(
+                                children: [
+                                  Radio<int>(
+                                    value: 2,
+                                    groupValue: gender,
+                                    activeColor: AppColors.lightBlue,
+                                    onChanged: (val) {
+                                      setState(() => gender = val ?? 2);
+                                    },
+                                  ),
+                                  Text(
+                                    "Female".tr,
+                                    style: AppStyles.poppins14w400darkGrey2,
+                                  ),
+                                ],
+                              ),
+                              16.horizontalSpace,
+                              Column(
+                                children: [
+                                  Radio<int>(
+                                    value: 3,
+                                    groupValue: gender,
+                                    activeColor: AppColors.lightBlue,
+                                    onChanged: (val) {
+                                      setState(() => gender = val ?? 3);
+                                    },
+                                  ),
+                                  Text(
+                                    "Other".tr,
+                                    style: AppStyles.poppins14w400darkGrey2,
+                                  ),
+                                ],
+                              ),
+                            ],
+                          )
+                              : Text(
+                            gender == 1
+                                ? "Male".tr
+                                : gender == 2
+                                ? "Female".tr
+                                : "Other".tr,
+                            style: AppStyles.poppins14w300darkGrey2,
+                          ),
                         ],
                       ),
                     ),
@@ -308,17 +334,16 @@ class _EditProfileViewState extends State<EditProfileView> {
                           isEditGender = !isEditGender;
                         });
                         if (!isEditGender) {
-                          changeGender();
                         }
                       },
                       child:
-                          isEditGender
-                              ? SvgPicture.asset(
-                                AppSvgs.tickSvg,
-                                height: 20.h,
-                                color: AppColors.darkGrey2,
-                              )
-                              : SvgPicture.asset(AppSvgs.editIcon3Svg),
+                      isEditGender
+                          ? SvgPicture.asset(
+                        AppSvgs.tickSvg,
+                        height: 20.h,
+                        color: AppColors.darkGrey2,
+                      )
+                          : SvgPicture.asset(AppSvgs.editIcon3Svg),
                     ),
                   ],
                 ),
@@ -329,10 +354,20 @@ class _EditProfileViewState extends State<EditProfileView> {
                 child: CustomAppButton(
                   onTap: () {
                     final fullName = updateNameController.text.trim();
-                    final parts = fullName.split(" ");
-                    final firstName = parts.isNotEmpty ? parts.first : "";
-                    final lastName = parts.length > 1 ? parts.sublist(1).join(" ") : "";
-                    final selectedGender = gender ?? 1;
+
+                    String firstName;
+                    String lastName;
+
+                    if (fullName.isEmpty) {
+                      firstName = PrefManager.read("firstName") ?? "";
+                      lastName = PrefManager.read("lastName") ?? "";
+                    } else {
+                      final parts = fullName.split(" ");
+                      firstName = parts.isNotEmpty ? parts.first : "";
+                      lastName = parts.length > 1 ? parts.sublist(1).join(" ") : "";
+                    }
+
+                    final selectedGender = gender ?? PrefManager.read("gender") ?? 1;
 
                     profileRegistrationController.updateProfileEditView(
                       firstName: firstName,
@@ -350,13 +385,5 @@ class _EditProfileViewState extends State<EditProfileView> {
         ),
       ),
     );
-  }
-
-  void editName() {
-    print('Edit Name');
-  }
-
-  void changeGender() {
-    print('Change Gender');
   }
 }

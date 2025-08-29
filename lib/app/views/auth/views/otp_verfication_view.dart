@@ -100,16 +100,14 @@ class _OtpVerficationViewState extends State<OtpVerficationView> {
                   border: Border.all(color: AppColors.whiteColor, width: 1.5.w),
                 ),
 
-                child: Center(
-                  child: Text(
-                    "Invalid code. Enter the correct verification code".tr,
-                    style: GoogleFonts.poppins(
-                      fontWeight: FontWeight.w600,
-                      fontSize: FontSizes.pt12,
-                      color: AppColors.redColor,
+                child: Obx(() {
+                  return Center(
+                    child: Text(
+                      phoneLoginController.errorToShow.value.tr,
+                      style: phoneLoginController.successCondition.value?AppStyles.poppins12w600green:AppStyles.poppins12w600red,
                     ),
-                  ),
-                ),
+                  );
+                }),
               ),
               20.verticalSpace,
               Row(
@@ -160,7 +158,7 @@ class _OtpVerficationViewState extends State<OtpVerficationView> {
     //Get.toNamed(AppRoutes.profileRegistrationView);
   }
 
-  // void resendCode() {
-  //   phoneLoginController.sendOtp(phoneNumber);
-  // }
+// void resendCode() {
+//   phoneLoginController.sendOtp(phoneNumber);
+// }
 }

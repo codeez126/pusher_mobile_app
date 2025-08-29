@@ -1,3 +1,4 @@
+
 import 'package:base_project/app/routes/app_routes.dart';
 import 'package:base_project/app/views/auth/model/google_login_response_model.dart';
 import 'package:base_project/app/views/auth/model/register_phone_number_model.dart';
@@ -77,6 +78,8 @@ class PhoneLoginController extends GetxController {
   var verifyOtpModel = VerifyOtpReponseModel().obs;
   final isClickedCountryCode = false.obs;
   final RxBool loading = false.obs;
+  final RxString errorToShow ="".obs;
+  final RxBool successCondition =false.obs;
   static final GoogleSignIn googleSignIn = GoogleSignIn(
     scopes: [
       'email',
@@ -112,26 +115,38 @@ class PhoneLoginController extends GetxController {
           PrefManager.save("lastName", model.data!.user!.lastName);
           PrefManager.save("dob", model.data!.user!.dob);
           PrefManager.save("gender", model.data!.user!.gender);
-
+          errorToShow.value = model.message.toString();
+          successCondition.value =true;
           Utils.toastMessage("${model.message}");
           final register = model.data?.user?.isRegistered;
           print("Registered Or Not : $register");
           if(register==0){
-            Get.toNamed(AppRoutes.profileRegistrationView);
+            Duration();
+            Future.delayed(Duration(seconds: 3),(){
+              Get.toNamed(AppRoutes.profileRegistrationView);
+            });
           }else {
-            Get.toNamed(AppRoutes.bottomNavNavigation);
+            Future.delayed(Duration(seconds: 3),(){
+              Get.toNamed(AppRoutes.bottomNavNavigation);
+            });
           }
 
         } else {
           print("Otp Verification Failed: ${model.message}");
+          successCondition.value =false;
+          errorToShow.value = model.message.toString();
           Utils.toastMessage(model.message ?? "Otp verification failed".tr);
         }
       } else {
         print("No response from server");
+        successCondition.value =false;
+        errorToShow.value = "Unable to verify OTP, please try again".tr;
         Utils.toastMessage("Unable to verify OTP, please try again".tr);
       }
     } catch (e) {
       print("Error verifying OTP: $e");
+      successCondition.value =false;
+      errorToShow.value = "Error verifying OTP: $e";
       Utils.toastMessage("${"Error verifying OTP".tr}: $e");
     }
   }

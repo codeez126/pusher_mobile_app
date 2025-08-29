@@ -22,7 +22,6 @@ class CoursesView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final CoursesViewModel coursesViewModel;
     return Scaffold(
       extendBody: false,
       body: BackdropFilter(
@@ -148,7 +147,6 @@ class CoursesView extends StatelessWidget {
                           courseDurations: courseDurations,
                           favIcon: AppSvgs.heartSvg,
                         );
-
                         return CustomListviewItem(
                           course: courses,
                           onTap: () {
@@ -173,91 +171,6 @@ class CoursesView extends StatelessWidget {
                 },
               ),
             ),
-            // ),
-                // CustomCategoryList(
-                //     categoryName: CoursesViewModel.coursesList[0].categoryName,
-                //     child: ListView.builder(
-                //       padding: EdgeInsets.only(top: 10.h),
-                //       scrollDirection: Axis.horizontal,
-                //       itemCount: CoursesViewModel.coursesList[0].courses.length,
-                //       itemBuilder: (context, index) {
-                //         final course = CoursesViewModel.coursesList[0].courses[index];
-                //         final courseCategory = CoursesViewModel.coursesList[0].categoryName;
-                //         final courseTittle = course.title;
-                //         final courseImage = course.backgroundImage;
-                //         final courseDurations = course.duration;
-                //         final timelineMinutes = course.timeLine.minutes;
-                //         final timelineSeconds = course.timeLine.seconds;
-                //         final courses = CoursesAddingFavModel(
-                //           categoryName: courseCategory,
-                //           title: courseTittle,
-                //           imagePath: courseImage,
-                //           courseDurations: courseDurations,
-                //           favIcon: AppSvgs.heartSvg,
-                //         );
-                //         return CustomListviewItem(
-                //           course: courses,
-                //           onTap: () {
-                //             Get.toNamed(
-                //               AppRoutes.coursesDetailView,
-                //               arguments: {
-                //                 'title': courseTittle,
-                //                 'category': courseCategory,
-                //                 'backgroundImage': courseImage,
-                //                 'courseDurations': courseDurations,
-                //                 'courseTimelineMinutes': timelineMinutes,
-                //                 'courseTimelineSeconds': timelineSeconds,
-                //                 'selectedCourseIndex': index,
-                //                 'categoryIndex': 0,
-                //               },
-                //             );
-                //           },
-                //         );
-                //       },
-                //     )),
-                //
-                // 10.verticalSpace,
-                // CustomCategoryList(
-                //     categoryName: CoursesViewModel.coursesList[1].categoryName,
-                //     child: ListView.builder(
-                //       padding: EdgeInsets.only(top: 10.h),
-                //       scrollDirection: Axis.horizontal,
-                //       itemCount: CoursesViewModel.coursesList[1].courses.length,
-                //       itemBuilder: (context, index) {
-                //         final course = CoursesViewModel.coursesList[1].courses[index];
-                //         final courseCategory = CoursesViewModel.coursesList[1].categoryName;
-                //         final courseTittle = course.title;
-                //         final courseImage = course.backgroundImage;
-                //         final courseDurations = course.duration;
-                //         final timelineMinutes = course.timeLine.minutes;
-                //         final timelineSeconds = course.timeLine.seconds;
-                //         final courses = CoursesAddingFavModel(
-                //           categoryName: courseCategory,
-                //           title: courseTittle,
-                //           imagePath: courseImage,
-                //           courseDurations: courseDurations,
-                //           favIcon: AppSvgs.heartSvg,
-                //         );
-                //         return CustomListviewItem(
-                //           course: courses,
-                //           onTap: () {
-                //             Get.toNamed(
-                //               AppRoutes.coursesDetailView,
-                //               arguments: {
-                //                 'title': courseTittle,
-                //                 'category': courseCategory,
-                //                 'backgroundImage': courseImage,
-                //                 'courseDurations': courseDurations,
-                //                 'courseTimelineMinutes': timelineMinutes,
-                //                 'courseTimelineSeconds': timelineSeconds,
-                //                 'selectedCourseIndex': index,
-                //                 'categoryIndex': 1,
-                //               },
-                //             );
-                //           },
-                //         );
-                //       },
-                //     )),
             ]
           ),
         ),

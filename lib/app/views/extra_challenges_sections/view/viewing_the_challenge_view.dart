@@ -132,7 +132,7 @@ class _ViewingTheChallengeViewState extends State<ViewingTheChallengeView> {
                                   },
                                   child: SvgPicture.asset(
                                     AppSvgs.shareSvg,
-                                    color: AppColors.darkGrey2,
+                                    colorFilter: ColorFilter.mode(AppColors.darkGrey2, BlendMode.srcIn),
                                     height: 30.h,
                                   ),
                                 ),
@@ -164,7 +164,7 @@ class _ViewingTheChallengeViewState extends State<ViewingTheChallengeView> {
                                   },
                                   child: SvgPicture.asset(
                                     AppSvgs.calenderSvg,
-                                    color: AppColors.darkGrey2,
+                                    colorFilter: ColorFilter.mode(AppColors.darkGrey2, BlendMode.srcIn),
                                     height: 30.h,
                                   ),
                                 ),

@@ -279,7 +279,7 @@ class _ImagePickerWidgetState extends State<ImagePickerWidget> {
         uiSettings: [
           AndroidUiSettings(
             toolbarTitle: 'Crop Image',
-            toolbarColor: Theme.of(context).primaryColor,
+            toolbarColor: AppColors.darkGrey2,
             toolbarWidgetColor: Colors.white,
             initAspectRatio: CropAspectRatioPreset.original,
             lockAspectRatio: widget.aspectRatio != null,

@@ -28,7 +28,7 @@ class ProfileRegistrationController extends GetxController {
   var selectedDay = '01'.obs;
   var selectedMonth = '01'.obs;
   var selectedYear = DateTime.now().year.toString().obs;
-
+  Rx<File?> photoUrl = Rx<File?>(null);
   var isDayDropdownOpen = false.obs;
   var isMonthDropdownOpen = false.obs;
   var isYearDropdownOpen = false.obs;
@@ -62,7 +62,6 @@ class ProfileRegistrationController extends GetxController {
     };
 
     Utils.showLoader();
-
     dio.Response? response = await networkManager.callApi(
       urlEndPoint: ApiEndpoints.apiUpdateProfileEndPoint,
       method: HttpMethod.post,
@@ -175,7 +174,4 @@ class ProfileRegistrationController extends GetxController {
       print("DOB Saved: $dob");
     }
   }
-
-
-
 }

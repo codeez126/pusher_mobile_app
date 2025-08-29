@@ -9,8 +9,6 @@ class AppImages {
   static const String bell = 'assets/icons/bell.png';
   static const String editIcon = 'assets/icons/editIcoon.png';
 
-
-
   /// Images
   static const String bgMainImage = 'assets/images/bg_main.png';
   static const String appLogo = 'assets/images/pusher. logo.png';
@@ -57,8 +55,6 @@ class AppImages {
   static const String motivationalVideoBackgroundTwo="assets/images/motivational_videos_view/motivational_videos_2.jpg";
   static const String motivationalVideoBackgroundThree="assets/images/motivational_videos_view/motivational_videos_3.jpg";
   static const String motivationalVideoBackgroundFour="assets/images/motivational_videos_view/motivational_videos_4.jpg";
-
-
 
   //============================Profile View==========================================
   static const String profilePic = "assets/images/profile_view/image.png";

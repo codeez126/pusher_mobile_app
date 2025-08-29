@@ -63,6 +63,8 @@ class AppStyles{
   static TextStyle poppins12w700darkGrey2 = GoogleFonts.poppins(fontSize: FontSizes.pt12,fontWeight: FontWeight.w700,color: AppColors.darkGrey2);
   static TextStyle poppins28w300white = GoogleFonts.poppins(fontSize: FontSizes.pt28,fontWeight: FontWeight.w300,color: AppColors.whiteColor);
   static TextStyle poppins12w600darkGrey2 = GoogleFonts.poppins(fontSize: FontSizes.pt12,fontWeight: FontWeight.w600,color: AppColors.darkGrey2);
+  static TextStyle poppins12w600red = GoogleFonts.poppins(fontSize: FontSizes.pt12,fontWeight: FontWeight.w600,color: AppColors.redColor);
+  static TextStyle poppins12w600green = GoogleFonts.poppins(fontSize: FontSizes.pt12,fontWeight: FontWeight.w600,color: AppColors.greenColor);
   static TextStyle poppins13w700white = GoogleFonts.poppins(fontSize: FontSizes.pt13,fontWeight: FontWeight.w700,color: AppColors.whiteColor);
   static TextStyle poppins10w700white = GoogleFonts.poppins(fontSize: FontSizes.pt10,fontWeight: FontWeight.w700,color: AppColors.whiteColor);
   static TextStyle poppins16w700white = GoogleFonts.poppins(fontWeight: FontWeight.w700, fontSize: FontSizes.pt16, color: AppColors.whiteColor,);
