@@ -15,8 +15,9 @@ class SplashController extends GetxController {
   }
 
   splashCountDown() {
-    Future.delayed(const Duration(seconds: 10), () {
-      Get.offNamed(PrefManager.isLogin()?AppRoutes.bottomNavNavigation:AppRoutes.onboardingView);
+    Future.delayed(const Duration(milliseconds: 2000), () {
+      // Get.offNamed(PrefManager.isLogin()?AppRoutes.bottomNavNavigation:AppRoutes.onboardingView);
+      Get.offNamed(AppRoutes.onboardingView);
     });
   }
 }

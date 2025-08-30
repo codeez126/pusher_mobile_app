@@ -28,50 +28,52 @@ class VouchersAndCoinView extends StatelessWidget {
           fit: BoxFit.cover,
         ),
       ),
-      child: SingleChildScrollView(
-        child: Column(
-          children: [
-            Stack(
-              alignment: Alignment.topCenter,
-              children: [
-                Container(height: 180.h),
-                Container(
-                  height: 130.h,
-                  alignment: Alignment.bottomCenter,
-                  padding: EdgeInsets.only(bottom: 25.h),
-                  width: double.infinity,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.vertical(
-                      bottom: Radius.circular(50.sp),
-                    ),
-                    color: AppColors.whiteColor.withOpacity(0.30),
+      child: Column(
+        children: [
+          Stack(
+            clipBehavior: Clip.none,
+            alignment: Alignment.topCenter,
+            children: [
+              // Container(height: 180.h),
+              Container(
+                height: 100,
+                alignment: Alignment.bottomCenter,
+                padding: EdgeInsets.only(bottom: 25.h),
+                width: double.infinity,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.vertical(
+                    bottom: Radius.circular(50.sp),
                   ),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Image.asset(AppImages.premiumStar, height: 30.h),
-                      5.horizontalSpace,
-                      Text("Challenges", style: AppStyles.poppins20w600darkGrey2),
-                    ],
-                  ),
+                  color: AppColors.whiteColor.withOpacity(0.30),
                 ),
-                Positioned(
-                  bottom: 0,
-                  left: 0,
-                  child: GestureDetector(
-                    behavior: HitTestBehavior.translucent,
-                    onTap: () {
-                      Get.back();
-                      print('tapped');
-                    },
-                    child: Image.asset(AppImages.backImage, height: 130.h),
-                  ),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Image.asset(AppImages.premiumStar, height: 30.h),
+                    5.horizontalSpace,
+                    Text("Challenges", style: AppStyles.poppins20w600darkGrey2),
+                  ],
                 ),
-              ],
-            ),
-            ListView.builder(
+              ),
+              Positioned(
+                bottom: -40,
+                left: 0,
+                child: GestureDetector(
+                  behavior: HitTestBehavior.translucent,
+                  onTap: () {
+                    Get.back();
+                    print('tapped');
+                  },
+                  child: Image.asset(AppImages.backImage, height: 100),
+                ),
+              ),
+            ],
+          ),
+          SizedBox(height: 20),
+          Expanded(
+            child: ListView.builder(
               padding: EdgeInsets.zero,
-              physics: NeverScrollableScrollPhysics(),
+              // physics: NeverScrollableScrollPhysics(),
               shrinkWrap: true,
               itemCount: VouchersAndCoinsModel.challenges.length,
               itemBuilder: (context, index) {
@@ -89,12 +91,13 @@ class VouchersAndCoinView extends StatelessWidget {
                   },
                 );
               },
-            )
-          ],
-        ),
+            ),
+          ),
+        ],
       ),
     );
   }
+
   void showChallengeBottomSheet(BuildContext context, dynamic challenge) {
     showModalBottomSheet(
       context: context,
@@ -119,18 +122,18 @@ class VouchersAndCoinView extends StatelessWidget {
                   onTap: () {
                     Navigator.pop(context);
                     Get.toNamed(
-                        AppRoutes.viewingTheChallengeView,
-                        arguments: {
-                          'challengeName': challenge.challengeName,
-                          'backgroundImage': challenge.backgroundImage,
-                          'challengePoints': challenge.points,
-                          'trainerName': challenge.trainerName,
-                          'trainerDescription': challenge.trainerDescription,
-                          'challengeDescription': challenge.courseDescription,
-                          'tasks': challenge.tasks,
-                          'challengeTime': challenge.challengeTime,
-                          'isPremium': false,
-                        }
+                      AppRoutes.viewingTheChallengeView,
+                      arguments: {
+                        'challengeName': challenge.challengeName,
+                        'backgroundImage': challenge.backgroundImage,
+                        'challengePoints': challenge.points,
+                        'trainerName': challenge.trainerName,
+                        'trainerDescription': challenge.trainerDescription,
+                        'challengeDescription': challenge.courseDescription,
+                        'tasks': challenge.tasks,
+                        'challengeTime': challenge.challengeTime,
+                        'isPremium': false,
+                      },
                     );
                   },
                   child: SvgPicture.asset(AppSvgs.backImageWhiteSvg),
@@ -155,10 +158,7 @@ class VouchersAndCoinView extends StatelessWidget {
                       borderRadius: BorderRadius.vertical(
                         top: Radius.circular(30.r),
                       ),
-                      border: Border.all(
-                        color: Colors.white,
-                        width: 1,
-                      ),
+                      border: Border.all(color: Colors.white, width: 1),
                     ),
                     child: Column(
                       mainAxisSize: MainAxisSize.min,
@@ -167,12 +167,18 @@ class VouchersAndCoinView extends StatelessWidget {
                         ClipRRect(
                           borderRadius: BorderRadius.circular(55.r),
                           child: BackdropFilter(
-                            filter: ImageFilter.blur(sigmaX: 10,sigmaY: 10),
+                            filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
                             child: Container(
                               alignment: Alignment.center,
-                              padding: EdgeInsets.symmetric(horizontal: 12.sp,vertical: 10.sp),
+                              padding: EdgeInsets.symmetric(
+                                horizontal: 12.sp,
+                                vertical: 10.sp,
+                              ),
                               decoration: BoxDecoration(
-                                border: Border.all(width: 1.2.w,color: AppColors.whiteColor),
+                                border: Border.all(
+                                  width: 1.2.w,
+                                  color: AppColors.whiteColor,
+                                ),
                                 color: AppColors.whiteColor.withOpacity(0.45),
                                 borderRadius: BorderRadius.circular(55.r),
                               ),
@@ -180,18 +186,21 @@ class VouchersAndCoinView extends StatelessWidget {
                                 onTap: () {
                                   Get.back();
                                   Get.toNamed(
-                                      AppRoutes.viewingTheChallengeView,
-                                      arguments: {
-                                        'challengeName': challenge.challengeName,
-                                        'backgroundImage': challenge.backgroundImage,
-                                        'challengePoints': challenge.points,
-                                        'trainerName': challenge.trainerName,
-                                        'trainerDescription': challenge.trainerDescription,
-                                        'challengeDescription': challenge.courseDescription,
-                                        'tasks': challenge.tasks,
-                                        'challengeTime': challenge.challengeTime,
-                                        'isPremium': true,
-                                      }
+                                    AppRoutes.viewingTheChallengeView,
+                                    arguments: {
+                                      'challengeName': challenge.challengeName,
+                                      'backgroundImage':
+                                          challenge.backgroundImage,
+                                      'challengePoints': challenge.points,
+                                      'trainerName': challenge.trainerName,
+                                      'trainerDescription':
+                                          challenge.trainerDescription,
+                                      'challengeDescription':
+                                          challenge.courseDescription,
+                                      'tasks': challenge.tasks,
+                                      'challengeTime': challenge.challengeTime,
+                                      'isPremium': true,
+                                    },
                                   );
                                   Utils.toastMessage("You purchased Premium");
                                 },
@@ -208,8 +217,8 @@ class VouchersAndCoinView extends StatelessWidget {
                                       Image.asset(AppImages.premiumStar),
                                       10.horizontalSpace,
                                       Text(
-                                          "I Want This Challenge",
-                                          style: AppStyles.poppins14w700white
+                                        "I Want This Challenge",
+                                        style: AppStyles.poppins14w700white,
                                       ),
                                     ],
                                   ),
@@ -224,22 +233,16 @@ class VouchersAndCoinView extends StatelessWidget {
                         Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            Text(
-                              ">> ",
-                              style: AppStyles.poppins14w500white
-                            ),
+                            Text(">> ", style: AppStyles.poppins14w500white),
                             Text(
                               "Go Premium ",
-                              style: AppStyles.poppins14w700white
+                              style: AppStyles.poppins14w700white,
                             ),
                             Text(
                               "To Unlock This Challenge ",
-                              style: AppStyles.poppins14w500white
+                              style: AppStyles.poppins14w500white,
                             ),
-                            Text(
-                              "<<",
-                              style: AppStyles.poppins14w500white
-                            ),
+                            Text("<<", style: AppStyles.poppins14w500white),
                           ],
                         ),
                         60.verticalSpace,
@@ -247,7 +250,7 @@ class VouchersAndCoinView extends StatelessWidget {
                     ),
                   ),
                 ],
-              )
+              ),
             ],
           ),
         );

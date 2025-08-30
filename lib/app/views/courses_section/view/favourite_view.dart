@@ -12,11 +12,12 @@ import '../../../../core/constants/app_images.dart';
 import '../../../../core/constants/app_svgs.dart';
 import '../controller/favorites_controller.dart';
 
-
 class FavouriteView extends StatelessWidget {
   FavouriteView({super.key});
 
-  final FavoritesController favoritesController = Get.put(FavoritesController());
+  final FavoritesController favoritesController = Get.put(
+    FavoritesController(),
+  );
 
   @override
   Widget build(BuildContext context) {
@@ -35,13 +36,14 @@ class FavouriteView extends StatelessWidget {
           child: Column(
             children: [
               Stack(
+                clipBehavior: Clip.none,
                 alignment: Alignment.topCenter,
                 children: [
-                  Container(height: 180.h),
+                  // Container(height: 180.h),
                   Container(
                     alignment: Alignment.bottomCenter,
                     padding: EdgeInsets.only(bottom: 30.h),
-                    height: 130.h,
+                    height: 100,
                     width: double.infinity,
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.vertical(
@@ -52,7 +54,10 @@ class FavouriteView extends StatelessWidget {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        SvgPicture.asset(AppSvgs.heartSvg,color: AppColors.darkGrey2,),
+                        SvgPicture.asset(
+                          AppSvgs.heartSvg,
+                          color: AppColors.darkGrey2,
+                        ),
                         5.horizontalSpace,
                         Text(
                           "Favorites".tr,
@@ -62,7 +67,7 @@ class FavouriteView extends StatelessWidget {
                     ),
                   ),
                   Positioned(
-                    bottom: 0,
+                    bottom: -40,
                     left: 0,
                     child: GestureDetector(
                       behavior: HitTestBehavior.translucent,
@@ -70,13 +75,13 @@ class FavouriteView extends StatelessWidget {
                         Get.back();
                         print('tapped');
                       },
-                      child: Image.asset(AppImages.backImage, height: 130.h),
+                      child: Image.asset(AppImages.backImage, height: 110),
                     ),
                   ),
                 ],
               ),
-              10.verticalSpace,
 
+              // 10.verticalSpace,
               Obx(() {
                 if (favoritesController.favorites.isEmpty) {
                   return Center(child: Text("No favorites yet".tr));
@@ -84,7 +89,7 @@ class FavouriteView extends StatelessWidget {
                 return SizedBox(
                   height: 270.h,
                   child: ListView.builder(
-                    scrollDirection:Axis.horizontal,
+                    scrollDirection: Axis.horizontal,
                     itemCount: favoritesController.favorites.length,
                     itemBuilder: (context, index) {
                       final course = favoritesController.favorites[index];
@@ -93,21 +98,29 @@ class FavouriteView extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Expanded(
-                              child: CustomListviewItem(
-                              course: course, onTap: (){},
-                          )),
-                          5.verticalSpace,
-                          Container(
-                            margin: EdgeInsets.only(left: 10.w),
-                            decoration: BoxDecoration(
-                              color: AppColors.whiteColor,
-                              borderRadius: BorderRadius.circular(25.sp),
+                            child: CustomListviewItem(
+                              course: course,
+                              onTap: () {},
                             ),
-                            padding: EdgeInsets.symmetric(horizontal: 20.w,vertical: 10.h),
-                            child: Text(
-                              course.categoryName,
-                              style: AppStyles.poppins12w700darkGrey2,
-                              textAlign: TextAlign.center,
+                          ),
+                          // 5.verticalSpace,
+                          Transform(
+                            transform: Matrix4.translationValues(0, -8, 0),
+                            child: Container(
+                              margin: EdgeInsets.only(left: 10.w),
+                              decoration: BoxDecoration(
+                                color: AppColors.whiteColor,
+                                borderRadius: BorderRadius.circular(25.sp),
+                              ),
+                              padding: EdgeInsets.symmetric(
+                                horizontal: 10.w,
+                                vertical: 10.h,
+                              ),
+                              child: Text(
+                                course.categoryName,
+                                style: AppStyles.poppins12w600darkGrey2,
+                                textAlign: TextAlign.center,
+                              ),
                             ),
                           ),
                         ],
@@ -115,7 +128,7 @@ class FavouriteView extends StatelessWidget {
                     },
                   ),
                 );
-              })
+              }),
             ],
           ),
         ),

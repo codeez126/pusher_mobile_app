@@ -34,17 +34,18 @@ class _FadeThreeWidgetsState extends State<FadeThreeWidgets> {
                         key: const ValueKey(1),
                         children: [
                           Container(
-                            width: Get.width * 0.50,
+                            // width: Get.width * 0.50,
                             padding: EdgeInsets.symmetric(
-                              horizontal: 10,
-                              vertical: 10,
+                              horizontal: 6,
+                              vertical: 4,
                             ),
                             decoration: BoxDecoration(
                               color: AppColors.yellow,
-                              borderRadius: BorderRadius.circular(20),
-                              border: Border.all(color: Colors.white, width: 1),
+                              borderRadius: BorderRadius.circular(50),
+                              border: Border.all(color: Colors.white, width: 2),
                             ),
                             child: Row(
+                              mainAxisSize: MainAxisSize.min,
                               spacing: 5,
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
@@ -65,7 +66,7 @@ class _FadeThreeWidgetsState extends State<FadeThreeWidgets> {
                             ),
                           ),
                           Padding(
-                            padding: const EdgeInsets.all(8.0),
+                            padding: const EdgeInsets.symmetric(horizontal: 16),
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
@@ -80,6 +81,8 @@ class _FadeThreeWidgetsState extends State<FadeThreeWidgets> {
                                   },
                                   child: Image.asset(
                                     "assets/images/calender.png",
+                                    width: 60,
+                                    height: 60,
                                   ),
                                 ),
                                 GestureDetector(
@@ -91,7 +94,11 @@ class _FadeThreeWidgetsState extends State<FadeThreeWidgets> {
                                       curve: Curves.easeInOut,
                                     );
                                   },
-                                  child: Image.asset("assets/images/star.png"),
+                                  child: Image.asset(
+                                    "assets/images/star.png",
+                                    width: 60,
+                                    height: 60,
+                                  ),
                                 ),
                               ],
                             ),
@@ -103,18 +110,18 @@ class _FadeThreeWidgetsState extends State<FadeThreeWidgets> {
                         key: const ValueKey(0),
                         children: [
                           Container(
-                            width: Get.width * 0.50,
                             padding: EdgeInsets.symmetric(
-                              horizontal: 10,
-                              vertical: 10,
+                              horizontal: 6,
+                              vertical: 4,
                             ),
                             decoration: BoxDecoration(
                               color: Color(0xffe4e4e4),
-                              borderRadius: BorderRadius.circular(20),
-                              border: Border.all(color: Colors.white, width: 1),
+                              borderRadius: BorderRadius.circular(50),
+                              border: Border.all(color: Colors.white, width: 2),
                             ),
                             child: Row(
-                              spacing: 5,
+                              mainAxisSize: MainAxisSize.min,
+                              spacing: 0,
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
                                 Image.asset(
@@ -133,7 +140,7 @@ class _FadeThreeWidgetsState extends State<FadeThreeWidgets> {
                             ),
                           ),
                           Padding(
-                            padding: const EdgeInsets.all(8.0),
+                            padding: const EdgeInsets.symmetric(horizontal: 16),
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.end,
                               children: [
@@ -148,8 +155,8 @@ class _FadeThreeWidgetsState extends State<FadeThreeWidgets> {
                                   },
                                   child: Image.asset(
                                     "assets/images/homeplay.png",
-                                    width: 40,
-                                    height: 40,
+                                    width: 60,
+                                    height: 60,
                                   ),
                                 ),
                               ],
@@ -161,18 +168,19 @@ class _FadeThreeWidgetsState extends State<FadeThreeWidgets> {
                         key: const ValueKey(2),
                         children: [
                           Container(
-                            width: Get.width * 0.50,
+                            // width: Get.width * 0.50,
                             padding: EdgeInsets.symmetric(
-                              horizontal: 10,
-                              vertical: 10,
+                              horizontal: 6,
+                              vertical: 4,
                             ),
                             decoration: BoxDecoration(
                               color: Color(0xffe4e4e4),
-                              borderRadius: BorderRadius.circular(20),
-                              border: Border.all(color: Colors.white, width: 1),
+                              borderRadius: BorderRadius.circular(50),
+                              border: Border.all(color: Colors.white, width: 2),
                             ),
                             child: Row(
-                              spacing: 5,
+                              mainAxisSize: MainAxisSize.min,
+                              spacing: 0,
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
                                 Image.asset(
@@ -191,7 +199,7 @@ class _FadeThreeWidgetsState extends State<FadeThreeWidgets> {
                             ),
                           ),
                           Padding(
-                            padding: const EdgeInsets.all(8.0),
+                            padding: const EdgeInsets.symmetric(horizontal: 16),
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.start,
                               children: [
@@ -206,8 +214,8 @@ class _FadeThreeWidgetsState extends State<FadeThreeWidgets> {
                                   },
                                   child: Image.asset(
                                     "assets/images/homeplay.png",
-                                    width: 40,
-                                    height: 40,
+                                    width: 60,
+                                    height: 60,
                                   ),
                                 ),
                               ],

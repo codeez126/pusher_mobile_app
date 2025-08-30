@@ -55,7 +55,11 @@ class AppPages {
     ),
 
     //----------------------------------Home Section-------------------------------------
-    GetPage(name: AppRoutes.wellDoneView, page: () => WellDoneView()),
+    GetPage(
+      name: AppRoutes.wellDoneView,
+      page: () => WellDoneView(),
+      transition: Transition.rightToLeft,
+    ),
     GetPage(name: AppRoutes.home, page: () => HomeScreen()),
     GetPage(name: AppRoutes.notificationsView, page: () => NotificationsView()),
     GetPage(name: AppRoutes.dailyGoalsView, page: () => DailyGoalsView()),

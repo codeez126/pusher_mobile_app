@@ -82,281 +82,362 @@ class _CoursesDetailsViewState extends State<CoursesDetailsView> {
               fit: BoxFit.cover,
             ),
           ),
-          child: SingleChildScrollView(
-            child: Column(
-              children: [
-                Stack(
-                  clipBehavior: Clip.none,
-                  fit: StackFit.passthrough,
-                  alignment: Alignment.topCenter,
-                  children: [
-                    Container(
-                      height: 400.h,
-                      width: double.infinity,
-                      alignment: Alignment.bottomCenter,
-                      padding: EdgeInsets.only(bottom: 10.h),
-                      decoration: BoxDecoration(
-                        color: AppColors.whiteColor,
-                        borderRadius: BorderRadius.vertical(
-                          bottom: Radius.circular(50.sp),
-                        ),
-                      ),
-                      child: RichText(
-                        textAlign: TextAlign.center,
-                        overflow: TextOverflow.ellipsis,
-                        softWrap: true,
-                        maxLines: 1,
-                        text: TextSpan(
-                          children: [
-                            TextSpan(
-                              text: "current lesson:".tr,
-                              style: AppStyles.poppins14w700darkGrey2,
-                            ),
-                            TextSpan(
-                              text: "  Shifting Your Perspective".tr,
-                              style: AppStyles.poppins14w300darkGrey2,
-                            ),
-                          ],
-                        ),
+          child: Column(
+            children: [
+              Stack(
+                children: [
+                  // Container(height: 190.h),
+                  Container(
+                    height: 330,
+                    width: double.infinity,
+                    // alignment: Alignment.bottomCenter,
+                    // padding: EdgeInsets.only(bottom: 4),
+                    decoration: BoxDecoration(
+                      color: AppColors.whiteColor,
+                      borderRadius: BorderRadius.vertical(
+                        bottom: Radius.circular(50.sp),
                       ),
                     ),
-                    Container(
-                      height: 350.h,
-                      width: double.infinity,
-                      decoration: BoxDecoration(
-                        color: AppColors.blackColor,
-                        borderRadius: BorderRadius.vertical(
-                          bottom: Radius.circular(50.sp),
-                        ),
-                        image: DecorationImage(
-                          image: AssetImage(backgroundImage),
-                          fit: BoxFit.cover,
-                        ),
-                      ),
-                      child: Padding(
-                        padding: EdgeInsets.only(bottom: 10.sp),
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.end,
-                          children: [
-                            CustomAudioWaveformPlayer(
-                              isAudioContainerBackground: true,
-                              backgroundColor: AppColors.darkGrey2.withOpacity(0.22),
-                              totalDuration: Duration(minutes: courseTimelineMinutes, seconds: courseTimelineSeconds),
-                            )
-                          ],
-                        ),
-                      ),
-                    ),
-                    Stack(
+                    child: Column(
                       children: [
-                        Container(height: 190.h),
-                        Container(
-                          height: 150.h,
-                          alignment: Alignment.bottomCenter,
-                          width: double.infinity,
-                          padding: EdgeInsets.only(bottom: 10.h),
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.vertical(
-                              bottom: Radius.circular(50.sp),
+                        Expanded(
+                          child: Container(
+                            // height: 350.h,
+                            width: double.infinity,
+                            decoration: BoxDecoration(
+                              color: AppColors.blackColor,
+                              borderRadius: BorderRadius.vertical(
+                                bottom: Radius.circular(50.sp),
+                              ),
+                              image: DecorationImage(
+                                image: AssetImage(backgroundImage),
+                                fit: BoxFit.cover,
+                              ),
                             ),
-                            color: AppColors.yellow,
-                          ),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              SvgPicture.asset(AppSvgs.financialIconSvg),
-                              Text(category.tr, style: AppStyles.poppins16w600white),
-                            ],
+                            child: Padding(
+                              padding: EdgeInsets.only(
+                                bottom: 10.sp,
+                                left: 16,
+                                right: 16,
+                              ),
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.end,
+                                children: [
+                                  CustomAudioWaveformPlayer(
+                                    width: Get.width,
+                                    isAudioContainerBackground: true,
+                                    backgroundColor: AppColors.darkGrey2
+                                        .withOpacity(0.22),
+                                    totalDuration: Duration(
+                                      minutes: courseTimelineMinutes,
+                                      seconds: courseTimelineSeconds,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
                           ),
                         ),
-                        ClipRRect(
-                          borderRadius: BorderRadius.vertical(
-                            bottom: Radius.circular(50.sp),
-                          ),
-                          child: BackdropFilter(
-                            filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
-                            child: Container(
-                              alignment: Alignment.bottomCenter,
-                              width: double.infinity,
-                              height: 100.h,
-                              padding: EdgeInsets.only(bottom: 10.h),
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.vertical(
-                                  bottom: Radius.circular(50.sp),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(vertical: 10),
+                          child: RichText(
+                            textAlign: TextAlign.center,
+                            overflow: TextOverflow.ellipsis,
+                            softWrap: true,
+                            maxLines: 1,
+                            text: TextSpan(
+                              children: [
+                                TextSpan(
+                                  text: "current lesson:".tr,
+                                  style: AppStyles.poppins14w700darkGrey2,
                                 ),
-                                color: AppColors.whiteColor.withOpacity(0.45),
-                              ),
-                              child: Text(
-                                "\"$title\"".tr,
-                                style: AppStyles.poppins20w600darkGrey2,
-                              ),
-                            ),
-                          ),
-                        ),
-                        Positioned(
-                          bottom: 0,
-                          left: 0,
-                          child: GestureDetector(
-                            behavior: HitTestBehavior.translucent,
-                            onTap: () {
-                              Get.back();
-                              print('tapped');
-                            },
-                            child: Image.asset(
-                              AppImages.backImage,
-                              height: 130.h,
+                                TextSpan(
+                                  text: "  Shifting Your Perspective".tr,
+                                  style: AppStyles.poppins14w400darkGrey2,
+                                ),
+                              ],
                             ),
                           ),
                         ),
                       ],
                     ),
-                  ],
-                ),
-                10.verticalSpace,
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  children: [
-                    Container(
-                      margin: EdgeInsets.only(right: 20.w),
-                      padding: EdgeInsets.symmetric(
-                        horizontal: 10.w,
-                        vertical: 5.h,
+                  ),
+                  Container(
+                    height: 120,
+                    alignment: Alignment.bottomCenter,
+                    width: double.infinity,
+                    padding: EdgeInsets.only(bottom: 2),
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.vertical(
+                        bottom: Radius.circular(50.sp),
                       ),
-                      decoration: BoxDecoration(
-                        color: AppColors.whiteColor,
-                        borderRadius: BorderRadius.circular(20.sp),
-                      ),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
+                      color: AppColors.yellow,
+                    ),
+                    child: Column(
+                      children: [
+                        Expanded(
+                          child: ClipRRect(
+                            borderRadius: BorderRadius.vertical(
+                              bottom: Radius.circular(50.sp),
+                            ),
+                            child: BackdropFilter(
+                              filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
+                              child: Container(
+                                alignment: Alignment.bottomCenter,
+                                width: double.infinity,
+                                // height: 80,
+                                padding: EdgeInsets.only(bottom: 10.h),
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.vertical(
+                                    bottom: Radius.circular(50.sp),
+                                  ),
+                                  color: AppColors.whiteColor.withOpacity(0.45),
+                                ),
+                                child: Text(
+                                  "\"$title\"".tr,
+                                  style: AppStyles.poppins20w600darkGrey2,
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                        SizedBox(height: 5),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            SvgPicture.asset(
+                              AppSvgs.financialIconSvg,
+                              height: 18,
+                            ),
+                            SizedBox(width: 5),
+                            Text(
+                              category.tr,
+                              style: AppStyles.poppins16w600white,
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
+                  ),
+
+                  Positioned(
+                    top: 50,
+                    left: 0,
+                    child: GestureDetector(
+                      behavior: HitTestBehavior.translucent,
+                      onTap: () {
+                        Get.back();
+                        print('tapped');
+                      },
+                      child: Image.asset(AppImages.backImage, height: 100),
+                    ),
+                  ),
+                ],
+              ),
+              Expanded(
+                child: SingleChildScrollView(
+                  child: Column(
+                    children: [
+                      10.verticalSpace,
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.end,
                         children: [
-                          SvgPicture.asset(AppSvgs.clockSvg),
-                          5.horizontalSpace,
-                          Text(
-                            courseDurations.tr,
-                            style: AppStyles.poppins12w700darkGrey2,
+                          Container(
+                            margin: EdgeInsets.only(right: 20.w),
+                            padding: EdgeInsets.symmetric(
+                              horizontal: 10.w,
+                              vertical: 5.h,
+                            ),
+                            decoration: BoxDecoration(
+                              color: AppColors.whiteColor,
+                              borderRadius: BorderRadius.circular(20.sp),
+                            ),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                SvgPicture.asset(AppSvgs.clockSvg),
+                                5.horizontalSpace,
+                                Text(
+                                  courseDurations.tr,
+                                  style: AppStyles.poppins12w700darkGrey2,
+                                ),
+                              ],
+                            ),
                           ),
                         ],
                       ),
-                    ),
-                  ],
-                ),
-                10.verticalSpace,
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 20.w),
-                      child: Text(
-                        "All Lessons",
-                        style: AppStyles.poppins16w600darkGrey2,
-                      ),
-                    ),
-                    10.verticalSpace,
-                    ListView.builder(
-                      physics: NeverScrollableScrollPhysics(),
-                      shrinkWrap: true,
-                      padding: EdgeInsets.symmetric(horizontal: 20.w),
-                      itemCount: reorderedCourses.length,
-                      itemBuilder: (context, index) {
-                        final course = reorderedCourses[index];
-                        final isCurrentCourse = index == currentCourseIndex;
-                        return Container(
-                          margin: EdgeInsets.only(bottom: 15.h),
-                          child: Stack(
-                            alignment: Alignment.bottomCenter,
-                            children: [
-                              Container(
-                                width: double.infinity,
-                                height: 150.h,
-                                decoration: BoxDecoration(
-                                  color: AppColors.yellow.withOpacity(0.70),
-                                  borderRadius: BorderRadius.circular(25.sp),
-                                ),
-                                child: Row(
-                                  children: [
-                                    Container(
-                                      width: 150.w,
-                                      margin: EdgeInsets.all(1.sp),
-                                      decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.circular(25.sp),
-                                        image: DecorationImage(
-                                          image: AssetImage(course.backgroundImage),
-                                          fit: BoxFit.cover,
-                                        ),
-                                      ),
-                                      child: Column(
-                                        mainAxisAlignment: MainAxisAlignment.center,
-                                        children: [
-                                          CustomAudioWaveformPlayer(
-                                            buttonHeight: 30.h,
-                                            buttonWidth: 30.w,
-                                            playPauseIconHeight: 10.h,
-                                            isBackgroundContainerEnabled: false,
-                                            isTimerEnabled: false,
-                                            isWaveForm: false,
-                                          ),
-                                          20.verticalSpace
-                                        ],
-                                      ),
-                                    ),
-                                    10.horizontalSpace,
-                                    Expanded(
-                                      child: Column(
-                                        crossAxisAlignment: CrossAxisAlignment.start,
-                                        children: [
-                                          Text(course.title,
-                                              textAlign: TextAlign.center,
-                                              softWrap: true,
-                                              overflow: TextOverflow.ellipsis,
-                                              style: AppStyles.poppins16w600white),
-                                          Text(course.description,
-                                              textAlign: TextAlign.left,
-                                              overflow: TextOverflow.ellipsis,
-                                              maxLines: 3,
-                                              softWrap: true,
-                                              style: AppStyles.poppins12w300white),
-                                        ],
-                                      ),
-                                    ),],
-                                ),
-                              ),
-                              SizedBox(
-                                height: 52.h,
+                      10.verticalSpace,
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Padding(
+                            padding: EdgeInsets.symmetric(horizontal: 20.w),
+                            child: Text(
+                              "All Lessons",
+                              style: AppStyles.poppins16w600darkGrey2,
+                            ),
+                          ),
+                          10.verticalSpace,
+                          ListView.builder(
+                            physics: NeverScrollableScrollPhysics(),
+                            shrinkWrap: true,
+                            padding: EdgeInsets.symmetric(horizontal: 20.w),
+                            itemCount: reorderedCourses.length,
+                            itemBuilder: (context, index) {
+                              final course = reorderedCourses[index];
+                              final isCurrentCourse =
+                                  index == currentCourseIndex;
+                              return Container(
+                                margin: EdgeInsets.only(bottom: 15.h),
                                 child: Stack(
                                   alignment: Alignment.bottomCenter,
                                   children: [
-                                    ClipRRect(
-                                      borderRadius: BorderRadius.vertical(
-                                        top: Radius.circular(10.sp),
-                                        bottom: Radius.circular(23.sp),
-                                      ),
-                                      child: BackdropFilter(
-                                        filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
-                                        child: Container(
-                                          alignment: Alignment.topCenter,
-                                          height: 50.h,
-                                          color: AppColors.whiteColor.withOpacity(0.30),
-                                          child: LinearProgressIndicator(
-                                            color: AppColors.lightBlue,
-                                            backgroundColor: Colors.transparent,
-                                            minHeight: 10.h,
-                                          ),
+                                    Container(
+                                      width: double.infinity,
+                                      height: 150,
+                                      decoration: BoxDecoration(
+                                        color: AppColors.yellow,
+                                        borderRadius: BorderRadius.circular(
+                                          25.sp,
                                         ),
                                       ),
+                                      child: Row(
+                                        children: [
+                                          Container(
+                                            width: 150.w,
+                                            margin: EdgeInsets.all(1.sp),
+                                            decoration: BoxDecoration(
+                                              borderRadius:
+                                                  BorderRadius.circular(25.sp),
+                                              image: DecorationImage(
+                                                image: AssetImage(
+                                                  course.backgroundImage,
+                                                ),
+                                                fit: BoxFit.cover,
+                                              ),
+                                            ),
+                                            child: Column(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.center,
+                                              children: [
+                                                CustomAudioWaveformPlayer(
+                                                  buttonHeight: 30.h,
+                                                  buttonWidth: 30.w,
+                                                  playPauseIconHeight: 10.h,
+                                                  isBackgroundContainerEnabled:
+                                                      false,
+                                                  isTimerEnabled: false,
+                                                  isWaveForm: false,
+                                                ),
+                                                20.verticalSpace,
+                                              ],
+                                            ),
+                                          ),
+                                          10.horizontalSpace,
+                                          Expanded(
+                                            child: Padding(
+                                              padding: const EdgeInsets.all(
+                                                8.0,
+                                              ),
+                                              child: Column(
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.start,
+
+                                                children: [
+                                                  Text(
+                                                    course.title,
+                                                    textAlign: TextAlign.center,
+                                                    softWrap: true,
+                                                    overflow:
+                                                        TextOverflow.ellipsis,
+                                                    style:
+                                                        AppStyles
+                                                            .poppins16w600white,
+                                                  ),
+                                                  SizedBox(height: 5),
+                                                  Text(
+                                                    course.description,
+                                                    textAlign: TextAlign.left,
+                                                    overflow:
+                                                        TextOverflow.ellipsis,
+                                                    maxLines: 3,
+                                                    softWrap: true,
+                                                    style: AppStyles
+                                                        .poppins12w300white
+                                                        .copyWith(
+                                                          fontWeight:
+                                                              FontWeight.w400,
+                                                        ),
+                                                  ),
+                                                ],
+                                              ),
+                                            ),
+                                          ),
+                                        ],
+                                      ),
                                     ),
-                                    CustomCourseDurationContainer(text: course.duration)
+                                    SizedBox(
+                                      height: 52,
+                                      child: Stack(
+                                        alignment: Alignment.bottomCenter,
+                                        children: [
+                                          ClipRRect(
+                                            borderRadius: BorderRadius.vertical(
+                                              top: Radius.circular(10.sp),
+                                              bottom: Radius.circular(23.sp),
+                                            ),
+                                            child: BackdropFilter(
+                                              filter: ImageFilter.blur(
+                                                sigmaX: 10,
+                                                sigmaY: 10,
+                                              ),
+                                              child: Column(
+                                                children: [
+                                                  Container(
+                                                    height: 3,
+                                                    color: AppColors.whiteColor
+                                                        .withOpacity(0.30),
+                                                    child:
+                                                        LinearProgressIndicator(
+                                                          value: 0.4,
+                                                          color:
+                                                              AppColors
+                                                                  .lightBlue,
+                                                          backgroundColor:
+                                                              Colors
+                                                                  .transparent,
+                                                          minHeight: 3,
+                                                        ),
+                                                  ),
+                                                  Padding(
+                                                    padding:
+                                                        const EdgeInsets.symmetric(
+                                                          horizontal: 10,
+                                                        ),
+                                                    child:
+                                                        CustomCourseDurationContainer(
+                                                          text: course.duration,
+                                                        ),
+                                                  ),
+                                                ],
+                                              ),
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
                                   ],
                                 ),
-                              ),
-                            ],
+                              );
+                            },
                           ),
-                        );
-                      },
-                    ),
-                  ],
+                        ],
+                      ),
+                    ],
+                  ),
                 ),
-              ],
-            ),
+              ),
+            ],
           ),
         ),
       ),

@@ -73,67 +73,52 @@ class _ViewingTheChallengeViewState extends State<ViewingTheChallengeView> {
             children: [
               Stack(
                 alignment: Alignment.topCenter,
+                clipBehavior: Clip.none,
                 children: [
-                  if (isPremium) SizedBox(height: 470.h),
+                  // if (isPremium) SizedBox(height: 300),
                   Container(
-                    height: 450.h,
+                    height: isPremium ? 300 : 400,
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.vertical(
                         bottom: Radius.circular(50.sp),
                       ),
                       image: DecorationImage(
+                        opacity: 0.5,
                         image: AssetImage(backgroundImage),
                         fit: BoxFit.cover,
                       ),
+                      color: Colors.black.withValues(alpha: 0.7),
                     ),
-                  ),
-                  Container(
-                    height: 400.h,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.vertical(
-                        bottom: Radius.circular(50.sp),
-                      ),
-                      gradient: LinearGradient(
-                        begin: Alignment.topCenter,
-                        end: Alignment.bottomCenter,
-                        colors: [
-                          Colors.black.withOpacity(0.6),
-                          Colors.black.withOpacity(0.3),
-                          Colors.transparent,
-                        ],
-                      ),
-                    ),
-                  ),
-                  SizedBox(
-                    height: 400.h,
                     child: Column(
                       children: [
-                        // top bar
                         Container(
-                          height: 120.h,
+                          height: 100,
                           alignment: Alignment.bottomCenter,
                           padding: EdgeInsets.only(bottom: 25.h),
                           width: double.infinity,
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.vertical(
-                              bottom: Radius.circular(50.sp),
+                              bottom: Radius.circular(30),
                             ),
-                            color: AppColors.whiteColor.withOpacity(0.50),
+                            color: AppColors.whiteColor.withOpacity(0.60),
                           ),
                           child: Padding(
                             padding: EdgeInsets.symmetric(horizontal: 20.sp),
                             child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              mainAxisAlignment: MainAxisAlignment.spaceAround,
                               children: [
                                 GestureDetector(
                                   onTap: () {
-                                    print("SelectedDay :$selectedDay");
-                                    print("CurrentDay :$currentDay");
+                                    if (isPremium) {
+                                      _currentDaySheet(context);
+                                    }
+                                    // print("SelectedDay :$selectedDay");
+                                    // print("CurrentDay :$currentDay");
                                   },
                                   child: SvgPicture.asset(
                                     AppSvgs.shareSvg,
                                     color: AppColors.darkGrey2,
-                                    height: 30.h,
+                                    height: 25,
                                   ),
                                 ),
                                 Row(
@@ -145,18 +130,18 @@ class _ViewingTheChallengeViewState extends State<ViewingTheChallengeView> {
                                     5.horizontalSpace,
                                     Text(
                                       "$challengeName${" Challenges".tr}",
-                                      style: AppStyles.poppins20w600white,
+                                      style: AppStyles.poppins20w600darkGrey2,
                                     ),
                                   ],
                                 ),
                                 GestureDetector(
                                   onTap: () {
-                                    if(isPremium){
+                                    if (isPremium) {
                                       _openTopSheet(
                                         context,
                                         currentDay,
                                         selectedDay,
-                                            (day) {
+                                        (day) {
                                           setState(() => selectedDay = day);
                                         },
                                       );
@@ -165,129 +150,153 @@ class _ViewingTheChallengeViewState extends State<ViewingTheChallengeView> {
                                   child: SvgPicture.asset(
                                     AppSvgs.calenderSvg,
                                     color: AppColors.darkGrey2,
-                                    height: 30.h,
+                                    height: 25,
                                   ),
                                 ),
                               ],
                             ),
                           ),
                         ),
-                        Row(
-                          mainAxisAlignment:
-                              isPremium
-                                  ? MainAxisAlignment.center
-                                  : MainAxisAlignment.end,
-                          children: [
-                            Container(
-                              width: isPremium ? null : 130.w,
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(30.sp),
-                                color: AppColors.whiteColor.withOpacity(0.25),
-                                border: Border.all(
-                                  width: 1.5.w,
-                                  color: AppColors.whiteColor,
-                                ),
-                              ),
-                              margin: isPremium?null:EdgeInsets.only(top: 10.sp,right: 10.sp),
-                              padding: EdgeInsets.symmetric(
-                                horizontal: 10.w,
-                                vertical: 10.h,
-                              ),
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  RichText(
-                                    text: TextSpan(
-                                      children: [
-                                        TextSpan(
-                                          text:
-                                              isPremium
-                                                  ? "Complete The Challenge And Win "
-                                                      .tr
-                                                  : "Win ".tr,
-                                          style: AppStyles.poppins14w300darkGrey2.copyWith(color: AppColors.whiteColor),
-                                        ),
-                                        TextSpan(
-                                          text: challengePoints.toString(),
-                                          style: AppStyles.poppins16w600white,
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                  SvgPicture.asset(
-                                    AppSvgs.coinSvg,
-                                    height: 30.h,
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ],
-                        ),
-                        if (isPremium) Spacer(),
-                        Padding(
-                          padding: EdgeInsets.only(left: 10.sp),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            children: [
-                              Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  ClipRRect(
-                                    borderRadius: BorderRadius.circular(20.sp),
-                                    child: BackdropFilter(
-                                      filter: ImageFilter.blur(
-                                        sigmaX: 10,
-                                        sigmaY: 10,
-                                      ),
-                                      child: Container(
-                                        padding: EdgeInsets.symmetric(
-                                          horizontal: 10.sp,
-                                          vertical: 5.sp,
-                                        ),
-                                        color: AppColors.whiteColor.withOpacity(
-                                          0.25,
-                                        ),
-                                        child: Text(
-                                          '${'By'.tr}$trainerName',
-                                          style: AppStyles.poppins14w700white,
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                  8.verticalSpace,
-                                  ClipRRect(
-                                    borderRadius: BorderRadius.circular(20.sp),
-                                    child: BackdropFilter(
-                                      filter: ImageFilter.blur(
-                                        sigmaX: 10,
-                                        sigmaY: 10,
-                                      ),
-                                      child: Container(
-                                        padding: EdgeInsets.symmetric(
-                                          horizontal: 10.sp,
-                                          vertical: 5.sp,
-                                        ),
-                                        color: AppColors.whiteColor.withOpacity(
-                                          0.25,
-                                        ),
-                                        child: Text(
-                                          trainerDescription,
-                                          style: AppStyles.poppins12w300white,
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ],
-                          ),
-                        ),
                       ],
                     ),
                   ),
+                  Positioned(
+                    top: isPremium ? 90 : 100,
+                    right: isPremium ? null : 16,
+                    child: Container(
+                      width: isPremium ? Get.width * 0.90 : 130.w,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(30.sp),
+                        color: AppColors.whiteColor.withOpacity(0.2),
+                        border: Border.all(
+                          width: 1.5.w,
+                          color: AppColors.whiteColor,
+                        ),
+                      ),
+                      margin:
+                          isPremium
+                              ? EdgeInsets.symmetric(horizontal: 16)
+                              : EdgeInsets.only(top: 10.sp, right: 10.sp),
+
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(30.sp),
+                        child: BackdropFilter(
+                          filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
+                          child: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                RichText(
+                                  text: TextSpan(
+                                    children: [
+                                      TextSpan(
+                                        text:
+                                            isPremium
+                                                ? "Complete The Challenge And Win "
+                                                    .tr
+                                                : "Win ".tr,
+                                        style: AppStyles.poppins14w700darkGrey2
+                                            .copyWith(
+                                              color: AppColors.whiteColor,
+                                            ),
+                                      ),
+                                      TextSpan(
+                                        text: challengePoints.toString(),
+                                        style: AppStyles.poppins16w600white,
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                                SvgPicture.asset(AppSvgs.coinSvg, height: 30.h),
+                              ],
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                  Positioned(
+                    bottom: isPremium ? 40 : 120,
+                    left: 20,
+                    child: Padding(
+                      padding: EdgeInsets.only(left: 0),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Container(
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(10),
+                              color: AppColors.whiteColor.withOpacity(0.5),
+                            ),
+
+                            child: ClipRRect(
+                              borderRadius: BorderRadius.circular(10),
+                              child: BackdropFilter(
+                                filter: ImageFilter.blur(
+                                  sigmaX: 20,
+                                  sigmaY: 20,
+                                ),
+                                child: Padding(
+                                  padding: const EdgeInsets.all(4.0),
+                                  child: Text(
+                                    '${'By'.tr} $trainerName',
+                                    style: AppStyles.poppins14w700white,
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ),
+                          8.verticalSpace,
+                          Container(
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(10),
+                              color: AppColors.whiteColor.withOpacity(0.5),
+                            ),
+
+                            child: ClipRRect(
+                              borderRadius: BorderRadius.circular(10),
+                              child: BackdropFilter(
+                                filter: ImageFilter.blur(
+                                  sigmaX: 20,
+                                  sigmaY: 20,
+                                ),
+                                child: Padding(
+                                  padding: const EdgeInsets.all(4.0),
+                                  child: Text(
+                                    trainerDescription,
+                                    style: AppStyles.poppins12w300white
+                                        .copyWith(fontWeight: FontWeight.w600),
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+
+                  // Container(
+                  //   height: 400.h,
+                  //   decoration: BoxDecoration(
+                  //     borderRadius: BorderRadius.vertical(
+                  //       bottom: Radius.circular(50.sp),
+                  //     ),
+                  //     gradient: LinearGradient(
+                  //       begin: Alignment.topCenter,
+                  //       end: Alignment.bottomCenter,
+                  //       colors: [
+                  //         Colors.black.withOpacity(0.6),
+                  //         Colors.black.withOpacity(0.3),
+                  //         Colors.transparent,
+                  //       ],
+                  //     ),
+                  //   ),
+                  // ),
                   isPremium
                       ? Positioned(
-                        bottom: 0,
+                        bottom: -45,
                         left: 0,
                         right: 0,
                         child: Padding(
@@ -295,7 +304,7 @@ class _ViewingTheChallengeViewState extends State<ViewingTheChallengeView> {
                           child: ClipRRect(
                             borderRadius: BorderRadius.circular(30.sp),
                             child: BackdropFilter(
-                              filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
+                              filter: ImageFilter.blur(sigmaX: 20, sigmaY: 20),
                               child: Container(
                                 alignment: Alignment.center,
                                 width: double.infinity,
@@ -312,11 +321,21 @@ class _ViewingTheChallengeViewState extends State<ViewingTheChallengeView> {
                                   gradient: LinearGradient(
                                     colors: [
                                       AppColors.whiteColor.withOpacity(0.20),
-                                      AppColors.darkGrey2.withOpacity(0.20),
+                                      AppColors.darkGrey2.withOpacity(0.01),
                                     ],
                                     begin: Alignment.bottomCenter,
                                     end: Alignment.topCenter,
                                   ),
+                                  // boxShadow: [
+                                  //   BoxShadow(
+                                  //     color: Color(
+                                  //       0xff1E5DA1,
+                                  //     ).withValues(alpha: 0.15),
+                                  //     offset: Offset(0, 4),
+                                  //     blurRadius: 2,
+                                  //     spreadRadius: 0,
+                                  //   ),
+                                  // ],
                                 ),
                                 child: Text(
                                   '${'DAY'.tr} 05',
@@ -341,7 +360,9 @@ class _ViewingTheChallengeViewState extends State<ViewingTheChallengeView> {
                             child: Container(
                               width: double.infinity,
                               padding: EdgeInsets.all(20.sp),
-                              color: AppColors.darkGrey2.withOpacity(0.25),
+                              color: AppColors.blackColor.withValues(
+                                alpha: 0.1,
+                              ),
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
@@ -357,16 +378,24 @@ class _ViewingTheChallengeViewState extends State<ViewingTheChallengeView> {
                           ),
                         ),
                       ),
-                  if(!isPremium)Positioned(
-                    top: 70,
-                    left: 0,
-                    child: GestureDetector(onTap: (){
-                      Get.back();
-                    },child: SvgPicture.asset(AppSvgs.backImageWhiteSvg,height: 120.h,)),
-                  )
+
+                  // if (!isPremium)
+                  //   Positioned(
+                  //     top: 70,
+                  //     left: 0,
+                  //     child: GestureDetector(
+                  //       onTap: () {
+                  //         Get.back();
+                  //       },
+                  //       child: SvgPicture.asset(
+                  //         AppSvgs.backImageWhiteSvg,
+                  //         height: 120.h,
+                  //       ),
+                  //     ),
+                  //   ),
                 ],
               ),
-              20.verticalSpace,
+              SizedBox(height: isPremium ? 80 : 40),
               ListView.builder(
                 physics: const NeverScrollableScrollPhysics(),
                 shrinkWrap: true,
@@ -377,32 +406,32 @@ class _ViewingTheChallengeViewState extends State<ViewingTheChallengeView> {
                   return ClipRRect(
                     borderRadius: BorderRadius.circular(40.sp),
                     child: BackdropFilter(
-                      filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
+                      filter: ImageFilter.blur(sigmaX: 20, sigmaY: 20),
                       child: GestureDetector(
                         onTap: () {
-                         if(isPremium){
-                           completionDialoge(context, 0.20,false,true);
-                           setState(() {
-                             if (isPremium) {
-                               if (isSelected) {
-                                 selectedTaskIndices.remove(index);
-                               } else {
-                                 if (selectedTaskIndices.length >=
-                                     maxSelectableItems) {
-                                   Utils.toastMessage(
-                                     'You can select up to $maxSelectableItems tasks'
-                                         .tr,
-                                   );
-                                   return;
-                                 }
-                                 selectedTaskIndices.add(index);
-                               }
-                             }
-                           });
-                           debugPrint(
-                             'Selected tasks: ${getSelectedTaskNames()}',
-                           );
-                         }
+                          if (isPremium) {
+                            completionDialoge(context, 0.20, false, true);
+                            setState(() {
+                              if (isPremium) {
+                                if (isSelected) {
+                                  selectedTaskIndices.remove(index);
+                                } else {
+                                  if (selectedTaskIndices.length >=
+                                      maxSelectableItems) {
+                                    Utils.toastMessage(
+                                      'You can select up to $maxSelectableItems tasks'
+                                          .tr,
+                                    );
+                                    return;
+                                  }
+                                  selectedTaskIndices.add(index);
+                                }
+                              }
+                            });
+                            debugPrint(
+                              'Selected tasks: ${getSelectedTaskNames()}',
+                            );
+                          }
                         },
                         child: Container(
                           margin: EdgeInsets.symmetric(
@@ -437,11 +466,13 @@ class _ViewingTheChallengeViewState extends State<ViewingTheChallengeView> {
                                   tasks[index],
                                   style:
                                       isSelected
-                                          ? AppStyles.poppins14w500white
+                                          ? AppStyles.poppins16w600white
                                               .copyWith(
                                                 fontWeight: FontWeight.w600,
+                                                fontSize: 15,
                                               )
-                                          : AppStyles.poppins14w500white,
+                                          : AppStyles.poppins16w600white
+                                              .copyWith(fontSize: 15),
                                 ),
                               ),
                             ],
@@ -458,7 +489,14 @@ class _ViewingTheChallengeViewState extends State<ViewingTheChallengeView> {
       ),
     );
   }
-  void _openTopSheet(BuildContext context, int currentDay, int selectedDay, Function(int) onDaySelected,) {    showGeneralDialog(
+
+  void _openTopSheet(
+    BuildContext context,
+    int currentDay,
+    int selectedDay,
+    Function(int) onDaySelected,
+  ) {
+    showGeneralDialog(
       context: context,
       barrierDismissible: true,
       barrierColor: Colors.black.withOpacity(0.4),
@@ -655,6 +693,7 @@ class _ViewingTheChallengeViewState extends State<ViewingTheChallengeView> {
       },
     );
   }
+
   void _currentDaySheet(BuildContext context) {
     showGeneralDialog(
       context: context,
@@ -786,7 +825,13 @@ class _ViewingTheChallengeViewState extends State<ViewingTheChallengeView> {
       },
     );
   }
-  void completionDialoge(BuildContext context, double progress,bool isTopBar,bool isAutoDisappear) {
+
+  void completionDialoge(
+    BuildContext context,
+    double progress,
+    bool isTopBar,
+    bool isAutoDisappear,
+  ) {
     showGeneralDialog(
       context: context,
       barrierDismissible: true,
@@ -805,81 +850,85 @@ class _ViewingTheChallengeViewState extends State<ViewingTheChallengeView> {
               child: BackdropFilter(
                 filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
                 child: Column(
-                  mainAxisAlignment: isTopBar?MainAxisAlignment.start:MainAxisAlignment.center,
+                  mainAxisAlignment:
+                      isTopBar
+                          ? MainAxisAlignment.start
+                          : MainAxisAlignment.center,
                   children: [
-                    if(isTopBar)SizedBox(
-                      height: 200.h,
-                      child: Stack(
-                        alignment: Alignment.topCenter,
-                        children: [
-                          Container(
-                            alignment: Alignment.center,
-                            height: 120.h,
-                            width: double.infinity,
-                            decoration: BoxDecoration(
-                              image: DecorationImage(
-                                image: AssetImage(AppImages.topContainer),
-                                fit: BoxFit.fill,
-                              ),
-                            ),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Text(
-                                  "${"Day".tr} ${currentDay.toString().padLeft(2, '0')} ",
-                                  style: AppStyles.poppins20w600white,
-                                ),
-                                SvgPicture.asset(AppSvgs.circleTickSvg),
-                              ],
-                            ),
-                          ),
-                          Positioned(
-                            bottom: 50,
-                            child: Container(
-                              width: 100.w,
+                    if (isTopBar)
+                      SizedBox(
+                        height: 200.h,
+                        child: Stack(
+                          alignment: Alignment.topCenter,
+                          children: [
+                            Container(
+                              alignment: Alignment.center,
+                              height: 120.h,
+                              width: double.infinity,
                               decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(20.sp),
-                                border: Border.all(
-                                  color: AppColors.whiteColor,
-                                  width: 1.5.w,
+                                image: DecorationImage(
+                                  image: AssetImage(AppImages.topContainer),
+                                  fit: BoxFit.fill,
                                 ),
                               ),
                               child: Row(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
                                   Text(
-                                    currentDay.toString().padLeft(2, '0'),
-                                    style: AppStyles.poppins20w600white
-                                        .copyWith(color: AppColors.yellow),
-                                  ),
-                                  5.horizontalSpace,
-                                  Text(
-                                    "/",
+                                    "${"Day".tr} ${currentDay.toString().padLeft(2, '0')} ",
                                     style: AppStyles.poppins20w600white,
                                   ),
-                                  5.horizontalSpace,
-                                  Text(
-                                    challengeTime,
-                                    style: AppStyles.poppins20w600white,
-                                  ),
+                                  SvgPicture.asset(AppSvgs.circleTickSvg),
                                 ],
                               ),
                             ),
-                          ),
-                          Positioned(
-                            bottom: 0,
-                            left: 0,
-                            child: GestureDetector(
-                              onTap: () => Get.back(),
-                              child: Image.asset(
-                                AppImages.backImageButton,
-                                height: 120.h,
+                            Positioned(
+                              bottom: 50,
+                              child: Container(
+                                width: 100.w,
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(20.sp),
+                                  border: Border.all(
+                                    color: AppColors.whiteColor,
+                                    width: 1.5.w,
+                                  ),
+                                ),
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Text(
+                                      currentDay.toString().padLeft(2, '0'),
+                                      style: AppStyles.poppins20w600white
+                                          .copyWith(color: AppColors.yellow),
+                                    ),
+                                    5.horizontalSpace,
+                                    Text(
+                                      "/",
+                                      style: AppStyles.poppins20w600white,
+                                    ),
+                                    5.horizontalSpace,
+                                    Text(
+                                      challengeTime,
+                                      style: AppStyles.poppins20w600white,
+                                    ),
+                                  ],
+                                ),
                               ),
                             ),
-                          ),
-                        ],
+                            Positioned(
+                              bottom: 0,
+                              left: 0,
+                              child: GestureDetector(
+                                onTap: () => Get.back(),
+                                child: Image.asset(
+                                  AppImages.backImageButton,
+                                  height: 120.h,
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
                       ),
-                    ),
                     Container(
                       width: double.infinity,
                       height: 420.h,
@@ -939,14 +988,15 @@ class _ViewingTheChallengeViewState extends State<ViewingTheChallengeView> {
         );
       },
     );
-    if(isAutoDisappear){
-      Future.delayed( Duration(seconds: 2), () {
+    if (isAutoDisappear) {
+      Future.delayed(Duration(seconds: 2), () {
         if (Navigator.of(context).canPop()) {
           Get.back();
         }
       });
     }
   }
+
   void _openCompletedDaySheet(BuildContext context, int currentDay) {
     showGeneralDialog(
       context: context,
@@ -1162,6 +1212,7 @@ class _ViewingTheChallengeViewState extends State<ViewingTheChallengeView> {
       },
     );
   }
+
   void challengePopUp(BuildContext context, int index, bool isSelected) {
     showGeneralDialog(
       context: context,
@@ -1408,7 +1459,12 @@ class _ViewingTheChallengeViewState extends State<ViewingTheChallengeView> {
                                       //   }
                                       // });
                                       Get.back();
-                                      completionDialoge(context, 0.20,true,false);
+                                      completionDialoge(
+                                        context,
+                                        0.20,
+                                        true,
+                                        false,
+                                      );
                                       // if (selectedTaskIndices.length ==
                                       //     pusherChallengeController.taskNames.length) {
                                       //   Get.toNamed(AppRoutes.pusherChallengeAllCompletedView);
@@ -1457,6 +1513,7 @@ class _ViewingTheChallengeViewState extends State<ViewingTheChallengeView> {
       },
     );
   }
+
   Widget dialogueBulletPoint(String title, String content) {
     return Padding(
       padding: EdgeInsets.only(bottom: 10.h),
@@ -1479,9 +1536,11 @@ class _ViewingTheChallengeViewState extends State<ViewingTheChallengeView> {
       ),
     );
   }
+
   List<String> getSelectedTaskNames() {
     return selectedTaskIndices.map((index) => tasks[index]).toList();
   }
+
   void resetSelections() {
     setState(() {
       selectedTaskIndices.clear();

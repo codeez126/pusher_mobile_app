@@ -26,7 +26,6 @@ class _OtpVerficationViewState extends State<OtpVerficationView> {
   );
   final FocusNode otpFocusNode = FocusNode();
 
-
   late String phoneNumber;
 
   @override
@@ -136,6 +135,7 @@ class _OtpVerficationViewState extends State<OtpVerficationView> {
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(30),
                   child: CustomAppButton(
+                    isIcon: false,
                     onTap: () {
                       otpFocusNode.unfocus();
                       FocusScope.of(context).unfocus();

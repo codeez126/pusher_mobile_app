@@ -7,7 +7,7 @@ import '../constants/app_fonts_and_styles.dart';
 import '../constants/app_svgs.dart';
 
 class CustomChangeRoundButton extends StatelessWidget {
-  CustomChangeRoundButton({super.key,required this.text,required this.icon});
+  CustomChangeRoundButton({super.key, required this.text, required this.icon});
 
   String text;
   String icon;
@@ -18,27 +18,16 @@ class CustomChangeRoundButton extends StatelessWidget {
       decoration: BoxDecoration(
         color: AppColors.lightBlue,
         borderRadius: BorderRadius.circular(35.sp),
-        border: Border.all(
-          width: 1.5.w,
-          color: AppColors.whiteColor,
-        ),
+        border: Border.all(width: 1.5.w, color: AppColors.whiteColor),
       ),
-      padding: EdgeInsets.symmetric(
-        horizontal: 20.w,
-        vertical: 10.h,
-      ),
+      padding: EdgeInsets.symmetric(horizontal: 10, vertical: 8),
       child: Row(
+        mainAxisSize: MainAxisSize.min,
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Text(
-            text,
-            style: AppStyles.poppins16w600white,
-          ),
+          Text(text, style: AppStyles.poppins16w600white),
           5.horizontalSpace,
-          SvgPicture.asset(
-            icon,
-            height: 30.h,
-          )
+          SvgPicture.asset(icon, height: 30.h),
         ],
       ),
     );

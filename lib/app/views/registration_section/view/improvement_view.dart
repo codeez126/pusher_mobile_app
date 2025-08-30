@@ -61,7 +61,9 @@ class _ImprovementViewState extends State<ImprovementView> {
                     itemCount: ImprovementModel.categories.length,
                     itemBuilder: (context, index) {
                       final category = ImprovementModel.categories[index];
-                      final isSelected = selectedCategories.contains(category.title);
+                      final isSelected = selectedCategories.contains(
+                        category.title,
+                      );
                       final showIcon = showIconFor.contains(category.title);
 
                       return GestureDetector(
@@ -82,7 +84,10 @@ class _ImprovementViewState extends State<ImprovementView> {
                               fit: BoxFit.fill,
                             ),
                             borderRadius: BorderRadius.circular(25),
-                            border: Border.all(color: AppColors.whiteColor, width: 0.5.w),
+                            border: Border.all(
+                              color: AppColors.whiteColor,
+                              width: 0.5.w,
+                            ),
                             boxShadow: [
                               BoxShadow(
                                 color: Colors.black.withOpacity(0.2),
@@ -99,23 +104,38 @@ class _ImprovementViewState extends State<ImprovementView> {
                                 child: AnimatedAlign(
                                   duration: Duration(milliseconds: 600),
                                   curve: Curves.easeInOut,
-                                  alignment: isSelected ? Alignment.center : Alignment.bottomCenter,
+                                  alignment:
+                                      isSelected
+                                          ? Alignment.center
+                                          : Alignment.bottomCenter,
                                   child: ClipRRect(
                                     borderRadius: BorderRadius.circular(20.sp),
                                     child: BackdropFilter(
-                                      filter: ImageFilter.blur(sigmaY: 10, sigmaX: 10),
+                                      filter: ImageFilter.blur(
+                                        sigmaY: 10,
+                                        sigmaX: 10,
+                                      ),
                                       child: AnimatedContainer(
                                         duration: Duration(milliseconds: 800),
                                         curve: Curves.easeInOut,
                                         alignment: Alignment.center,
                                         width: 140.w,
-                                        height: isSelected
-                                            ? MediaQuery.of(context).size.height - 640
-                                            : 60.h,
-                                        padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 10.h),
+                                        height:
+                                            isSelected
+                                                ? MediaQuery.of(
+                                                      context,
+                                                    ).size.height -
+                                                    640
+                                                : 60.h,
+                                        padding: EdgeInsets.symmetric(
+                                          horizontal: 10.w,
+                                          vertical: 10.h,
+                                        ),
                                         decoration: BoxDecoration(
                                           color: Colors.white.withOpacity(0.2),
-                                          borderRadius: BorderRadius.circular(20.sp),
+                                          borderRadius: BorderRadius.circular(
+                                            20.sp,
+                                          ),
                                         ),
                                         child: FittedBox(
                                           fit: BoxFit.scaleDown,
@@ -126,18 +146,27 @@ class _ImprovementViewState extends State<ImprovementView> {
                                               color: Colors.white,
                                               fontWeight: FontWeight.bold,
                                               shadows: [
-                                                Shadow(offset: Offset(0, 1), blurRadius: 2, color: Colors.black26),
+                                                Shadow(
+                                                  offset: Offset(0, 1),
+                                                  blurRadius: 2,
+                                                  color: Colors.black26,
+                                                ),
                                               ],
                                             ),
                                           ),
                                         ),
                                         onEnd: () {
                                           if (isSelected && !showIcon) {
-                                            Future.delayed(Duration(milliseconds: 100), () {
-                                              setState(() {
-                                                showIconFor.add(category.title);
-                                              });
-                                            });
+                                            Future.delayed(
+                                              Duration(milliseconds: 100),
+                                              () {
+                                                setState(() {
+                                                  showIconFor.add(
+                                                    category.title,
+                                                  );
+                                                });
+                                              },
+                                            );
                                           }
                                         },
                                       ),
@@ -155,12 +184,9 @@ class _ImprovementViewState extends State<ImprovementView> {
                                   turns: isSelected ? 0.12 : 1,
                                   duration: Duration(milliseconds: 700),
                                   curve: Curves.easeInOut,
-                                  child: SvgPicture.asset(
-                                    AppSvgs.plusSvg,
-                                  ),
+                                  child: SvgPicture.asset(AppSvgs.plusSvg),
                                 ),
-                              )
-
+                              ),
                             ],
                           ),
                         ),

@@ -29,10 +29,11 @@ class NotificationsView extends StatelessWidget {
         child: Column(
           children: [
             Stack(
-              alignment: Alignment.topCenter,
+              clipBehavior: Clip.none,
+              alignment: Alignment.bottomCenter,
               children: [
                 Container(
-                  height: 170.h,
+                  height: 100,
                   width: double.infinity,
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.vertical(
@@ -45,29 +46,29 @@ class NotificationsView extends StatelessWidget {
                     children: [
                       Positioned(
                         left: 0,
-                        bottom: 0,
+                        bottom: -10,
                         child: InkWell(
                           onTap: () => Get.back(),
-                          child: SvgPicture.asset(AppSvgs.backImageSvg,height: 120.h,),
+                          child: SvgPicture.asset(
+                            AppSvgs.backImageSvg,
+                            height: 100,
+                          ),
                           // Image.asset(
                           //   AppImages.imageBackIcon,
                           //   height: 120.h,
                           // ),
                         ),
                       ),
-                      Positioned(
-                        bottom: 35,
-                        child: Column(
+                      Transform(
+                        transform: Matrix4.translationValues(0, 15, 0),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            Row(
-                              children: [
-                                SvgPicture.asset(AppSvgs.notificationBellSvg),
-                                10.horizontalSpace,
-                                Text(
-                                  'Notifications'.tr,
-                                  style: AppStyles.poppins20w600darkGrey2,
-                                ),
-                              ],
+                            SvgPicture.asset(AppSvgs.notificationBellSvg),
+                            10.horizontalSpace,
+                            Text(
+                              'Notifications'.tr,
+                              style: AppStyles.poppins20w600darkGrey2,
                             ),
                           ],
                         ),
@@ -77,16 +78,17 @@ class NotificationsView extends StatelessWidget {
                 ),
               ],
             ),
-            10.verticalSpace,
+            20.verticalSpace,
             Expanded(
               child: SingleChildScrollView(
                 child: Column(
                   children: [
                     InkWell(
-                    onTap: (){
-                      Get.toNamed(AppRoutes.bottomNavNavigation);
-                    },
-                    child: CustomNotificationByDay(weekday: 'TODAY'.tr)),
+                      onTap: () {
+                        // Get.toNamed(AppRoutes.bottomNavNavigation);
+                      },
+                      child: CustomNotificationByDay(weekday: 'TODAY'.tr),
+                    ),
                     16.verticalSpace,
                     CustomNotificationByDay(weekday: 'YESTERDAY'.tr),
                     16.verticalSpace,

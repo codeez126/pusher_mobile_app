@@ -265,6 +265,6 @@ class _PersonalGoalsViewState extends State<PersonalGoalsView> {
 
     Utils.toastMessage('${'Selected'.tr}${selectedGoals.length} goals'.tr);
     //Get.toNamed(AppRoutes.premiumSubscriptionView);
-    Get.toNamed(AppRoutes.wellDoneView);
+    Get.toNamed(AppRoutes.wellDoneView,);
   }
 }

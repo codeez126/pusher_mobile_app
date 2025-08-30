@@ -9,14 +9,12 @@ import 'package:get/get.dart';
 import '../../../../core/constants/api_urls.dart';
 import '../../../../core/utils/utils.dart';
 
-
 class ProfileRegistrationController extends GetxController {
-
   final firstNameController = TextEditingController().obs;
   final lastNameController = TextEditingController().obs;
   final emailController = TextEditingController().obs;
   final NetworkManager networkManager = NetworkManager();
-  var  profileModel = UpdateProfileResponseModel().obs;
+  var profileModel = UpdateProfileResponseModel().obs;
   int selectedGender = 1;
   String gender = 'Male';
   bool agreeToTerms = false;
@@ -29,70 +27,70 @@ class ProfileRegistrationController extends GetxController {
   var isMonthDropdownOpen = false.obs;
   var isYearDropdownOpen = false.obs;
 
-
   @override
   void onInit() {
     super.onInit();
     loadDOB();
   }
 
-
   Future<void> updateProfile() async {
-    if (firstNameController.value.text.isEmpty) {
-      Utils.toastMessage('Enter Your First Name');
-      return;
-    }
-    if (lastNameController.value.text.isEmpty) {
-      Utils.toastMessage('Enter Your Last Name');
-      return;
-    }
+    Get.toNamed(AppRoutes.improvementView);
+    // if (firstNameController.value.text.isEmpty) {
+    //   Utils.toastMessage('Enter Your First Name');
+    //   return;
+    // }
+    // if (lastNameController.value.text.isEmpty) {
+    //   Utils.toastMessage('Enter Your Last Name');
+    //   return;
+    // }
 
-    String dob =
-        "${selectedYear.value}-${selectedMonth.value.padLeft(2, '0')}-${selectedDay.value.padLeft(2, '0')}";
+    // String dob =
+    //     "${selectedYear.value}-${selectedMonth.value.padLeft(2, '0')}-${selectedDay.value.padLeft(2, '0')}";
 
-    Map data = {
-      "first_name": firstNameController.value.text,
-      "last_name": lastNameController.value.text,
-      "dob": dob,
-      "gender": selectedGender
-    };
+    // Map data = {
+    //   "first_name": firstNameController.value.text,
+    //   "last_name": lastNameController.value.text,
+    //   "dob": dob,
+    //   "gender": selectedGender
+    // };
 
-    Utils.showLoader();
+    // Utils.showLoader();
 
-    dio.Response? response = await networkManager.callApi(
-      urlEndPoint: ApiEndpoints.apiUpdateProfileEndPoint,
-      method: HttpMethod.post,
-      body: data,
-    );
+    // dio.Response? response = await networkManager.callApi(
+    //   urlEndPoint: ApiEndpoints.apiUpdateProfileEndPoint,
+    //   method: HttpMethod.post,
+    //   body: data,
+    // );
 
-    if (response != null) {
-      final model = UpdateProfileResponseModel.fromJson(response.data);
-      profileModel.value = model;
-      try {
-        if (model.status == true) {
-          print("Model Message: ${model.message}");
+    // if (response != null) {
+    //   final model = UpdateProfileResponseModel.fromJson(response.data);
+    //   profileModel.value = model;
+    //   try {
+    //     if (model.status == true) {
+    //       print("Model Message: ${model.message}");
 
-          PrefManager.save("firstName", model.data!.user!.firstName);
-          PrefManager.save("lastName", model.data!.user!.lastName);
-          PrefManager.save("dob", model.data!.user!.dob);
-          PrefManager.save("gender", model.data!.user!.gender);
+    //       PrefManager.save("firstName", model.data!.user!.firstName);
+    //       PrefManager.save("lastName", model.data!.user!.lastName);
+    //       PrefManager.save("dob", model.data!.user!.dob);
+    //       PrefManager.save("gender", model.data!.user!.gender);
 
-          Utils.toastMessage("${model.message}");
-          Get.toNamed(AppRoutes.improvementView);
-        } else {
-          print("Failed: ${model.message}");
-          Utils.toastMessage(model.message ?? "Update failed");
-        }
-      } catch (stackTrace, error) {
-        print("Error : $stackTrace");
-        print("Error : $error");
-        print("Error : ${model.errors}");
-      }
-    } else {
-      print("Unsuccessful Update: No response");
-      Utils.toastMessage("Unable to Update, please check your connection.");
-    }
+    //       Utils.toastMessage("${model.message}");
+    //       Get.toNamed(AppRoutes.improvementView);
+    //     } else {
+    //       print("Failed: ${model.message}");
+    //       Utils.toastMessage(model.message ?? "Update failed");
+    //     }
+    //   } catch (stackTrace, error) {
+    //     print("Error : $stackTrace");
+    //     print("Error : $error");
+    //     print("Error : ${model.errors}");
+    //   }
+    // } else {
+    //   print("Unsuccessful Update: No response");
+    //   Utils.toastMessage("Unable to Update, please check your connection.");
+    // }
   }
+
   Future<void> updateProfileEditView({
     required String firstName,
     required String lastName,
@@ -146,8 +144,6 @@ class ProfileRegistrationController extends GetxController {
     }
   }
 
-
-
   void loadDOB() async {
     final dob = await PrefManager.read("dob");
     if (dob != null && dob.isNotEmpty) {
@@ -170,7 +166,4 @@ class ProfileRegistrationController extends GetxController {
       print("DOB Saved: $dob");
     }
   }
-
-
-
 }

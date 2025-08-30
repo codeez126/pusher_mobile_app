@@ -76,7 +76,6 @@ class PhoneLoginController extends GetxController {
   final RxBool loading = false.obs;
   GoogleSignIn googleSignIn = GoogleSignIn();
 
-
   void register() async {
     final code = selectedCode.value.replaceAll("+", "");
     final phone = phoneController.value.text.trim();
@@ -123,11 +122,11 @@ class PhoneLoginController extends GetxController {
           print("Register Failed: ${model.message}");
           Utils.toastMessage(model.message ?? "Registration failed");
         }
-      } catch (stackTrace,error) {
+      } catch (stackTrace, error) {
         print("Error : $stackTrace");
         print("Error : $error");
         print("Error : ${model.errors}");
-//        Utils.toastMessage("${model.errors}");
+        //        Utils.toastMessage("${model.errors}");
       }
     } else {
       print("Unsuccessful Register: No response");
@@ -136,7 +135,7 @@ class PhoneLoginController extends GetxController {
   }
 
   Future<void> googleSignin() async {
-    try{
+    try {
       final account = await googleSignIn.signIn();
 
       print("Account ID: ${account?.id}");
@@ -146,7 +145,7 @@ class PhoneLoginController extends GetxController {
 
       final auth = account?.authentication;
       print("Auth Token: $auth");
-    }catch(s,e){
+    } catch (s, e) {
       print("Stack Trace: $s");
       print("Error : $e");
     }
@@ -157,86 +156,91 @@ class PhoneLoginController extends GetxController {
     // final phone = phoneController.value.text.trim();
     // final phoneWithCode = "$code$phone";
 
-    Map<String, dynamic> data = {
-      "phone": phone,
-      "otp": otpTextController.value.text.trim(),
-    };
+    Get.toNamed(AppRoutes.profileRegistrationView);
 
-    try {
-      dio.Response? response = await networkManager.callApi(
-        urlEndPoint: ApiEndpoints.apiVerifyOtpEndPoint,
-        method: HttpMethod.post,
-        body: data,
-      );
+    // Map<String, dynamic> data = {
+    //   "phone": phone,
+    //   "otp": otpTextController.value.text.trim(),
+    // };
 
-      if (response != null) {
-        final model = VerifyOtpReponseModel.fromJson(response.data);
-        verifyOtpModel.value=model;
-        if (model.status == true) {
-          print("Status : ${model.status}");
-          print("Message : ${model.message}");
-          print("Token : ${model.data?.token}");
+    // try {
+    //   dio.Response? response = await networkManager.callApi(
+    //     urlEndPoint: ApiEndpoints.apiVerifyOtpEndPoint,
+    //     method: HttpMethod.post,
+    //     body: data,
+    //   );
 
-          PrefManager.setToken(model.data!.token.toString());
-          PrefManager.setIsLogin(true);
-          PrefManager.save("firstName", model.data!.user!.firstName);
-          PrefManager.save("lastName", model.data!.user!.lastName);
-          PrefManager.save("dob", model.data!.user!.dob);
-          PrefManager.save("gender", model.data!.user!.gender);
+    //   if (response != null) {
+    //     final model = VerifyOtpReponseModel.fromJson(response.data);
+    //     verifyOtpModel.value = model;
+    //     if (model.status == true) {
+    //       print("Status : ${model.status}");
+    //       print("Message : ${model.message}");
+    //       print("Token : ${model.data?.token}");
 
-          Utils.toastMessage("${model.message}");
-          final register = model.data?.user?.isRegistered;
-          print("Registered Or Not : $register");
-          if(register==0){
-            Get.toNamed(AppRoutes.profileRegistrationView);
-          }else {
-            Get.toNamed(AppRoutes.bottomNavNavigation);
-          }
+    //       PrefManager.setToken(model.data!.token.toString());
+    //       PrefManager.setIsLogin(true);
+    //       PrefManager.save("firstName", model.data!.user!.firstName);
+    //       PrefManager.save("lastName", model.data!.user!.lastName);
+    //       PrefManager.save("dob", model.data!.user!.dob);
+    //       PrefManager.save("gender", model.data!.user!.gender);
 
-        } else {
-          print("Otp Verification Failed: ${model.message}");
-          Utils.toastMessage(model.message ?? "Otp verification failed");
-        }
-      } else {
-        print("No response from server");
-        Utils.toastMessage("Unable to verify OTP, please try again");
-      }
-    } catch (e) {
-      print("Error verifying OTP: $e");
-      Utils.toastMessage("Error verifying OTP: $e");
-    }
+    //       Utils.toastMessage("${model.message}");
+    //       final register = model.data?.user?.isRegistered;
+    //       print("Registered Or Not : $register");
+    //       if (register == 0) {
+    //         Get.toNamed(AppRoutes.profileRegistrationView);
+    //       } else {
+    //         Get.toNamed(AppRoutes.bottomNavNavigation);
+    //       }
+    //     } else {
+    //       print("Otp Verification Failed: ${model.message}");
+    //       Utils.toastMessage(model.message ?? "Otp verification failed");
+    //     }
+    //   } else {
+    //     print("No response from server");
+    //     Utils.toastMessage("Unable to verify OTP, please try again");
+    //   }
+    // } catch (e) {
+    //   print("Error verifying OTP: $e");
+    //   Utils.toastMessage("Error verifying OTP: $e");
+    // }
   }
+
   void sendOtp() async {
-    Map<String, dynamic> data = {"phone": phoneController.value.text};
-
-    dio.Response? response = await networkManager.callApi(
-      urlEndPoint: ApiEndpoints.apiSendOtpEndPoint,
-      method: HttpMethod.post,
-      body: data,
+    Get.toNamed(
+      AppRoutes.otpVerificationView,
+      arguments: {'phoneNumber': phoneController.value.text},
     );
+    // Map<String, dynamic> data = {"phone": phoneController.value.text};
 
-    if (response != null) {
-      try {
-        final model = SendOtpResponseModel.fromJson(response.data);
-        sendOtpModel.value = model;
-        if (model.status == true) {
-          print("Otp Sent Successfully");
-          Utils.toastMessage("Otp Sent Successfully: ${model.message}");
-          Get.toNamed(AppRoutes.otpVerificationView,arguments: {
-            'phoneNumber': phoneController.value.text,
-          });
-        } else {
-          Utils.toastMessage(model.message ?? "Failed to send OTP");
-        }
-      } catch (e) {
-        print("Error parsing OTP response: $e");
-        Utils.toastMessage("Error parsing OTP response");
-      }
-    } else {
-      Utils.toastMessage("No response while sending OTP");
-    }
+    // dio.Response? response = await networkManager.callApi(
+    //   urlEndPoint: ApiEndpoints.apiSendOtpEndPoint,
+    //   method: HttpMethod.post,
+    //   body: data,
+    // );
+
+    // if (response != null) {
+    //   try {
+    //     final model = SendOtpResponseModel.fromJson(response.data);
+    //     sendOtpModel.value = model;
+    //     if (model.status == true) {
+    //       print("Otp Sent Successfully");
+    //       Utils.toastMessage("Otp Sent Successfully: ${model.message}");
+    //       Get.toNamed(AppRoutes.otpVerificationView,arguments: {
+    //         'phoneNumber': phoneController.value.text,
+    //       });
+    //     } else {
+    //       Utils.toastMessage(model.message ?? "Failed to send OTP");
+    //     }
+    //   } catch (e) {
+    //     print("Error parsing OTP response: $e");
+    //     Utils.toastMessage("Error parsing OTP response");
+    //   }
+    // } else {
+    //   Utils.toastMessage("No response while sending OTP");
+    // }
   }
-
 
   // static Future<GoogleSignInAccount?> signInWithGoogle() async {
   //   Utils.toastMessage("Starting Google Sign-In...");
@@ -276,6 +280,4 @@ class PhoneLoginController extends GetxController {
   //     return null;
   //   }
   // }
-
-
 }

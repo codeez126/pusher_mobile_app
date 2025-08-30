@@ -10,13 +10,14 @@ import 'package:get/get.dart';
 
 import '../../../../core/Constants/app_colors.dart';
 import '../../../../core/constants/app_images.dart';
+
 class ProfileView extends StatelessWidget {
   const ProfileView({super.key});
 
   @override
   Widget build(BuildContext context) {
     final firstName = (PrefManager.read("firstName") ?? "").toString();
-    final lastName  = (PrefManager.read("lastName") ?? "").toString();
+    final lastName = (PrefManager.read("lastName") ?? "").toString();
     return Scaffold(
       body: Container(
         width: double.infinity,
@@ -44,149 +45,180 @@ class ProfileView extends StatelessWidget {
                   ),
                 ),
                 Positioned(
-                    bottom: 0,
-                    child: ClipRRect(
-                      borderRadius: BorderRadius.circular(50.sp),
-                      child: BackdropFilter(
-                        filter: ImageFilter.blur(sigmaX: 10.0, sigmaY: 10.0),
+                  bottom: 0,
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(50.sp),
+                    child: BackdropFilter(
+                      filter: ImageFilter.blur(sigmaX: 10.0, sigmaY: 10.0),
+                      child: Container(
+                        width: 100.w,
+                        height: 100.h,
+                        padding: EdgeInsets.all(5.w),
+                        decoration: BoxDecoration(
+                          shape: BoxShape.circle,
+                          color: AppColors.whiteColor.withOpacity(0.70),
+                          border: Border.all(
+                            color: AppColors.whiteColor.withOpacity(0.30),
+                            width: 2.w,
+                          ),
+                        ),
                         child: Container(
-                          width: 100.w,
-                          height: 100.h,
-                          padding: EdgeInsets.all(5.w),
                           decoration: BoxDecoration(
                             shape: BoxShape.circle,
-                            color: AppColors.whiteColor.withOpacity(0.70),
                             border: Border.all(
-                              color: AppColors.whiteColor.withOpacity(0.30),
+                              color: AppColors.whiteColor,
                               width: 2.w,
                             ),
-                          ),
-                          child: Container(
-                            decoration: BoxDecoration(
-                              shape: BoxShape.circle,
-                              border: Border.all(
-                                  color: AppColors.whiteColor, width: 2.w),
-                              image: DecorationImage(
-                                image: AssetImage(AppImages.profilePic),
-                                fit: BoxFit.cover,
-                              ),
+                            image: DecorationImage(
+                              image: AssetImage(AppImages.profilePic),
+                              fit: BoxFit.cover,
                             ),
                           ),
                         ),
                       ),
-                    )
+                    ),
+                  ),
                 ),
-                Positioned(right: 20,top: 30,child: GestureDetector(onTap: (){
-                  Get.toNamed(AppRoutes.languagesView);
-                },child: Icon(Icons.settings,color: AppColors.darkGrey2,)))
+                Positioned(
+                  right: 20,
+                  top: 30,
+                  child: GestureDetector(
+                    onTap: () {
+                      Get.toNamed(AppRoutes.languagesView);
+                    },
+                    child: Icon(Icons.settings, color: AppColors.darkGrey2),
+                  ),
+                ),
               ],
             ),
-            20.verticalSpace,
+            SizedBox(height: 40),
             Expanded(
-                child: ClipRRect(
-                  borderRadius: BorderRadius.vertical(
-                      top: Radius.circular(50.sp)),
-                  child: BackdropFilter(
-                    filter: ImageFilter.blur(sigmaX: 10.0, sigmaY: 10.0),
-                    child: Container(
-                      decoration: BoxDecoration(
-                        color: AppColors.whiteColor.withOpacity(0.70),
-                        borderRadius: BorderRadius.vertical(
-                          top: Radius.circular(50.sp),
-                        ),
-                      ),
-                      child: Column(
-                        children: [
-                          ClipRRect(
-                            borderRadius: BorderRadius.circular(40.sp),
-                            child: BackdropFilter(
-                              filter: ImageFilter.blur(sigmaX: 10.0, sigmaY: 10.0),
-                              child: Container(
-                                padding: EdgeInsets.all(15.sp),
-                                decoration: BoxDecoration(
-                                  color: AppColors.darkGrey2.withOpacity(0.17),
-                                  borderRadius: BorderRadius.circular(40.sp),
-                                  border: Border.all(
-                                    color: AppColors.whiteColor,
-                                    width: 1.5.sp,
-                                  ),
-                                ),
-                                child: Text(
-                                  '$firstName $lastName'.tr,
-                                  style: AppStyles.poppins20w600white
-                                ),
-                              ),
-                            ),
+              child: Stack(
+                clipBehavior: Clip.none,
+                alignment: Alignment.center,
+                children: [
+                  ClipRRect(
+                    borderRadius: BorderRadius.vertical(
+                      top: Radius.circular(50.sp),
+                    ),
+                    child: BackdropFilter(
+                      filter: ImageFilter.blur(sigmaX: 10.0, sigmaY: 10.0),
+                      child: Container(
+                        decoration: BoxDecoration(
+                          color: AppColors.whiteColor.withOpacity(0.70),
+                          borderRadius: BorderRadius.vertical(
+                            top: Radius.circular(50.sp),
                           ),
-                          20.verticalSpace,
-                          Expanded(
-                            child: Padding(
-                              padding: EdgeInsets.symmetric(horizontal: 20),
-                              child: Column(
-                                children: [
-                                  CustomContainerTile(
+                        ),
+                        child: Column(
+                          children: [
+                            60.verticalSpace,
+
+                            Expanded(
+                              child: Padding(
+                                padding: EdgeInsets.symmetric(horizontal: 20),
+                                child: Column(
+                                  children: [
+                                    CustomContainerTile(
                                       icon: AppSvgs.editProfileSvg,
                                       title: "Edit My Profile".tr,
                                       onTap: () {
                                         Get.toNamed(AppRoutes.editProfileView);
-                                      }),
-                                  10.verticalSpace,
-                                  CustomContainerTile(
+                                      },
+                                    ),
+                                    10.verticalSpace,
+                                    CustomContainerTile(
                                       icon: AppSvgs.shareProfileSvg,
                                       title: "Sharing The App".tr,
-                                      onTap: () {}),
-                                  10.verticalSpace,
-                                  CustomContainerTile(
+                                      onTap: () {},
+                                    ),
+                                    10.verticalSpace,
+                                    CustomContainerTile(
                                       icon: AppSvgs.contactUsSvg,
                                       title: 'Contact Us'.tr,
-                                      onTap: () {}),
-                                  10.verticalSpace,
-                                  CustomContainerTile(
+                                      onTap: () {},
+                                    ),
+                                    10.verticalSpace,
+                                    CustomContainerTile(
                                       icon: AppSvgs.termOfUseSvg,
                                       title: 'Terms Of Use'.tr,
                                       onTap: () {
                                         Get.toNamed(AppRoutes.termOfUseView);
-                                      }),
-                                  10.verticalSpace,
-                                  CustomContainerTile(
+                                      },
+                                    ),
+                                    10.verticalSpace,
+                                    CustomContainerTile(
                                       icon: AppSvgs.termOfUseSvg,
                                       title: 'Privacy Policy'.tr,
                                       onTap: () {
-                                        Get.toNamed(AppRoutes.privacyPolicyView);
-                                      }),
-                                  10.verticalSpace,
-                                  CustomContainerTile(
+                                        Get.toNamed(
+                                          AppRoutes.privacyPolicyView,
+                                        );
+                                      },
+                                    ),
+                                    10.verticalSpace,
+                                    CustomContainerTile(
                                       icon: AppSvgs.logOutSvg,
                                       title: 'Log Out'.tr,
-                                      containerColor: AppColors.redColor.withOpacity(0.35),
+                                      containerColor: AppColors.redColor
+                                          .withOpacity(0.35),
                                       borderColor: AppColors.redColor,
                                       titleColor: AppColors.whiteColor,
                                       onTap: () {
                                         PrefManager.setIsLogin(false);
                                         Get.offAllNamed(AppRoutes.phoneLogin);
-                                      }),
-                                  Spacer(),
-                                  CustomContainerTile(
+                                      },
+                                    ),
+                                    Spacer(),
+                                    CustomContainerTile(
                                       icon: AppSvgs.deleteSvg,
                                       title: 'Delete User'.tr,
-                                      containerColor: AppColors.redColor.withOpacity(0.85),
+                                      containerColor: AppColors.redColor
+                                          .withOpacity(0.85),
                                       borderColor: AppColors.redColor,
                                       titleColor: AppColors.whiteColor,
                                       onTap: () {
                                         showDeleteConfirmation(context);
-                                      }),
-                                  10.verticalSpace
-                                ],
+                                      },
+                                    ),
+                                    20.verticalSpace,
+                                  ],
+                                ),
                               ),
                             ),
-                          ),
-                        ],
+                          ],
+                        ),
                       ),
                     ),
                   ),
-                )
+                  20.verticalSpace,
+                  Positioned(
+                    top: -30,
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(40.sp),
+                      child: BackdropFilter(
+                        filter: ImageFilter.blur(sigmaX: 10.0, sigmaY: 10.0),
+                        child: Container(
+                          padding: EdgeInsets.all(15.sp),
+                          decoration: BoxDecoration(
+                            color: AppColors.darkGrey2.withOpacity(0.17),
+                            borderRadius: BorderRadius.circular(40.sp),
+                            border: Border.all(
+                              color: AppColors.whiteColor,
+                              width: 1.5.sp,
+                            ),
+                          ),
+                          child: Text(
+                            'haim'.tr,
+                            style: AppStyles.poppins20w600white,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
             ),
-
           ],
         ),
       ),
@@ -198,7 +230,10 @@ class ProfileView extends StatelessWidget {
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          title: Text('Delete Account',style: AppStyles.poppins16w700darkGrey2,),
+          title: Text(
+            'Delete Account',
+            style: AppStyles.poppins16w700darkGrey2,
+          ),
           content: Text(
             'Are you sure you want to delete your account? This action cannot be undone.',
             style: AppStyles.poppins14w300darkGrey2,
@@ -206,20 +241,18 @@ class ProfileView extends StatelessWidget {
           actions: [
             TextButton(
               onPressed: () => Get.back(),
-              child: Text('Cancel',style: AppStyles.poppins14w400darkGrey2,),
+              child: Text('Cancel', style: AppStyles.poppins14w400darkGrey2),
             ),
             TextButton(
               onPressed: () {
                 Get.back();
               },
-              style: TextButton.styleFrom(
-                foregroundColor: Colors.red,
-              ),
-              child: Text('Delete',style: AppStyles.poppins14w400Red,),
+              style: TextButton.styleFrom(foregroundColor: Colors.red),
+              child: Text('Delete', style: AppStyles.poppins14w400Red),
             ),
           ],
         );
-     },
+      },
     );
   }
 }

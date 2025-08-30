@@ -42,10 +42,11 @@ class _DailyGoalsViewState extends State<DailyGoalsView> {
           children: [
             Stack(
               alignment: Alignment.topCenter,
+              clipBehavior: Clip.none,
               children: [
-                Container(height: 210.h),
+                // Container(height: 210.h),
                 Container(
-                  height: 170.h,
+                  height: 120,
                   width: double.infinity,
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.vertical(
@@ -63,7 +64,7 @@ class _DailyGoalsViewState extends State<DailyGoalsView> {
                           onTap: () => Get.back(),
                           child: SvgPicture.asset(
                             AppSvgs.backImageSvg,
-                            height: 120.h,
+                            height: 100,
                           ),
                           // Image.asset(
                           //   AppImages.imageBackIcon,
@@ -72,7 +73,7 @@ class _DailyGoalsViewState extends State<DailyGoalsView> {
                         ),
                       ),
                       Positioned(
-                        bottom: 55,
+                        // bottom: 55,
                         child: Text(
                           'Daily Challenge'.tr,
                           style: AppStyles.poppins20w600darkGrey2,
@@ -82,7 +83,7 @@ class _DailyGoalsViewState extends State<DailyGoalsView> {
                   ),
                 ),
                 Positioned(
-                  bottom: 0,
+                  bottom: -40,
                   child: Container(
                     padding: EdgeInsets.symmetric(
                       horizontal: 20.w,
@@ -102,7 +103,7 @@ class _DailyGoalsViewState extends State<DailyGoalsView> {
                           ),
                           TextSpan(
                             text: ' One'.tr,
-                            style: AppStyles.poppins16w900darkGrey2,
+                            style: AppStyles.poppins16w600darkGrey2,
                           ),
                           TextSpan(
                             text: '\nchallenge for today'.tr,
@@ -114,13 +115,19 @@ class _DailyGoalsViewState extends State<DailyGoalsView> {
                   ),
                 ),
                 Positioned(
-                  bottom: 0,
+                  bottom: -40,
                   right: 0,
                   child: GestureDetector(
-                      onTap: () {
-                        Get.dialog(CustomInfoDialog(description: "Every day you can choose one daily challenge from three possible challenges. After you choose and carry it out, three new challenge will appear every other day.".tr));
-                      },
-                      child: Container(
+                    onTap: () {
+                      Get.dialog(
+                        CustomInfoDialog(
+                          description:
+                              "Every day you can choose one daily challenge from three possible challenges. After you choose and carry it out, three new challenge will appear every other day."
+                                  .tr,
+                        ),
+                      );
+                    },
+                    child: Container(
                       margin: EdgeInsets.all(20.sp),
                       padding: EdgeInsets.all(5.sp),
                       decoration: BoxDecoration(
@@ -137,7 +144,7 @@ class _DailyGoalsViewState extends State<DailyGoalsView> {
                 ),
               ],
             ),
-            40.verticalSpace,
+            80.verticalSpace,
             SizedBox(
               height: 450.h,
               child: PageView(
@@ -154,21 +161,24 @@ class _DailyGoalsViewState extends State<DailyGoalsView> {
                     '5 Minute'.tr,
                     'Meditation'.tr,
                     AppStyles.urbanistBold30Yellow700,
-                    'Take a 5 minute break today to go outside in the sun and breathe air'.tr,
+                    'Take a 5 minute break today to go outside in the sun and breathe air'
+                        .tr,
                     AppSvgs.yogaSvg,
                     AppImages.meditationBackgroundImage,
                     () {
                       Get.toNamed(
                         AppRoutes.dailyGoalsDoingView,
                         arguments: {
-                          'backgroundImage': AppImages.meditationBackgroundImage,
+                          'backgroundImage':
+                              AppImages.meditationBackgroundImage,
                           'title': '5 Minute'.tr,
                           'heading': 'Meditation'.tr,
-                          'description': 'Take a 5 minute break today to go outside in the sun and breathe air'.tr,
+                          'description':
+                              'Take a 5 minute break today to go outside in the sun and breathe air'
+                                  .tr,
                           'iconImage': AppSvgs.yogaSvg,
                         },
                       );
-
                     },
                   ),
                   buildPageViewItem(
@@ -185,7 +195,9 @@ class _DailyGoalsViewState extends State<DailyGoalsView> {
                           'backgroundImage': AppImages.friendBackgroundImage,
                           'title': 'Meet A'.tr,
                           'heading': 'Friend'.tr,
-                          'description': 'Meeting a friend I haven\'t seen in a long time'.tr,
+                          'description':
+                              'Meeting a friend I haven\'t seen in a long time'
+                                  .tr,
                           'iconImage': AppSvgs.friendsSvg,
                         },
                       );
@@ -195,7 +207,8 @@ class _DailyGoalsViewState extends State<DailyGoalsView> {
                     'Take A'.tr,
                     'Walk'.tr,
                     AppStyles.urbanistBold30Yellow700,
-                    'Go for a walk in a place you like, for example at the sea or even under the house'.tr,
+                    'Go for a walk in a place you like, for example at the sea or even under the house'
+                        .tr,
                     AppSvgs.walkSvg,
                     AppImages.walkBackgroundImage,
                     () {
@@ -205,7 +218,9 @@ class _DailyGoalsViewState extends State<DailyGoalsView> {
                           'backgroundImage': AppImages.walkBackgroundImage,
                           'title': 'Take A'.tr,
                           'heading': 'Walk'.tr,
-                          'description': 'Go for a walk in a place you like, for example at the sea or even under the house'.tr,
+                          'description':
+                              'Go for a walk in a place you like, for example at the sea or even under the house'
+                                  .tr,
                           'iconImage': AppSvgs.walkSvg,
                         },
                       );
@@ -274,7 +289,9 @@ class _DailyGoalsViewState extends State<DailyGoalsView> {
                 children: [
                   Container(
                     decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(18.r), // Slightly smaller to account for border
+                      borderRadius: BorderRadius.circular(
+                        18.r,
+                      ), // Slightly smaller to account for border
                       gradient: LinearGradient(
                         begin: Alignment.topCenter,
                         end: Alignment.bottomCenter,
@@ -297,27 +314,35 @@ class _DailyGoalsViewState extends State<DailyGoalsView> {
                         children: [
                           currentPage == 0
                               ? Stack(
-                            alignment: Alignment.bottomCenter,
-                            children: [
-                              SvgPicture.asset(AppSvgs.meditationClockSvg),
-                              Text(title, style: AppStyles.urbanistBold20White600),
-                            ],
-                          )
-                              : Text(title, style: AppStyles.urbanistBold20White600),
-                          if (currentPage == 1 || currentPage == 2) 10.verticalSpace,
+                                alignment: Alignment.bottomCenter,
+                                children: [
+                                  SvgPicture.asset(AppSvgs.meditationClockSvg),
+                                  Text(
+                                    title,
+                                    style: AppStyles.urbanistBold20White600,
+                                  ),
+                                ],
+                              )
+                              : Text(
+                                title,
+                                style: AppStyles.urbanistBold20White600,
+                              ),
+
+                          // if (currentPage == 1 || currentPage == 2)
+                          10.verticalSpace,
                           Text(heading, style: headingStyle),
-                          if (currentPage == 1 || currentPage == 2) 10.verticalSpace,
+                          // if (currentPage == 1 || currentPage == 2)
+                          10.verticalSpace,
+
                           Text(
                             description,
                             style: AppStyles.poppins14w500white,
                             textAlign: TextAlign.center,
                           ),
-                          if (currentPage == 1 || currentPage == 2) 10.verticalSpace,
-                          SvgPicture.asset(
-                            svgIcon,
-                            height: currentPage == 1 || currentPage == 2 ? 50.h : null,
-                          ),
-                          20.verticalSpace, // Added bottom spacing
+                          // if (currentPage == 1 || currentPage == 2)
+                          10.verticalSpace,
+                          SvgPicture.asset(svgIcon, height: 50),
+                          // 20.verticalSpace, // Added bottom spacing
                         ],
                       ),
                     ),
@@ -328,10 +353,12 @@ class _DailyGoalsViewState extends State<DailyGoalsView> {
             Positioned(
               top: 0,
               child: Container(
-                padding: EdgeInsets.symmetric(horizontal: 30.w, vertical: 10.h),
+                padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 6.h),
                 decoration: BoxDecoration(
-                  color: AppColors.darkGrey2.withOpacity(0.90), // Increased opacity for better readability
-                  borderRadius: BorderRadius.circular(40.sp),
+                  color: AppColors.whiteColor.withOpacity(
+                    0.50,
+                  ), // Increased opacity for better readability
+                  borderRadius: BorderRadius.circular(100.sp),
                   border: Border.all(color: AppColors.whiteColor, width: 1.5.w),
                 ),
                 child: Text(

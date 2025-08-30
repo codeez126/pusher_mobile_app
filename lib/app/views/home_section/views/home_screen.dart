@@ -46,20 +46,29 @@ class _HomeScreenState extends State<HomeScreen> {
               children: [
                 // Container(height: 210.h),
                 Container(
-                  height: 120,
+                  height: 100,
                   width: Get.width,
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.vertical(
                       bottom: Radius.circular(50.sp),
                     ),
+                    boxShadow: [
+                      BoxShadow(
+                        color: Color(0xff1E5DA1).withValues(alpha: 0.15),
+                        offset: Offset(0, 4),
+                        blurRadius: 10,
+                        spreadRadius: 0,
+                      ),
+                    ],
                     color: AppColors.whiteColor.withOpacity(0.30),
                   ),
                   child: Stack(
+                    clipBehavior: Clip.none,
                     alignment: Alignment.center,
                     children: [
                       Positioned(
                         left: 0,
-                        bottom: 0,
+                        bottom: -20,
                         child: SizedBox(
                           height: 100,
                           width: 100,
@@ -92,7 +101,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       ),
                       Positioned(
                         right: -20,
-                        bottom: 0,
+                        bottom: -20,
                         child: SizedBox(
                           height: 100,
                           width: 100,
@@ -119,23 +128,33 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
                 ),
                 Positioned(
-                  bottom: -50,
+                  bottom: -20,
                   child: Stack(
                     alignment: Alignment.bottomCenter,
                     clipBehavior: Clip.none,
                     children: [
                       Positioned(
-                        bottom: -45,
+                        bottom: -35,
                         child: Container(
                           width: Get.width * 0.70,
                           padding: EdgeInsets.symmetric(
                             horizontal: 10,
-                            vertical: 12,
+                            vertical: 8,
                           ),
                           decoration: BoxDecoration(
                             color: Colors.white.withValues(alpha: 0.20),
                             borderRadius: BorderRadius.circular(50),
                             border: Border.all(color: Colors.white, width: 1),
+                            boxShadow: [
+                              BoxShadow(
+                                color: Color(
+                                  0xff1E5DA1,
+                                ).withValues(alpha: 0.15),
+                                offset: Offset(0, 4),
+                                blurRadius: 10,
+                                spreadRadius: 0,
+                              ),
+                            ],
                           ),
                           child: Center(
                             child: Text(
@@ -143,7 +162,7 @@ class _HomeScreenState extends State<HomeScreen> {
                               style: AppTextStyles.medium.copyWith(
                                 color: Colors.white,
                                 fontSize: 18,
-                                fontWeight: FontWeight.w700,
+                                fontWeight: FontWeight.w600,
                               ),
                             ),
                           ),
@@ -155,9 +174,17 @@ class _HomeScreenState extends State<HomeScreen> {
                           shape: BoxShape.circle,
                           border: Border.all(color: Colors.white, width: 1),
                           color: const Color(0xff0E1E2E4),
+                          boxShadow: [
+                            BoxShadow(
+                              color: Color(0xff1E5DA1).withValues(alpha: 0.15),
+                              offset: Offset(0, 4),
+                              blurRadius: 10,
+                              spreadRadius: 0,
+                            ),
+                          ],
                         ),
                         child: CircleAvatar(
-                          radius: 40,
+                          radius: 30,
                           backgroundImage: AssetImage('assets/images/user.png'),
                         ),
                       ),
@@ -194,7 +221,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 // ),
               ],
             ),
-            SizedBox(height: 120),
+            SizedBox(height: 70),
             Expanded(
               child: SingleChildScrollView(
                 child: Column(
@@ -203,8 +230,12 @@ class _HomeScreenState extends State<HomeScreen> {
                       padding: const EdgeInsets.symmetric(horizontal: 16),
                       child: Container(
                         width: Get.width,
-                        height: 65,
-                        padding: EdgeInsets.symmetric(horizontal: 10),
+                        height: 50,
+                        padding: EdgeInsets.only(
+                          bottom: 4,
+                          left: 16,
+                          right: 16,
+                        ),
                         decoration: BoxDecoration(
                           color: Colors.white.withValues(alpha: 0.20),
                           borderRadius: BorderRadius.circular(50),
@@ -215,67 +246,93 @@ class _HomeScreenState extends State<HomeScreen> {
                           itemCount: 7,
                           scrollDirection: Axis.horizontal,
                           itemBuilder: (context, index) {
-                            return Padding(
-                              padding: const EdgeInsets.symmetric(
-                                horizontal: 8,
-                              ),
-                              child: SizedBox(
-                                width: 40,
-                                child: Column(
-                                  mainAxisAlignment: MainAxisAlignment.end,
-                                  crossAxisAlignment: CrossAxisAlignment.center,
-                                  children: [
-                                    if (index < 2)
-                                      Icon(
-                                        Icons.check,
-                                        size: 20,
-                                        color: AppColors.darkGrey2,
-                                      ),
-                                    SizedBox(height: 0),
+                            return Container(
+                              margin: EdgeInsets.symmetric(horizontal: 8),
+                              // width: 30,
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.end,
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: [
+                                  if (index < 2)
                                     Container(
-                                      padding: EdgeInsets.only(bottom: 10),
-                                      child: Container(
-                                        padding: EdgeInsets.symmetric(
-                                          horizontal: 8,
-                                          vertical: 4,
+                                      padding: EdgeInsets.symmetric(
+                                        horizontal: 3,
+                                        vertical: 1,
+                                      ),
+                                      decoration: BoxDecoration(
+                                        color: Colors.white.withValues(
+                                          alpha: 0.20,
                                         ),
-                                        decoration: BoxDecoration(
-                                          color:
-                                              index == 2
-                                                  ? Colors.white.withValues(
-                                                    alpha: 0.30,
-                                                  )
-                                                  : Colors.transparent,
-                                          borderRadius:
-                                              index == 2
-                                                  ? BorderRadius.circular(8)
-                                                  : null,
-                                          border:
-                                              index == 2
-                                                  ? Border.all(
-                                                    color: Colors.white,
-                                                    width: 1,
-                                                  )
-                                                  : null,
+                                        borderRadius: BorderRadius.only(
+                                          bottomLeft: Radius.circular(50),
+                                          bottomRight: Radius.circular(50),
                                         ),
-                                        child: Text(
-                                          "0${index + 1}",
-                                          style: AppTextStyles.medium.copyWith(
-                                            color:
-                                                index < 2
-                                                    ? AppColors.darkGrey2
-                                                    : Colors.white,
-                                            fontWeight:
-                                                index == 2
-                                                    ? FontWeight.w600
-                                                    : FontWeight.w300,
-                                            fontSize: 16,
-                                          ),
+                                      ),
+                                      child: Icon(
+                                        Icons.check,
+                                        size: 15,
+                                        color: AppColors.darkGrey2.withValues(
+                                          alpha: 0.7,
                                         ),
                                       ),
                                     ),
-                                  ],
-                                ),
+                                  // Spacer(),
+                                  Container(
+                                    // margin: EdgeInsets.only(bottom: 5),
+                                    padding: EdgeInsets.symmetric(
+                                      horizontal: 3,
+                                      vertical: 1,
+                                    ),
+                                    decoration: BoxDecoration(
+                                      color:
+                                          index == 2
+                                              ? Colors.white.withValues(
+                                                alpha: 0.30,
+                                              )
+                                              : Colors.transparent,
+                                      borderRadius:
+                                          index == 2
+                                              ? BorderRadius.circular(8)
+                                              : null,
+                                      border:
+                                          index == 2
+                                              ? Border.all(
+                                                color: Colors.white,
+                                                width: 1,
+                                              )
+                                              : null,
+                                      boxShadow:
+                                          index == 2
+                                              ? [
+                                                BoxShadow(
+                                                  color: Color(
+                                                    0xff1E5DA1,
+                                                  ).withValues(alpha: 0.15),
+                                                  offset: Offset(0, 4),
+                                                  blurRadius: 10,
+                                                  spreadRadius: 0,
+                                                ),
+                                              ]
+                                              : [],
+                                    ),
+                                    child: Text(
+                                      "0${index + 1}",
+                                      style: AppTextStyles.medium.copyWith(
+                                        color:
+                                            index < 2
+                                                ? Color(
+                                                  0xff5A5A5A,
+                                                ).withValues(alpha: 0.7)
+                                                : Colors.white,
+                                        fontWeight:
+                                            index == 2
+                                                ? FontWeight.w600
+                                                : FontWeight.w300,
+                                        fontSize: 18,
+                                      ),
+                                    ),
+                                  ),
+                                ],
                               ),
                             );
                           },
@@ -291,7 +348,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       ),
                       child: Column(
                         children: [
-                          SizedBox(height: 20),
+                          SizedBox(height: 10),
                           Container(
                             width: Get.width,
                             margin: EdgeInsets.symmetric(horizontal: 16),
@@ -303,6 +360,16 @@ class _HomeScreenState extends State<HomeScreen> {
                               color: Colors.white.withValues(alpha: 0.20),
                               borderRadius: BorderRadius.circular(50),
                               border: Border.all(color: Colors.white, width: 1),
+                              boxShadow: [
+                                BoxShadow(
+                                  color: Color(
+                                    0xff1E5DA1,
+                                  ).withValues(alpha: 0.05),
+                                  offset: Offset(0, 4),
+                                  blurRadius: 10,
+                                  spreadRadius: 0,
+                                ),
+                              ],
                             ),
                             child: Center(
                               child: Text(
@@ -319,7 +386,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           FadeThreeWidgets(),
                           // SizedBox(height: 20.h),
                           SizedBox(
-                            height: 320,
+                            height: 300,
                             width: Get.width,
                             child: Stack(
                               // spacing: 2,

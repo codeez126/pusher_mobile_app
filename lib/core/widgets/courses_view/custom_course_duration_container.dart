@@ -9,7 +9,7 @@ import '../../constants/app_fonts_and_styles.dart';
 import '../../constants/app_svgs.dart';
 
 class CustomCourseDurationContainer extends StatelessWidget {
-  CustomCourseDurationContainer({super.key,required this.text});
+  CustomCourseDurationContainer({super.key, required this.text});
 
   String text;
 
@@ -17,8 +17,8 @@ class CustomCourseDurationContainer extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: double.infinity,
-      margin: EdgeInsets.all(10.sp),
-      padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 5.h),
+      margin: EdgeInsets.only(top: 5),
+      padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 10.h),
       decoration: BoxDecoration(
         color: AppColors.whiteColor,
         borderRadius: BorderRadius.circular(25.sp),
@@ -28,10 +28,7 @@ class CustomCourseDurationContainer extends StatelessWidget {
         children: [
           SvgPicture.asset(AppSvgs.clockSvg),
           5.horizontalSpace,
-          Text(
-            text.tr,
-            style: AppStyles.poppins12w700darkGrey2,
-          ),
+          Text(text.tr, style: AppStyles.poppins12w600darkGrey2),
         ],
       ),
     );
