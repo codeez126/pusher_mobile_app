@@ -14,5 +14,8 @@ class ApiEndpoints {
   static const String apiUpdateProfileEndPoint = "update-profile";
 
 
+  static const String apiImprovementProgramsEndPoint = "improvement-programs";
+
+
 
 }

@@ -11,6 +11,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:dio/dio.dart' as dio;
+import 'package:get_storage/get_storage.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
 import '../model/verify_otp_response_model.dart';
@@ -120,17 +121,19 @@ class PhoneLoginController extends GetxController {
           Utils.toastMessage("${model.message}");
           final register = model.data?.user?.isRegistered;
           print("Registered Or Not : $register");
-          if(register==0){
-            Duration();
-            Future.delayed(Duration(seconds: 3),(){
-              Get.toNamed(AppRoutes.profileRegistrationView);
-            });
-          }else {
-            Future.delayed(Duration(seconds: 3),(){
-              Get.toNamed(AppRoutes.bottomNavNavigation);
-            });
-          }
-
+          //TODO
+          // if(register==0){
+          //   Duration();
+          //   Future.delayed(Duration(seconds: 3),(){
+          //     Get.toNamed(AppRoutes.profileRegistrationView);
+          //   });
+          // }else {
+          //   Future.delayed(Duration(seconds: 3),(){
+          //     Get.toNamed(AppRoutes.bottomNavNavigation);
+          //   });
+          // }
+          //Get.toNamed(AppRoutes.profileRegistrationView);
+          Get.toNamed(AppRoutes.improvementView);
         } else {
           print("Otp Verification Failed: ${model.message}");
           successCondition.value =false;
@@ -151,7 +154,10 @@ class PhoneLoginController extends GetxController {
     }
   }
   void sendOtp() async {
-    Map<String, dynamic> data = {"phone": phoneController.value.text};
+
+    String phone = selectedCode.value.replaceAll('+', '') + phoneController.value.text;
+
+    Map<String, dynamic> data = {"phone": phone};
 
     dio.Response? response = await networkManager.callApi(
       urlEndPoint: ApiEndpoints.apiSendOtpEndPoint,

@@ -112,12 +112,15 @@ class CustomRegistrationAppBar extends StatelessWidget {
                   children: [
                     Text(
                       "Setting Personal Goals".tr,
-                      style: AppStyles.urbanistBold28White900,
+                      style: AppStyles.urbanistBold20White900,
                     ),
-                    Text(
-                      'Based on your selection, pick the \ngoals you want to achieve for \npersonal growth.'.tr,
-                      textAlign: TextAlign.center,
-                      style: AppStyles.poppins12w700white,
+                    Container(
+                      width: 300.w,
+                      child: Text(
+                        'Based on your selection, pick the goals you want to achieve for personal growth.'.tr,
+                        textAlign: TextAlign.center,
+                        style: AppStyles.poppins12w700white,
+                      ),
                     ),
                   ],
                 ),

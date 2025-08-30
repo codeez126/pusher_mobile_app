@@ -92,20 +92,21 @@ class _OtpVerficationViewState extends State<OtpVerficationView> {
               ),
               30.verticalSpace,
               Container(
-                height: 40.h,
-                margin: EdgeInsets.symmetric(horizontal: 10.w),
+                height: 50.h,
+                alignment: Alignment.center,
+                margin: EdgeInsets.symmetric(horizontal: 15.w),
                 decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(20.sp),
+                  borderRadius: BorderRadius.circular(30.sp),
                   color: AppColors.whiteColor.withOpacity(0.25),
                   border: Border.all(color: AppColors.whiteColor, width: 1.5.w),
                 ),
 
                 child: Obx(() {
-                  return Center(
-                    child: Text(
-                      phoneLoginController.errorToShow.value.tr,
-                      style: phoneLoginController.successCondition.value?AppStyles.poppins12w600green:AppStyles.poppins12w600red,
-                    ),
+                  return Text(
+                    phoneLoginController.errorToShow.value.tr,
+                    style: phoneLoginController.successCondition.value?AppStyles.poppins14w700white.copyWith(color: AppColors.greenColor):AppStyles.poppins14w700white.copyWith(color: AppColors.redColor.withOpacity(0.5)),
+                    textAlign: TextAlign.center,
+                    overflow: TextOverflow.ellipsis,
                   );
                 }),
               ),
@@ -117,9 +118,9 @@ class _OtpVerficationViewState extends State<OtpVerficationView> {
                     "Didn't receive the code?".tr,
                     style: AppStyles.poppins12w700white,
                   ),
-                  TextButton(
-                    onPressed: () {
-                      //resendCode();
+                  GestureDetector(
+                    onTap: (){
+                      resendOtp();
                     },
                     child: Text(
                       " Resend it now",
@@ -139,6 +140,9 @@ class _OtpVerficationViewState extends State<OtpVerficationView> {
                       FocusScope.of(context).unfocus();
                       otpVerfication();
                     },
+                    isIcon: false,
+                    verticalPadding: 15.h,
+                    borderWidth: 1.w,
                     text: "OK".tr,
                     textStyle: AppStyles.poppins16w700white,
                   ),
@@ -153,12 +157,13 @@ class _OtpVerficationViewState extends State<OtpVerficationView> {
 
   void otpVerfication() {
     print(phoneLoginController.otpTextController.value.text);
-    print("PhoneNumber: $phoneNumber");
-    phoneLoginController.verifyOtp(phoneNumber);
+    String phone = phoneLoginController.selectedCode.value.replaceAll('+', '') + phoneLoginController.phoneController.value.text;
+    phoneNumber = phone;
+    print("PhoneNumber: $phone");
+    phoneLoginController.verifyOtp(phone);
     //Get.toNamed(AppRoutes.profileRegistrationView);
   }
 
-// void resendCode() {
-//   phoneLoginController.sendOtp(phoneNumber);
-// }
+  void resendOtp() {}
+
 }

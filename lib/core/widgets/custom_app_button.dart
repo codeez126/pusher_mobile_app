@@ -17,6 +17,8 @@ class CustomAppButton extends StatelessWidget {
     this.isImage=false,
     this.image='',
     this.paddingInsideHorizontal=30,
+    this.verticalPadding=12,
+    this.borderWidth=1.4,
   });
 
   String text;
@@ -26,6 +28,8 @@ class CustomAppButton extends StatelessWidget {
   String image;
   bool isImage;
   double paddingInsideHorizontal;
+  double verticalPadding;
+  double borderWidth;
 
   @override
   Widget build(BuildContext context) {
@@ -39,10 +43,10 @@ class CustomAppButton extends StatelessWidget {
           borderRadius: BorderRadius.circular(30.r),
           side: BorderSide(
             color: AppColors.whiteColor,
-            width: 1.4.sp,
+            width: borderWidth.sp,
           ),
         ),
-        padding: EdgeInsets.symmetric(horizontal: paddingInsideHorizontal.w, vertical: 12.h),
+        padding: EdgeInsets.symmetric(horizontal: paddingInsideHorizontal.w, vertical: verticalPadding.h),
       ),
       child: Row(
         mainAxisAlignment: isIcon?MainAxisAlignment.spaceBetween:MainAxisAlignment.center,

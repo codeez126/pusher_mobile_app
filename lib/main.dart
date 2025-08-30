@@ -20,7 +20,7 @@ void main() async {
       statusBarIconBrightness: Brightness.dark,
     ),
   );
-  // Initialize GetStorage
+  //Initialize GetStorage
   await PrefManager.init();
   await GetStorage.init();
   //await initializeGoogleSignIn();
@@ -31,7 +31,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ScreenUtilInit(
-      designSize: const Size(399, 853),
+      designSize: const Size(390, 852),
       minTextAdapt: true,
       splitScreenMode: true,
       child: GetMaterialApp(

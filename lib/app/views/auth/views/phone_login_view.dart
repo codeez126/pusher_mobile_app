@@ -67,7 +67,7 @@ class PhoneLogin extends StatelessWidget {
           Padding(
             padding: EdgeInsets.symmetric(horizontal: 24.0),
             child: ClipRRect(
-              borderRadius: BorderRadius.circular(30),
+              borderRadius: BorderRadius.circular(20),
               child: BackdropFilter(
                 filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
                 child: Row(
@@ -77,14 +77,14 @@ class PhoneLogin extends StatelessWidget {
                       return AnimatedContainer(
                         curve: Curves.easeInOut,
                         duration: const Duration(milliseconds: 500),
-                        width: 120.w,
+                        width: 100.w,
                         height: phoneLoginController.isClickedCountryCode.value
                             ? 200.h
                             : 60.h,
                         padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 10.h),
                         decoration: BoxDecoration(
                           color: Colors.white.withOpacity(0.1),
-                          borderRadius: BorderRadius.circular(30),
+                          borderRadius: BorderRadius.circular(20),
                           border: Border.all(color: AppColors.whiteColor),
                         ),
                         child: phoneLoginController.isClickedCountryCode.value
@@ -145,7 +145,7 @@ class PhoneLogin extends StatelessWidget {
                         padding: EdgeInsets.symmetric(horizontal: 12),
                         decoration: BoxDecoration(
                           color: Colors.white.withOpacity(0.1),
-                          borderRadius: BorderRadius.circular(30),
+                          borderRadius: BorderRadius.circular(20),
                           border: Border.all(color: AppColors.whiteColor),
                         ),
                         child: Center(
@@ -155,6 +155,7 @@ class PhoneLogin extends StatelessWidget {
                             keyboardType: TextInputType.phone,
                             style: AppStyles.poppins14w700darkGrey2,
                             decoration: InputDecoration(
+                              contentPadding: EdgeInsets.only(left: 10.w),
                               border: InputBorder.none,
                               hintText: '055-6675589',
                               hintStyle: AppStyles.poppins14w700darkGrey2,
@@ -179,6 +180,8 @@ class PhoneLogin extends StatelessWidget {
                         FocusScope.of(context).unfocus();
                         phoneNumberLogin();
                       },
+                      verticalPadding: 15.h,
+                      borderWidth: 1.w,
                       isIcon: false,
                       text: "Login".tr,
                       textStyle: AppStyles.poppins16w600white),
@@ -186,6 +189,7 @@ class PhoneLogin extends StatelessWidget {
               ),
               50.verticalSpace,
               Text("Or".tr,style: AppStyles.poppins16w700white,),
+              10.verticalSpace,
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
@@ -194,13 +198,13 @@ class PhoneLogin extends StatelessWidget {
                       appleLogin();
                     },
                     child: Container(
-                      padding: EdgeInsets.symmetric(horizontal: 20.sp,vertical: 22.sp),
+                      padding: EdgeInsets.symmetric(horizontal: 20.sp,vertical: 20.sp),
                       alignment: Alignment.center,
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(25.sp),
                           color: AppColors.whiteColor,
                           ),
-                      child: Image.asset(AppImages.appleImage,height: 25.h,),
+                      child: Image.asset(AppImages.appleImage,height: 23.h,),
                     ),
                   ),
                   10.horizontalSpace,
@@ -209,13 +213,13 @@ class PhoneLogin extends StatelessWidget {
                       googleLogin();
                     },
                     child: Container(
-                      padding: EdgeInsets.symmetric(horizontal: 20.sp,vertical: 22.sp),
+                      padding: EdgeInsets.symmetric(horizontal: 20.sp,vertical: 20.sp),
                       alignment: Alignment.center,
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(25.sp),
                         color: AppColors.whiteColor,
                       ),
-                      child: Image.asset(AppImages.googleImage,height: 25.h,),
+                      child: Image.asset(AppImages.googleImage,height: 23.h,),
                     ),
                   ),
                 ],
