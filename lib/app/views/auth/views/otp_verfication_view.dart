@@ -91,8 +91,9 @@ class _OtpVerficationViewState extends State<OtpVerficationView> {
               ),
               30.verticalSpace,
               Container(
-                height: 40.h,
+                // height: 40.h,
                 margin: EdgeInsets.symmetric(horizontal: 10.w),
+                padding: EdgeInsets.all(10),
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(20.sp),
                   color: AppColors.whiteColor.withOpacity(0.25),

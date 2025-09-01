@@ -16,8 +16,8 @@ class ProfileView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final firstName = (PrefManager.read("firstName") ?? "").toString();
-    final lastName = (PrefManager.read("lastName") ?? "").toString();
+    // final firstName = (PrefManager.read("firstName") ?? "").toString();
+    // final lastName = (PrefManager.read("lastName") ?? "").toString();
     return Scaffold(
       body: Container(
         width: double.infinity,
@@ -31,11 +31,12 @@ class ProfileView extends StatelessWidget {
         child: Column(
           children: [
             Stack(
+              clipBehavior: Clip.none,
               alignment: Alignment.topCenter,
               children: [
-                Container(height: 170.h),
+                // Container(height: 170.h),
                 Container(
-                  height: 120.h,
+                  height: 100,
                   width: double.infinity,
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.vertical(
@@ -45,7 +46,7 @@ class ProfileView extends StatelessWidget {
                   ),
                 ),
                 Positioned(
-                  bottom: 0,
+                  bottom: -40,
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(50.sp),
                     child: BackdropFilter(
@@ -91,7 +92,7 @@ class ProfileView extends StatelessWidget {
                 ),
               ],
             ),
-            SizedBox(height: 40),
+            SizedBox(height: 80),
             Expanded(
               child: Stack(
                 clipBehavior: Clip.none,
@@ -157,6 +158,11 @@ class ProfileView extends StatelessWidget {
                                       },
                                     ),
                                     10.verticalSpace,
+                                    Divider(
+                                      color: Colors.white,
+                                      thickness: 0.5,
+                                    ),
+                                    10.verticalSpace,
                                     CustomContainerTile(
                                       icon: AppSvgs.logOutSvg,
                                       title: 'Log Out'.tr,
@@ -194,23 +200,25 @@ class ProfileView extends StatelessWidget {
                   20.verticalSpace,
                   Positioned(
                     top: -30,
-                    child: ClipRRect(
-                      borderRadius: BorderRadius.circular(40.sp),
-                      child: BackdropFilter(
-                        filter: ImageFilter.blur(sigmaX: 10.0, sigmaY: 10.0),
-                        child: Container(
-                          padding: EdgeInsets.all(15.sp),
-                          decoration: BoxDecoration(
-                            color: AppColors.darkGrey2.withOpacity(0.17),
-                            borderRadius: BorderRadius.circular(40.sp),
-                            border: Border.all(
-                              color: AppColors.whiteColor,
-                              width: 1.5.sp,
+                    child: Container(
+                      decoration: BoxDecoration(
+                        color: AppColors.whiteColor.withValues(alpha: 0.05),
+                        borderRadius: BorderRadius.circular(40.sp),
+                        border: Border.all(
+                          color: AppColors.whiteColor,
+                          width: 1.5.sp,
+                        ),
+                      ),
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(40.sp),
+                        child: BackdropFilter(
+                          filter: ImageFilter.blur(sigmaX: 20.0, sigmaY: 20.0),
+                          child: Padding(
+                            padding: const EdgeInsets.all(12),
+                            child: Text(
+                              'Or Haim'.tr,
+                              style: AppStyles.poppins20w600white,
                             ),
-                          ),
-                          child: Text(
-                            'haim'.tr,
-                            style: AppStyles.poppins20w600white,
                           ),
                         ),
                       ),

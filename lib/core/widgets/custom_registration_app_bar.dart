@@ -41,7 +41,7 @@ class CustomRegistrationAppBar extends StatelessWidget {
     return Stack(
       alignment: Alignment.topCenter,
       children: [
-        SizedBox(height: isProfile?250.h:200.h),
+        SizedBox(height: isProfile ? 250.h : 200.h),
         Container(
           height: 170.h,
           width: double.infinity,
@@ -57,7 +57,7 @@ class CustomRegistrationAppBar extends StatelessWidget {
                 bottom: 0,
                 child: InkWell(
                   onTap: () => Get.back(),
-                  child: Image.asset(AppImages.imageBackIcon, height: 120.h),
+                  child: Image.asset(AppImages.imageBackIcon, height: 100.h),
                 ),
               ),
               isLogo
@@ -65,17 +65,19 @@ class CustomRegistrationAppBar extends StatelessWidget {
                     bottom: 35,
                     child: SvgPicture.asset(logo!, height: 50.h),
                   )
-                  : isTittleAndSubtitle?Positioned(
+                  : isTittleAndSubtitle
+                  ? Positioned(
                     bottom: 35,
                     child: Column(
                       children: [
                         Row(
                           children: [
-                            if(isIcon)Image.asset(
-                              AppImages.protectionShield,
-                              height: 25.h,
-                            ),
-                            if(isIcon)20.horizontalSpace,
+                            if (isIcon)
+                              Image.asset(
+                                AppImages.protectionShield,
+                                height: 25.h,
+                              ),
+                            if (isIcon) 20.horizontalSpace,
                             Text(
                               title!,
                               style: AppStyles.urbanistBold28White900,
@@ -88,39 +90,43 @@ class CustomRegistrationAppBar extends StatelessWidget {
                         ),
                       ],
                     ),
-                  ):SizedBox(),
-              if(isImprovement)Positioned(
-                bottom: 40.h,
-                child: Column(
-                  children: [
-                    Row(
-                      children: [
-                        Text(
-                          'What Would You Like To\nImprove?'.tr,
-                          textAlign: TextAlign.center,
-                          style: AppStyles.urbanistBold20White900,
-                        ),
-                      ],
-                    ),
-                  ],
+                  )
+                  : SizedBox(),
+              if (isImprovement)
+                Positioned(
+                  bottom: 40.h,
+                  child: Column(
+                    children: [
+                      Row(
+                        children: [
+                          Text(
+                            'What Would You Like To\nImprove?'.tr,
+                            textAlign: TextAlign.center,
+                            style: AppStyles.urbanistBold20White900,
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
                 ),
-              ),
-              if(isPersonalGoals)Positioned(
-                bottom: 35,
-                child: Column(
-                  children: [
-                    Text(
-                      "Setting Personal Goals".tr,
-                      style: AppStyles.urbanistBold28White900,
-                    ),
-                    Text(
-                      'Based on your selection, pick the \ngoals you want to achieve for \npersonal growth.'.tr,
-                      textAlign: TextAlign.center,
-                      style: AppStyles.poppins12w700white,
-                    ),
-                  ],
+              if (isPersonalGoals)
+                Positioned(
+                  bottom: 35,
+                  child: Column(
+                    children: [
+                      Text(
+                        "Setting Personal Goals".tr,
+                        style: AppStyles.urbanistBold28White900,
+                      ),
+                      Text(
+                        'Based on your selection, pick the \ngoals you want to achieve for \npersonal growth.'
+                            .tr,
+                        textAlign: TextAlign.center,
+                        style: AppStyles.poppins12w700white,
+                      ),
+                    ],
+                  ),
                 ),
-              ),
             ],
           ),
         ),
@@ -149,7 +155,10 @@ class CustomRegistrationAppBar extends StatelessWidget {
                             width: 1.5.w,
                           ),
                         ),
-                        child: SvgPicture.asset(AppSvgs.cameraSvg, height: 30.h),
+                        child: SvgPicture.asset(
+                          AppSvgs.cameraSvg,
+                          height: 30.h,
+                        ),
                       ),
                       Positioned(
                         bottom: 0,

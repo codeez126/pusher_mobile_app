@@ -21,8 +21,8 @@ class OnboardingView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-        height: 1.sh,
-        width: 1.sw,
+        height: Get.height,
+        width: Get.width,
         decoration: BoxDecoration(
           image: DecorationImage(
             image: AssetImage(AppImages.onboardingBackground),
@@ -34,7 +34,7 @@ class OnboardingView extends StatelessWidget {
           children: [
             Padding(
               padding: EdgeInsets.only(top: 80.h),
-              child: SvgPicture.asset(AppSvgs.logoSvg,height: 55.h,),
+              child: SvgPicture.asset(AppSvgs.logoSvg, height: 55.h),
             ),
             ClipRRect(
               borderRadius: BorderRadius.only(
@@ -55,15 +55,16 @@ class OnboardingView extends StatelessWidget {
                   child: SingleChildScrollView(
                     physics: const BouncingScrollPhysics(),
                     child: ConstrainedBox(
-                      constraints: BoxConstraints(
-                        minHeight: 400.h,
-                      ),
+                      constraints: BoxConstraints(minHeight: 400.h),
                       child: IntrinsicHeight(
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.end,
                           children: [
                             Padding(
-                              padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 20.h),
+                              padding: EdgeInsets.symmetric(
+                                horizontal: 20.w,
+                                vertical: 20.h,
+                              ),
                               child: Text(
                                 "Start Your Self Improvement Journey Today!".tr,
                                 style: AppStyles.urbanistBold28White900,
@@ -112,13 +113,19 @@ class OnboardingView extends StatelessWidget {
                                 color: AppColors.whiteColor.withOpacity(0.35),
                                 borderRadius: BorderRadius.circular(40.sp),
                               ),
-                              margin: EdgeInsets.symmetric(horizontal: 15.sp, vertical: 15.sp),
+                              margin: EdgeInsets.symmetric(
+                                horizontal: 15.sp,
+                                vertical: 15.sp,
+                              ),
                               child: Padding(
                                 padding: EdgeInsets.all(8.0),
                                 child: CustomAppButton(
-                                    onTap: (){Get.toNamed(AppRoutes.onboarding2View);},
-                                    text: 'Next'.tr,
-                                    textStyle: AppStyles.poppins16w700white),
+                                  onTap: () {
+                                    Get.toNamed(AppRoutes.onboarding2View);
+                                  },
+                                  text: 'Next'.tr,
+                                  textStyle: AppStyles.poppins16w700white,
+                                ),
                               ),
                             ),
                             20.verticalSpace,

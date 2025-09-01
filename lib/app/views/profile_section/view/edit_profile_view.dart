@@ -24,7 +24,9 @@ class EditProfileView extends StatefulWidget {
 }
 
 class _EditProfileViewState extends State<EditProfileView> {
-  final TextEditingController updateNameController = TextEditingController();
+  final TextEditingController updateNameController = TextEditingController(
+    text: "Or Haim",
+  );
   final ProfileRegistrationController profileRegistrationController = Get.put(
     ProfileRegistrationController(),
   );
@@ -35,8 +37,8 @@ class _EditProfileViewState extends State<EditProfileView> {
 
   @override
   Widget build(BuildContext context) {
-    var fullName =
-    "${PrefManager.read("firstName") ?? ""} ${PrefManager.read("lastName") ?? ""}";
+    // var fullName =
+    // "${PrefManager.read("firstName") ?? ""} ${PrefManager.read("lastName") ?? ""}";
     return Scaffold(
       body: Container(
         width: double.infinity,
@@ -51,11 +53,12 @@ class _EditProfileViewState extends State<EditProfileView> {
           child: Column(
             children: [
               Stack(
+                clipBehavior: Clip.none,
                 alignment: Alignment.topCenter,
                 children: [
-                  Container(height: 200.h),
+                  // Container(height: 200.h),
                   Container(
-                    height: 150.h,
+                    height: 100,
                     width: double.infinity,
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.vertical(
@@ -65,7 +68,7 @@ class _EditProfileViewState extends State<EditProfileView> {
                     ),
                   ),
                   Positioned(
-                    bottom: 0,
+                    bottom: -50,
                     child: ClipRRect(
                       borderRadius: BorderRadius.circular(50.sp),
                       child: BackdropFilter(
@@ -77,6 +80,7 @@ class _EditProfileViewState extends State<EditProfileView> {
                             color: AppColors.whiteColor.withOpacity(0.70),
                           ),
                           child: Stack(
+                            clipBehavior: Clip.none,
                             alignment: Alignment.center,
                             children: [
                               Container(
@@ -135,7 +139,7 @@ class _EditProfileViewState extends State<EditProfileView> {
                     ),
                   ),
                   Positioned(
-                    bottom: 0,
+                    bottom: -20,
                     left: 0,
                     child: GestureDetector(
                       behavior: HitTestBehavior.translucent,
@@ -143,17 +147,17 @@ class _EditProfileViewState extends State<EditProfileView> {
                         Get.back();
                         print('tapped');
                       },
-                      child: Image.asset(AppImages.backImage, height: 130.h),
+                      child: Image.asset(AppImages.backImage, height: 100),
                     ),
                   ),
                 ],
               ),
-              10.verticalSpace,
+              60.verticalSpace,
               Text("Edit Profile".tr, style: AppStyles.poppins20w600darkGrey2),
               20.verticalSpace,
               Container(
                 margin: EdgeInsets.symmetric(horizontal: 15.sp),
-                padding: EdgeInsets.all(20.sp),
+                padding: EdgeInsets.symmetric(horizontal: 16, vertical: 10),
                 decoration: BoxDecoration(
                   color: AppColors.whiteColor.withOpacity(0.40),
                   borderRadius: BorderRadius.circular(20.sp),
@@ -170,20 +174,26 @@ class _EditProfileViewState extends State<EditProfileView> {
                             "Full Name".tr,
                             style: AppStyles.poppins12w600darkGrey2,
                           ),
-                          isEditName ? 0.verticalSpace : 5.verticalSpace,
-                          isEditName
-                              ? TextField(
-                                controller: updateNameController,
-                                style: AppStyles.poppins14w400darkGrey2,
-                                decoration: InputDecoration(
-                                  hintText: "Enter full name",
-                                  border: InputBorder.none,
-                                ),
-                              )
-                              : Text(
-                               "${PrefManager.read("firstName") ?? ""} ${PrefManager.read("lastName") ?? ""}",
-                                style: AppStyles.poppins14w300darkGrey2,
+                          // isEditName ? 0.verticalSpace : 5.verticalSpace,
+                          // isEditName
+                          // ?
+                          SizedBox(
+                            height: 40,
+                            child: TextField(
+                              controller: updateNameController,
+                              style: AppStyles.poppins16w400darkGrey2.copyWith(
+                                fontWeight: FontWeight.w500,
                               ),
+                              decoration: InputDecoration(
+                                hintText: "Enter full name",
+                                border: InputBorder.none,
+                              ),
+                            ),
+                          ),
+                          // : Text(
+                          //   "${PrefManager.read("firstName") ?? ""} ${PrefManager.read("lastName") ?? ""}",
+                          //   style: AppStyles.poppins14w300darkGrey2,
+                          // ),
                         ],
                       ),
                     ),
@@ -193,7 +203,10 @@ class _EditProfileViewState extends State<EditProfileView> {
                           final fullName = updateNameController.text.trim();
                           final parts = fullName.split(" ");
                           final firstName = parts.isNotEmpty ? parts.first : "";
-                          final lastName = parts.length > 1 ? parts.sublist(1).join(" ") : "";
+                          final lastName =
+                              parts.length > 1
+                                  ? parts.sublist(1).join(" ")
+                                  : "";
                           PrefManager.save("firstName", firstName);
                           PrefManager.save("lastName", lastName);
                           isEditName = !isEditName;
@@ -216,7 +229,7 @@ class _EditProfileViewState extends State<EditProfileView> {
               10.verticalSpace,
               Container(
                 margin: EdgeInsets.symmetric(horizontal: 15.sp),
-                padding: EdgeInsets.all(20.sp),
+                padding: EdgeInsets.symmetric(horizontal: 16, vertical: 10),
                 decoration: BoxDecoration(
                   color: AppColors.whiteColor.withOpacity(0.40),
                   borderRadius: BorderRadius.circular(20.sp),
@@ -291,13 +304,17 @@ class _EditProfileViewState extends State<EditProfileView> {
                                   ),
                                 ],
                               )
-                              : Text(
-                                gender == 1
-                                    ? "Male".tr
-                                    : gender == 2
-                                    ? "Female".tr
-                                    : "Other".tr,
-                                style: AppStyles.poppins14w300darkGrey2,
+                              : SizedBox(
+                                height: 30,
+                                child: Text(
+                                  gender == 1
+                                      ? "Male".tr
+                                      : gender == 2
+                                      ? "Female".tr
+                                      : "Other".tr,
+                                  style: AppStyles.poppins16w400darkGrey2
+                                      .copyWith(fontWeight: FontWeight.w500),
+                                ),
                               ),
                         ],
                       ),
@@ -324,27 +341,28 @@ class _EditProfileViewState extends State<EditProfileView> {
                 ),
               ),
               10.verticalSpace,
-              Padding(
-                padding: EdgeInsets.symmetric(horizontal: 20.sp),
-                child: CustomAppButton(
-                  onTap: () {
-                    final fullName = updateNameController.text.trim();
-                    final parts = fullName.split(" ");
-                    final firstName = parts.isNotEmpty ? parts.first : "";
-                    final lastName = parts.length > 1 ? parts.sublist(1).join(" ") : "";
-                    final selectedGender = gender ?? 1;
+              // Padding(
+              //   padding: EdgeInsets.symmetric(horizontal: 20.sp),
+              //   child: CustomAppButton(
+              //     onTap: () {
+              //       final fullName = updateNameController.text.trim();
+              //       final parts = fullName.split(" ");
+              //       final firstName = parts.isNotEmpty ? parts.first : "";
+              //       final lastName =
+              //           parts.length > 1 ? parts.sublist(1).join(" ") : "";
+              //       final selectedGender = gender ?? 1;
 
-                    profileRegistrationController.updateProfileEditView(
-                      firstName: firstName,
-                      lastName: lastName,
-                      gender: selectedGender,
-                    );
-                  },
-                  text: "Update Profile",
-                  isIcon: false,
-                  textStyle: AppStyles.poppins14w500white,
-                ),
-              ),
+              //       profileRegistrationController.updateProfileEditView(
+              //         firstName: firstName,
+              //         lastName: lastName,
+              //         gender: selectedGender,
+              //       );
+              //     },
+              //     text: "Update Profile",
+              //     isIcon: false,
+              //     textStyle: AppStyles.poppins14w500white,
+              //   ),
+              // ),
             ],
           ),
         ),
