@@ -1,13 +1,10 @@
-import 'package:base_project/core/widgets/image_picker_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
-
 import '../Constants/app_colors.dart';
 import '../constants/app_fonts_and_styles.dart';
 import '../constants/app_images.dart';
-import '../constants/app_svgs.dart';
 
 class CustomRegistrationAppBar extends StatelessWidget {
   CustomRegistrationAppBar({
@@ -55,7 +52,7 @@ class CustomRegistrationAppBar extends StatelessWidget {
             children: [
               Positioned(
                 left: 0,
-                bottom: 0,
+                bottom: 10,
                 child: InkWell(
                   onTap: () => Get.back(),
                   child: Image.asset(AppImages.imageBackIcon, height: 120.h),
@@ -114,8 +111,8 @@ class CustomRegistrationAppBar extends StatelessWidget {
                       "Setting Personal Goals".tr,
                       style: AppStyles.urbanistBold20White900,
                     ),
-                    Container(
-                      width: 300.w,
+                    SizedBox(
+                      width: 290.w,
                       child: Text(
                         'Based on your selection, pick the goals you want to achieve for personal growth.'.tr,
                         textAlign: TextAlign.center,
@@ -128,60 +125,59 @@ class CustomRegistrationAppBar extends StatelessWidget {
             ],
           ),
         ),
-        if (isProfile)
-          Positioned(
-            bottom: 0,
-            child: Center(
-              child:
-              Column(
-                children: [
-                  Stack(
-                    children: [
-                      Container(
-                        width: 90,
-                        height: 90,
-                        padding: EdgeInsets.all(9.sp),
-                      ),
-                      Container(
-                        width: 80,
-                        height: 80,
-                        padding: EdgeInsets.all(9.sp),
-                        decoration: BoxDecoration(
-                          color: Colors.white.withOpacity(0.3),
-                          shape: BoxShape.circle,
-                          border: Border.all(
-                            color: AppColors.whiteColor,
-                            width: 1.5.w,
-                          ),
-                        ),
-                        child: SvgPicture.asset(AppSvgs.cameraSvg, height: 30.h),
-                      ),
-                      Positioned(
-                        bottom: 0,
-                        right: 0,
-                        child: InkWell(
-                          onTap: () {
-                            print("Image picker");
-
-
-                          },
-                          child: Image.asset(
-                            AppImages.addPng,
-                            height: 50.h, // provide a valid height
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                  8.verticalSpace,
-                  Text(
-                    'Add a profile image'.tr,
-                    style: AppStyles.poppins12w700white,
-                  ),
-                ],
-              ),
-            ),
-          ),
+        //TODO i have done this in the view for clarity
+        // if (isProfile)
+        //   Positioned(
+        //     bottom: 0,
+        //     child: Center(
+        //       child:
+        //       Column(
+        //         children: [
+        //           Stack(
+        //             children: [
+        //               Container(
+        //                 width: 90,
+        //                 height: 90,
+        //                 padding: EdgeInsets.all(9.sp),
+        //               ),
+        //               Container(
+        //                 width: 80,
+        //                 height: 80,
+        //                 padding: EdgeInsets.all(9.sp),
+        //                 decoration: BoxDecoration(
+        //                   color: Colors.white.withOpacity(0.3),
+        //                   shape: BoxShape.circle,
+        //                   border: Border.all(
+        //                     color: AppColors.whiteColor,
+        //                     width: 1.5.w,
+        //                   ),
+        //                 ),
+        //                 child: SvgPicture.asset(AppSvgs.cameraSvg, height: 30.h),
+        //               ),
+        //               Positioned(
+        //                 bottom: 0,
+        //                 right: 0,
+        //                 child: InkWell(
+        //                   onTap: () {
+        //                     print("Image picker");
+        //                   },
+        //                   child: Image.asset(
+        //                     AppImages.addPng,
+        //                     height: 50.h, // provide a valid height
+        //                   ),
+        //                 ),
+        //               ),
+        //             ],
+        //           ),
+        //           8.verticalSpace,
+        //           Text(
+        //             'Add a profile image'.tr,
+        //             style: AppStyles.poppins12w700white,
+        //           ),
+        //         ],
+        //       ),
+        //     ),
+        //   ),
       ],
     );
   }

@@ -24,14 +24,13 @@ class ImprovementView extends StatefulWidget {
 }
 
 class _ImprovementViewState extends State<ImprovementView> {
-  final ImprovementController controller = Get.put(ImprovementController());
-  Set<int> selectedCategoryIds = {};
-  Set<int> showIconFor = {};
+  final ImprovementController improvementController = Get.put(ImprovementController());
+
 
   @override
   void initState() {
     super.initState();
-    controller.getImprovements();
+    improvementController.getImprovements();
   }
 
   @override
@@ -57,14 +56,10 @@ class _ImprovementViewState extends State<ImprovementView> {
               ),
               Expanded(
                 child: Obx(() {
-                  if (controller.improvementModel.value.data == null) {
-                    return Center(
-                      child: CircularProgressIndicator(
-                        color: AppColors.whiteColor,
-                      ),
-                    );
+                  if (improvementController.improvementModel.value.data == null) {
+                    return SizedBox();
                   }
-                  final categories = controller.improvementModel.value.data!;
+                  final categories = improvementController.improvementModel.value.data!;
                   if (categories.isEmpty) {
                     return Center(
                       child: Text(
@@ -85,10 +80,10 @@ class _ImprovementViewState extends State<ImprovementView> {
                       itemCount: categories.length,
                       itemBuilder: (context, index) {
                         final category = categories[index];
-                        final isSelected = selectedCategoryIds.contains(
+                        final isSelected = improvementController.selectedCategoryIds.contains(
                           category.id,
                         );
-                        final showIcon = showIconFor.contains(category.id);
+                        final showIcon = improvementController.showIconFor.contains(category.id);
                         return Container(
                           decoration: BoxDecoration(
                             image: DecorationImage(
@@ -169,7 +164,7 @@ class _ImprovementViewState extends State<ImprovementView> {
                                               Duration(milliseconds: 100),
                                               () {
                                                 setState(() {
-                                                  showIconFor.add(category.id!);
+                                                  improvementController.showIconFor.add(category.id!);
                                                 });
                                               },
                                             );
@@ -194,12 +189,12 @@ class _ImprovementViewState extends State<ImprovementView> {
                                     onTap: () {
                                       setState(() {
                                         if (isSelected) {
-                                          selectedCategoryIds.remove(
+                                          improvementController.selectedCategoryIds.remove(
                                             category.id,
                                           );
-                                          showIconFor.remove(category.id);
+                                          improvementController.showIconFor.remove(category.id);
                                         } else {
-                                          selectedCategoryIds.add(category.id!);
+                                          improvementController.selectedCategoryIds.add(category.id!);
                                         }
                                       });
                                     },
@@ -239,20 +234,20 @@ class _ImprovementViewState extends State<ImprovementView> {
   }
 
   void handleNext() {
-    if (selectedCategoryIds.isEmpty) {
+    if (improvementController.selectedCategoryIds.isEmpty) {
       Utils.toastMessage('Please select at least one category to improve'.tr);
       return;
     }
     final selectedCategories =
-        controller.improvementModel.value.data!
-            .where((category) => selectedCategoryIds.contains(category.id))
+        improvementController.improvementModel.value.data!
+            .where((category) => improvementController.selectedCategoryIds.contains(category.id))
             .map((category) => category.title ?? 'Unknown')
             .toList();
     Utils.toastMessage('${'Selected'.tr} : ${selectedCategories.join(', ')}');
     Get.toNamed(
       AppRoutes.personalGoalsView,
       arguments: {
-        'selectedCategoryIds': selectedCategoryIds.toList(),
+        'selectedCategoryIds': improvementController.selectedCategoryIds.toList(),
         'selectedCategories': selectedCategories,
       },
     );

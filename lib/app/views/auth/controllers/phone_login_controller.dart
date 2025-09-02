@@ -1,6 +1,9 @@
 
+import 'dart:async';
+
 import 'package:base_project/app/routes/app_routes.dart';
 import 'package:base_project/app/views/auth/model/google_login_response_model.dart';
+import 'package:base_project/app/views/auth/model/login_model.dart';
 import 'package:base_project/app/views/auth/model/register_phone_number_model.dart';
 import 'package:base_project/app/views/auth/model/send_otp_response_model.dart';
 import 'package:base_project/core/Managers/PrefManager.dart';
@@ -11,7 +14,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:dio/dio.dart' as dio;
-import 'package:get_storage/get_storage.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
 import '../model/verify_otp_response_model.dart';
@@ -76,11 +78,12 @@ class PhoneLoginController extends GetxController {
   var registerModel = RegisterPhoneNumberResponseModel().obs;
   var googleModel = GoogleLoginResponseModel().obs;
   var sendOtpModel = SendOtpResponseModel().obs;
-  var verifyOtpModel = VerifyOtpReponseModel().obs;
+  var verifyOtpModel = VerifyOtpResponseModel().obs;
   final isClickedCountryCode = false.obs;
   final RxBool loading = false.obs;
   final RxString errorToShow ="".obs;
   final RxBool successCondition =false.obs;
+  final RxBool showContainer =false.obs;
   static final GoogleSignIn googleSignIn = GoogleSignIn(
     scopes: [
       'email',
@@ -88,8 +91,41 @@ class PhoneLoginController extends GetxController {
     ],
   );
 
-  void verifyOtp(String phone) async {
 
+  var isButtonEnabled = true.obs;
+  var remainingSeconds = 0.obs;
+  Timer? _timer;
+
+  void startCooldown() {
+    isButtonEnabled.value = false;
+    remainingSeconds.value = 30;
+
+    _timer?.cancel();
+    _timer = Timer.periodic(const Duration(seconds: 1), (timer) {
+      remainingSeconds.value--;
+
+      if (remainingSeconds.value <= 0) {
+        isButtonEnabled.value = true;
+        timer.cancel();
+      }
+    });
+  }
+
+  Future<void> checkUserModel() async {
+    final user = await PrefManager.getUser();
+    print("User Data: $user");
+    print("User FirstName: ${user?.firstName}");
+    print("User LastName: ${user?.lastName}");
+    print("User isRegister: ${user?.isRegistered}");
+    print("User isOnboard: ${user?.isOnboarded}");
+    print("User Phone: ${user?.phone}");
+    print("User ProfileImage: ${user?.profileImage}");
+    print("User Gender: ${user?.gender}");
+    print("User DOB: ${user?.dob}");
+    print("User Email: ${user?.email}");
+  }
+
+  void verifyOtp(String phone) async {
     Map<String, dynamic> data = {
       "phone": phone,
       "otp": otpTextController.value.text.trim(),
@@ -103,37 +139,40 @@ class PhoneLoginController extends GetxController {
       );
 
       if (response != null) {
-        final model = VerifyOtpReponseModel.fromJson(response.data);
+        final model = VerifyOtpResponseModel.fromJson(response.data);
         verifyOtpModel.value=model;
+        final responseData = response.data["data"];
         if (model.status == true) {
           print("Status : ${model.status}");
           print("Message : ${model.message}");
           print("Token : ${model.data?.token}");
 
           PrefManager.setToken(model.data!.token.toString());
-          PrefManager.setIsLogin(true);
-          PrefManager.save("firstName", model.data!.user!.firstName);
-          PrefManager.save("lastName", model.data!.user!.lastName);
-          PrefManager.save("dob", model.data!.user!.dob);
-          PrefManager.save("gender", model.data!.user!.gender);
+          PrefManager.saveLoginData(responseData);
+
+
           errorToShow.value = model.message.toString();
+          showContainer.value=true;
           successCondition.value =true;
-          Utils.toastMessage("${model.message}");
+
+
           final register = model.data?.user?.isRegistered;
+          final onBoarding = model.data?.user?.isOnboarded;
+
           print("Registered Or Not : $register");
-          //TODO
-          // if(register==0){
-          //   Duration();
-          //   Future.delayed(Duration(seconds: 3),(){
-          //     Get.toNamed(AppRoutes.profileRegistrationView);
-          //   });
-          // }else {
-          //   Future.delayed(Duration(seconds: 3),(){
-          //     Get.toNamed(AppRoutes.bottomNavNavigation);
-          //   });
-          // }
-          //Get.toNamed(AppRoutes.profileRegistrationView);
-          Get.toNamed(AppRoutes.improvementView);
+          if(register==0){
+            Future.delayed(Duration(seconds: 3),(){
+              Get.toNamed(AppRoutes.profileRegistrationView);
+            });
+          }else if(onBoarding==0) {
+            Future.delayed(Duration(seconds: 3),(){
+              Get.toNamed(AppRoutes.improvementView);
+            });
+          }else{
+            Future.delayed(Duration(seconds: 3),(){
+              Get.toNamed(AppRoutes.bottomNavNavigation);
+            });
+          }
         } else {
           print("Otp Verification Failed: ${model.message}");
           successCondition.value =false;
@@ -153,6 +192,7 @@ class PhoneLoginController extends GetxController {
       Utils.toastMessage("${"Error verifying OTP".tr}: $e");
     }
   }
+
   void sendOtp() async {
 
     String phone = selectedCode.value.replaceAll('+', '') + phoneController.value.text;
@@ -171,7 +211,7 @@ class PhoneLoginController extends GetxController {
         sendOtpModel.value = model;
         if (model.status == true) {
           print("Otp Sent Successfully");
-          Utils.toastMessage("${"${"Otp Sent Successfully".tr}:"} ${model.message}");
+          Utils.toastMessage(model.message.toString());
           Get.toNamed(AppRoutes.otpVerificationView,arguments: {
             'phoneNumber': phoneController.value.text,
           });
@@ -230,6 +270,7 @@ class PhoneLoginController extends GetxController {
           print("Register Successful Message: ${model.message}");
           Utils.toastMessage("Registration successful!".tr);
           phoneController.value.clear();
+
           PrefManager.setToken(model.data!.token.toString());
           PrefManager.setIsLogin(true);
           PrefManager.save("firstName", firstName);
@@ -256,6 +297,7 @@ class PhoneLoginController extends GetxController {
       Utils.toastMessage("Unable to register, please check your connection.".tr);
     }
   }
+
   Future<GoogleSignInAccount?> googleSignInTry() async {
     try {
       await googleSignIn.signOut();
@@ -327,7 +369,6 @@ class PhoneLoginController extends GetxController {
     }
   }
 
-
   Future<void> signOut() async {
     try {
       await googleSignIn.signOut();
@@ -336,6 +377,7 @@ class PhoneLoginController extends GetxController {
       print("❌ Error during sign-out: $error");
     }
   }
+
   Future<void> disconnect() async {
     try {
       await googleSignIn.disconnect();

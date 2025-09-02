@@ -15,6 +15,7 @@ class ApiEndpoints {
 
 
   static const String apiImprovementProgramsEndPoint = "improvement-programs";
+  static const String apiStoreUserImprovementsProgramsEndPoint = "store-user-improvement-programs";
 
 
 

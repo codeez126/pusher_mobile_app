@@ -26,7 +26,6 @@ class _OtpVerficationViewState extends State<OtpVerficationView> {
   );
   final FocusNode otpFocusNode = FocusNode();
 
-
   late String phoneNumber;
 
   @override
@@ -75,6 +74,11 @@ class _OtpVerficationViewState extends State<OtpVerficationView> {
                   length: 6,
                   focusNode: otpFocusNode,
                   controller: phoneLoginController.otpTextController.value,
+                  onCompleted: (value) {
+                    otpVerfication();
+                    phoneLoginController.startCooldown();
+
+                  },
                   defaultPinTheme: PinTheme(
                     textStyle: AppStyles.poppins14w700darkGrey2,
                     width: 45.w,
@@ -91,25 +95,39 @@ class _OtpVerficationViewState extends State<OtpVerficationView> {
                 ),
               ),
               30.verticalSpace,
-              Container(
-                height: 50.h,
-                alignment: Alignment.center,
-                margin: EdgeInsets.symmetric(horizontal: 15.w),
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(30.sp),
-                  color: AppColors.whiteColor.withOpacity(0.25),
-                  border: Border.all(color: AppColors.whiteColor, width: 1.5.w),
-                ),
+              Obx(() {
+                return phoneLoginController.showContainer.value
+                    ? Container(
+                      height: 50.h,
+                      alignment: Alignment.center,
+                      margin: EdgeInsets.symmetric(horizontal: 15.w),
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(30.sp),
+                        color: AppColors.whiteColor.withOpacity(0.25),
+                        border: Border.all(
+                          color: AppColors.whiteColor,
+                          width: 1.5.w,
+                        ),
+                      ),
 
-                child: Obx(() {
-                  return Text(
-                    phoneLoginController.errorToShow.value.tr,
-                    style: phoneLoginController.successCondition.value?AppStyles.poppins14w700white.copyWith(color: AppColors.greenColor):AppStyles.poppins14w700white.copyWith(color: AppColors.redColor.withOpacity(0.5)),
-                    textAlign: TextAlign.center,
-                    overflow: TextOverflow.ellipsis,
-                  );
-                }),
-              ),
+                      child: Obx(() {
+                        return Text(
+                          phoneLoginController.errorToShow.value.tr,
+                          style:
+                              phoneLoginController.successCondition.value
+                                  ? AppStyles.poppins14w700white.copyWith(
+                                    color: AppColors.greenColor,
+                                  )
+                                  : AppStyles.poppins14w700white.copyWith(
+                                    color: AppColors.redColor.withOpacity(0.5),
+                                  ),
+                          textAlign: TextAlign.center,
+                          overflow: TextOverflow.ellipsis,
+                        );
+                      }),
+                    )
+                    : SizedBox();
+              }),
               20.verticalSpace,
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -119,7 +137,7 @@ class _OtpVerficationViewState extends State<OtpVerficationView> {
                     style: AppStyles.poppins12w700white,
                   ),
                   GestureDetector(
-                    onTap: (){
+                    onTap: () {
                       resendOtp();
                     },
                     child: Text(
@@ -132,19 +150,28 @@ class _OtpVerficationViewState extends State<OtpVerficationView> {
               20.verticalSpace,
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 24.0),
-                child: ClipRRect(
-                  borderRadius: BorderRadius.circular(30),
-                  child: CustomAppButton(
-                    onTap: () {
-                      otpFocusNode.unfocus();
-                      FocusScope.of(context).unfocus();
-                      otpVerfication();
-                    },
-                    isIcon: false,
-                    verticalPadding: 15.h,
-                    borderWidth: 1.w,
-                    text: "OK".tr,
-                    textStyle: AppStyles.poppins16w700white,
+                child: Obx(
+                  () => ClipRRect(
+                    borderRadius: BorderRadius.circular(30),
+                    child: CustomAppButton(
+                      onTap:
+                          phoneLoginController.isButtonEnabled.value
+                              ? () {
+                                otpFocusNode.unfocus();
+                                FocusScope.of(context).unfocus();
+                                otpVerfication();
+                                phoneLoginController.startCooldown();
+                              }
+                              : () {},
+                      isIcon: false,
+                      verticalPadding: 15.h,
+                      borderWidth: 1.w,
+                      text:
+                          phoneLoginController.isButtonEnabled.value
+                              ? "OK".tr
+                              : "Wait ${phoneLoginController.remainingSeconds.value}s",
+                      textStyle: AppStyles.poppins16w700white,
+                    ),
                   ),
                 ),
               ),
@@ -157,13 +184,15 @@ class _OtpVerficationViewState extends State<OtpVerficationView> {
 
   void otpVerfication() {
     print(phoneLoginController.otpTextController.value.text);
-    String phone = phoneLoginController.selectedCode.value.replaceAll('+', '') + phoneLoginController.phoneController.value.text;
+    String phone =
+        phoneLoginController.selectedCode.value.replaceAll('+', '') +
+        phoneLoginController.phoneController.value.text;
     phoneNumber = phone;
     print("PhoneNumber: $phone");
     phoneLoginController.verifyOtp(phone);
-    //Get.toNamed(AppRoutes.profileRegistrationView);
   }
 
-  void resendOtp() {}
-
+  void resendOtp() {
+    phoneLoginController.checkUserModel();
+  }
 }

@@ -1,5 +1,7 @@
 import 'dart:convert';
 
+import 'package:base_project/app/views/auth/model/login_model.dart';
+import 'package:base_project/app/views/auth/model/verify_otp_response_model.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class PrefManager {
@@ -84,4 +86,28 @@ class PrefManager {
   //     print(ex);
   //   }
   // }
+  static const _expiresInKey = "expires_in";
+  static const _userKey = "user";
+
+  static Future<void> saveLoginData(Map<String, dynamic> data) async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setInt(_expiresInKey, data["expires_in"]);
+    await prefs.setString(_userKey, jsonEncode(data["user"]));
+  }
+  static Future<int?> getExpiry() async {
+    final prefs = await SharedPreferences.getInstance();
+    return prefs.getInt(_expiresInKey);
+  }
+  static Future<UserModel?> getUser() async {
+    final prefs = await SharedPreferences.getInstance();
+    final userStr = prefs.getString(_userKey);
+    if (userStr == null) return null;
+    return UserModel.fromJson(jsonDecode(userStr));
+  }
+  static Future<void> clear() async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.clear();
+  }
+
+
 }

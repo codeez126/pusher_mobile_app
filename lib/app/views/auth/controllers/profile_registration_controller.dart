@@ -70,15 +70,14 @@ class ProfileRegistrationController extends GetxController {
 
     if (response != null) {
       final model = UpdateProfileResponseModel.fromJson(response.data);
+      final responseData = response.data['data'];
       profileModel.value = model;
       try {
         if (model.status == true) {
+
           print("Model Message: ${model.message}");
 
-          PrefManager.save("firstName", model.data!.user!.firstName);
-          PrefManager.save("lastName", model.data!.user!.lastName);
-          PrefManager.save("dob", model.data!.user!.dob);
-          PrefManager.save("gender", model.data!.user!.gender);
+          PrefManager.saveLoginData(responseData);
 
           Utils.toastMessage("${model.message}");
           Get.toNamed(AppRoutes.improvementView);
@@ -130,13 +129,12 @@ class ProfileRegistrationController extends GetxController {
 
     if (response != null) {
       final model = UpdateProfileResponseModel.fromJson(response.data);
+      final responseData = response.data['data'];
       try {
         if (model.status == true) {
           PrefManager.setIsLogin(true);
-          PrefManager.save("firstName", model.data!.user!.firstName);
-          PrefManager.save("lastName", model.data!.user!.lastName);
-          PrefManager.save("dob", model.data!.user!.dob);
-          PrefManager.save("gender", model.data!.user!.gender);
+
+          PrefManager.saveLoginData(responseData);
 
           Utils.toastMessage("${model.message}");
         } else {

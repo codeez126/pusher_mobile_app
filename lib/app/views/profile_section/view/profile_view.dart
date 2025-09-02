@@ -11,15 +11,20 @@ import 'package:get/get.dart';
 
 import '../../../../core/Constants/app_colors.dart';
 import '../../../../core/constants/app_images.dart';
+import '../controller/profile_view_controller.dart';
 class ProfileView extends StatelessWidget {
   ProfileView({super.key});
 
   final PhoneLoginController phoneLoginController =Get.put(PhoneLoginController());
+  final controller = Get.put(ProfileViewController());
+
 
   @override
   Widget build(BuildContext context) {
-    final firstName = (PrefManager.read("firstName") ?? "").toString();
-    final lastName  = (PrefManager.read("lastName") ?? "").toString();
+    final firstName = controller.user.value?.firstName ?? '';
+    final lastName  = controller.user.value?.lastName ?? '';
+    // final firstName = (PrefManager.read("firstName") ?? "").toString();
+    // final lastName  = (PrefManager.read("lastName") ?? "").toString();
     return Scaffold(
       body: Container(
         width: double.infinity,

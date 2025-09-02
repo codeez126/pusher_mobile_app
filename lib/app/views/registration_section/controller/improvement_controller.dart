@@ -1,11 +1,9 @@
 import 'package:base_project/app/views/registration_section/model/improvement_response_model.dart';
 import 'package:base_project/core/network/networking_managar.dart';
-import 'package:dio/dio.dart';
 import 'package:get/get.dart';
 import 'package:dio/dio.dart' as dio;
 
 import '../../../../core/constants/api_urls.dart';
-import '../../../../core/utils/utils.dart';
 
 class ImprovementController extends GetxController {
   NetworkManager networkManager = NetworkManager();
@@ -13,31 +11,19 @@ class ImprovementController extends GetxController {
   var isLoading = false.obs;
   var hasError = false.obs;
   var errorMessage = ''.obs;
-
-  @override
-  void onInit() {
-    super.onInit();
-    //TODO load when the controller initialized
-    // getImprovements();
-  }
+  Set<int> selectedCategoryIds = {};
+  Set<int> showIconFor = {};
 
   Future<void> getImprovements() async {
     isLoading.value = true;
     hasError.value = false;
     errorMessage.value = '';
 
-    Map data = {
-      "first_name": "Furqan",
-      "last_name": "Ahmed",
-      "dob": "1995-08-25",
-      "gender": 1
-    };
-
     try {
       dio.Response? response = await networkManager.callApi(
         urlEndPoint: ApiEndpoints.apiImprovementProgramsEndPoint,
         method: HttpMethod.post,
-        body: data,
+        // body: data,
       );
 
       if (response != null) {

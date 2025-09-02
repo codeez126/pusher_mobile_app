@@ -353,27 +353,7 @@ class _EditProfileViewState extends State<EditProfileView> {
                 padding: EdgeInsets.symmetric(horizontal: 20.sp),
                 child: CustomAppButton(
                   onTap: () {
-                    final fullName = updateNameController.text.trim();
-
-                    String firstName;
-                    String lastName;
-
-                    if (fullName.isEmpty) {
-                      firstName = PrefManager.read("firstName") ?? "";
-                      lastName = PrefManager.read("lastName") ?? "";
-                    } else {
-                      final parts = fullName.split(" ");
-                      firstName = parts.isNotEmpty ? parts.first : "";
-                      lastName = parts.length > 1 ? parts.sublist(1).join(" ") : "";
-                    }
-
-                    final selectedGender = gender ?? PrefManager.read("gender") ?? 1;
-
-                    profileRegistrationController.updateProfileEditView(
-                      firstName: firstName,
-                      lastName: lastName,
-                      gender: selectedGender,
-                    );
+                   updateProfile();
                   },
                   text: "Update Profile".tr,
                   isIcon: false,
@@ -384,6 +364,33 @@ class _EditProfileViewState extends State<EditProfileView> {
           ),
         ),
       ),
+    );
+  }
+
+  Future<void> updateProfile() async {
+    final fullName = updateNameController.text.trim();
+
+    String firstName;
+    String lastName;
+
+    if (fullName.isEmpty) {
+      final user = await PrefManager.getUser();
+      firstName = "${user?.firstName}";
+      lastName = "${user?.lastName}";
+      print(firstName);
+      print(lastName);
+    } else {
+      final parts = fullName.split(" ");
+      firstName = parts.isNotEmpty ? parts.first : "";
+      lastName = parts.length > 1 ? parts.sublist(1).join(" ") : "";
+    }
+
+    final selectedGender = gender ?? PrefManager.read("gender") ?? 1;
+
+    profileRegistrationController.updateProfileEditView(
+      firstName: firstName,
+      lastName: lastName,
+      gender: selectedGender,
     );
   }
 }

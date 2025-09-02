@@ -22,56 +22,54 @@ class WellDoneView extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
-                InkWell(onTap: (){
-                  crossClick();
-                },child: Image.asset(AppImages.closeImage,height: 120.h,))
+                InkWell(
+                  onTap: () {
+                    goNext();
+                  },
+                  child: Image.asset(AppImages.closeImage, height: 120.h),
+                ),
               ],
             ),
-            Text('Well Done'.tr,style: AppStyles.urbanistBold32White900,),
+            Text('Well Done'.tr, style: AppStyles.urbanistBold32White900),
             20.verticalSpace,
             SvgPicture.asset(AppSvgs.completedSvg),
             20.verticalSpace,
-            Text('We hope you got some \nmotivation today'.tr,style: AppStyles.poppins24w300white,textAlign: TextAlign.center,),
+            Text(
+              'We hope you got some \nmotivation today'.tr,
+              style: AppStyles.poppins24w300white,
+              textAlign: TextAlign.center,
+            ),
             40.verticalSpace,
             GestureDetector(
-              onTap: (){
-                goNext();
+              onTap: () {
+                goPremium();
               },
               child: Container(
-              padding: EdgeInsets.symmetric(
-                horizontal: 25,
-                vertical: 8,
+                padding: EdgeInsets.symmetric(horizontal: 25, vertical: 8),
+                decoration: BoxDecoration(
+                  color: Colors.lightBlue,
+                  borderRadius: BorderRadius.circular(20),
+                ),
+                child: Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Image.asset(AppImages.star, height: 30.h),
+                    10.horizontalSpace,
+                    Text('Upgrade Now'.tr, style: AppStyles.poppins14w700white),
+                  ],
+                ),
               ),
-              decoration: BoxDecoration(
-                color: Colors.lightBlue,
-                borderRadius: BorderRadius.circular(20),
-              ),
-              child: Row(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Image.asset(AppImages.star,height: 30.h,),
-                  10.horizontalSpace,
-                  Text(
-                      'Upgrade Now'.tr,
-                      style: AppStyles.poppins14w700white
-                  ),
-                ],
-              ),
-                        ),
-            )
+            ),
           ],
         ),
       ),
     );
   }
 
-  void crossClick() {
-    Get.back();
-  }
-
   void goNext() {
     print('Next');
-    //Get.toNamed(AppRoutes.notificationsView);
     Get.toNamed(AppRoutes.bottomNavNavigation);
   }
+
+  void goPremium() {}
 }
