@@ -1327,7 +1327,7 @@ class _ViewingTheChallengeViewState extends State<ViewingTheChallengeView> {
                                     ),
                                     8.horizontalSpace,
                                     Text(
-                                      "Description",
+                                      "Description".tr,
                                       style: AppStyles.poppins16w700white
                                           .copyWith(color: AppColors.yellow),
                                     ),
@@ -1335,7 +1335,7 @@ class _ViewingTheChallengeViewState extends State<ViewingTheChallengeView> {
                                 ),
                                 8.verticalSpace,
                                 Text(
-                                  "Not Added",
+                                  "Not Added".tr,
                                   style: AppStyles.poppins12w300white,
                                 ),
                                 20.verticalSpace,
@@ -1347,7 +1347,7 @@ class _ViewingTheChallengeViewState extends State<ViewingTheChallengeView> {
                                     ),
                                     8.horizontalSpace,
                                     Text(
-                                      "Introductions",
+                                      "Introductions".tr,
                                       style: AppStyles.poppins16w700white
                                           .copyWith(color: AppColors.yellow),
                                     ),
@@ -1358,15 +1358,15 @@ class _ViewingTheChallengeViewState extends State<ViewingTheChallengeView> {
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     dialogueBulletPoint(
-                                      "Why It’s Important: ",
+                                      "Why It’s Important: ".tr,
                                       "Exercise Improves Your Energy, Mood, And Overall Health.",
                                     ),
                                     dialogueBulletPoint(
-                                      "What You Need To Do: ",
+                                      "What You Need To Do: ".tr,
                                       "Spend Just 45 Minutes Today On A Physical Activity Of Your Choice.",
                                     ),
                                     dialogueBulletPoint(
-                                      "How It Helps: ",
+                                      "How It Helps: ".tr,
                                       "Consistency Builds Lasting Habits And Keeps You On Track Toward Your Fitness Goals.",
                                     ),
                                   ],

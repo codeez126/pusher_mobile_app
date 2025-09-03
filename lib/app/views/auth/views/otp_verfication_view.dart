@@ -77,12 +77,11 @@ class _OtpVerficationViewState extends State<OtpVerficationView> {
                   onCompleted: (value) {
                     otpVerfication();
                     phoneLoginController.startCooldown();
-
                   },
                   defaultPinTheme: PinTheme(
-                    textStyle: AppStyles.poppins14w700darkGrey2,
+                    textStyle: AppStyles.poppins20w600darkGrey2,
                     width: 45.w,
-                    height: 60.h,
+                    height: 65.h,
                     decoration: BoxDecoration(
                       color: AppColors.whiteColor,
                       borderRadius: BorderRadius.circular(25.sp),

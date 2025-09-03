@@ -1,11 +1,9 @@
-import 'package:base_project/core/Managers/PrefManager.dart';
 import 'package:get/get.dart';
-
-import '../../auth/model/login_model.dart';
+import 'package:base_project/core/Managers/PrefManager.dart';
+import 'package:base_project/app/views/auth/model/user_model.dart';
 
 class ProfileViewController extends GetxController {
-  /// Reactive user object (nullable at first)
-  final Rxn<UserModel> user = Rxn<UserModel>();
+  var user = Rxn<UserModel>();
 
   @override
   void onInit() {
@@ -14,9 +12,16 @@ class ProfileViewController extends GetxController {
   }
 
   Future<void> loadUser() async {
-    final storedUser = await PrefManager.getUser();
-    if (storedUser != null) {
-      user.value = storedUser;
-    }
+    user.value = await PrefManager.getUser();
+  }
+
+  Future<void> updateUser(UserModel newUser) async {
+    await PrefManager.saveUser(newUser);
+    user.value = newUser;
+  }
+
+  Future<void> clearUser() async {
+    await PrefManager.clearUser();
+    user.value = null;
   }
 }

@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-import 'package:base_project/app/views/auth/model/login_model.dart';
+import 'package:base_project/app/views/auth/model/user_model.dart';
 import 'package:base_project/app/views/auth/model/verify_otp_response_model.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -65,6 +65,28 @@ class PrefManager {
     _prefsInstance.clear();
   }
 
+  static const _userKey = "user";
+
+  /// Save user object
+  static Future<void> saveUser(UserModel user) async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setString(_userKey, user.toRawJson());
+  }
+
+  /// Get user object
+  static Future<UserModel?> getUser() async {
+    final prefs = await SharedPreferences.getInstance();
+    final userString = prefs.getString(_userKey);
+    if (userString == null) return null;
+    return UserModel.fromRawJson(userString);
+  }
+
+  /// Remove user (on logout, etc.)
+  static Future<void> clearUser() async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.remove(_userKey);
+  }
+
   // static LoginModel? getUserInfo() {
   //   try {
   //     if (_prefsInstance.containsKey('user_info')) {
@@ -86,28 +108,53 @@ class PrefManager {
   //     print(ex);
   //   }
   // }
-  static const _expiresInKey = "expires_in";
-  static const _userKey = "user";
+  //
+  // static Future<void> saveLoginData(Map<String, dynamic> data) async {
+  //   final prefs = await SharedPreferences.getInstance();
+  //   await prefs.setInt(_expiresInKey, data["expires_in"]);
+  //   await prefs.setString(_userKey, jsonEncode(data["user"]));
+  // }
+  //
+  // static Future<void> updateUserField(String key, dynamic value) async {
+  //   final prefs = await SharedPreferences.getInstance();
+  //   final userStr = prefs.getString(_userKey);
+  //
+  //   if (userStr == null) return;
+  //   final Map<String, dynamic> userMap = jsonDecode(userStr);
+  //   userMap[key] = value;
+  //
+  //   await prefs.setString(_userKey, jsonEncode(userMap));
+  // }
+  //
+  // static Future<void> updateFirstName(String firstName) async {
+  //   await updateUserField("firstName", firstName);
+  // }
+  // static Future<void> updateLastName(String lastName) async {
+  //   await updateUserField("lastName", lastName);
+  // }
+  // static Future<void> updateDOB(String dob) async {
+  //   await updateUserField("dob", dob);
+  // }
+  // static Future<void> updateGender(int gender) async {
+  //   await updateUserField("gender", gender);
+  // }
+  //
+  // static Future<int?> getExpiry() async {
+  //   final prefs = await SharedPreferences.getInstance();
+  //   return prefs.getInt(_expiresInKey);
+  // }
+  // static Future<UserModel?> getUser() async {
+  //   final prefs = await SharedPreferences.getInstance();
+  //   final userStr = prefs.getString(_userKey);
+  //   if (userStr == null) return null;
+  //   return UserModel.fromJson(jsonDecode(userStr));
+  // }
+  // static Future<void> clear() async {
+  //   final prefs = await SharedPreferences.getInstance();
+  //   await prefs.clear();
+  // }
 
-  static Future<void> saveLoginData(Map<String, dynamic> data) async {
-    final prefs = await SharedPreferences.getInstance();
-    await prefs.setInt(_expiresInKey, data["expires_in"]);
-    await prefs.setString(_userKey, jsonEncode(data["user"]));
-  }
-  static Future<int?> getExpiry() async {
-    final prefs = await SharedPreferences.getInstance();
-    return prefs.getInt(_expiresInKey);
-  }
-  static Future<UserModel?> getUser() async {
-    final prefs = await SharedPreferences.getInstance();
-    final userStr = prefs.getString(_userKey);
-    if (userStr == null) return null;
-    return UserModel.fromJson(jsonDecode(userStr));
-  }
-  static Future<void> clear() async {
-    final prefs = await SharedPreferences.getInstance();
-    await prefs.clear();
-  }
+
 
 
 }

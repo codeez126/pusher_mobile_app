@@ -113,7 +113,7 @@ class _DailyGoalsDoingViewState extends State<DailyGoalsDoingView> {
                       onTap: (){
                         Get.back();
                       },
-                      child: CustomChangeRoundButton(text: 'Change Task', icon: AppSvgs.changeSvg),
+                      child: CustomChangeRoundButton(text: 'Change Task'.tr, icon: AppSvgs.changeSvg),
                     ),
                   ),
                 ),

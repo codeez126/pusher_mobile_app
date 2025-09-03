@@ -9,6 +9,7 @@ import 'package:base_project/core/constants/app_svgs.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:get/get.dart';
 
 import '../../core/Constants/app_colors.dart';
 
@@ -74,7 +75,7 @@ class _BottomNavNavigationState extends State<BottomNavNavigation> {
                       BlendMode.srcIn,
                     ),
                   ),
-                  label: 'Profile',
+                  label: 'Profile'.tr,
                 ),
                 BottomNavigationBarItem(
                   icon: SvgPicture.asset(
@@ -86,7 +87,7 @@ class _BottomNavNavigationState extends State<BottomNavNavigation> {
                       BlendMode.srcIn,
                     ),
                   ),
-                  label: 'Daily Goals',
+                  label: 'Daily Goals'.tr,
                 ),
                 BottomNavigationBarItem(
                   icon: SvgPicture.asset(
@@ -98,7 +99,7 @@ class _BottomNavNavigationState extends State<BottomNavNavigation> {
                       BlendMode.srcIn,
                     ),
                   ),
-                  label: 'Courses',
+                  label: 'Courses'.tr,
                 ),
                 BottomNavigationBarItem(
                   icon: Opacity(
@@ -109,7 +110,7 @@ class _BottomNavNavigationState extends State<BottomNavNavigation> {
                       colorBlendMode: BlendMode.srcIn,
                     ),
                   ),
-                  label: 'Challenge',
+                  label: 'Challenge'.tr,
                 ),
               ],
             ),

@@ -3,6 +3,7 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:get/get.dart';
 
 import '../../Constants/app_colors.dart';
 import '../../constants/app_fonts_and_styles.dart';
@@ -83,7 +84,7 @@ class CustomChallengeContainer extends StatelessWidget {
                           Image.asset(AppImages.premiumStar, height: 30.h),
                           10.horizontalSpace,
                           Text(
-                            "$challengeName Challenge",
+                            "$challengeName+ ${"Challenge".tr}",
                             style: AppStyles.poppins20w600white,
                           ),
                         ],
@@ -101,7 +102,7 @@ class CustomChallengeContainer extends StatelessWidget {
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             Text(
-                              "$challengeTime Days",
+                              "$challengeTime ${"Days".tr}",
                               style: AppStyles.poppins12w300white,
                             ),
                             10.horizontalSpace,
@@ -111,7 +112,7 @@ class CustomChallengeContainer extends StatelessWidget {
                       ),
                       Spacer(),
                       Text(
-                        "By $trainerName",
+                        "${"By".tr} $trainerName",
                         style: AppStyles.poppins20w600white,
                       ),
                       10.verticalSpace,
@@ -162,7 +163,7 @@ class CustomChallengeContainer extends StatelessWidget {
                                 text: TextSpan(
                                   children: [
                                     TextSpan(
-                                      text: "Win ",
+                                      text: "Win ".tr,
                                       style: AppStyles.poppins16w300white,
                                     ),
                                     TextSpan(
@@ -181,7 +182,7 @@ class CustomChallengeContainer extends StatelessWidget {
                             onTap();
                           },
                           child: CustomChangeRoundButton(
-                            text: "See The Challenges",
+                            text: "See The Challenges".tr,
                             icon: AppSvgs.nextSvg,
                           ),
                         ),

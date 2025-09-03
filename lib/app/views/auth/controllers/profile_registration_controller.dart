@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:base_project/app/routes/app_routes.dart';
 import 'package:base_project/app/views/auth/model/update_profile_response_model.dart';
+import 'package:base_project/app/views/profile_section/controller/profile_view_controller.dart';
 import 'package:base_project/core/Managers/PrefManager.dart';
 import 'package:base_project/core/network/networking_managar.dart';
 import 'package:dio/dio.dart' as dio;
@@ -10,6 +11,7 @@ import 'package:get/get.dart';
 
 import '../../../../core/constants/api_urls.dart';
 import '../../../../core/utils/utils.dart';
+import '../model/user_model.dart';
 
 
 class ProfileRegistrationController extends GetxController {
@@ -19,6 +21,7 @@ class ProfileRegistrationController extends GetxController {
   final emailController = TextEditingController().obs;
   final NetworkManager networkManager = NetworkManager();
   var  profileModel = UpdateProfileResponseModel().obs;
+  final ProfileViewController profileViewController =Get.put(ProfileViewController());
 
 
   int selectedGender = 1;
@@ -70,25 +73,22 @@ class ProfileRegistrationController extends GetxController {
 
     if (response != null) {
       final model = UpdateProfileResponseModel.fromJson(response.data);
-      final responseData = response.data['data'];
+      final responseData = response.data['data']['user'];
       profileModel.value = model;
       try {
-        if (model.status == true) {
+        if (model.status == true && model.data != null) {
+          final updatedUser = UserModel.fromJson(responseData);
 
-          print("Model Message: ${model.message}");
+          await PrefManager.saveUser(updatedUser);
 
-          PrefManager.saveLoginData(responseData);
-
-          Utils.toastMessage("${model.message}");
+          Utils.toastMessage(model.message ?? "Profile updated".tr);
           Get.toNamed(AppRoutes.improvementView);
         } else {
-          print("Failed: ${model.message}");
           Utils.toastMessage(model.message ?? "Update failed".tr);
         }
-      } catch (stackTrace, error) {
-        print("Error : $stackTrace");
-        print("Error : $error");
-        print("Error : ${model.errors}");
+      } catch (e, stack) {
+        print("Update Profile Error: $e");
+        print(stack);
       }
     } else {
       print("Unsuccessful Update: No response");
@@ -129,14 +129,17 @@ class ProfileRegistrationController extends GetxController {
 
     if (response != null) {
       final model = UpdateProfileResponseModel.fromJson(response.data);
-      final responseData = response.data['data'];
+      final responseData = response.data['data']['user'];
       try {
-        if (model.status == true) {
+        if (model.status == true && model.data != null) {
           PrefManager.setIsLogin(true);
 
-          PrefManager.saveLoginData(responseData);
+          final updatedUser = UserModel.fromJson(responseData);
 
-          Utils.toastMessage("${model.message}");
+          await profileViewController.updateUser(updatedUser);
+          //await PrefManager.saveUser(updatedUser);
+
+          Utils.toastMessage(model.message ?? "Profile updated".tr);
         } else {
           Utils.toastMessage(model.message ?? "Update failed".tr);
         }

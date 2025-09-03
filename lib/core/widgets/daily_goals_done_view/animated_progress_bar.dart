@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class CustomProgressBar extends StatelessWidget {
   final double progress; // Value from 0.0 to 1.0
@@ -28,7 +29,7 @@ class CustomProgressBar extends StatelessWidget {
   Widget build(BuildContext context) {
     final int percentage = (progress * 100).round();
     final String displayText = customText ??
-        (showPercentage ? '$percentage% done' : 'done');
+        (showPercentage ? '$percentage%${'Done'.tr}' : 'Done'.tr);
 
     return LayoutBuilder(
       builder: (context, constraints) {

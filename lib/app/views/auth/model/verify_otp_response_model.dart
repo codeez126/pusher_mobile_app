@@ -59,7 +59,7 @@ class User {
   int? gender;
   dynamic email;
   String? phone;
-  bool? isVerified;
+  int? isVerified;
   int? isRegistered;
   int? isOnboarded;
   dynamic address;

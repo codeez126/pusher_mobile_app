@@ -259,7 +259,7 @@ class DailyCourseView extends StatelessWidget {
                       onTap: (){
                         nextDailyGoals();
                       },
-                      child: CustomChangeRoundButton(text: 'Next Daily Goals'.tr, icon: AppSvgs.nextSvg),
+                      child: CustomChangeRoundButton(text: 'Next Daily Goal'.tr, icon: AppSvgs.nextSvg),
                     ),
                   ),
                 ),

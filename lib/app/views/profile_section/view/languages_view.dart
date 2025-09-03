@@ -1,5 +1,3 @@
-import 'dart:ui';
-
 import 'package:base_project/core/constants/app_fonts_and_styles.dart';
 import 'package:base_project/core/widgets/languages_view/custom_languages_tile.dart';
 import 'package:flutter/material.dart';
@@ -7,9 +5,10 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 
-import '../../../../core/Constants/app_colors.dart';
+import '../../../../core/constants/app_colors.dart';
 import '../../../../core/constants/app_images.dart';
 import '../../../../core/constants/app_svgs.dart';
+
 class LanguagesView extends StatefulWidget {
   const LanguagesView({super.key});
 
@@ -22,9 +21,33 @@ class _LanguagesViewState extends State<LanguagesView> {
   bool isEnglish = false;
 
   @override
+  void initState() {
+    super.initState();
+    final currentLocale = Get.locale?.languageCode ?? "en";
+    if (currentLocale == "he") {
+      isHebrew = true;
+      isEnglish = false;
+    } else {
+      isEnglish = true;
+      isHebrew = false;
+    }
+  }
+
+  void _changeLanguage(Locale locale) {
+    Get.updateLocale(locale);
+    setState(() {
+      if (locale.languageCode == 'he') {
+        isHebrew = true;
+        isEnglish = false;
+      } else {
+        isEnglish = true;
+        isHebrew = false;
+      }
+    });
+  }
+
+  @override
   Widget build(BuildContext context) {
-    print("isHebrew: $isHebrew");
-    print("isEnglish: $isEnglish");
     return Scaffold(
       body: Container(
         width: double.infinity,
@@ -57,7 +80,10 @@ class _LanguagesViewState extends State<LanguagesView> {
                     children: [
                       SvgPicture.asset(AppSvgs.languagesIconSvg),
                       5.horizontalSpace,
-                      Text("Languages".tr,style: AppStyles.poppins20w600darkGrey2,)
+                      Text(
+                        "Languages".tr,
+                        style: AppStyles.poppins20w600darkGrey2,
+                      )
                     ],
                   ),
                 ),
@@ -68,7 +94,6 @@ class _LanguagesViewState extends State<LanguagesView> {
                     behavior: HitTestBehavior.translucent,
                     onTap: () {
                       Get.back();
-                      print('tapped');
                     },
                     child: Image.asset(AppImages.backImage, height: 130.h),
                   ),
@@ -80,11 +105,9 @@ class _LanguagesViewState extends State<LanguagesView> {
               title: "עברית",
               valueCheck: isHebrew,
               onTap: (value) {
-                setState(() {
-                  isHebrew = value!;
-                  if (isHebrew) isEnglish = false;
-                  Get.updateLocale(const Locale('he'));
-                });
+                if (value == true) {
+                  _changeLanguage(const Locale('he', 'IL'));
+                }
               },
             ),
             10.verticalSpace,
@@ -92,14 +115,11 @@ class _LanguagesViewState extends State<LanguagesView> {
               title: "English",
               valueCheck: isEnglish,
               onTap: (value) {
-                setState(() {
-                  isEnglish = value!;
-                  if (isEnglish) isHebrew = false;
-                  Get.updateLocale(const Locale('en'));
-                });
+                if (value == true) {
+                  _changeLanguage(const Locale('en', 'US'));
+                }
               },
             ),
-
           ],
         ),
       ),

@@ -3,7 +3,7 @@ import 'dart:async';
 
 import 'package:base_project/app/routes/app_routes.dart';
 import 'package:base_project/app/views/auth/model/google_login_response_model.dart';
-import 'package:base_project/app/views/auth/model/login_model.dart';
+import 'package:base_project/app/views/auth/model/user_model.dart';
 import 'package:base_project/app/views/auth/model/register_phone_number_model.dart';
 import 'package:base_project/app/views/auth/model/send_otp_response_model.dart';
 import 'package:base_project/core/Managers/PrefManager.dart';
@@ -141,14 +141,15 @@ class PhoneLoginController extends GetxController {
       if (response != null) {
         final model = VerifyOtpResponseModel.fromJson(response.data);
         verifyOtpModel.value=model;
-        final responseData = response.data["data"];
+        final responseData = response.data["data"]['user'];
         if (model.status == true) {
           print("Status : ${model.status}");
           print("Message : ${model.message}");
           print("Token : ${model.data?.token}");
 
           PrefManager.setToken(model.data!.token.toString());
-          PrefManager.saveLoginData(responseData);
+          final user = UserModel.fromJson(responseData);
+          await PrefManager.saveUser(user);
 
 
           errorToShow.value = model.message.toString();
@@ -161,15 +162,15 @@ class PhoneLoginController extends GetxController {
 
           print("Registered Or Not : $register");
           if(register==0){
-            Future.delayed(Duration(seconds: 3),(){
+            Future.delayed(Duration(seconds: 2),(){
               Get.toNamed(AppRoutes.profileRegistrationView);
             });
           }else if(onBoarding==0) {
-            Future.delayed(Duration(seconds: 3),(){
+            Future.delayed(Duration(seconds: 2),(){
               Get.toNamed(AppRoutes.improvementView);
             });
           }else{
-            Future.delayed(Duration(seconds: 3),(){
+            Future.delayed(Duration(seconds: 2),(){
               Get.toNamed(AppRoutes.bottomNavNavigation);
             });
           }
@@ -302,13 +303,13 @@ class PhoneLoginController extends GetxController {
     try {
       await googleSignIn.signOut();
 
-      print("🔄 Starting fresh Google Sign-In...");
+      print(" Starting fresh Google Sign-In...");
       GoogleSignInAccount? account = await googleSignIn.signIn();
 
       if (account != null) {
         final GoogleSignInAuthentication auth = await account.authentication;
 
-        print("✅ Sign-in successful!");
+        print(" Sign-in successful!");
         print("Account ID: ${account.id}");
         print("Account Email: ${account.email}");
         print("Account DisplayName: ${account.displayName}");
@@ -329,11 +330,11 @@ class PhoneLoginController extends GetxController {
 
         return account;
       } else {
-        print("❌ User cancelled sign-in");
+        print(" User cancelled sign-in");
         return null;
       }
     } on PlatformException catch (error) {
-      print("❌ PlatformException during Google Sign-In:");
+      print(" PlatformException during Google Sign-In:");
       print("Code: ${error.code}");
       print("Message: ${error.message}");
       print("Details: ${error.details}");
@@ -348,20 +349,20 @@ class PhoneLoginController extends GetxController {
           Utils.toastMessage("Sign-in configuration error. Please try again.".tr);
           break;
         case 'network_error':
-          print("🔧 Check your internet connection");
+          print(" Check your internet connection");
           Utils.toastMessage("Network error. Please check your connection.".tr);
           break;
         case 'sign_in_canceled':
-          print("🔧 User cancelled the sign-in process");
+          print(" User cancelled the sign-in process");
           Utils.toastMessage("Sign-in cancelled.".tr);
           break;
         default:
-          print("🔧 Unknown error occurred");
+          print(" Unknown error occurred");
           Utils.toastMessage("Sign-in failed. Please try again.".tr);
       }
       return null;
     } catch (error, stackTrace) {
-      print("❌ Unexpected error during Google Sign-In:");
+      print("Unexpected error during Google Sign-In:");
       print("Error: $error");
       print("Stack Trace: $stackTrace");
       Utils.toastMessage("An unexpected error occurred. Please try again.".tr);
@@ -372,18 +373,18 @@ class PhoneLoginController extends GetxController {
   Future<void> signOut() async {
     try {
       await googleSignIn.signOut();
-      print("✅ Successfully signed out");
+      print(" Successfully signed out");
     } catch (error) {
-      print("❌ Error during sign-out: $error");
+      print(" Error during sign-out: $error");
     }
   }
 
   Future<void> disconnect() async {
     try {
       await googleSignIn.disconnect();
-      print("✅ Successfully disconnected");
+      print("Successfully disconnected");
     } catch (error) {
-      print("❌ Error during disconnect: $error");
+      print("Error during disconnect: $error");
     }
   }
 

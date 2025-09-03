@@ -113,7 +113,7 @@ class _DailyGoalsDoneViewState extends State<DailyGoalsDoneView> {
                       onTap: (){
                         nextDailyGoals();
                       },
-                      child: CustomChangeRoundButton(text: 'Next Daily Goals', icon: AppSvgs.nextSvg),
+                      child: CustomChangeRoundButton(text: 'Next Daily Goal'.tr, icon: AppSvgs.nextSvg),
                     ),
                   ),
                 ),

@@ -21,10 +21,6 @@ class ProfileView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final firstName = controller.user.value?.firstName ?? '';
-    final lastName  = controller.user.value?.lastName ?? '';
-    // final firstName = (PrefManager.read("firstName") ?? "").toString();
-    // final lastName  = (PrefManager.read("lastName") ?? "").toString();
     return Scaffold(
       body: Container(
         width: double.infinity,
@@ -119,10 +115,17 @@ class ProfileView extends StatelessWidget {
                                     width: 1.5.sp,
                                   ),
                                 ),
-                                child: Text(
-                                  '$firstName $lastName'.tr,
-                                  style: AppStyles.poppins20w600white
-                                ),
+                                child:  Obx(() {
+                                  final firstName = controller.user.value?.firstName ?? '';
+                                  final lastName = controller.user.value?.lastName ?? '';
+                                  return Text(
+                                    '$firstName $lastName'.trim().isEmpty
+                                        ? "No name set"
+                                        : '$firstName $lastName',
+                                    style: AppStyles.poppins20w600white,
+                                  );
+                                }),
+
                               ),
                             ),
                           ),
@@ -198,7 +201,6 @@ class ProfileView extends StatelessWidget {
                   ),
                 )
             ),
-
           ],
         ),
       ),
@@ -210,15 +212,15 @@ class ProfileView extends StatelessWidget {
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          title: Text('Delete Account',style: AppStyles.poppins16w700darkGrey2,),
+          title: Text('Delete Account'.tr,style: AppStyles.poppins16w700darkGrey2,),
           content: Text(
-            'Are you sure you want to delete your account? This action cannot be undone.',
+            'Are you sure you want to delete your account? This action cannot be undone.'.tr,
             style: AppStyles.poppins14w300darkGrey2,
           ),
           actions: [
             TextButton(
               onPressed: () => Get.back(),
-              child: Text('Cancel',style: AppStyles.poppins14w400darkGrey2,),
+              child: Text('Cancel'.tr,style: AppStyles.poppins14w400darkGrey2,),
             ),
             TextButton(
               onPressed: () {
@@ -227,7 +229,7 @@ class ProfileView extends StatelessWidget {
               style: TextButton.styleFrom(
                 foregroundColor: Colors.red,
               ),
-              child: Text('Delete',style: AppStyles.poppins14w400Red,),
+              child: Text('Delete'.tr,style: AppStyles.poppins14w400Red,),
             ),
           ],
         );

@@ -30,6 +30,11 @@ void main() async {
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    final box = GetStorage();
+
+    // read saved language or fallback to English
+    final String langCode = box.read('langCode') ?? 'en';
+    final String countryCode = box.read('countryCode') ?? 'US';
     return ScreenUtilInit(
       designSize: const Size(390, 852),
       minTextAdapt: true,
@@ -42,7 +47,8 @@ class MyApp extends StatelessWidget {
           colorScheme: ColorScheme.fromSeed(seedColor: AppColors.primaryColor),
           useMaterial3: true,
         ),
-        locale: const Locale('en', 'US'),
+        //locale: const Locale('en', 'US'),
+        locale: Locale(langCode, countryCode),
         translations: LocaleString(),
         fallbackLocale: const Locale('en', 'US'),
         initialRoute: AppRoutes.splashView,

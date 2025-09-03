@@ -51,7 +51,7 @@ class VouchersAndCoinView extends StatelessWidget {
                     children: [
                       Image.asset(AppImages.premiumStar, height: 30.h),
                       5.horizontalSpace,
-                      Text("Challenges", style: AppStyles.poppins20w600darkGrey2),
+                      Text("Challenges".tr, style: AppStyles.poppins20w600darkGrey2),
                     ],
                   ),
                 ),
@@ -193,7 +193,7 @@ class VouchersAndCoinView extends StatelessWidget {
                                         'isPremium': true,
                                       }
                                   );
-                                  Utils.toastMessage("You purchased Premium");
+                                  Utils.toastMessage("You purchased Premium".tr);
                                 },
                                 child: Container(
                                   width: double.infinity,
@@ -208,7 +208,7 @@ class VouchersAndCoinView extends StatelessWidget {
                                       Image.asset(AppImages.premiumStar),
                                       10.horizontalSpace,
                                       Text(
-                                          "I Want This Challenge",
+                                          "I Want This Challenge".tr,
                                           style: AppStyles.poppins14w700white
                                       ),
                                     ],
@@ -225,21 +225,21 @@ class VouchersAndCoinView extends StatelessWidget {
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             Text(
-                              ">> ",
-                              style: AppStyles.poppins14w500white
+                              ">> To Unlock This Challenge Go Premium <<".tr,
+                              style: AppStyles.poppins14w600white
                             ),
-                            Text(
-                              "Go Premium ",
-                              style: AppStyles.poppins14w700white
-                            ),
-                            Text(
-                              "To Unlock This Challenge ",
-                              style: AppStyles.poppins14w500white
-                            ),
-                            Text(
-                              "<<",
-                              style: AppStyles.poppins14w500white
-                            ),
+                            // Text(
+                            //   "Go Premium ",
+                            //   style: AppStyles.poppins14w700white
+                            // ),
+                            // Text(
+                            //   "To Unlock This Challenge ",
+                            //   style: AppStyles.poppins14w500white
+                            // ),
+                            // Text(
+                            //   "<<",
+                            //   style: AppStyles.poppins14w500white
+                            // ),
                           ],
                         ),
                         60.verticalSpace,
