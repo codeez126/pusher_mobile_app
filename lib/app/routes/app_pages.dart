@@ -20,6 +20,7 @@ import 'package:base_project/app/views/registration_section/view/improvement_vie
 import 'package:base_project/app/views/registration_section/view/personal_goals_view.dart';
 import 'package:base_project/app/views/registration_section/view/premium_subscription_view.dart';
 import 'package:base_project/app/views/splash/views/splash_view.dart';
+import 'package:base_project/core/transitions/app_transitions.dart';
 import 'package:get/get.dart';
 import '../views/home_section/views/well_done_view.dart';
 import '../views/profile_section/view/languages_view.dart';
@@ -35,7 +36,7 @@ class AppPages {
   static final routes = [
 
     //-----------------------------------------Registration Section----------------------------------
-    GetPage(name: AppRoutes.splashView, page: () => SplashView()),
+    GetPage(name: AppRoutes.splashView, page: () => SplashView(),transition: AppTransitions.defaultTransition),
     GetPage(name: AppRoutes.onboardingView, page: () => OnboardingView()),
     GetPage(name: AppRoutes.onboarding2View, page: () => Onboarding2View()),
     GetPage(name: AppRoutes.phoneLogin, page: () => PhoneLogin()),

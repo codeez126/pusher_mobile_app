@@ -120,7 +120,7 @@ class ProfileView extends StatelessWidget {
                                   final lastName = controller.user.value?.lastName ?? '';
                                   return Text(
                                     '$firstName $lastName'.trim().isEmpty
-                                        ? "No name set"
+                                        ? "N/A"
                                         : '$firstName $lastName',
                                     style: AppStyles.poppins20w600white,
                                   );

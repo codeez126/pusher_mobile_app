@@ -59,12 +59,12 @@ class _ImprovementViewState extends State<ImprovementView> {
                   if (improvementController.improvementModel.value.data == null) {
                     return SizedBox();
                   }
-                  final categories = improvementController.improvementModel.value.data!;
+                  final categories = improvementController.improvementModel.value.data ?? [];
                   if (categories.isEmpty) {
                     return Center(
                       child: Text(
                         'No improvement categories available',
-                        style: TextStyle(color: Colors.white, fontSize: 16.sp),
+                        style: AppStyles.poppins16w600white,
                       ),
                     );
                   }
@@ -80,16 +80,23 @@ class _ImprovementViewState extends State<ImprovementView> {
                       itemCount: categories.length,
                       itemBuilder: (context, index) {
                         final category = categories[index];
-                        final isSelected = improvementController.selectedCategoryIds.contains(
-                          category.id,
-                        );
-                        final showIcon = improvementController.showIconFor.contains(category.id);
+
+                        final categoryId = category.id ?? -1; // fallback ID
+                        final categoryTitle = category.title ?? 'Unknown Category';
+                        final categoryImage = category.image;
+
+                        final isSelected = improvementController.selectedCategoryIds.contains(categoryId);
+                        final showIcon = improvementController.showIconFor.contains(categoryId);
+
                         return Container(
                           decoration: BoxDecoration(
-                            image: DecorationImage(
-                              image: NetworkImage(category.image!),
+                            image: categoryImage != null
+                                ? DecorationImage(
+                              image: NetworkImage(categoryImage),
                               fit: BoxFit.cover,
-                            ),
+                            )
+                                : null, // if no image, just no background
+                            color: Colors.black26, // fallback background if no image
                             borderRadius: BorderRadius.circular(35),
                             border: Border.all(
                               color: AppColors.whiteColor,
@@ -113,10 +120,7 @@ class _ImprovementViewState extends State<ImprovementView> {
                                 child: AnimatedAlign(
                                   duration: Duration(milliseconds: 600),
                                   curve: Curves.easeInOut,
-                                  alignment:
-                                      isSelected
-                                          ? Alignment.center
-                                          : Alignment.bottomCenter,
+                                  alignment: isSelected ? Alignment.center : Alignment.bottomCenter,
                                   child: ClipRRect(
                                     borderRadius: BorderRadius.circular(20.sp),
                                     child: BackdropFilter(
@@ -129,32 +133,24 @@ class _ImprovementViewState extends State<ImprovementView> {
                                         curve: Curves.easeInOut,
                                         alignment: Alignment.center,
                                         width: 140.w,
-                                        height:
-                                            isSelected
-                                                ? MediaQuery.of(
-                                                      context,
-                                                    ).size.height -
-                                                    640
-                                                : 50.h,
+                                        height: isSelected
+                                            ? MediaQuery.of(context).size.height - 640
+                                            : 50.h,
                                         padding: EdgeInsets.symmetric(
                                           horizontal: 10.w,
                                           vertical: 10.h,
                                         ),
                                         decoration: BoxDecoration(
                                           color: Colors.white.withOpacity(0.2),
-                                          borderRadius: BorderRadius.circular(
-                                            20.sp,
-                                          ),
+                                          borderRadius: BorderRadius.circular(20.sp),
                                         ),
                                         child: FittedBox(
                                           fit: BoxFit.scaleDown,
                                           child: Text(
-                                            category.title ??
-                                                'Unknown Category',
+                                            categoryTitle,
                                             overflow: TextOverflow.ellipsis,
                                             softWrap: true,
-                                            style: AppStyles
-                                                .poppins16w700white,
+                                            style: AppStyles.poppins16w700white,
                                             textAlign: TextAlign.center,
                                           ),
                                         ),
@@ -162,9 +158,9 @@ class _ImprovementViewState extends State<ImprovementView> {
                                           if (isSelected && !showIcon) {
                                             Future.delayed(
                                               Duration(milliseconds: 100),
-                                              () {
+                                                  () {
                                                 setState(() {
-                                                  improvementController.showIconFor.add(category.id!);
+                                                  improvementController.showIconFor.add(categoryId);
                                                 });
                                               },
                                             );
@@ -189,21 +185,17 @@ class _ImprovementViewState extends State<ImprovementView> {
                                     onTap: () {
                                       setState(() {
                                         if (isSelected) {
-                                          improvementController.selectedCategoryIds.remove(
-                                            category.id,
-                                          );
-                                          improvementController.showIconFor.remove(category.id);
+                                          improvementController.selectedCategoryIds.remove(categoryId);
+                                          improvementController.showIconFor.remove(categoryId);
                                         } else {
-                                          improvementController.selectedCategoryIds.add(category.id!);
+                                          improvementController.selectedCategoryIds.add(categoryId);
                                         }
                                       });
                                     },
                                     child: SvgPicture.asset(
                                       AppSvgs.plusSvg,
                                       colorFilter: ColorFilter.mode(
-                                        isSelected
-                                            ? AppColors.redColor
-                                            : AppColors.whiteColor,
+                                        isSelected ? AppColors.redColor : AppColors.whiteColor,
                                         BlendMode.srcIn,
                                       ),
                                     ),

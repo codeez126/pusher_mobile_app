@@ -228,7 +228,7 @@ class PhoneLoginController extends GetxController {
     }
   }
 
-  void googleRegister(String email, var authId,displayName) async {
+  void googleRegister(String email, var authId,displayName,photoUrl,) async {
 
     if (email.isEmpty) {
       Utils.toastMessage('Email Not Found'.tr);
@@ -240,16 +240,14 @@ class PhoneLoginController extends GetxController {
     List<String> nameParts = displayName.split(' ');
     String firstName = nameParts.isNotEmpty ? nameParts[0] : "";
     String lastName = nameParts.length > 1 ? nameParts.sublist(1).join(' ') : "";
-    String dob ="1995-10-20";
-    int gender =1;
+
     Map<String, dynamic> data = {
       "auth_type": "google",
       "email": email,
       "auth_id": authId.toString(),
+      "profile_image": photoUrl,
       "first_name": firstName,
-      "last_name": lastName,
-      "dob": dob,
-      "gender": gender
+      "last_name": lastName
     };
 
     print('Sending Google Register Data: $data');
@@ -266,20 +264,40 @@ class PhoneLoginController extends GetxController {
       final model = GoogleLoginResponseModel.fromJson(response.data);
       googleModel.value = model;
 
+      // Safely extract user
+      final responseData = response.data["data"]?['user'];
+
       try {
         if (model.status == true) {
           print("Register Successful Message: ${model.message}");
           Utils.toastMessage("Registration successful!".tr);
           phoneController.value.clear();
 
-          PrefManager.setToken(model.data!.token.toString());
-          PrefManager.setIsLogin(true);
-          PrefManager.save("firstName", firstName);
-          PrefManager.save("lastName", lastName);
-          PrefManager.save("dob", dob);
-          PrefManager.save("gender", gender);
-          Get.toNamed(AppRoutes.bottomNavNavigation);
+          PrefManager.setToken(model.data?.token ?? "");
 
+          if (responseData != null) {
+            final user = UserModel.fromJson(responseData);
+            await PrefManager.saveUser(user);
+
+            debugPrint("Complete Response from Api: $response");
+            final userData = await PrefManager.getUser();
+            debugPrint("Saved User First Name: ${userData?.firstName}");
+            debugPrint("Saved User Last Name: ${userData?.lastName}");
+            debugPrint("Saved User Gender: ${userData?.gender}");
+            debugPrint("Saved User Email: ${userData?.email}");
+            debugPrint("Saved User DOB: ${userData?.dob}");
+            debugPrint("Saved User Profile Image: ${userData?.profileImage}");
+            debugPrint("Saved User isOnboarded: ${userData?.isOnboarded}");
+            debugPrint("Saved User ID: ${userData?.id}");
+          } else {
+            debugPrint("⚠️ No user object in API response: ${response.data}");
+          }
+
+          if (model.data?.user?.isOnboarded == 0) {
+            Get.toNamed(AppRoutes.improvementView);
+          } else {
+            Get.toNamed(AppRoutes.bottomNavNavigation);
+          }
         } else {
           print("Register Failed: ${model.message}");
           Utils.toastMessage(model.message ?? "Registration failed".tr);
@@ -293,16 +311,92 @@ class PhoneLoginController extends GetxController {
         print("Model Errors: ${model.errors}");
         Utils.toastMessage("Registration failed. Please try again.".tr);
       }
-    } else {
+    }
+    else {
       print("Unsuccessful Register: No response");
       Utils.toastMessage("Unable to register, please check your connection.".tr);
     }
   }
+  // void googleRegisterWithHardCodeEmails() async {
+  //
+  //
+  //   Map<String, dynamic> data = {
+  //     "auth_type": "google",
+  //     "email": "email4@gmail.com",
+  //     "auth_id":"1234567890",
+  //     "profile_image": "https://sadsakjdhlas.sadakudha",
+  //     "first_name": "Hamza",
+  //     "last_name": "Ahmed"
+  //   };
+  //
+  //   print('Sending Google Register Data: $data');
+  //
+  //   dio.Response? response = await networkManager.callApi(
+  //     urlEndPoint: ApiEndpoints.apiRegisterEndPoint,
+  //     method: HttpMethod.post,
+  //     body: data,
+  //   );
+  //
+  //   loading.value = false;
+  //
+  //   if (response != null) {
+  //     final model = GoogleLoginResponseModel.fromJson(response.data);
+  //     googleModel.value = model;
+  //     final responseData = response.data["data"]['user'];
+  //
+  //     try {
+  //       if (model.status == true) {
+  //         print("Register Successful Message: ${model.message}");
+  //         Utils.toastMessage("Registration successful!".tr);
+  //         phoneController.value.clear();
+  //
+  //         PrefManager.setToken(model.data!.token.toString());
+  //         //PrefManager.setIsLogin(true);
+  //         final user = UserModel.fromJson(responseData);
+  //         await PrefManager.saveUser(user);
+  //
+  //         debugPrint("Complete Response from Api: $response");
+  //         final userData = await PrefManager.getUser();
+  //         debugPrint("Saved User First Name: ${userData?.firstName}");
+  //         debugPrint("Saved User Last Name: ${userData?.lastName}");
+  //         debugPrint("Saved User Gender: ${userData?.gender}");
+  //         debugPrint("Saved User Email: ${userData?.email}");
+  //         debugPrint("Saved User DOB: ${userData?.dob}");
+  //         debugPrint("Saved User Profile Image: ${userData?.profileImage}");
+  //         debugPrint("Saved User isRegistered: ${userData?.isRegistered}");
+  //         debugPrint("Saved User ID: ${userData?.id}");
+  //
+  //
+  //         if(model.data!.user!.isOnboarded==0){
+  //           Get.toNamed(AppRoutes.improvementView);
+  //         }else{
+  //           //TODO Go to Home
+  //           Get.toNamed(AppRoutes.bottomNavNavigation);
+  //         }
+  //
+  //       } else {
+  //         print("Register Failed: ${model.message}");
+  //         Utils.toastMessage(model.message ?? "Registration failed".tr);
+  //         if (model.errors != null) {
+  //           print("Registration Errors: ${model.errors}");
+  //         }
+  //       }
+  //     } catch (error, stackTrace) {
+  //       print("Error parsing response: $error");
+  //       print("Stack Trace: $stackTrace");
+  //       print("Model Errors: ${model.errors}");
+  //       Utils.toastMessage("Registration failed. Please try again.".tr);
+  //     }
+  //   } else {
+  //     print("Unsuccessful Register: No response");
+  //     Utils.toastMessage("Unable to register, please check your connection.".tr);
+  //   }
+  // }
 
   Future<GoogleSignInAccount?> googleSignInTry() async {
     try {
-      await googleSignIn.signOut();
 
+      await googleSignIn.signOut();
       print(" Starting fresh Google Sign-In...");
       GoogleSignInAccount? account = await googleSignIn.signIn();
 
@@ -323,10 +417,7 @@ class PhoneLoginController extends GetxController {
         final photoUrl = account.photoUrl ?? "";
         final accessToken = auth.accessToken ?? "";
 
-        PrefManager.save('photoUrl', photoUrl);
-        PrefManager.save('authId', auth.idToken);
-
-        googleRegister(email, authId, displayName);
+        googleRegister(email, authId, displayName,photoUrl);
 
         return account;
       } else {

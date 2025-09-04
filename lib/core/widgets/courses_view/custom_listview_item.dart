@@ -1,3 +1,4 @@
+import 'package:awesome_video_player/awesome_video_player.dart';
 import 'package:base_project/core/widgets/courses_view/custom_course_duration_container.dart';
 import 'package:base_project/core/widgets/daily_course_view/custom_audio_waveform_player.dart';
 import 'package:flutter/material.dart';
@@ -84,14 +85,26 @@ class CustomListviewItem extends StatelessWidget {
                   ),
 
                   const Spacer(),
-                  CustomAudioWaveformPlayer(
-                    isTimerEnabled: false,
-                    height: 50.h,
-                    buttonHeight: 50.h,
-                    buttonWidth: 50.w,
-                    isAudioContainerBackground: true,
-                    isBackgroundContainerEnabled: false,
-                    backgroundColor: Colors.transparent,
+                  // BetterPlayer.network(
+                  //   "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4",
+                  //   betterPlayerConfiguration: BetterPlayerConfiguration(
+                  //     aspectRatio: 16/9
+                  //   ),
+                  // ),
+
+                  GestureDetector(
+                    onTap: (){
+                      onTap();
+                    },
+                    child: CustomAudioWaveformPlayer(
+                      isTimerEnabled: false,
+                      height: 50.h,
+                      buttonHeight: 50.h,
+                      buttonWidth: 50.w,
+                      isAudioContainerBackground: true,
+                      isBackgroundContainerEnabled: false,
+                      backgroundColor: Colors.transparent,
+                    ),
                   ),
                   10.verticalSpace,
                   CustomCourseDurationContainer(text: course.courseDurations),

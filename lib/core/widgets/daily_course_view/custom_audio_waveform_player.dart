@@ -76,11 +76,11 @@ class _CustomAudioWaveformPlayerState extends State<CustomAudioWaveformPlayer>
   void _togglePlayPause() {
     setState(() {
       isPlaying = !isPlaying;
-
       if (isPlaying) {
         _animationController.forward();
         _startTimer();
-      } else {
+      }
+      else {
         _animationController.reverse();
         _timer?.cancel();
       }

@@ -1,4 +1,5 @@
 import 'dart:ui';
+import 'package:base_project/app/views/courses_section/view/course_video_player_view.dart';
 import 'package:base_project/core/constants/app_fonts_and_styles.dart';
 import 'package:base_project/core/constants/app_svgs.dart';
 import 'package:base_project/core/widgets/courses_view/custom_course_duration_container.dart';
@@ -120,30 +121,35 @@ class _CoursesDetailsViewState extends State<CoursesDetailsView> {
                         ),
                       ),
                     ),
-                    Container(
-                      height: 350.h,
-                      width: double.infinity,
-                      decoration: BoxDecoration(
-                        color: AppColors.blackColor,
-                        borderRadius: BorderRadius.vertical(
-                          bottom: Radius.circular(50.sp),
+                    GestureDetector(
+                      onTap: (){
+                        Get.to(CourseVideoPlayerView());
+                      },
+                      child: Container(
+                        height: 350.h,
+                        width: double.infinity,
+                        decoration: BoxDecoration(
+                          color: AppColors.blackColor,
+                          borderRadius: BorderRadius.vertical(
+                            bottom: Radius.circular(50.sp),
+                          ),
+                          image: DecorationImage(
+                            image: AssetImage(backgroundImage),
+                            fit: BoxFit.cover,
+                          ),
                         ),
-                        image: DecorationImage(
-                          image: AssetImage(backgroundImage),
-                          fit: BoxFit.cover,
-                        ),
-                      ),
-                      child: Padding(
-                        padding: EdgeInsets.only(bottom: 10.sp),
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.end,
-                          children: [
-                            CustomAudioWaveformPlayer(
-                              isAudioContainerBackground: true,
-                              backgroundColor: AppColors.darkGrey2.withOpacity(0.22),
-                              totalDuration: Duration(minutes: courseTimelineMinutes, seconds: courseTimelineSeconds),
-                            )
-                          ],
+                        child: Padding(
+                          padding: EdgeInsets.only(bottom: 10.sp),
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.end,
+                            children: [
+                              CustomAudioWaveformPlayer(
+                                isAudioContainerBackground: true,
+                                backgroundColor: AppColors.darkGrey2.withOpacity(0.22),
+                                totalDuration: Duration(minutes: courseTimelineMinutes, seconds: courseTimelineSeconds),
+                              )
+                            ],
+                          ),
                         ),
                       ),
                     ),

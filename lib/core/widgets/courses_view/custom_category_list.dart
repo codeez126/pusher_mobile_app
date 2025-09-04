@@ -71,12 +71,13 @@ class CustomCategoryList extends StatelessWidget {
               height: 240.h,
               width: double.infinity,
               decoration: BoxDecoration(
-                border: Border(
-                  top: BorderSide(
-                    width: 1.w,
-                    color: AppColors.lightBlue,
-                  ),
-                ),
+                //TODO Drawing to make it like the design
+                // border: Border(
+                //   top: BorderSide(
+                //     width: 1.w,
+                //     color: AppColors.lightBlue,
+                //   ),
+                // ),
                 gradient: LinearGradient(
                   colors: [
                     AppColors.whiteColor.withOpacity(0.6),
