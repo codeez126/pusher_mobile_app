@@ -2,6 +2,7 @@ import 'dart:developer';
 import 'dart:math';
 import 'package:base_project/app/routes/app_routes.dart';
 import 'package:base_project/app/views/home_section/controller/home_controller.dart';
+import 'package:base_project/app/views/home_section/widgets/custom_box.dart';
 import 'package:base_project/app/views/home_section/widgets/top_scroller.dart';
 import 'package:base_project/core/constants/app_svgs.dart';
 import 'package:base_project/core/utils/text_styles.dart';
@@ -228,116 +229,117 @@ class _HomeScreenState extends State<HomeScreen> {
                   children: [
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 16),
-                      child: Container(
-                        width: Get.width,
-                        height: 50,
-                        padding: EdgeInsets.only(
-                          bottom: 4,
-                          left: 16,
-                          right: 16,
-                        ),
-                        decoration: BoxDecoration(
-                          color: Colors.white.withValues(alpha: 0.20),
-                          borderRadius: BorderRadius.circular(50),
-                          border: Border.all(color: Colors.white, width: 1),
-                        ),
-                        child: ListView.builder(
-                          shrinkWrap: true,
-                          itemCount: 7,
-                          scrollDirection: Axis.horizontal,
-                          itemBuilder: (context, index) {
-                            return Container(
-                              margin: EdgeInsets.symmetric(horizontal: 8),
-                              // width: 30,
-                              child: Column(
-                                mainAxisAlignment: MainAxisAlignment.end,
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                children: [
-                                  if (index < 2)
-                                    Container(
-                                      padding: EdgeInsets.symmetric(
-                                        horizontal: 3,
-                                        vertical: 1,
-                                      ),
-                                      decoration: BoxDecoration(
-                                        color: Colors.white.withValues(
-                                          alpha: 0.20,
-                                        ),
-                                        borderRadius: BorderRadius.only(
-                                          bottomLeft: Radius.circular(50),
-                                          bottomRight: Radius.circular(50),
-                                        ),
-                                      ),
-                                      child: Icon(
-                                        Icons.check,
-                                        size: 15,
-                                        color: AppColors.darkGrey2.withValues(
-                                          alpha: 0.7,
-                                        ),
-                                      ),
-                                    ),
-                                  // Spacer(),
-                                  Container(
-                                    // margin: EdgeInsets.only(bottom: 5),
-                                    padding: EdgeInsets.symmetric(
-                                      horizontal: 3,
-                                      vertical: 1,
-                                    ),
-                                    decoration: BoxDecoration(
-                                      color:
-                                          index == 2
-                                              ? Colors.white.withValues(
-                                                alpha: 0.30,
-                                              )
-                                              : Colors.transparent,
-                                      borderRadius:
-                                          index == 2
-                                              ? BorderRadius.circular(8)
-                                              : null,
-                                      border:
-                                          index == 2
-                                              ? Border.all(
-                                                color: Colors.white,
-                                                width: 1,
-                                              )
-                                              : null,
-                                      boxShadow:
-                                          index == 2
-                                              ? [
-                                                BoxShadow(
-                                                  color: Color(
-                                                    0xff1E5DA1,
-                                                  ).withValues(alpha: 0.15),
-                                                  offset: Offset(0, 4),
-                                                  blurRadius: 10,
-                                                  spreadRadius: 0,
-                                                ),
-                                              ]
-                                              : [],
-                                    ),
-                                    child: Text(
-                                      "0${index + 1}",
-                                      style: AppTextStyles.medium.copyWith(
-                                        color:
-                                            index < 2
-                                                ? Color(
-                                                  0xff5A5A5A,
-                                                ).withValues(alpha: 0.7)
-                                                : Colors.white,
-                                        fontWeight:
-                                            index == 2
-                                                ? FontWeight.w600
-                                                : FontWeight.w300,
-                                        fontSize: 18,
-                                      ),
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            );
-                          },
-                        ),
-                      ),
+                      child: JourneyHeader(selectedIndex: 6),
+                      // child: Container(
+                      //   width: Get.width,
+                      //   height: 50,
+                      //   padding: EdgeInsets.only(
+                      //     bottom: 4,
+                      //     left: 16,
+                      //     right: 16,
+                      //   ),
+                      //   decoration: BoxDecoration(
+                      //     color: Colors.white.withValues(alpha: 0.20),
+                      //     borderRadius: BorderRadius.circular(50),
+                      //     border: Border.all(color: Colors.white, width: 1),
+                      //   ),
+                      //   child: ListView.builder(
+                      //     shrinkWrap: true,
+                      //     itemCount: 7,
+                      //     scrollDirection: Axis.horizontal,
+                      //     itemBuilder: (context, index) {
+                      //       return Container(
+                      //         margin: EdgeInsets.symmetric(horizontal: 8),
+                      //         // width: 30,
+                      //         child: Column(
+                      //           mainAxisAlignment: MainAxisAlignment.end,
+                      //           crossAxisAlignment: CrossAxisAlignment.center,
+                      //           children: [
+                      //             if (index < 2)
+                      //               Container(
+                      //                 padding: EdgeInsets.symmetric(
+                      //                   horizontal: 3,
+                      //                   vertical: 1,
+                      //                 ),
+                      //                 decoration: BoxDecoration(
+                      //                   color: Colors.white.withValues(
+                      //                     alpha: 0.20,
+                      //                   ),
+                      //                   borderRadius: BorderRadius.only(
+                      //                     bottomLeft: Radius.circular(50),
+                      //                     bottomRight: Radius.circular(50),
+                      //                   ),
+                      //                 ),
+                      //                 child: Icon(
+                      //                   Icons.check,
+                      //                   size: 15,
+                      //                   color: AppColors.darkGrey2.withValues(
+                      //                     alpha: 0.7,
+                      //                   ),
+                      //                 ),
+                      //               ),
+                      //             // Spacer(),
+                      //             Container(
+                      //               // margin: EdgeInsets.only(bottom: 5),
+                      //               padding: EdgeInsets.symmetric(
+                      //                 horizontal: 3,
+                      //                 vertical: 1,
+                      //               ),
+                      //               decoration: BoxDecoration(
+                      //                 color:
+                      //                     index == 2
+                      //                         ? Colors.white.withValues(
+                      //                           alpha: 0.30,
+                      //                         )
+                      //                         : Colors.transparent,
+                      //                 borderRadius:
+                      //                     index == 2
+                      //                         ? BorderRadius.circular(8)
+                      //                         : null,
+                      //                 border:
+                      //                     index == 2
+                      //                         ? Border.all(
+                      //                           color: Colors.white,
+                      //                           width: 1,
+                      //                         )
+                      //                         : null,
+                      //                 boxShadow:
+                      //                     index == 2
+                      //                         ? [
+                      //                           BoxShadow(
+                      //                             color: Color(
+                      //                               0xff1E5DA1,
+                      //                             ).withValues(alpha: 0.15),
+                      //                             offset: Offset(0, 4),
+                      //                             blurRadius: 10,
+                      //                             spreadRadius: 0,
+                      //                           ),
+                      //                         ]
+                      //                         : [],
+                      //               ),
+                      //               child: Text(
+                      //                 "0${index + 1}",
+                      //                 style: AppTextStyles.medium.copyWith(
+                      //                   color:
+                      //                       index < 2
+                      //                           ? Color(
+                      //                             0xff5A5A5A,
+                      //                           ).withValues(alpha: 0.7)
+                      //                           : Colors.white,
+                      //                   fontWeight:
+                      //                       index == 2
+                      //                           ? FontWeight.w600
+                      //                           : FontWeight.w300,
+                      //                   fontSize: 18,
+                      //                 ),
+                      //               ),
+                      //             ),
+                      //           ],
+                      //         ),
+                      //       );
+                      //     },
+                      //   ),
+                      // ),
                     ),
                     SizedBox(height: 20),
                     Container(
